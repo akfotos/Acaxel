@@ -200,11 +200,40 @@ function handleLogin(e) {
   e.preventDefault();
   const role  = document.getElementById('loginRole').value;
   const email = document.getElementById('email').value;
+  const remember = document.getElementById('rememberMe')?.checked;
+
+  if (remember) {
+    localStorage.setItem('hc_remember_email', email);
+    localStorage.setItem('hc_remember_role', role);
+  } else {
+    localStorage.removeItem('hc_remember_email');
+    localStorage.removeItem('hc_remember_role');
+  }
+
   localStorage.setItem('hc_user', JSON.stringify({
     name: demoUsers[role]?.name || 'User',
     role, email
   }));
   window.location.href = dashboardMap[role] || 'parent-dashboard.html';
+}
+
+/* ── Restore remembered login details ────────────────────── */
+function restoreLoginFields() {
+  const savedEmail = localStorage.getItem('hc_remember_email');
+  const savedRole  = localStorage.getItem('hc_remember_role');
+  const emailInput = document.getElementById('email');
+  const rememberBox = document.getElementById('rememberMe');
+
+  if (savedEmail && emailInput) emailInput.value = savedEmail;
+  if (savedRole && rememberBox) {
+    rememberBox.checked = true;
+    const btn = document.querySelector(`[data-role="${savedRole}"]`);
+    if (btn) setRole(savedRole, btn);
+  }
+}
+
+if (document.getElementById('loginForm')) {
+  document.addEventListener('DOMContentLoaded', restoreLoginFields);
 }
 
 /* ── Signup handler ──────────────────────────────────────── */
