@@ -7,18 +7,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link href="https://db.onlinewebfonts.com/c/04e6981992c0e2e7642af2074ebe3901?family=Helvetica+Now+Display+Bold" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/home.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
 </head>
 <body class="home">
 
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
+    <img src="images/Logo/logo.png" class="nav-logo-img" alt="Acaxel School Logo" />
     <span class="nav-name">Acaxel</span>
   </a>
   <ul class="nav-links">
@@ -51,147 +49,253 @@
 </div>
 
 <!-- HERO -->
-<section class="hero hero-video-bg">
-
-  <!-- Background video -->
-  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"></video>
-
-  <!-- Dark gradient filter so text pops -->
-  <div class="hero-video-overlay"></div>
-
-  <!-- Content -->
-  <div class="hero-content hero-content-vb">
-    <div class="hero-badge-vb"><span class="hero-badge-dot"></span>School Management Platform</div>
-    <h1 class="hero-heading-vb">
-      <i data-lucide="zap" class="hero-icon-inline"></i>
-      Manage <em>Acaxel</em> with
-      <i data-lucide="graduation-cap" class="hero-icon-inline"></i>
-      Clarity &amp; Ease
-      <i data-lucide="shield-check" class="hero-icon-inline"></i>
+<section class="hero hero-warm">
+  <div class="hero-content hero-content-warm">
+    <div class="hero-badge-warm">
+      <i data-lucide="heart-handshake" class="hero-badge-icon"></i>
+      Built for Ghanaian Schools
+    </div>
+    <h1 class="hero-heading-warm">
+      School management that feels <span class="text-accent">human</span>.
     </h1>
-    <p class="hero-sub-vb">Zero stress, total control. Acaxel keeps your school running with seamless fee tracking, real-time grades, attendance monitoring, and instant parent communication — all in one place.</p>
-    <div class="hero-actions-vb">
-      <a href="signup.html" class="hero-cta-vb">
-        <span>Get Started Free</span>
-        <i data-lucide="arrow-right-circle" class="hero-cta-icon"></i>
+    <p class="hero-sub-warm">
+      Acaxel helps parents, teachers, and administrators stay connected — so you spend less time on paperwork and more time with the children.
+    </p>
+    <div class="hero-actions-warm">
+      <a href="signup.html" class="btn-primary btn-lg hero-cta-warm">
+        <span>Start your free trial</span>
+        <i data-lucide="arrow-right" class="hero-cta-icon"></i>
       </a>
-      <a href="login.html" class="hero-signin-vb">Sign In</a>
+      <a href="login.html" class="btn-ghost btn-lg hero-ghost-warm">Sign In</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-avatars">
+        <img src="images/about/teacher-leading.jpg" alt="Teacher" />
+        <img src="images/home/students-collaborating.jpg" alt="Students" />
+        <img src="images/home/students-studying.jpg" alt="Students studying" />
+      </div>
+      <p>Trusted by <strong>1,240+</strong> families & staff</p>
     </div>
   </div>
 
+  <div class="hero-visual hero-visual-warm">
+    <div class="hero-image-collage">
+      <div class="hero-img-main">
+        <img src="images/home/teacher-instructing.jpg" alt="Teacher instructing students in class" />
+      </div>
+      <div class="hero-img-float hero-img-float-1">
+        <img src="images/home/students-collaborating.jpg" alt="Students collaborating" />
+      </div>
+      <div class="hero-img-float hero-img-float-2">
+        <div class="hero-float-card">
+          <i data-lucide="trending-up"></i>
+          <div>
+            <span class="hero-float-value">98%</span>
+            <span class="hero-float-label">Fee collection rate</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-shape hero-shape-1"></div>
+      <div class="hero-shape hero-shape-2"></div>
+    </div>
+  </div>
 </section>
 
 <!-- STATS STRIP -->
-<div class="stats-strip">
-  <div class="stat-item"><div class="num">1,240+</div><div class="label">Enrolled Students</div></div>
-  <div class="stat-item"><div class="num">86</div><div class="label">Teaching Staff</div></div>
-  <div class="stat-item"><div class="num">98%</div><div class="label">Fee Collection Rate</div></div>
-  <div class="stat-item"><div class="num">24/7</div><div class="label">Portal Access</div></div>
+<div class="stats-strip stats-warm">
+  <div class="stat-item">
+    <div class="stat-icon"><i data-lucide="users"></i></div>
+    <div class="stat-text">
+      <div class="num">1,240+</div>
+      <div class="label">Enrolled Students</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><i data-lucide="user-check"></i></div>
+    <div class="stat-text">
+      <div class="num">86</div>
+      <div class="label">Dedicated Staff</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><i data-lucide="wallet"></i></div>
+    <div class="stat-text">
+      <div class="num">98%</div>
+      <div class="label">Fee Collection</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><i data-lucide="clock"></i></div>
+    <div class="stat-text">
+      <div class="num">24/7</div>
+      <div class="label">Portal Access</div>
+    </div>
+  </div>
 </div>
 
-<!-- FEATURES -->
-<section class="section" id="features">
-  <div class="section-header">
-    <div class="section-tag">Features</div>
-    <h2>Everything Your School Needs</h2>
-    <p>From fee management to grade tracking, Acaxel brings your entire school administration online.</p>
+<!-- WHY ACAXEL -->
+<section class="section section-warm" id="why">
+  <div class="section-header section-header-warm">
+    <div class="section-tag section-tag-warm">Why Acaxel</div>
+    <h2>Less admin work. More time for teaching.</h2>
+    <p>Everything your school community needs, designed around real people and real classrooms.</p>
   </div>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon"><i data-lucide="credit-card"></i></div>
-      <h3>Fee Management</h3>
-      <p>Track tuition, levies, and outstanding balances. Generate invoices and send payment reminders automatically.</p>
+  <div class="features-grid features-grid-warm">
+    <div class="feature-card feature-card-warm">
+      <div class="feature-icon feature-icon-warm"><i data-lucide="credit-card"></i></div>
+      <h3>Simple Fee Payments</h3>
+      <p>Parents pay online and see every invoice. Schools track balances and send reminders in seconds.</p>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon"><i data-lucide="bar-chart-2"></i></div>
-      <h3>Grade Tracking</h3>
-      <p>Administrators enter scores directly. Parents see real-time academic performance with subject breakdowns.</p>
+    <div class="feature-card feature-card-warm">
+      <div class="feature-icon feature-icon-warm"><i data-lucide="bar-chart-2"></i></div>
+      <h3>Clear Grade Reports</h3>
+      <p>Teachers enter marks once. Parents and students see progress instantly, with no guesswork.</p>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon"><i data-lucide="calendar-check"></i></div>
-      <h3>Attendance Records</h3>
-      <p>Daily attendance marking with instant parent notifications for absences and late arrivals.</p>
+    <div class="feature-card feature-card-warm">
+      <div class="feature-icon feature-icon-warm"><i data-lucide="calendar-check"></i></div>
+      <h3>Reliable Attendance</h3>
+      <p>Mark registers quickly, notify parents automatically, and keep accurate records every term.</p>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon"><i data-lucide="message-square"></i></div>
+    <div class="feature-card feature-card-warm">
+      <div class="feature-icon feature-icon-warm"><i data-lucide="message-square"></i></div>
       <h3>Direct Messaging</h3>
-      <p>Secure in-app messaging between parents and administrators. No more missed notes or phone tag.</p>
+      <p>One place for parents and teachers to communicate — no more lost notes or missed calls.</p>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon"><i data-lucide="file-text"></i></div>
-      <h3>Billing &amp; Invoices</h3>
-      <p>Compose and send itemised bills to individual students or entire classes with one click.</p>
+    <div class="feature-card feature-card-warm">
+      <div class="feature-icon feature-icon-warm"><i data-lucide="file-text"></i></div>
+      <h3>Instant Bills & Receipts</h3>
+      <p>Send invoices to one student or a whole class, and generate printable receipts on demand.</p>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon"><i data-lucide="megaphone"></i></div>
-      <h3>Announcements</h3>
-      <p>Broadcast school news, event reminders, and urgent notices to all parents and staff instantly.</p>
+    <div class="feature-card feature-card-warm">
+      <div class="feature-icon feature-icon-warm"><i data-lucide="megaphone"></i></div>
+      <h3>School Announcements</h3>
+      <p>Share updates, events, and important news with the entire school community in one click.</p>
     </div>
   </div>
 </section>
 
 <!-- IMAGE SHOWCASE STRIP -->
-<div class="img-showcase-strip">
+<div class="img-showcase-strip img-showcase-warm">
   <div class="img-showcase-item">
-    <img src="images/home/students-collaborating.jpg" alt="Students collaborating in class" loading="lazy" />
-    <div class="img-showcase-label">Collaborative Learning</div>
+    <img src="images/home/school-library.jpg" alt="Students in the school library" loading="lazy" />
+    <div class="img-showcase-label">Modern Learning Spaces</div>
   </div>
   <div class="img-showcase-item img-showcase-tall">
     <img src="images/home/teacher-instructing.jpg" alt="Teacher instructing students" loading="lazy" />
-    <div class="img-showcase-label">Expert Administrators</div>
+    <div class="img-showcase-label">Dedicated Educators</div>
   </div>
   <div class="img-showcase-item">
     <img src="images/home/students-studying.jpg" alt="Students studying together" loading="lazy" />
-    <div class="img-showcase-label">Student Success</div>
+    <div class="img-showcase-label">Focused Learners</div>
   </div>
   <div class="img-showcase-item img-showcase-tall">
-    <img src="images/home/school-library.jpg" alt="Students in school library" loading="lazy" />
-    <div class="img-showcase-label">Modern Facilities</div>
+    <img src="images/home/students-collaborating.jpg" alt="Students collaborating" loading="lazy" />
+    <div class="img-showcase-label">Collaborative Culture</div>
   </div>
 </div>
 
 <!-- PORTALS -->
-<section class="section portals" id="portals">
-  <div class="section-header">
-    <div class="section-tag">Portals</div>
-    <h2>Built for Parents &amp; Administrators</h2>
-    <p>Two dedicated portals, each designed for the specific needs of its users.</p>
+<section class="section portals-warm" id="portals">
+  <div class="section-header section-header-warm">
+    <div class="section-tag section-tag-warm">Portals</div>
+    <h2>Built for the people who make school happen.</h2>
+    <p>Two simple portals, each designed around the daily needs of parents and school staff.</p>
   </div>
-  <div class="portals-grid">
-    <div class="portal-card parent">
-      <h3>Parent Portal</h3>
-      <p>Stay connected to your child's school life without the back-and-forth.</p>
-      <ul class="portal-features">
-        <li>View and pay outstanding fees</li>
-        <li>Download invoices and receipts</li>
-        <li>Track attendance and grades</li>
-        <li>Message administrators directly</li>
-        <li>Receive school announcements</li>
-      </ul>
-      <a href="signup.html?role=parent" class="btn-white">Join as Parent</a>
+  <div class="portals-grid portals-grid-warm">
+    <div class="portal-card portal-card-warm parent">
+      <div class="portal-img">
+        <img src="images/portals/parent-reviewing.jpg" alt="Parent reviewing child's progress" loading="lazy" />
+      </div>
+      <div class="portal-body">
+        <h3>Parent Portal</h3>
+        <p>Stay connected to your child's school life without the back-and-forth.</p>
+        <ul class="portal-features">
+          <li><i data-lucide="check-circle-2"></i> View and pay outstanding fees</li>
+          <li><i data-lucide="check-circle-2"></i> Download invoices and receipts</li>
+          <li><i data-lucide="check-circle-2"></i> Track attendance and grades</li>
+          <li><i data-lucide="check-circle-2"></i> Message administrators directly</li>
+          <li><i data-lucide="check-circle-2"></i> Receive school announcements</li>
+        </ul>
+        <a href="signup.html?role=parent" class="btn-primary portal-btn">Join as Parent</a>
+      </div>
     </div>
-    <div class="portal-card teacher">
-      <h3>Administrator Portal</h3>
-      <p>Manage classes, records, and parent communication from one dashboard.</p>
-      <ul class="portal-features">
-        <li>Mark daily attendance</li>
-        <li>Enter and manage grades</li>
-        <li>Send bills and fee records</li>
-        <li>Add and manage students</li>
-        <li>Message parents directly</li>
-      </ul>
-      <a href="signup.html?role=teacher" class="btn-wine">Join as Administrator</a>
+    <div class="portal-card portal-card-warm teacher">
+      <div class="portal-img">
+        <img src="images/portals/administrator-desk.jpg" alt="Administrator at desk" loading="lazy" />
+      </div>
+      <div class="portal-body">
+        <h3>Administrator Portal</h3>
+        <p>Manage classes, records, and parent communication from one calm dashboard.</p>
+        <ul class="portal-features">
+          <li><i data-lucide="check-circle-2"></i> Mark daily attendance</li>
+          <li><i data-lucide="check-circle-2"></i> Enter and manage grades</li>
+          <li><i data-lucide="check-circle-2"></i> Send bills and fee records</li>
+          <li><i data-lucide="check-circle-2"></i> Add and manage students</li>
+          <li><i data-lucide="check-circle-2"></i> Message parents directly</li>
+        </ul>
+        <a href="signup.html?role=teacher" class="btn-ghost portal-btn portal-btn-outline">Join as Administrator</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-warm" id="testimonials">
+  <div class="section-header section-header-warm">
+    <div class="section-tag section-tag-warm">Community</div>
+    <h2>Loved by schools like yours.</h2>
+    <p>Hear from the parents, teachers, and administrators who use Acaxel every day.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">
+        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+      </div>
+      <p class="testimonial-quote">"I can finally see my children's fees, grades, and attendance in one place. It saves me so many trips to the school office."</p>
+      <div class="testimonial-author">
+        <img src="images/about/students-collaborating.jpg" alt="Parent" />
+        <div>
+          <strong>Abena Mensah</strong>
+          <span>Parent, Accra</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card testimonial-featured">
+      <div class="testimonial-stars">
+        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+      </div>
+      <p class="testimonial-quote">"Acaxel turned our manual record-keeping into a smooth digital process. Our teachers now spend more time teaching and less time filling forms."</p>
+      <div class="testimonial-author">
+        <img src="images/about/teacher-leading.jpg" alt="School administrator" />
+        <div>
+          <strong>Mr. Joseph Kusi</strong>
+          <span>Administrator</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">
+        <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+      </div>
+      <p class="testimonial-quote">"Sending bills used to take days. Now I do it in minutes, and parents pay faster because everything is clear."</p>
+      <div class="testimonial-author">
+        <img src="images/portals/students-studying.jpg" alt="Bursar" />
+        <div>
+          <strong>Grace Osei</strong>
+          <span>Bursar</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section class="section pricing-section" id="pricing">
-  <div class="section-header">
-    <div class="section-tag">Pricing</div>
-    <h2>Simple, Transparent Plans</h2>
-    <p>Choose the plan that fits your school's size and needs. All plans include a 14-day free trial.</p>
-    <div class="pricing-toggle">
+<section class="section pricing-section pricing-warm" id="pricing">
+  <div class="section-header section-header-warm">
+    <div class="section-tag section-tag-warm">Pricing</div>
+    <h2>Simple, transparent plans.</h2>
+    <p>Choose the plan that fits your school's size. Every plan includes a 14-day free trial.</p>
+    <div class="pricing-toggle pricing-toggle-warm">
       <span class="pricing-toggle-label">Monthly</span>
       <button class="pricing-toggle-btn" id="billingToggle" onclick="toggleBilling()" aria-label="Toggle billing">
         <span class="pricing-toggle-knob"></span>
@@ -200,10 +304,8 @@
     </div>
   </div>
 
-  <div class="pricing-grid">
-
-    <!-- BASIC -->
-    <div class="pricing-card">
+  <div class="pricing-grid pricing-grid-warm">
+    <div class="pricing-card pricing-card-warm">
       <div class="pricing-card-top">
         <div class="pricing-plan-icon pricing-icon-basic"><i data-lucide="package"></i></div>
         <div class="pricing-plan-name">Basic</div>
@@ -217,21 +319,20 @@
       </div>
       <ul class="pricing-features">
         <li class="feat-yes"><i data-lucide="check"></i> Up to 100 students</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Parent &amp; Administrator portals</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking &amp; invoices</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Parent & Administrator portals</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking & invoices</li>
         <li class="feat-yes"><i data-lucide="check"></i> Attendance records</li>
         <li class="feat-yes"><i data-lucide="check"></i> Basic announcements</li>
-        <li class="feat-no"><i data-lucide="x"></i> Grade analytics &amp; reports</li>
+        <li class="feat-no"><i data-lucide="x"></i> Grade analytics & reports</li>
         <li class="feat-no"><i data-lucide="x"></i> Bulk bill sending</li>
-        <li class="feat-no"><i data-lucide="x"></i> SMS &amp; email notifications</li>
+        <li class="feat-no"><i data-lucide="x"></i> SMS & email notifications</li>
         <li class="feat-no"><i data-lucide="x"></i> Priority support</li>
       </ul>
-      <a href="signup.html" class="pricing-cta pricing-cta-outline">Start Free Trial</a>
+      <a href="signup.html" class="pricing-cta pricing-cta-warm-outline">Start Free Trial</a>
     </div>
 
-    <!-- INTERMEDIATE -->
-    <div class="pricing-card pricing-card-featured">
-      <div class="pricing-popular-badge">Most Popular</div>
+    <div class="pricing-card pricing-card-warm pricing-card-featured">
+      <div class="pricing-popular-badge pricing-popular-badge-warm">Most Popular</div>
       <div class="pricing-card-top">
         <div class="pricing-plan-icon pricing-icon-inter"><i data-lucide="zap"></i></div>
         <div class="pricing-plan-name">Intermediate</div>
@@ -245,20 +346,19 @@
       </div>
       <ul class="pricing-features">
         <li class="feat-yes"><i data-lucide="check"></i> Up to 500 students</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Parent &amp; Administrator portals</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking &amp; invoices</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Parent & Administrator portals</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking & invoices</li>
         <li class="feat-yes"><i data-lucide="check"></i> Attendance records</li>
         <li class="feat-yes"><i data-lucide="check"></i> Advanced announcements</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Grade analytics &amp; reports</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Grade analytics & reports</li>
         <li class="feat-yes"><i data-lucide="check"></i> Bulk bill sending</li>
-        <li class="feat-no"><i data-lucide="x"></i> SMS &amp; email notifications</li>
+        <li class="feat-no"><i data-lucide="x"></i> SMS & email notifications</li>
         <li class="feat-no"><i data-lucide="x"></i> Priority support</li>
       </ul>
-      <a href="signup.html" class="pricing-cta pricing-cta-solid">Start Free Trial</a>
+      <a href="signup.html" class="pricing-cta pricing-cta-warm-solid">Start Free Trial</a>
     </div>
 
-    <!-- ADVANCED -->
-    <div class="pricing-card">
+    <div class="pricing-card pricing-card-warm">
       <div class="pricing-card-top">
         <div class="pricing-plan-icon pricing-icon-adv"><i data-lucide="shield-check"></i></div>
         <div class="pricing-plan-name">Advanced</div>
@@ -272,38 +372,39 @@
       </div>
       <ul class="pricing-features">
         <li class="feat-yes"><i data-lucide="check"></i> Unlimited students</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Parent &amp; Administrator portals</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking &amp; invoices</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Parent & Administrator portals</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking & invoices</li>
         <li class="feat-yes"><i data-lucide="check"></i> Attendance records</li>
         <li class="feat-yes"><i data-lucide="check"></i> Advanced announcements</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Grade analytics &amp; reports</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Grade analytics & reports</li>
         <li class="feat-yes"><i data-lucide="check"></i> Bulk bill sending</li>
-        <li class="feat-yes"><i data-lucide="check"></i> SMS &amp; email notifications</li>
-        <li class="feat-yes"><i data-lucide="check"></i> Priority support &amp; onboarding</li>
+        <li class="feat-yes"><i data-lucide="check"></i> SMS & email notifications</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Priority support & onboarding</li>
       </ul>
-      <a href="signup.html" class="pricing-cta pricing-cta-outline">Start Free Trial</a>
+      <a href="signup.html" class="pricing-cta pricing-cta-warm-outline">Start Free Trial</a>
     </div>
-
   </div>
 
-  <p class="pricing-footnote">All prices in GHS (Ghana Cedis). School pricing available for multi-campus setups. <a href="contact.html">Contact us</a> for a custom quote.</p>
+  <p class="pricing-footnote pricing-footnote-warm">All prices in GHS (Ghana Cedis). School pricing available for multi-campus setups. <a href="contact.html">Contact us</a> for a custom quote.</p>
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
-  <h2>Ready to Simplify School Management?</h2>
-  <p>Join hundreds of parents and administrators already using Acaxel.</p>
-  <div class="cta-actions">
-    <a href="signup.html" class="btn-white btn-lg">Create Free Account</a>
-    <a href="login.html" class="btn-ghost btn-lg cta-ghost">Sign In</a>
+<section class="cta-section cta-warm">
+  <div class="cta-content">
+    <h2>Ready to make school life easier?</h2>
+    <p>Join hundreds of parents and administrators already using Acaxel.</p>
+    <div class="cta-actions cta-actions-warm">
+      <a href="signup.html" class="btn-primary btn-lg cta-btn-primary">Create Free Account</a>
+      <a href="login.html" class="btn-ghost btn-lg cta-btn-ghost">Sign In</a>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer id="contact">
+<footer id="contact" class="footer-warm">
 
   <!-- Top accent bar -->
-  <div class="footer-top-bar">
+  <div class="footer-top-bar footer-top-bar-warm">
     <div class="footer-top-inner">
       <div class="footer-top-item">
         <i data-lucide="phone"></i>
@@ -322,26 +423,26 @@
       <div class="footer-top-divider"></div>
       <div class="footer-top-item">
         <i data-lucide="clock"></i>
-        <span>Mon &ndash; Fri &nbsp;7:30 AM &ndash; 4:00 PM</span>
+        <span>Mon – Fri &nbsp;7:30 AM – 4:00 PM</span>
       </div>
     </div>
   </div>
 
   <!-- Main footer body -->
-  <div class="footer-body">
+  <div class="footer-body footer-body-warm">
     <div class="footer-grid">
 
       <!-- Brand + about -->
       <div class="footer-brand">
         <div class="footer-logo-row">
-          <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
+          <img src="images/Logo/logo.png" class="nav-logo-img" alt="Acaxel School Logo" />
           <span class="footer-school-name">Acaxel School</span>
         </div>
         <p class="footer-tagline">Nurturing Excellence, Building Character.</p>
         <p class="footer-desc">Acaxel is a forward-thinking institution dedicated to academic excellence, moral development, and the holistic growth of every student.</p>
         <div class="footer-accreditation">
-          <span class="footer-badge"><i data-lucide="shield-check"></i> GES Accredited</span>
-          <span class="footer-badge"><i data-lucide="award"></i> ISO 9001:2015</span>
+          <span class="footer-badge footer-badge-warm"><i data-lucide="shield-check"></i> GES Accredited</span>
+          <span class="footer-badge footer-badge-warm"><i data-lucide="award"></i> ISO 9001:2015</span>
         </div>
       </div>
 
@@ -362,76 +463,38 @@
       <div class="footer-col">
         <h5>Academic</h5>
         <ul>
-          <li><a href="#"><i data-lucide="chevron-right"></i> Academic Calendar</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i> Admission Process</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i> School Timetable</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i> Fee Schedule</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i> Exam Results</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> Admissions</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> Curriculum</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> Calendar</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> News & Events</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> Staff Directory</a></li>
         </ul>
       </div>
 
-      <!-- Term Dates -->
+      <!-- Contact Info -->
       <div class="footer-col">
-        <h5>Current Term</h5>
-        <div class="footer-term-card">
-          <div class="footer-term-label">2025/2026 Academic Year</div>
-          <div class="footer-term-row">
-            <span class="footer-term-badge footer-term-done">Term 1</span>
-            <span class="footer-term-dates">Sep 9 &ndash; Dec 13, 2025</span>
-          </div>
-          <div class="footer-term-row">
-            <span class="footer-term-badge footer-term-active">Term 2</span>
-            <span class="footer-term-dates">Jan 13 &ndash; Apr 11, 2026</span>
-          </div>
-          <div class="footer-term-row">
-            <span class="footer-term-badge footer-term-upcoming">Term 3</span>
-            <span class="footer-term-dates">Apr 27 &ndash; Jul 18, 2026</span>
-          </div>
-        </div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+233556924358"><i data-lucide="phone"></i> +233 55 6924 358</a></li>
+          <li><a href="mailto:info@acaxel.edu.gh"><i data-lucide="mail"></i> info@acaxel.edu.gh</a></li>
+          <li><a href="#"><i data-lucide="map-pin"></i> 14 Academy Road, Accra</a></li>
+        </ul>
       </div>
 
     </div>
   </div>
 
-  <!-- Bottom bar -->
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      <span>&copy; 2026 Acaxel School. All rights reserved.</span>
-    </div>
-    <div class="footer-bottom-center">
+  <!-- Footer bottom -->
+  <div class="footer-bottom footer-bottom-warm">
+    <p>© 2026 Acaxel School. All rights reserved.</p>
+    <div class="footer-bottom-links">
       <a href="#">Privacy Policy</a>
-      <span class="footer-dot">&middot;</span>
-      <a href="#">Terms of Use</a>
-      <span class="footer-dot">&middot;</span>
-      <a href="#">Safeguarding Policy</a>
-      <span class="footer-dot">&middot;</span>
-      <a href="#">Accessibility</a>
-    </div>
-    <div class="footer-social">
-      <a href="#" class="footer-social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></a>
-      <a href="#" class="footer-social-btn" aria-label="Twitter/X"><i data-lucide="twitter"></i></a>
-      <a href="#" class="footer-social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-      <a href="#" class="footer-social-btn" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Policy</a>
     </div>
   </div>
-
 </footer>
 
 <script src="js/main.js"></script>
-<script>lucide.createIcons();</script>
-<script>
-(function(){
-  var video = document.getElementById('heroVideo');
-  var src = 'https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8';
-  if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = src;
-  } else if (Hls.isSupported()) {
-    var hls = new Hls({ autoStartLoad: true, startLevel: -1 });
-    hls.loadSource(src);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function() { video.play(); });
-  }
-})();
-</script>
 </body>
 </html>
