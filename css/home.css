@@ -954,6 +954,49 @@ body.home .page-hero::before {
 body.home .page-hero h1 { color: var(--forest); }
 body.home .page-hero p { color: var(--mid); }
 
+/* Legal / policy pages */
+body.home .legal-page-section {
+  background: #fff;
+  padding: 64px 5% 90px;
+}
+.legal-page-content {
+  max-width: 760px;
+  margin: 0 auto;
+  color: var(--charcoal);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+.legal-page-content h2 {
+  color: var(--forest);
+  font-size: 1.25rem;
+  margin: 36px 0 14px;
+}
+.legal-page-content p {
+  color: var(--mid);
+  margin-bottom: 16px;
+}
+.legal-page-content ul {
+  margin: 0 0 18px 20px;
+  padding: 0;
+  list-style: disc;
+}
+.legal-page-content li {
+  color: var(--mid);
+  margin-bottom: 8px;
+}
+.legal-page-content a {
+  color: var(--terracotta);
+  font-weight: 600;
+}
+.legal-page-content a:hover { text-decoration: underline; }
+.legal-page-content strong { color: var(--forest); }
+
+@media (max-width: 768px) {
+  body.home .legal-page-section { padding: 44px 5% 64px; }
+  .legal-page-content { font-size: 0.9rem; }
+  .legal-page-content h2 { font-size: 1.15rem; }
+}
+
 /* Demo buttons on login */
 body.home .auth-right .btn-ghost {
   border-color: var(--border-warm); color: var(--forest);
