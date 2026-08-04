@@ -9,24 +9,26 @@ body.home {
   --cream:        #FFFBF7;
   --cream-dark:   #F7F1EA;
   --sage:         #84A98C;
-  --sage-dark:    #52796F;
-  --forest:       #264653;
-  --terracotta:   #E07A5F;
-  --terracotta-dark: #C45A3E;
+  --sage-dark:    #3D5A4F;
+  --forest:       #1D3A44;
+  --terracotta:   #D4694F;
+  --terracotta-dark: #B54D35;
   --sand:         #F2E9E4;
-  --amber:        #F4A261;
-  --charcoal:     #2A3B45;
-  --mid:          #5D737E;
-  --light:        #8FA3AD;
-  --border-warm:  rgba(38, 70, 83, 0.10);
-  --shadow-warm:  0 8px 30px rgba(38, 70, 83, 0.08);
-  --shadow-lg:    0 20px 50px rgba(38, 70, 83, 0.12);
+  --amber:        #E08E4C;
+  --charcoal:     #22333A;
+  --mid:          #3D5A64;
+  --light:        #6B818A;
+  --border-warm:  rgba(29, 58, 68, 0.10);
+  --shadow-warm:  0 8px 30px rgba(29, 58, 68, 0.08);
+  --shadow-lg:    0 20px 50px rgba(29, 58, 68, 0.12);
 }
 
-/* Override root for homepage warmth */
+/* Override root for homepage warmth with strong contrast */
 body.home { background: var(--cream); color: var(--charcoal); }
 body.home h1, body.home h2, body.home h3, body.home h4 { color: var(--forest); }
 body.home p { color: var(--mid); }
+body.home a { color: var(--sage-dark); }
+body.home a:hover { color: var(--terracotta); }
 
 /* ── NAVBAR ─────────────────────────────────────────────── */
 body.home .navbar {
@@ -476,7 +478,9 @@ body.home .pricing-grid-warm {
 /* ── CTA ────────────────────────────────────────────────── */
 body.home .cta-warm {
   padding: 90px 5%;
-  background: linear-gradient(135deg, var(--forest) 0%, var(--sage-dark) 100%);
+  background: linear-gradient(135deg, var(--forest) 0%, var(--sage-dark) 35%, var(--sage) 70%, var(--forest) 100%);
+  background-size: 250% 250%;
+  animation: heroGradient 15s ease infinite;
   text-align: center;
 }
 .cta-content { max-width: 620px; margin: 0 auto; }
@@ -514,6 +518,148 @@ body.home .cta-warm {
 }
 .footer-bottom-warm a { color: var(--mid); }
 .footer-bottom-warm a:hover { color: var(--terracotta); }
+
+/* ── ANIMATIONS ─────────────────────────────────────────── */
+
+/* Keyframes */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50%      { transform: translateY(-12px) rotate(-1.5deg); }
+}
+@keyframes floatAlt {
+  0%, 100% { transform: translateY(0) rotate(3deg); }
+  50%      { transform: translateY(-10px) rotate(3deg); }
+}
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  33%      { transform: translate(8px, -8px); }
+  66%      { transform: translate(-6px, 6px); }
+}
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 0.18; }
+  50%      { transform: scale(1.08); opacity: 0.24; }
+}
+@keyframes heroGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes underlineGrow {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+/* Hero entrance animations */
+.hero-badge-warm {
+  opacity: 0;
+  animation: fadeInUp 0.7s ease forwards 0.1s;
+}
+.hero-heading-warm {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards 0.25s;
+}
+.hero-sub-warm {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards 0.4s;
+}
+.hero-actions-warm {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards 0.55s;
+}
+.hero-trust {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards 0.7s;
+}
+.hero-img-main {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 0.3s, float 6s ease-in-out infinite 1.3s;
+}
+.hero-img-float-1 {
+  opacity: 0;
+  animation: fadeIn 0.9s ease forwards 0.7s, floatAlt 5s ease-in-out infinite 1.6s;
+}
+.hero-img-float-2 {
+  opacity: 0;
+  animation: fadeIn 0.9s ease forwards 0.9s, float 5.5s ease-in-out infinite 1.9s;
+}
+.hero-shape-1 {
+  animation: pulse-soft 8s ease-in-out infinite;
+}
+.hero-shape-2 {
+  animation: drift 12s ease-in-out infinite;
+}
+
+/* Button hover arrow slide */
+.hero-cta-warm .hero-cta-icon {
+  transition: transform 0.25s ease;
+}
+.hero-cta-warm:hover .hero-cta-icon {
+  transform: translateX(4px);
+}
+
+/* Animated underline on nav links */
+body.home .nav-links a {
+  position: relative;
+}
+body.home .nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 100%; height: 2px; border-radius: 2px;
+  background: var(--terracotta);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.25s ease;
+}
+body.home .nav-links a:hover::after {
+  transform: scaleX(1); transform-origin: left;
+}
+
+/* Card hover enhancements */
+.feature-card-warm,
+.portal-card-warm,
+.pricing-card-warm,
+.testimonial-card,
+.img-showcase-warm .img-showcase-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card-warm:hover,
+.portal-card-warm:hover,
+.pricing-card-warm:hover,
+.testimonial-card:hover,
+.img-showcase-warm .img-showcase-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.pricing-card-warm.pricing-card-featured:hover {
+  transform: scale(1.03) translateY(-6px);
+}
+
+/* Section entrance animation base (driven by main.js observer) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
 
 /* ── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 1024px) {

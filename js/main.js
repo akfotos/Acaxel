@@ -26,10 +26,10 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.feature-card, .stat-item, .portal-card, .pricing-card').forEach(el => {
+document.querySelectorAll('.feature-card, .stat-item, .portal-card, .pricing-card, .testimonial-card, .section-header-warm, .cta-content, .img-showcase-item').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   observer.observe(el);
 });
 
