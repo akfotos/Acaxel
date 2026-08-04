@@ -84,30 +84,32 @@
         </div>
 
         <!-- PARENT FIELDS -->
-        <div class="role-fields active" id="parentFields">
-          <div class="form-group">
-            <label>Child's Full Name</label>
-            <input type="text" id="childName" placeholder="Child's name" />
-          </div>
-          <div class="form-row">
+        <div class="role-fields" id="parentFields">
+          <div class="role-fields-inner">
             <div class="form-group">
-              <label>Child's Class</label>
-              <select id="childClass">
-                <option value="">Select class</option>
-                <option>JSS 1A</option><option>JSS 1B</option>
-                <option>JSS 2A</option><option>JSS 2B</option>
-                <option>JSS 3A</option><option>JSS 3B</option>
-                <option>SSS 1A</option><option>SSS 1B</option>
-                <option>SSS 2A</option><option>SSS 2B</option>
-                <option>SSS 3A</option><option>SSS 3B</option>
-              </select>
+              <label>Child's Full Name</label>
+              <input type="text" id="childName" placeholder="Child's name" />
             </div>
-            <div class="form-group">
-              <label>Child's Student ID <span class="gen-badge">Auto-generated</span></label>
-              <div class="gen-field-wrap">
-                <input type="text" id="studentId" placeholder="Generating…" readonly />
-                <button type="button" class="gen-refresh-btn" onclick="refreshGenField('studentId','student')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
-                <button type="button" class="gen-copy-btn" onclick="copyGenField('studentId')" title="Copy"><i data-lucide="copy"></i></button>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Child's Class</label>
+                <select id="childClass">
+                  <option value="">Select class</option>
+                  <option>JSS 1A</option><option>JSS 1B</option>
+                  <option>JSS 2A</option><option>JSS 2B</option>
+                  <option>JSS 3A</option><option>JSS 3B</option>
+                  <option>SSS 1A</option><option>SSS 1B</option>
+                  <option>SSS 2A</option><option>SSS 2B</option>
+                  <option>SSS 3A</option><option>SSS 3B</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Child's Student ID <span class="gen-badge">Auto-generated</span></label>
+                <div class="gen-field-wrap">
+                  <input type="text" id="studentId" placeholder="Generating…" readonly />
+                  <button type="button" class="gen-refresh-btn" onclick="refreshGenField('studentId','student')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
+                  <button type="button" class="gen-copy-btn" onclick="copyGenField('studentId')" title="Copy"><i data-lucide="copy"></i></button>
+                </div>
               </div>
             </div>
           </div>
@@ -115,122 +117,128 @@
 
         <!-- STUDENT FIELDS -->
         <div class="role-fields" id="studentFields">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Student ID <span class="gen-badge">Auto-generated</span></label>
-              <div class="gen-field-wrap">
-                <input type="text" id="studentIdNum" placeholder="Generating…" readonly />
-                <button type="button" class="gen-refresh-btn" onclick="refreshGenField('studentIdNum','student')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
-                <button type="button" class="gen-copy-btn" onclick="copyGenField('studentIdNum')" title="Copy"><i data-lucide="copy"></i></button>
+          <div class="role-fields-inner">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Student ID <span class="gen-badge">Auto-generated</span></label>
+                <div class="gen-field-wrap">
+                  <input type="text" id="studentIdNum" placeholder="Generating…" readonly />
+                  <button type="button" class="gen-refresh-btn" onclick="refreshGenField('studentIdNum','student')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
+                  <button type="button" class="gen-copy-btn" onclick="copyGenField('studentIdNum')" title="Copy"><i data-lucide="copy"></i></button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="date" id="studentDob" />
               </div>
             </div>
-            <div class="form-group">
-              <label>Date of Birth</label>
-              <input type="date" id="studentDob" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Class / Form</label>
-              <select id="studentClass">
-                <option value="">Select class</option>
-                <option>JSS 1A</option><option>JSS 1B</option>
-                <option>JSS 2A</option><option>JSS 2B</option>
-                <option>JSS 3A</option><option>JSS 3B</option>
-                <option>SSS 1A</option><option>SSS 1B</option>
-                <option>SSS 2A</option><option>SSS 2B</option>
-                <option>SSS 3A</option><option>SSS 3B</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Guardian's Name</label>
-              <input type="text" id="guardianName" placeholder="Parent / guardian" />
+            <div class="form-row">
+              <div class="form-group">
+                <label>Class / Form</label>
+                <select id="studentClass">
+                  <option value="">Select class</option>
+                  <option>JSS 1A</option><option>JSS 1B</option>
+                  <option>JSS 2A</option><option>JSS 2B</option>
+                  <option>JSS 3A</option><option>JSS 3B</option>
+                  <option>SSS 1A</option><option>SSS 1B</option>
+                  <option>SSS 2A</option><option>SSS 2B</option>
+                  <option>SSS 3A</option><option>SSS 3B</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Guardian's Name</label>
+                <input type="text" id="guardianName" placeholder="Parent / guardian" />
+              </div>
             </div>
           </div>
         </div>
 
         <!-- TEACHER FIELDS -->
         <div class="role-fields" id="teacherFields">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Staff ID <span class="gen-badge">Auto-generated</span></label>
-              <div class="gen-field-wrap">
-                <input type="text" id="staffId" placeholder="Generating…" readonly />
-                <button type="button" class="gen-refresh-btn" onclick="refreshGenField('staffId','teacher')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
-                <button type="button" class="gen-copy-btn" onclick="copyGenField('staffId')" title="Copy"><i data-lucide="copy"></i></button>
+          <div class="role-fields-inner">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Staff ID <span class="gen-badge">Auto-generated</span></label>
+                <div class="gen-field-wrap">
+                  <input type="text" id="staffId" placeholder="Generating…" readonly />
+                  <button type="button" class="gen-refresh-btn" onclick="refreshGenField('staffId','teacher')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
+                  <button type="button" class="gen-copy-btn" onclick="copyGenField('staffId')" title="Copy"><i data-lucide="copy"></i></button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Subject</label>
+                <select id="subject">
+                  <option value="">Select subject</option>
+                  <option>Mathematics</option><option>English Language</option>
+                  <option>Basic Science</option><option>Social Studies</option>
+                  <option>Civic Education</option><option>Agricultural Science</option>
+                  <option>Computer Studies</option><option>Fine Arts</option>
+                  <option>Physical Education</option><option>French</option>
+                </select>
               </div>
             </div>
             <div class="form-group">
-              <label>Subject</label>
-              <select id="subject">
-                <option value="">Select subject</option>
-                <option>Mathematics</option><option>English Language</option>
-                <option>Basic Science</option><option>Social Studies</option>
-                <option>Civic Education</option><option>Agricultural Science</option>
-                <option>Computer Studies</option><option>Fine Arts</option>
-                <option>Physical Education</option><option>French</option>
+              <label>Assigned Class</label>
+              <select id="assignedClass">
+                <option value="">Select class</option>
+                <option>JSS 1A</option><option>JSS 1B</option>
+                <option>JSS 2A</option><option>JSS 2B</option>
+                <option>JSS 3A</option><option>JSS 3B</option>
+                <option>SSS 1A</option><option>SSS 1B</option>
               </select>
             </div>
-          </div>
-          <div class="form-group">
-            <label>Assigned Class</label>
-            <select id="assignedClass">
-              <option value="">Select class</option>
-              <option>JSS 1A</option><option>JSS 1B</option>
-              <option>JSS 2A</option><option>JSS 2B</option>
-              <option>JSS 3A</option><option>JSS 3B</option>
-              <option>SSS 1A</option><option>SSS 1B</option>
-            </select>
           </div>
         </div>
 
         <!-- ADMIN FIELDS -->
         <div class="role-fields active" id="adminFields">
-          <div class="admin-school-reg-label"><i data-lucide="building-2"></i> School Registration</div>
-          <div class="form-group">
-            <label>School Name</label>
-            <input type="text" id="schoolName" placeholder="e.g. Highcrest Academy" required />
-          </div>
-          <div class="form-row">
+          <div class="role-fields-inner">
+            <div class="admin-school-reg-label"><i data-lucide="building-2"></i> School Registration</div>
             <div class="form-group">
-              <label>School Code <span class="gen-badge">Auto-generated</span></label>
-              <div class="gen-field-wrap">
-                <input type="text" id="schoolCode" placeholder="Fill school name first" readonly />
-                <button type="button" class="gen-refresh-btn" onclick="refreshGenField('schoolCode','admin')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
-                <button type="button" class="gen-copy-btn" onclick="copyGenField('schoolCode')" title="Copy"><i data-lucide="copy"></i></button>
+              <label>School Name</label>
+              <input type="text" id="schoolName" placeholder="e.g. Highcrest Academy" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>School Code <span class="gen-badge">Auto-generated</span></label>
+                <div class="gen-field-wrap">
+                  <input type="text" id="schoolCode" placeholder="Fill school name first" readonly />
+                  <button type="button" class="gen-refresh-btn" onclick="refreshGenField('schoolCode','admin')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
+                  <button type="button" class="gen-copy-btn" onclick="copyGenField('schoolCode')" title="Copy"><i data-lucide="copy"></i></button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>School Type</label>
+                <select id="schoolType">
+                  <option value="">Select type</option>
+                  <option>Primary School</option>
+                  <option>Junior High School</option>
+                  <option>Senior High School</option>
+                  <option>Combined (JHS + SHS)</option>
+                  <option>International School</option>
+                </select>
               </div>
             </div>
-            <div class="form-group">
-              <label>School Type</label>
-              <select id="schoolType">
-                <option value="">Select type</option>
-                <option>Primary School</option>
-                <option>Junior High School</option>
-                <option>Senior High School</option>
-                <option>Combined (JHS + SHS)</option>
-                <option>International School</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Your Role / Position</label>
-              <select id="adminRole">
-                <option value="">Select position</option>
-                <option>Principal</option>
-                <option>Vice Principal</option>
-                <option>Head of Department</option>
-                <option>Finance Officer</option>
-                <option>Registrar</option>
-                <option>IT Administrator</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Staff ID <span class="gen-badge">Auto-generated</span></label>
-              <div class="gen-field-wrap">
-                <input type="text" id="adminStaffId" placeholder="Generating…" readonly />
-                <button type="button" class="gen-refresh-btn" onclick="refreshGenField('adminStaffId','admin')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
-                <button type="button" class="gen-copy-btn" onclick="copyGenField('adminStaffId')" title="Copy"><i data-lucide="copy"></i></button>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Role / Position</label>
+                <select id="adminRole">
+                  <option value="">Select position</option>
+                  <option>Principal</option>
+                  <option>Vice Principal</option>
+                  <option>Head of Department</option>
+                  <option>Finance Officer</option>
+                  <option>Registrar</option>
+                  <option>IT Administrator</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Staff ID <span class="gen-badge">Auto-generated</span></label>
+                <div class="gen-field-wrap">
+                  <input type="text" id="adminStaffId" placeholder="Generating…" readonly />
+                  <button type="button" class="gen-refresh-btn" onclick="refreshGenField('adminStaffId','admin')" title="Generate new code"><i data-lucide="refresh-cw"></i></button>
+                  <button type="button" class="gen-copy-btn" onclick="copyGenField('adminStaffId')" title="Copy"><i data-lucide="copy"></i></button>
+                </div>
               </div>
             </div>
           </div>

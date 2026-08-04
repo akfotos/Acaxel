@@ -135,10 +135,22 @@ function setRole(role, btn) {
   // Toggle role-specific fields (signup page only)
   ['parentFields','studentFields','teacherFields','adminFields'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.classList.remove('active');
+    if (el) {
+      el.classList.remove('active');
+      el.querySelectorAll('input, select, textarea').forEach(f => {
+        f.disabled = true;
+        f.dataset.roleDisabled = 'true';
+      });
+    }
   });
   const active = document.getElementById(role + 'Fields');
-  if (active) active.classList.add('active');
+  if (active) {
+    active.classList.add('active');
+    active.querySelectorAll('input, select, textarea').forEach(f => {
+      f.disabled = false;
+      delete f.dataset.roleDisabled;
+    });
+  }
 
   // Signup-page-only UI updates
   const subtitle    = document.getElementById('signupSubtitle');

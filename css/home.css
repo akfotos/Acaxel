@@ -737,15 +737,29 @@ body.home .form-group select:focus {
 body.home .form-group input::placeholder { color: var(--light); }
 body.home .form-group select option { color: var(--charcoal); }
 
-/* Role-specific fields wrapper */
-body.home .role-fields { display: none; }
-body.home .role-fields.active {
-  display: block;
-  padding: 18px;
-  background: rgba(132, 169, 140, 0.06);
-  border: 1px solid var(--border-warm);
+/* Role-specific fields wrapper — smooth reveal, no empty space */
+body.home .role-fields {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  padding: 0 18px;
+  margin-bottom: 0;
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 14px;
+  transition: grid-template-rows 0.45s ease, opacity 0.35s ease, padding 0.35s ease, margin 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+}
+body.home .role-fields.active {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  padding: 18px;
   margin-bottom: 16px;
+  background: rgba(132, 169, 140, 0.06);
+  border-color: var(--border-warm);
+}
+body.home .role-fields-inner {
+  overflow: hidden;
+  min-height: 0;
 }
 body.home .admin-school-reg-label {
   color: var(--sage-dark);
