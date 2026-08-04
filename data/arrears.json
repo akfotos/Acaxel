@@ -1,0 +1,125 @@
+﻿{
+    "extractedAt":  "2026-08-04T17:50:51",
+    "arrears":  [
+                    {
+                        "no":  1,
+                        "pupilName":  "Azasoo Jayden-Elyon Elikem",
+                        "arrearsIntoT3":  2800,
+                        "discount":  "4300",
+                        "status":  "4300"
+                    },
+                    {
+                        "no":  2,
+                        "pupilName":  "Ayeh-Kumi Jomari Paakow",
+                        "arrearsIntoT3":  3160,
+                        "discount":  "4210",
+                        "status":  "4210"
+                    },
+                    {
+                        "no":  3,
+                        "pupilName":  "Ayeh-Kumi Fiifi Jody",
+                        "arrearsIntoT3":  3600,
+                        "discount":  "3380",
+                        "status":  "3380"
+                    },
+                    {
+                        "no":  4,
+                        "pupilName":  "Owusu Okyem Emmanuella",
+                        "arrearsIntoT3":  2600,
+                        "discount":  "2420",
+                        "status":  "2420"
+                    },
+                    {
+                        "no":  5,
+                        "pupilName":  "Owusu Katakyie Nana Kwame",
+                        "arrearsIntoT3":  2590,
+                        "discount":  "2270",
+                        "status":  "2270"
+                    },
+                    {
+                        "no":  6,
+                        "pupilName":  "Morkeh Michelle",
+                        "arrearsIntoT3":  3200,
+                        "discount":  "2122.5",
+                        "status":  "1522.5"
+                    },
+                    {
+                        "no":  7,
+                        "pupilName":  "Ampofo Yirenkyi Papa Kofi",
+                        "arrearsIntoT3":  1650,
+                        "discount":  "1650",
+                        "status":  "1650"
+                    },
+                    {
+                        "no":  8,
+                        "pupilName":  "Appiah Zakiel Nana Kwame",
+                        "arrearsIntoT3":  300,
+                        "discount":  "1350",
+                        "status":  "0"
+                    },
+                    {
+                        "no":  9,
+                        "pupilName":  "Asare Okaine Bismark",
+                        "arrearsIntoT3":  1200,
+                        "discount":  "1200",
+                        "status":  "1200"
+                    },
+                    {
+                        "no":  10,
+                        "pupilName":  "Mensah-Aborampah Ayeyi Yeboah",
+                        "arrearsIntoT3":  1600,
+                        "discount":  "1100",
+                        "status":  "1100"
+                    },
+                    {
+                        "no":  11,
+                        "pupilName":  "Morkeh Bradley",
+                        "arrearsIntoT3":  2422.5,
+                        "discount":  "922.5",
+                        "status":  "422.5"
+                    },
+                    {
+                        "no":  12,
+                        "pupilName":  "Appiah Serwaa Senam",
+                        "arrearsIntoT3":  622.5,
+                        "discount":  "872.5",
+                        "status":  "0"
+                    },
+                    {
+                        "no":  13,
+                        "pupilName":  "Mensah-Aborampah Asa Essilfie Owuraku",
+                        "arrearsIntoT3":  1450,
+                        "discount":  "850",
+                        "status":  "850"
+                    },
+                    {
+                        "no":  14,
+                        "pupilName":  "Adugbira Mbo Ibiza",
+                        "arrearsIntoT3":  0,
+                        "discount":  "550",
+                        "status":  "0"
+                    },
+                    {
+                        "no":  15,
+                        "pupilName":  "Darko Asher Kukuwa",
+                        "arrearsIntoT3":  1450,
+                        "discount":  "500",
+                        "status":  "500"
+                    },
+                    {
+                        "no":  16,
+                        "pupilName":  "Tagoe Henry",
+                        "arrearsIntoT3":  1400,
+                        "discount":  "400",
+                        "status":  "400"
+                    },
+                    {
+                        "no":  17,
+                        "pupilName":  "Appiah Eno",
+                        "arrearsIntoT3":  495,
+                        "discount":  "360",
+                        "status":  "0"
+                    }
+                ],
+    "count":  17
+}

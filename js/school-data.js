@@ -52,9 +52,7 @@
       'weeks',
       'monthlyEquiv'
     ],
-    feeSchedule: [
-      // { classLevel: 'Nursery 1', birdHouse: 'Bluebird', annualFee: 0, termlyFee: 0, staffOicFee: 0, programme: 'Foundation', weeks: 12, monthlyEquiv: 0 }
-    ],
+    feeSchedule: [],
 
     // Matches the "Summary" sheet columns:
     // Class | Bird House | Enrolled | Annual Fee | T1 Due | T1 Paid | T1 Balance | T1 Rate% | T2 Due | T2 Discount | T2 Paid | T2 Balance | T2 Rate% | T3 Fee | T3 Discount | T3 Arrears | T3 Net Due
@@ -77,13 +75,28 @@
       't3Arrears',
       't3NetDue'
     ],
-    fullYearRegister: [
-      // { class: 'JSS 1A', birdHouse: 'Eagle', enrolled: 32, annualFee: 2400, ... }
-    ],
+    fullYearRegister: [],
 
     // Optional list of students ready for import from a register
-    students: (typeof highcrestStudents !== 'undefined') ? highcrestStudents : []
+    students: [],
+
+    // Real-time totals computed from the full-year register
+    fullYearTotals: null,
+
+    // Arrears tracker list from the Excel summary
+    arrears: []
   };
+
+  // Override defaults with extracted Excel data when present
+  if (typeof highcrestData !== 'undefined' && highcrestData) {
+    if (Array.isArray(highcrestData.feeSchedule)) _defaults.feeSchedule = highcrestData.feeSchedule;
+    if (Array.isArray(highcrestData.fullYearRegister)) _defaults.fullYearRegister = highcrestData.fullYearRegister;
+    if (Array.isArray(highcrestData.students)) _defaults.students = highcrestData.students;
+    if (Array.isArray(highcrestData.arrears)) _defaults.arrears = highcrestData.arrears;
+    if (highcrestData.fullYearTotals) _defaults.fullYearTotals = highcrestData.fullYearTotals;
+  } else if (typeof highcrestStudents !== 'undefined' && highcrestStudents) {
+    _defaults.students = highcrestStudents;
+  }
 
   // In-memory store (clone of defaults)
   const _data = JSON.parse(JSON.stringify(_defaults));
@@ -106,6 +119,10 @@
     getFeeSchedule: () => _data.feeSchedule,
 
     getFullYearRegister: () => _data.fullYearRegister,
+
+    getFullYearTotals: () => _data.fullYearTotals,
+
+    getArrears: () => _data.arrears || [],
 
     // ----------------------------------------------------------------
     // Loaders (call these with arrays exported from the Excel sheets)

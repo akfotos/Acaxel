@@ -1,0 +1,105 @@
+﻿{
+    "feeSchedule":  [
+                        {
+                            "classLevel":  "Crèche",
+                            "birdHouse":  "Robins",
+                            "annualFee":  10000,
+                            "termlyFee":  2550,
+                            "staffOicFee":  800,
+                            "programme":  "Year-Round",
+                            "weeks":  52,
+                            "monthlyEquiv":  833.33333333333337
+                        },
+                        {
+                            "classLevel":  "Nursery 1",
+                            "birdHouse":  "Starlings",
+                            "annualFee":  9400,
+                            "termlyFee":  2400,
+                            "staffOicFee":  800,
+                            "programme":  "Year-Round",
+                            "weeks":  52,
+                            "monthlyEquiv":  783.33333333333337
+                        },
+                        {
+                            "classLevel":  "Nursery 2",
+                            "birdHouse":  "Goldfinches",
+                            "annualFee":  9400,
+                            "termlyFee":  2400,
+                            "staffOicFee":  800,
+                            "programme":  "Year-Round",
+                            "weeks":  52,
+                            "monthlyEquiv":  783.33333333333337
+                        },
+                        {
+                            "classLevel":  "KG 1",
+                            "birdHouse":  "Kingfishers",
+                            "annualFee":  7350,
+                            "termlyFee":  2550,
+                            "staffOicFee":  850,
+                            "programme":  "3-Term",
+                            "weeks":  39,
+                            "monthlyEquiv":  612.5
+                        },
+                        {
+                            "classLevel":  "KG 2",
+                            "birdHouse":  "Hawks",
+                            "annualFee":  7350,
+                            "termlyFee":  2550,
+                            "staffOicFee":  850,
+                            "programme":  "3-Term",
+                            "weeks":  39,
+                            "monthlyEquiv":  612.5
+                        },
+                        {
+                            "classLevel":  "Grade 1",
+                            "birdHouse":  "Skylarks",
+                            "annualFee":  8500,
+                            "termlyFee":  3000,
+                            "staffOicFee":  1200,
+                            "programme":  "3-Term",
+                            "weeks":  39,
+                            "monthlyEquiv":  708.33333333333337
+                        },
+                        {
+                            "classLevel":  "Grade 2",
+                            "birdHouse":  "Kestrels",
+                            "annualFee":  8500,
+                            "termlyFee":  3000,
+                            "staffOicFee":  1200,
+                            "programme":  "3-Term",
+                            "weeks":  39,
+                            "monthlyEquiv":  708.33333333333337
+                        },
+                        {
+                            "classLevel":  "Grade 3",
+                            "birdHouse":  "Woodpeckers",
+                            "annualFee":  8500,
+                            "termlyFee":  3000,
+                            "staffOicFee":  1300,
+                            "programme":  "3-Term",
+                            "weeks":  39,
+                            "monthlyEquiv":  708.33333333333337
+                        },
+                        {
+                            "classLevel":  "Grade 4",
+                            "birdHouse":  "Nightingales",
+                            "annualFee":  8500,
+                            "termlyFee":  3000,
+                            "staffOicFee":  1300,
+                            "programme":  "3-Term",
+                            "weeks":  39,
+                            "monthlyEquiv":  708.33333333333337
+                        },
+                        {
+                            "classLevel":  "Grade 5",
+                            "birdHouse":  "Falcons",
+                            "annualFee":  8500,
+                            "termlyFee":  3000,
+                            "staffOicFee":  1300,
+                            "programme":  "3-Term",
+                            "weeks":  39,
+                            "monthlyEquiv":  708.33333333333337
+                        }
+                    ],
+    "extractedAt":  "2026-08-04T17:50:50"
+}

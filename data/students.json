@@ -1,0 +1,408 @@
+﻿{
+    "extractedAt":  "2026-08-04T17:50:51",
+    "count":  67,
+    "students":  [
+                     {
+                         "fullName":  "Agyapong Awuraba Avril Phoebe",
+                         "class":  "Crèche",
+                         "birdHouse":  "Robins",
+                         "sourceSheet":  "sheet3"
+                     },
+                     {
+                         "fullName":  "Ansu-Boamah Othniel",
+                         "class":  "Crèche",
+                         "birdHouse":  "Robins",
+                         "sourceSheet":  "sheet3"
+                     },
+                     {
+                         "fullName":  "Diko Nana Pokuah Elshaddai",
+                         "class":  "Crèche",
+                         "birdHouse":  "Robins",
+                         "sourceSheet":  "sheet3"
+                     },
+                     {
+                         "fullName":  "Lartey Akua Victoria",
+                         "class":  "Crèche",
+                         "birdHouse":  "Robins",
+                         "sourceSheet":  "sheet3"
+                     },
+                     {
+                         "fullName":  "Nera Jasmine Owusu Mensah",
+                         "class":  "Crèche",
+                         "birdHouse":  "Robins",
+                         "sourceSheet":  "sheet3"
+                     },
+                     {
+                         "fullName":  "Twum Kwao Barima",
+                         "class":  "Crèche",
+                         "birdHouse":  "Robins",
+                         "sourceSheet":  "sheet3"
+                     },
+                     {
+                         "fullName":  "Adelia Alhassan",
+                         "class":  "Crèche",
+                         "birdHouse":  "Robins",
+                         "sourceSheet":  "sheet3"
+                     },
+                     {
+                         "fullName":  "Ayeh-Kumi Fiifi Jody",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Bakari Kuuku Curtis",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Benneh Laura",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Boamah Nakie Pearl",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Boamah Nakour Perpetual",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Kanati Ava Bubune",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Lartey Madeeha Larley",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Monney Aseda",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Obeng Nana Osei Kwasi Agyemang Jayden",
+                         "class":  "Nursery 1",
+                         "birdHouse":  "Starlings",
+                         "sourceSheet":  "sheet5"
+                     },
+                     {
+                         "fullName":  "Agyemang Nunana Khloe",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Alhassan Bubune Y.A.B.A Faith Kaylan",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Ansah-Darko Chris-David",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Boakye Wren Okatakyie",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Campbell Fathia Elinam",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Diko Eliana Amponsah",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Obenewaa Ariel",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Oussainu Kassim",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Munkaila Tasmiyah",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Mubarik Jamil",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Sangber-Dery Jayden Mwinviel",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Bekoe Nana Yaa",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Adugbire Mbo Ibiza",
+                         "class":  "Nursery 2",
+                         "birdHouse":  "Goldfinches",
+                         "sourceSheet":  "sheet7"
+                     },
+                     {
+                         "fullName":  "Agyapong A. Akyedie Emmalyn-Rosemond",
+                         "class":  "KG 1",
+                         "birdHouse":  "Kingfishers",
+                         "sourceSheet":  "sheet9"
+                     },
+                     {
+                         "fullName":  "Asare Tony Papa Kwesi",
+                         "class":  "KG 1",
+                         "birdHouse":  "Kingfishers",
+                         "sourceSheet":  "sheet9"
+                     },
+                     {
+                         "fullName":  "Darko Asher Kukuwa",
+                         "class":  "KG 1",
+                         "birdHouse":  "Kingfishers",
+                         "sourceSheet":  "sheet9"
+                     },
+                     {
+                         "fullName":  "Monney Obrempong Nyamedo",
+                         "class":  "KG 1",
+                         "birdHouse":  "Kingfishers",
+                         "sourceSheet":  "sheet9"
+                     },
+                     {
+                         "fullName":  "Rufai Kiara Nhyira",
+                         "class":  "KG 1",
+                         "birdHouse":  "Kingfishers",
+                         "sourceSheet":  "sheet9"
+                     },
+                     {
+                         "fullName":  "Precious Dogbatsey",
+                         "class":  "KG 1",
+                         "birdHouse":  "Kingfishers",
+                         "sourceSheet":  "sheet9"
+                     },
+                     {
+                         "fullName":  "Morkeh Bradley",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Nartey Zayne Nene Kwadjo",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Oppong Ama Aseda",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Adjei-Djeton Jahmiel",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Appiah Serwaa Senam",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Ansah-Darko Carissa Elyon",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Asare Nana Ama Sakyibea",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Bakari Lilian Jamima",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Kanati Jed Elikem",
+                         "class":  "KG 2",
+                         "birdHouse":  "Hawks",
+                         "sourceSheet":  "sheet11"
+                     },
+                     {
+                         "fullName":  "Anaman Sam Darkoh",
+                         "class":  "Grade 1",
+                         "birdHouse":  "Skylarks",
+                         "sourceSheet":  "sheet13"
+                     },
+                     {
+                         "fullName":  "Djaba Emily",
+                         "class":  "Grade 1",
+                         "birdHouse":  "Skylarks",
+                         "sourceSheet":  "sheet13"
+                     },
+                     {
+                         "fullName":  "Mensah-Aborampah Asa Essilfie Owuraku",
+                         "class":  "Grade 1",
+                         "birdHouse":  "Skylarks",
+                         "sourceSheet":  "sheet13"
+                     },
+                     {
+                         "fullName":  "Bekoe Calvin Darko",
+                         "class":  "Grade 1",
+                         "birdHouse":  "Skylarks",
+                         "sourceSheet":  "sheet13"
+                     },
+                     {
+                         "fullName":  "Benneh Gregoria",
+                         "class":  "Grade 1",
+                         "birdHouse":  "Skylarks",
+                         "sourceSheet":  "sheet13"
+                     },
+                     {
+                         "fullName":  "Afful Ewura-Yaa Nkunim",
+                         "class":  "Grade 2",
+                         "birdHouse":  "Kestrels",
+                         "sourceSheet":  "sheet15"
+                     },
+                     {
+                         "fullName":  "Antwi Brion",
+                         "class":  "Grade 2",
+                         "birdHouse":  "Kestrels",
+                         "sourceSheet":  "sheet15"
+                     },
+                     {
+                         "fullName":  "Appiah Zakiel Nana Kwame",
+                         "class":  "Grade 2",
+                         "birdHouse":  "Kestrels",
+                         "sourceSheet":  "sheet15"
+                     },
+                     {
+                         "fullName":  "Kanati Jesse Nuna",
+                         "class":  "Grade 2",
+                         "birdHouse":  "Kestrels",
+                         "sourceSheet":  "sheet15"
+                     },
+                     {
+                         "fullName":  "Morkeh Michelle",
+                         "class":  "Grade 2",
+                         "birdHouse":  "Kestrels",
+                         "sourceSheet":  "sheet15"
+                     },
+                     {
+                         "fullName":  "Mortty Gaius Eyiram",
+                         "class":  "Grade 2",
+                         "birdHouse":  "Kestrels",
+                         "sourceSheet":  "sheet15"
+                     },
+                     {
+                         "fullName":  "Tagoe Henry",
+                         "class":  "Grade 2",
+                         "birdHouse":  "Kestrels",
+                         "sourceSheet":  "sheet15"
+                     },
+                     {
+                         "fullName":  "Tsikata Eli-Vava Sebastian",
+                         "class":  "Grade 2",
+                         "birdHouse":  "Kestrels",
+                         "sourceSheet":  "sheet15"
+                     },
+                     {
+                         "fullName":  "Adjei-Djeton Jayden",
+                         "class":  "Grade 3",
+                         "birdHouse":  "Woodpeckers",
+                         "sourceSheet":  "sheet17"
+                     },
+                     {
+                         "fullName":  "Azasoo Jayden-Elyon Elikem",
+                         "class":  "Grade 3",
+                         "birdHouse":  "Woodpeckers",
+                         "sourceSheet":  "sheet17"
+                     },
+                     {
+                         "fullName":  "Mensah-Aborampah Ayeyi Yeboah",
+                         "class":  "Grade 3",
+                         "birdHouse":  "Woodpeckers",
+                         "sourceSheet":  "sheet17"
+                     },
+                     {
+                         "fullName":  "Owusu Katakyie Nana Kwame",
+                         "class":  "Grade 3",
+                         "birdHouse":  "Woodpeckers",
+                         "sourceSheet":  "sheet17"
+                     },
+                     {
+                         "fullName":  "Djaba Larko Rhema",
+                         "class":  "Grade 4",
+                         "birdHouse":  "Nightingales",
+                         "sourceSheet":  "sheet19"
+                     },
+                     {
+                         "fullName":  "Mortty Elikem Galen",
+                         "class":  "Grade 4",
+                         "birdHouse":  "Nightingales",
+                         "sourceSheet":  "sheet19"
+                     },
+                     {
+                         "fullName":  "Monney Nana Aba Nyamekye",
+                         "class":  "Grade 4",
+                         "birdHouse":  "Nightingales",
+                         "sourceSheet":  "sheet19"
+                     },
+                     {
+                         "fullName":  "Owusu Okyem Emmanuella",
+                         "class":  "Grade 4",
+                         "birdHouse":  "Nightingales",
+                         "sourceSheet":  "sheet19"
+                     },
+                     {
+                         "fullName":  "Djaba Nana Kwame Lartey Leroy",
+                         "class":  "Grade 5",
+                         "birdHouse":  "Falcons",
+                         "sourceSheet":  "sheet21"
+                     },
+                     {
+                         "fullName":  "Harmony Owusu",
+                         "class":  "Grade 5",
+                         "birdHouse":  "Falcons",
+                         "sourceSheet":  "sheet21"
+                     }
+                 ]
+}

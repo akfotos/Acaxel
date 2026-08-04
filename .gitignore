@@ -23,3 +23,8 @@ _tmp_*.xml
 sharedStrings.xml
 shared_strings_list.txt
 sheet*_debug.xml
+_debug_*.ps1
+_debug_*.txt
+_sheet*_r1.txt
+_extract_log.txt
+_val.txt
