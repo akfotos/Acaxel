@@ -86,7 +86,7 @@
 (function(){
   const c=document.getElementById('auth-canvas'),ctx=c.getContext('2d');
   let W,H,pts;
-  const N=72,CONN=120,COLORS=['rgba(99,102,241,','rgba(139,92,246,','rgba(167,139,250,'];
+  const N=64,CONN=110,COLORS=['rgba(132,169,140,','rgba(224,122,95,','rgba(244,162,97,'];
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
   function mkPt(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*2+1,c:COLORS[Math.floor(Math.random()*COLORS.length)]};}
   function init(){resize();pts=Array.from({length:N},mkPt);}

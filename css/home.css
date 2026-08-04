@@ -661,6 +661,208 @@ body.home .nav-links a:hover::after {
   .reveal { opacity: 1; transform: none; }
 }
 
+/* ============================================================
+   AUTH PAGES (signup / login) — Warm overrides
+   Scoped to body.home so other auth layouts are unaffected.
+   ============================================================ */
+
+/* Left panel — warm forest/sage gradient instead of tech purple */
+body.home .auth-left {
+  background: linear-gradient(160deg, var(--forest) 0%, var(--sage-dark) 60%, var(--sage) 100%);
+}
+body.home .auth-left::before {
+  background: rgba(255,255,255,0.06);
+}
+body.home .auth-left h2 { color: #fff; }
+body.home .auth-left p { color: rgba(255,255,255,0.8); }
+body.home .auth-left .perk-icon {
+  background: rgba(255,255,255,0.12); color: #fff;
+}
+body.home .auth-left .perk-text h5 { color: #fff; }
+body.home .auth-left .perk-text p { color: rgba(255,255,255,0.65); }
+body.home .auth-left .nav-name { color: #fff; }
+body.home .auth-left .nav-logo-img {
+  filter: brightness(0) invert(1);
+}
+body.home .auth-back-btn--left {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+}
+body.home .auth-back-btn--left:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.14);
+}
+
+/* Right panel — warm light background */
+body.home .auth-right {
+  background: var(--cream);
+}
+body.home .auth-form-wrap h2 { color: var(--forest); }
+body.home .auth-form-wrap > p { color: var(--mid); }
+
+/* Role toggle */
+body.home .role-toggle {
+  background: var(--sand);
+  border-radius: 12px;
+  padding: 4px;
+}
+body.home .role-btn {
+  color: var(--mid);
+  border-radius: 10px;
+}
+body.home .role-btn.active {
+  background: #fff;
+  color: var(--terracotta);
+  box-shadow: 0 2px 8px rgba(38, 70, 83, 0.08);
+}
+
+/* Form fields */
+body.home .form-group label {
+  color: var(--forest);
+  font-weight: 600;
+}
+body.home .form-group input,
+body.home .form-group select {
+  background: #fff;
+  border-color: var(--border-warm);
+  color: var(--charcoal);
+}
+body.home .form-group input:focus,
+body.home .form-group select:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(132, 169, 140, 0.15);
+}
+body.home .form-group input::placeholder { color: var(--light); }
+body.home .form-group select option { color: var(--charcoal); }
+
+/* Role-specific fields wrapper */
+body.home .role-fields { display: none; }
+body.home .role-fields.active {
+  display: block;
+  padding: 18px;
+  background: rgba(132, 169, 140, 0.06);
+  border: 1px solid var(--border-warm);
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+body.home .admin-school-reg-label {
+  color: var(--sage-dark);
+  margin-top: 0;
+}
+body.home .admin-school-reg-label i { stroke: var(--sage-dark); }
+
+/* Auto-generated fields */
+body.home .gen-field-wrap input {
+  background: var(--sand) !important;
+  border-color: var(--border-warm) !important;
+  color: var(--forest) !important;
+}
+body.home .gen-refresh-btn { background: var(--sage); color: #fff; }
+body.home .gen-refresh-btn:hover { background: var(--sage-dark); }
+body.home .gen-refresh-btn i { stroke: #fff; }
+body.home .gen-copy-btn { background: var(--sand); color: var(--terracotta); }
+body.home .gen-copy-btn:hover { background: var(--terracotta); color: #fff; }
+body.home .gen-copy-btn i { stroke: var(--terracotta); }
+body.home .gen-copy-btn:hover i { stroke: #fff; }
+body.home .gen-badge {
+  background: var(--sand); color: var(--sage-dark);
+}
+
+/* School-first notice */
+body.home .school-first-notice {
+  background: rgba(244, 162, 97, 0.12);
+  border-color: var(--amber);
+  color: var(--terracotta-dark);
+}
+body.home .school-first-notice i { stroke: var(--terracotta); }
+body.home .school-first-notice strong { color: var(--terracotta-dark); }
+
+/* Field hints & errors */
+.field-hint {
+  font-size: 0.75rem; color: var(--light);
+  margin-top: 5px; margin-bottom: 0;
+}
+.field-error {
+  font-size: 0.78rem; color: var(--terracotta);
+  margin-top: 6px; margin-bottom: 0;
+  display: none;
+}
+.field-error.visible { display: block; }
+body.home .form-group input.invalid,
+body.home .form-group select.invalid {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.12);
+}
+
+/* Checkbox / terms */
+.checkbox-group { margin-bottom: 18px; }
+.checkbox-label {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.85rem; color: var(--mid); cursor: pointer;
+  line-height: 1.5;
+}
+.checkbox-label input {
+  position: absolute; opacity: 0; width: 0; height: 0;
+}
+.checkbox-label .checkmark {
+  width: 18px; height: 18px; min-width: 18px;
+  border: 1.5px solid var(--border-warm);
+  border-radius: 5px;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s ease;
+  margin-top: 1px;
+}
+.checkbox-label .checkmark::after {
+  content: ''; width: 5px; height: 9px;
+  border: solid #fff; border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s ease;
+  margin-top: -2px;
+}
+.checkbox-label input:checked + .checkmark {
+  background: var(--terracotta); border-color: var(--terracotta);
+}
+.checkbox-label input:checked + .checkmark::after {
+  transform: rotate(45deg) scale(1);
+}
+.checkbox-label a { color: var(--terracotta); font-weight: 600; }
+.checkbox-label a:hover { text-decoration: underline; }
+
+/* Submit button */
+body.home .form-submit {
+  background: var(--terracotta);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(224, 122, 95, 0.30);
+}
+body.home .form-submit:hover {
+  background: var(--terracotta-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(224, 122, 95, 0.35);
+}
+
+/* Auth switch link */
+body.home .auth-switch { color: var(--mid); }
+body.home .auth-switch a { color: var(--terracotta); }
+
+/* Back button on mobile / right panel */
+body.home .auth-back-btn--mobile {
+  color: var(--mid); border-color: var(--border-warm); background: #fff;
+}
+body.home .auth-back-btn--mobile:hover {
+  color: var(--terracotta); border-color: var(--terracotta); background: rgba(224, 122, 95, 0.05);
+}
+
+/* Demo buttons on login */
+body.home .auth-right .btn-ghost {
+  border-color: var(--border-warm); color: var(--forest);
+}
+body.home .auth-right .btn-ghost:hover {
+  border-color: var(--sage); color: var(--sage-dark); background: rgba(132, 169, 140, 0.08);
+}
+
 /* ── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
   body.home .hero.hero-warm {

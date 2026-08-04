@@ -196,11 +196,54 @@ function handleLogin(e) {
 }
 
 /* ── Signup handler ──────────────────────────────────────── */
+function clearSignupErrors() {
+  document.querySelectorAll('.field-error').forEach(el => { el.textContent = ''; el.classList.remove('visible'); });
+  document.querySelectorAll('.form-group input, .form-group select').forEach(el => el.classList.remove('invalid'));
+}
+
+function showFieldError(id, message, inputId) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.textContent = message;
+    el.classList.add('visible');
+  }
+  if (inputId) {
+    const input = document.getElementById(inputId);
+    if (input) input.classList.add('invalid');
+  }
+}
+
 function handleSignup(e) {
   e.preventDefault();
+  clearSignupErrors();
+
   const role      = document.getElementById('signupRole').value;
-  const firstName = document.getElementById('firstName').value;
-  const lastName  = document.getElementById('lastName').value;
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName  = document.getElementById('lastName').value.trim();
+  const email     = document.getElementById('email').value.trim();
+  const password  = document.getElementById('password').value;
+  const confirm   = document.getElementById('confirmPassword')?.value;
+  const terms     = document.getElementById('termsCheck')?.checked;
+
+  let hasError = false;
+
+  if (!firstName) { showFieldError('firstNameError', 'First name is required.', 'firstName'); hasError = true; }
+  if (!lastName)  { showFieldError('lastNameError',  'Last name is required.',  'lastName');  hasError = true; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showFieldError('emailError', 'Please enter a valid email address.', 'email');
+    hasError = true;
+  }
+  if (password.length < 8) {
+    showFieldError('passwordError', 'Password must be at least 8 characters.', 'password');
+    hasError = true;
+  } else if (confirm !== undefined && confirm !== password) {
+    showFieldError('passwordError', 'Passwords do not match.', 'confirmPassword');
+    hasError = true;
+  }
+  if (!terms) {
+    showFieldError('termsError', 'You must agree to the terms to continue.');
+    hasError = true;
+  }
 
   // Block non-admin if no school registered
   if (role !== 'admin' && !adminIsRegistered()) {
@@ -209,10 +252,12 @@ function handleSignup(e) {
     return;
   }
 
+  if (hasError) return;
+
   const userData = {
     name:  `${firstName} ${lastName}`,
     role,
-    email: document.getElementById('email').value,
+    email,
   };
 
   // Save school info when admin registers
