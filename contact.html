@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="home">
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
+    <span class="nav-name">Acaxel</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="features.html">Features</a></li>
+    <li><a href="portals.html">Portals</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-active">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-ghost">Sign In</a>
+    <a href="signup.html" class="btn-primary">Get Started</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="features.html">Features</a>
+  <a href="portals.html">Portals</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <div class="nav-actions mobile-nav-actions">
+    <a href="login.html" class="btn-ghost">Sign In</a>
+    <a href="signup.html" class="btn-primary">Get Started</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="section-tag">Contact</div>
+  <h1>Get in Touch</h1>
+  <p>Have a question, need support, or want to discuss pricing? We're here to help.</p>
+</div>
+
+<!-- CONTACT LAYOUT -->
+<section class="section">
+  <div class="contact-layout">
+
+    <!-- INFO COLUMN -->
+    <div class="contact-info contact-info-img" style="--contact-img:url('images/contact/school-building.jpg')">
+      <div class="contact-info-img-overlay"></div>
+      <h2>Contact Information</h2>
+      <p>Reach us through any of the channels below. Our team responds within one business day.</p>
+
+      <div class="contact-info-list">
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i data-lucide="map-pin"></i></div>
+          <div>
+            <div class="contact-info-label">Address</div>
+            <div class="contact-info-value">14 Academy Road, Accra, Ghana</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i data-lucide="phone"></i></div>
+          <div>
+            <div class="contact-info-label">Phone</div>
+            <div class="contact-info-value">+233 55 6924 358</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i data-lucide="mail"></i></div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value">info@acaxel.edu.gh</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i data-lucide="clock"></i></div>
+          <div>
+            <div class="contact-info-label">Office Hours</div>
+            <div class="contact-info-value">Monday &ndash; Friday, 7:30 AM &ndash; 4:00 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-social-row">
+        <a href="#" class="footer-social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+        <a href="#" class="footer-social-btn" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+        <a href="#" class="footer-social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+        <a href="#" class="footer-social-btn" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+      </div>
+    </div>
+
+    <!-- FORM COLUMN -->
+    <div class="contact-form-wrap">
+      <h2>Send Us a Message</h2>
+      <p>Fill out the form and a member of our team will get back to you shortly.</p>
+      <form class="contact-form" onsubmit="handleContact(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cFirstName">First Name</label>
+            <input type="text" id="cFirstName" placeholder="e.g. Adaeze" required />
+          </div>
+          <div class="form-group">
+            <label for="cLastName">Last Name</label>
+            <input type="text" id="cLastName" placeholder="e.g. Okonkwo" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cEmail">Email Address</label>
+          <input type="email" id="cEmail" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="cSubject">Subject</label>
+          <select id="cSubject">
+            <option value="">Select a topic…</option>
+            <option>General Enquiry</option>
+            <option>Technical Support</option>
+            <option>Pricing &amp; Plans</option>
+            <option>Admissions</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cMessage">Message</label>
+          <textarea id="cMessage" rows="5" placeholder="Write your message here…" style="width:100%;padding:10px 13px;border-radius:var(--radius-sm);border:1.5px solid var(--border);font-size:0.9rem;color:var(--text);resize:vertical;font-family:inherit;" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+        <div class="contact-success" id="contactSuccess" style="display:none;">
+          <i data-lucide="check-circle"></i> Your message has been sent. We will get back to you soon.
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Get Started?</h2>
+  <p>Create a free account and explore Acaxel for 14 days — no commitment needed.</p>
+  <div class="cta-actions">
+    <a href="signup.html" class="btn-white btn-lg">Create Free Account</a>
+    <a href="pricing.html" class="btn-ghost btn-lg cta-ghost">View Pricing</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top-bar">
+    <div class="footer-top-inner">
+      <div class="footer-top-item"><i data-lucide="phone"></i><span>+233 55 6924 358</span></div>
+      <div class="footer-top-divider"></div>
+      <div class="footer-top-item"><i data-lucide="mail"></i><span>info@acaxel.edu.gh</span></div>
+      <div class="footer-top-divider"></div>
+      <div class="footer-top-item"><i data-lucide="map-pin"></i><span>14 Academy Road, Accra, Ghana</span></div>
+    </div>
+  </div>
+  <div class="footer-body">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-row"><img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" /><span class="footer-school-name">Acaxel School</span></div>
+        <p class="footer-tagline">Nurturing Excellence, Building Character.</p>
+        <p class="footer-desc">A forward-thinking institution dedicated to academic excellence and holistic student growth.</p>
+        <div class="footer-accreditation">
+          <span class="footer-badge"><i data-lucide="shield-check"></i> GES Accredited</span>
+          <span class="footer-badge"><i data-lucide="award"></i> ISO 9001:2015</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="features.html"><i data-lucide="chevron-right"></i> Features</a></li>
+          <li><a href="portals.html"><i data-lucide="chevron-right"></i> Portals</a></li>
+          <li><a href="pricing.html"><i data-lucide="chevron-right"></i> Pricing</a></li>
+          <li><a href="about.html"><i data-lucide="chevron-right"></i> About</a></li>
+          <li><a href="contact.html"><i data-lucide="chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Portals</h5>
+        <ul>
+          <li><a href="login.html"><i data-lucide="chevron-right"></i> Sign In</a></li>
+          <li><a href="signup.html?role=parent"><i data-lucide="chevron-right"></i> Parent Portal</a></li>
+          <li><a href="signup.html?role=teacher"><i data-lucide="chevron-right"></i> Administrator Portal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Current Term</h5>
+        <div class="footer-term-card">
+          <div class="footer-term-label">2025/2026 Academic Year</div>
+          <div class="footer-term-row"><span class="footer-term-badge footer-term-done">Term 1</span><span class="footer-term-dates">Sep 9 &ndash; Dec 13, 2025</span></div>
+          <div class="footer-term-row"><span class="footer-term-badge footer-term-active">Term 2</span><span class="footer-term-dates">Jan 13 &ndash; Apr 11, 2026</span></div>
+          <div class="footer-term-row"><span class="footer-term-badge footer-term-upcoming">Term 3</span><span class="footer-term-dates">Apr 27 &ndash; Jul 18, 2026</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left"><span>&copy; 2026 Acaxel School. All rights reserved.</span></div>
+    <div class="footer-bottom-center">
+      <a href="#">Privacy Policy</a><span class="footer-dot">&middot;</span>
+      <a href="#">Terms of Use</a><span class="footer-dot">&middot;</span>
+      <a href="#">Safeguarding Policy</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" class="footer-social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+      <a href="#" class="footer-social-btn" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+      <a href="#" class="footer-social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  function handleContact(e) {
+    e.preventDefault();
+    document.getElementById('contactSuccess').style.display = 'flex';
+    e.target.reset();
+    lucide.createIcons();
+  }
+</script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

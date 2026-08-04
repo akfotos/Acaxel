@@ -1,0 +1,1243 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard - Acaxel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="sidebar-brand">
+      <img src="images/Logo/logo.png" class="sidebar-logo-img" alt="Acaxel Logo" />
+      <span class="sidebar-name">Acaxel</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Menu</div>
+      <button class="nav-item active" onclick="switchTab('overview',this)">
+        <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
+        <span class="nav-item-label">Overview</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('students',this)">
+        <span class="nav-icon"><i data-lucide="users"></i></span>
+        <span class="nav-item-label">Students</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('grades',this)">
+        <span class="nav-icon"><i data-lucide="bar-chart-2"></i></span>
+        <span class="nav-item-label">Grades</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('attendance',this)">
+        <span class="nav-icon"><i data-lucide="calendar-check"></i></span>
+        <span class="nav-item-label">Attendance</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('messages',this)">
+        <span class="nav-icon"><i data-lucide="message-square"></i></span>
+        <span class="nav-item-label">Messages</span>
+        <span class="nav-badge">5</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('timetable',this)">
+        <span class="nav-icon"><i data-lucide="calendar-days"></i></span>
+        <span class="nav-item-label">My Timetable</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('clockin',this)">
+        <span class="nav-icon"><i data-lucide="fingerprint"></i></span>
+        <span class="nav-item-label">Clock-In</span>
+        <span class="nav-badge" id="tchCiStatusBadge" style="display:none;">✓</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('support',this)">
+        <span class="nav-icon"><i data-lucide="life-buoy"></i></span>
+        <span class="nav-item-label">Support</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('profile',this)">
+        <span class="nav-icon"><i data-lucide="user"></i></span>
+        <span class="nav-item-label">My Profile</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn sidebar-collapse-btn--bottom" onclick="toggleSidebar()" aria-label="Collapse sidebar">
+        <i data-lucide="chevron-left"></i>
+        <span class="sidebar-collapse-label">Collapse</span>
+      </button>
+      <button class="sidebar-logout-btn" onclick="logout()">
+        <i data-lucide="log-out"></i>
+        <span class="sidebar-logout-label">Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MOBILE SIDEBAR OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- TOP NAV -->
+  <header class="dash-topnav">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="sidebar-hamburger" onclick="toggleSidebar()" aria-label="Open menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+    <div class="dash-search">
+      <span><i data-lucide="search"></i></span>
+      <input type="text" placeholder="Search students..." />
+    </div>
+    <div class="dash-topnav-right">
+      <button class="notif-btn" onclick="toggleNotif()" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+        <span class="notif-count" id="notifCount">3</span>
+      </button>
+      <div class="user-chip">
+        <div class="user-avatar">A</div>
+        <div>
+          <div class="user-chip-name">Madam Esther</div>
+          <div class="user-chip-role">Mathematics Teacher</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NOTIFICATION BACKDROP -->
+  <div class="notif-backdrop" id="notifBackdrop" onclick="closeNotif()"></div>
+
+  <!-- NOTIFICATION PANEL -->
+  <div class="notif-panel" id="notifPanel">
+    <div class="notif-panel-header">
+      <span class="notif-panel-title">Notifications</span>
+      <div class="notif-panel-actions">
+        <button class="notif-mark-all" onclick="markAllRead()">Mark all read</button>
+        <button class="notif-close-btn" onclick="closeNotif()"><i data-lucide="x"></i></button>
+      </div>
+    </div>
+    <div class="notif-tabs">
+      <button class="notif-tab active" onclick="switchNotifTab('all', this)">All <span class="notif-tab-badge" id="notifBadgeAll">3</span></button>
+      <button class="notif-tab" onclick="switchNotifTab('school', this)">School <span class="notif-tab-badge" id="notifBadgeSchool">2</span></button>
+      <button class="notif-tab" onclick="switchNotifTab('messages', this)">Messages <span class="notif-tab-badge" id="notifBadgeMsgs">1</span></button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item unread" data-category="school" onclick="markRead(this)">
+        <div class="notif-unread-dot"></div>
+        <div class="notif-item-icon notif-icon-announce"><i data-lucide="megaphone"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">Staff Meeting &mdash; Tomorrow 8:00 AM</div>
+          <div class="notif-item-text">Compulsory staff briefing before exams begin. Venue: Main Hall.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Today, 11:00 AM</div>
+        </div>
+      </div>
+      <div class="notif-item unread" data-category="school" onclick="markRead(this)">
+        <div class="notif-unread-dot"></div>
+        <div class="notif-item-icon notif-icon-grade"><i data-lucide="file-text"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">Exam Scripts Submission Deadline</div>
+          <div class="notif-item-text">All marked exam scripts for JSS 2A must be submitted by April 30.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Yesterday, 3:00 PM</div>
+        </div>
+      </div>
+      <div class="notif-item unread" data-category="messages" onclick="markRead(this)">
+        <div class="notif-unread-dot"></div>
+        <div class="notif-item-icon notif-icon-msg"><i data-lucide="message-square"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">New message from Mrs. Okonkwo</div>
+          <div class="notif-item-text">"Good afternoon sir, I wanted to ask about Adaeze's performance in the last..."</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Apr 19, 2026</div>
+        </div>
+      </div>
+      <div class="notif-item" data-category="school" onclick="markRead(this)">
+        <div class="notif-item-icon notif-icon-announce"><i data-lucide="calendar"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">Term 2 Exams Begin April 28</div>
+          <div class="notif-item-text">Please ensure all class registers are updated before exam week.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Apr 18, 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <main class="dash-main">
+    <div class="dash-content">
+
+      <!-- OVERVIEW TAB -->
+      <div class="tab-panel active" id="tab-overview">
+
+        <h2 class="ov-greeting">Good morning, Madam Esther</h2>
+
+        <!-- STAT CARDS ROW -->
+        <div class="bs-stats-row">
+          <div class="bs-stat-card">
+            <div class="bs-stat-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="users" style="stroke:#6366f1;"></i></div>
+            <div class="bs-stat-info">
+              <div class="bs-stat-value">38 <span style="font-size:12px;color:var(--text-light);font-weight:400;">JSS 2A</span></div>
+              <div class="bs-stat-label">Total Students</div>
+            </div>
+          </div>
+          <div class="bs-stat-card">
+            <div class="bs-stat-icon" style="background:rgba(46,204,113,0.1);"><i data-lucide="check-circle" style="stroke:#2ecc71;"></i></div>
+            <div class="bs-stat-info">
+              <div class="bs-stat-value">31 <span class="bs-badge bs-badge-pos">+3</span></div>
+              <div class="bs-stat-label">Fees Cleared</div>
+            </div>
+          </div>
+          <div class="bs-stat-card">
+            <div class="bs-stat-icon" style="background:rgba(231,76,60,0.1);"><i data-lucide="alert-triangle" style="stroke:#e74c3c;"></i></div>
+            <div class="bs-stat-info">
+              <div class="bs-stat-value">&#8373;234k <span class="bs-badge bs-badge-neg">7</span></div>
+              <div class="bs-stat-label">Outstanding Fees</div>
+            </div>
+          </div>
+          <div class="bs-stat-card">
+            <div class="bs-stat-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="calendar-check" style="stroke:#6366f1;"></i></div>
+            <div class="bs-stat-info">
+              <div class="bs-stat-value">92% <span class="bs-badge bs-badge-pos">Today</span></div>
+              <div class="bs-stat-label">Avg Attendance</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN DASHBOARD GRID -->
+        <div class="bs-dashboard-grid">
+
+          <!-- LEFT COLUMN -->
+          <div class="bs-left-col">
+
+            <!-- Class Average Chart -->
+            <div class="bs-card">
+              <div class="bs-card-header">
+                <div>
+                  <div class="bs-card-title">Class Average — JSS 2A Mathematics</div>
+                  <div class="bs-card-subtitle">Average scores across assessments this term</div>
+                </div>
+                <span class="bs-filter-pill">Term 2</span>
+              </div>
+              <div style="height:200px;position:relative;">
+                <canvas id="teacherGradeChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Pending Fees Table -->
+            <div class="bs-card">
+              <div class="bs-card-header">
+                <div class="bs-card-title">Pending Fee Payments <span style="color:var(--accent);font-size:14px;">(7)</span></div>
+                <button class="bs-filter-pill" onclick="switchTab('fees', document.querySelector('[onclick*=fees]'))">View All</button>
+              </div>
+              <table class="bs-table">
+                <thead>
+                  <tr><th>#</th><th>Student</th><th>Balance</th><th>Due Date</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td style="font-weight:500;">Emeka Nwosu</td><td>&#8373;32,500</td><td>Overdue</td><td><span class="bs-status bs-inprogress">Overdue</span></td></tr>
+                  <tr><td>2</td><td style="font-weight:500;">Fatima Aliyu</td><td>&#8373;15,000</td><td>Apr 20</td><td><span class="bs-status bs-inprogress">Pending</span></td></tr>
+                  <tr><td>3</td><td style="font-weight:500;">Tunde Bakare</td><td>&#8373;45,000</td><td>Overdue</td><td><span class="bs-status bs-inprogress">Overdue</span></td></tr>
+                  <tr><td>4</td><td style="font-weight:500;">Ngozi Eze</td><td>&#8373;12,500</td><td>Apr 25</td><td><span class="bs-status bs-inprogress">Pending</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div><!-- end left col -->
+
+          <!-- RIGHT COLUMN -->
+          <div class="bs-right-col">
+
+            <!-- Today's Schedule -->
+            <div class="bs-card">
+              <div class="bs-card-header">
+                <div class="bs-card-title">Today's Schedule</div>
+                <span class="bs-filter-pill">This Week</span>
+              </div>
+              <div class="bs-calendar-strip" id="teacherCalStrip">
+                <div class="bs-day-box" onclick="switchDay('teacher',0,this)"><span>M</span><div class="bs-date">26</div></div>
+                <div class="bs-day-box" onclick="switchDay('teacher',1,this)"><span>T</span><div class="bs-date">27</div></div>
+                <div class="bs-day-box" onclick="switchDay('teacher',2,this)"><span>W</span><div class="bs-date">28</div></div>
+                <div class="bs-day-box" onclick="switchDay('teacher',3,this)"><span>T</span><div class="bs-date">29</div></div>
+                <div class="bs-day-box" onclick="switchDay('teacher',4,this)"><span>F</span><div class="bs-date">30</div></div>
+              </div>
+              <div class="bs-schedule-list" id="teacherScheduleList">
+                <div class="bs-schedule-item">
+                  <span class="bs-time-slot">7:30 – 8:00</span>
+                  <span class="bs-subject">Staff Briefing</span>
+                  <div class="bs-score-dots"></div>
+                </div>
+                <div class="bs-schedule-item">
+                  <span class="bs-time-slot">8:15 – 9:00</span>
+                  <span class="bs-subject">Maths — JSS 2A</span>
+                  <div class="bs-score-dots">
+                    <div class="bs-dot bs-dot-green">38</div>
+                  </div>
+                </div>
+                <div class="bs-schedule-item">
+                  <span class="bs-time-slot">9:00 – 9:45</span>
+                  <span class="bs-subject">Maths — JSS 2B</span>
+                  <div class="bs-score-dots">
+                    <div class="bs-dot bs-dot-orange">34</div>
+                  </div>
+                </div>
+                <div class="bs-schedule-item">
+                  <span class="bs-time-slot">10:00 – 10:45</span>
+                  <span class="bs-subject">Further Maths — SSS 1</span>
+                  <div class="bs-score-dots">
+                    <div class="bs-dot bs-dot-green">28</div>
+                  </div>
+                </div>
+                <div class="bs-schedule-item">
+                  <span class="bs-time-slot">11:00 – 11:45</span>
+                  <span class="bs-subject">Remedial — JSS 2A</span>
+                  <div class="bs-score-dots"></div>
+                </div>
+                <div class="bs-schedule-item">
+                  <span class="bs-time-slot">2:00 – 3:00</span>
+                  <span class="bs-subject">Marking / Prep</span>
+                  <div class="bs-score-dots"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Attendance Donut -->
+            <div class="bs-card">
+              <div class="bs-card-title">Class Attendance</div>
+              <div class="bs-card-subtitle">JSS 2A &mdash; Today</div>
+              <div class="bs-efficiency-box">
+                <div>
+                  <div style="font-size:11px;color:var(--text-light);">Present</div>
+                  <div style="font-size:20px;font-weight:700;margin-top:4px;color:var(--accent);">92%</div>
+                  <div style="font-size:11px;color:var(--text-light);margin-top:8px;">35 present</div>
+                  <div style="font-size:11px;color:#dc2626;">3 absent</div>
+                  <div style="font-size:11px;color:#d97706;">2 late</div>
+                </div>
+                <div class="bs-progress-wrap">
+                  <canvas id="teacherDonut"></canvas>
+                  <div class="bs-donut-text">
+                    <div class="bs-donut-pct">92%</div>
+                    <div class="bs-donut-lbl">Present</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="bs-card">
+              <div class="bs-card-header">
+                <div class="bs-card-title">Upcoming Events</div>
+                <span class="bs-filter-pill">Apr 2026</span>
+              </div>
+              <div class="bs-event-date">Mon 28 Apr</div>
+              <div class="bs-event-card">
+                <div class="bs-event-title">2nd Term Exams Begin</div>
+                <div class="bs-event-time"><i data-lucide="clock"></i> 7:30 AM &mdash; All classes</div>
+              </div>
+              <div class="bs-event-date">Wed 30 Apr</div>
+              <div class="bs-event-card">
+                <div class="bs-event-title">Exam Scripts Submission</div>
+                <div class="bs-event-time"><i data-lucide="clock"></i> Deadline &mdash; JSS 2A scripts</div>
+              </div>
+            </div>
+
+          </div><!-- end right col -->
+        </div><!-- end bs-dashboard-grid -->
+
+      </div>
+
+      <!-- STUDENTS TAB -->
+      <div class="tab-panel" id="tab-students">
+        <div class="card">
+          <div class="card-header">
+            <h3>Students — JSS 2A</h3>
+            <div style="display:flex;gap:8px;">
+              <input class="input-field" type="text" placeholder="Search students..." style="width:200px;" oninput="searchStudents(this.value)" />
+              <button class="btn-sm wine" onclick="openModal('addStudentModal')">+ Add Student</button>
+            </div>
+          </div>
+          <div class="card-body card-body-flush">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>Student Name</th><th>Student ID</th><th>Parent</th><th>Attendance</th><th>Grade</th><th>Fee Status</th><th>Actions</th></tr></thead>
+                <tbody id="studentsTable">
+                  <tr><td>1</td><td>Adaeze Okonkwo</td><td>HC/2024/042</td><td>Mrs. Okonkwo</td><td>94%</td><td>B+</td><td><span class="badge badge-partial">Partial</span></td><td><button class="btn-icon" title="View"><i data-lucide="eye"></i></button></td></tr>
+                  <tr><td>2</td><td>Emeka Nwosu</td><td>HC/2024/015</td><td>Mr. Nwosu</td><td>88%</td><td>B</td><td><span class="badge badge-overdue">Overdue</span></td><td><button class="btn-icon" title="View"><i data-lucide="eye"></i></button></td></tr>
+                  <tr><td>3</td><td>Fatima Aliyu</td><td>HC/2024/023</td><td>Mrs. Aliyu</td><td>96%</td><td>A</td><td><span class="badge badge-pending">Pending</span></td><td><button class="btn-icon" title="View"><i data-lucide="eye"></i></button></td></tr>
+                  <tr><td>4</td><td>Tunde Bakare</td><td>HC/2024/031</td><td>Mr. Bakare</td><td>79%</td><td>C+</td><td><span class="badge badge-overdue">Overdue</span></td><td><button class="btn-icon" title="View"><i data-lucide="eye"></i></button></td></tr>
+                  <tr><td>5</td><td>Ngozi Eze</td><td>HC/2024/008</td><td>Mrs. Eze</td><td>91%</td><td>A-</td><td><span class="badge badge-pending">Pending</span></td><td><button class="btn-icon" title="View"><i data-lucide="eye"></i></button></td></tr>
+                  <tr><td>6</td><td>Chidi Obi</td><td>HC/2024/019</td><td>Mr. Obi</td><td>85%</td><td>B-</td><td><span class="badge badge-paid">Paid</span></td><td><button class="btn-icon" title="View"><i data-lucide="eye"></i></button></td></tr>
+                  <tr><td>7</td><td>Amina Sule</td><td>HC/2024/027</td><td>Mrs. Sule</td><td>98%</td><td>A+</td><td><span class="badge badge-paid">Paid</span></td><td><button class="btn-icon" title="View"><i data-lucide="eye"></i></button></td></tr>
+                  <tr><td>8</td><td>Biodun Adeyemi</td><td>HC/2024/033</td><td>Mr. Adeyemi</td><td>82%</td><td>B</td><td><span class="badge badge-paid">Paid</span></td><td><button class="btn-icon" title="View"><i data-lucide="eye"></i></button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRADES TAB (fees/bills removed) -->
+      <!-- FEE RECORDS TAB -->
+      <div class="tab-panel" id="tab-fees" style="display:none!important">
+
+        <!-- Banner -->
+        <div class="fees-banner">
+          <div class="fees-banner-left">
+            <div class="fees-banner-title">Fee Collection &mdash; JSS 2A</div>
+            <div class="fees-banner-sub">2nd Term 2026 &nbsp;&middot;&nbsp; 38 Students &nbsp;&middot;&nbsp; Mathematics</div>
+          </div>
+          <div class="fees-banner-badge">
+            <i data-lucide="calendar"></i> Term 2 &middot; 2025/2026
+          </div>
+        </div>
+
+        <!-- Summary stat cards -->
+        <div class="fees-stats" style="grid-template-columns:repeat(3,1fr);">
+          <div class="fees-stat-card fees-stat-green">
+            <div class="fees-stat-icon"><i data-lucide="check-circle"></i></div>
+            <div class="fees-stat-body">
+              <div class="fees-stat-value">31</div>
+              <div class="fees-stat-label">Fully Paid</div>
+            </div>
+          </div>
+          <div class="fees-stat-card fees-stat-neutral">
+            <div class="fees-stat-icon"><i data-lucide="clock"></i></div>
+            <div class="fees-stat-body">
+              <div class="fees-stat-value">4</div>
+              <div class="fees-stat-label">Partial / Pending</div>
+            </div>
+          </div>
+          <div class="fees-stat-card fees-stat-red">
+            <div class="fees-stat-icon"><i data-lucide="alert-triangle"></i></div>
+            <div class="fees-stat-body">
+              <div class="fees-stat-value">3</div>
+              <div class="fees-stat-label">Overdue</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student fee list -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Student Fee Records</h3>
+            <span class="fees-term-chip">2nd Term 2026</span>
+          </div>
+          <div class="card-body card-body-flush">
+            <div class="fees-item-list">
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-pending"><i data-lucide="clock"></i></div>
+                <div class="fees-item-info">
+                  <div class="fees-item-name">Adaeze Okonkwo</div>
+                  <div class="fees-item-due">HC/2024/042 &nbsp;&middot;&nbsp; Due Apr 20</div>
+                </div>
+                <div class="fees-item-amounts">
+                  <div class="fees-item-billed">&#8373;117,500 billed</div>
+                  <div class="fees-item-balance fees-balance-owed">&#8373;32,500 owed</div>
+                </div>
+                <span class="badge badge-partial">Partial</span>
+                <button class="bills-action-btn" onclick="recordPayment('Adaeze Okonkwo')"><i data-lucide="plus-circle"></i> Record</button>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-overdue"><i data-lucide="alert-triangle"></i></div>
+                <div class="fees-item-info">
+                  <div class="fees-item-name">Emeka Nwosu</div>
+                  <div class="fees-item-due fees-due-overdue">HC/2024/015 &nbsp;&middot;&nbsp; Overdue since Mar 1</div>
+                </div>
+                <div class="fees-item-amounts">
+                  <div class="fees-item-billed">&#8373;117,500 billed</div>
+                  <div class="fees-item-balance fees-balance-owed">&#8373;32,500 owed</div>
+                </div>
+                <span class="badge badge-overdue">Overdue</span>
+                <button class="bills-action-btn bills-pay-btn" onclick="recordPayment('Emeka Nwosu')"><i data-lucide="plus-circle"></i> Record</button>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-pending"><i data-lucide="clock"></i></div>
+                <div class="fees-item-info">
+                  <div class="fees-item-name">Fatima Aliyu</div>
+                  <div class="fees-item-due">HC/2024/023 &nbsp;&middot;&nbsp; Due Apr 20</div>
+                </div>
+                <div class="fees-item-amounts">
+                  <div class="fees-item-billed">&#8373;117,500 billed</div>
+                  <div class="fees-item-balance fees-balance-owed">&#8373;15,000 owed</div>
+                </div>
+                <span class="badge badge-pending">Pending</span>
+                <button class="bills-action-btn" onclick="recordPayment('Fatima Aliyu')"><i data-lucide="plus-circle"></i> Record</button>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-overdue"><i data-lucide="alert-triangle"></i></div>
+                <div class="fees-item-info">
+                  <div class="fees-item-name">Tunde Bakare</div>
+                  <div class="fees-item-due fees-due-overdue">HC/2024/031 &nbsp;&middot;&nbsp; Overdue since Feb 15</div>
+                </div>
+                <div class="fees-item-amounts">
+                  <div class="fees-item-billed">&#8373;117,500 billed</div>
+                  <div class="fees-item-balance fees-balance-owed">&#8373;45,000 owed</div>
+                </div>
+                <span class="badge badge-overdue">Overdue</span>
+                <button class="bills-action-btn bills-pay-btn" onclick="recordPayment('Tunde Bakare')"><i data-lucide="plus-circle"></i> Record</button>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-pending"><i data-lucide="clock"></i></div>
+                <div class="fees-item-info">
+                  <div class="fees-item-name">Ngozi Eze</div>
+                  <div class="fees-item-due">HC/2024/008 &nbsp;&middot;&nbsp; Due Apr 25</div>
+                </div>
+                <div class="fees-item-amounts">
+                  <div class="fees-item-billed">&#8373;117,500 billed</div>
+                  <div class="fees-item-balance fees-balance-owed">&#8373;12,500 owed</div>
+                </div>
+                <span class="badge badge-pending">Pending</span>
+                <button class="bills-action-btn" onclick="recordPayment('Ngozi Eze')"><i data-lucide="plus-circle"></i> Record</button>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-paid"><i data-lucide="check"></i></div>
+                <div class="fees-item-info">
+                  <div class="fees-item-name">Chidi Obi</div>
+                  <div class="fees-item-due">HC/2024/019 &nbsp;&middot;&nbsp; Cleared</div>
+                </div>
+                <div class="fees-item-amounts">
+                  <div class="fees-item-billed">&#8373;117,500 billed</div>
+                  <div class="fees-item-balance fees-balance-zero">&#8373;0 balance</div>
+                </div>
+                <span class="badge badge-paid">Paid</span>
+                <span style="font-size:0.78rem;color:var(--text-light);padding:7px 10px;">Cleared</span>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-paid"><i data-lucide="check"></i></div>
+                <div class="fees-item-info">
+                  <div class="fees-item-name">Amina Sule</div>
+                  <div class="fees-item-due">HC/2024/027 &nbsp;&middot;&nbsp; Cleared</div>
+                </div>
+                <div class="fees-item-amounts">
+                  <div class="fees-item-billed">&#8373;117,500 billed</div>
+                  <div class="fees-item-balance fees-balance-zero">&#8373;0 balance</div>
+                </div>
+                <span class="badge badge-paid">Paid</span>
+                <span style="font-size:0.78rem;color:var(--text-light);padding:7px 10px;">Cleared</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEND BILLS TAB (removed) -->
+      <div class="tab-panel" id="tab-bills" style="display:none!important">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;" class="bill-compose-grid">
+          <div class="card">
+            <div class="card-header"><h3>Compose Bill</h3></div>
+            <div class="card-body">
+              <div class="form-field">
+                <label class="input-label">Send To</label>
+                <select class="input-field" id="billTo" onchange="updatePreview()">
+                  <option value="">Select recipient</option>
+                  <option>Entire Class (JSS 2A)</option>
+                  <option>Adaeze Okonkwo</option>
+                  <option>Emeka Nwosu</option>
+                  <option>Fatima Aliyu</option>
+                  <option>Tunde Bakare</option>
+                  <option>Ngozi Eze</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="input-label">Bill Title</label>
+                <input class="input-field" type="text" id="billTitle" placeholder="e.g. 3rd Term Tuition" oninput="updatePreview()" />
+              </div>
+              <div id="billItems">
+                <div class="form-field bill-item-row" style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;">
+                  <div>
+                    <label class="input-label">Item Description</label>
+                    <input class="input-field" type="text" placeholder="e.g. Tuition Fee" oninput="updatePreview()" />
+                  </div>
+                  <div>
+                    <label class="input-label">Amount (&#8373;)</label>
+                    <input class="input-field" type="number" placeholder="0" style="width:120px;" oninput="updatePreview()" />
+                  </div>
+                </div>
+              </div>
+              <button class="btn-sm ghost" style="margin-bottom:14px;" onclick="addBillItem()">+ Add Item</button>
+              <div class="form-field">
+                <label class="input-label">Due Date</label>
+                <input class="input-field" type="date" id="billDue" onchange="updatePreview()" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Note (optional)</label>
+                <textarea class="input-field" id="billNote" placeholder="Additional instructions..." oninput="updatePreview()"></textarea>
+              </div>
+              <button class="btn-sm wine" style="width:100%;" onclick="sendBill()">Send Bill</button>
+            </div>
+          </div>
+          <div>
+            <div class="bill-preview">
+              <div class="bill-preview-header">
+                <h3>Acaxel School</h3>
+                <div style="font-size:0.78rem;color:var(--text-light);">Accra, Ghana</div>
+                <div style="font-size:0.82rem;margin-top:8px;font-weight:600;" id="previewTitle">Bill Preview</div>
+              </div>
+              <div style="font-size:0.82rem;margin-bottom:16px;">
+                <strong>To:</strong> <span id="previewTo">—</span><br/>
+                <strong>Due:</strong> <span id="previewDue">—</span>
+              </div>
+              <div id="previewItems">
+                <div class="bill-line"><span>No items yet</span><span>—</span></div>
+              </div>
+              <div class="bill-total"><span>Total</span><span id="previewTotal">&#8373;0</span></div>
+              <div id="previewNote" style="margin-top:12px;font-size:0.8rem;color:var(--text-light);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRADES TAB -->
+      <div class="tab-panel" id="tab-grades">
+        <div class="card">
+          <div class="card-header">
+            <h3>Grade Entry — JSS 2A Mathematics</h3>
+            <button class="btn-sm wine" onclick="saveGrades()">Save Grades</button>
+          </div>
+          <div class="card-body card-body-flush">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Student</th><th>CA1 (20)</th><th>CA2 (20)</th><th>Exam (60)</th><th>Total (100)</th><th>Grade</th></tr></thead>
+                <tbody id="gradesTable">
+                  <tr>
+                    <td>Adaeze Okonkwo</td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="17" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="16" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="60" value="45" oninput="calcGrade(this)"/></td>
+                    <td class="grade-total">78</td><td><span class="grade-letter grade-B">B+</span></td>
+                  </tr>
+                  <tr>
+                    <td>Emeka Nwosu</td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="14" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="15" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="60" value="41" oninput="calcGrade(this)"/></td>
+                    <td class="grade-total">70</td><td><span class="grade-letter grade-B">B</span></td>
+                  </tr>
+                  <tr>
+                    <td>Fatima Aliyu</td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="19" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="18" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="60" value="55" oninput="calcGrade(this)"/></td>
+                    <td class="grade-total">92</td><td><span class="grade-letter grade-A">A</span></td>
+                  </tr>
+                  <tr>
+                    <td>Tunde Bakare</td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="12" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="11" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="60" value="35" oninput="calcGrade(this)"/></td>
+                    <td class="grade-total">58</td><td><span class="grade-letter grade-C">C+</span></td>
+                  </tr>
+                  <tr>
+                    <td>Ngozi Eze</td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="18" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="20" value="17" oninput="calcGrade(this)"/></td>
+                    <td><input class="grade-input" type="number" min="0" max="60" value="50" oninput="calcGrade(this)"/></td>
+                    <td class="grade-total">85</td><td><span class="grade-letter grade-A">A-</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ATTENDANCE TAB -->
+      <div class="tab-panel" id="tab-attendance">
+        <div class="card">
+          <div class="card-header">
+            <h3>Daily Attendance — JSS 2A</h3>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input class="input-field" type="date" id="attendDate" style="width:auto;" />
+              <button class="btn-sm wine" onclick="saveAttendance()">Save Attendance</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="attendance-grid" id="attendanceGrid">
+              <!-- populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MESSAGES TAB -->
+      <div class="tab-panel" id="tab-messages">
+        <div class="card">
+          <div class="messages-layout">
+            <div class="msg-list">
+              <div class="msg-list-header">Parent Messages</div>
+              <div class="msg-item active unread" onclick="openChat('Mrs. Okonkwo','Parent of Adaeze')">
+                <div class="msg-avatar">O</div>
+                <div class="msg-meta"><div class="msg-name">Mrs. Okonkwo</div><div class="msg-preview">Thank you for the update...</div></div>
+                <div class="msg-time">10:24</div>
+              </div>
+              <div class="msg-item unread" onclick="openChat('Mr. Nwosu','Parent of Emeka')">
+                <div class="msg-avatar">N</div>
+                <div class="msg-meta"><div class="msg-name">Mr. Nwosu</div><div class="msg-preview">When is the next exam?</div></div>
+                <div class="msg-time">9:15</div>
+              </div>
+              <div class="msg-item" onclick="openChat('Mrs. Aliyu','Parent of Fatima')">
+                <div class="msg-avatar">A</div>
+                <div class="msg-meta"><div class="msg-name">Mrs. Aliyu</div><div class="msg-preview">Fatima will be absent tomorrow</div></div>
+                <div class="msg-time">Yesterday</div>
+              </div>
+            </div>
+            <div class="chat-area">
+              <div class="chat-header">
+                <div class="msg-avatar">O</div>
+                <div>
+                  <div style="font-weight:600;font-size:0.9rem;" id="chatName">Mrs. Okonkwo</div>
+                  <div style="font-size:0.75rem;color:var(--text-light);" id="chatSub">Parent of Adaeze</div>
+                </div>
+              </div>
+              <div class="chat-messages" id="chatMessages">
+                <div class="chat-bubble sent">
+                  <div class="bubble-text">Good morning Mrs. Okonkwo. Adaeze scored 78/100 in Mathematics this term.</div>
+                  <div class="bubble-time">10:20 AM</div>
+                </div>
+                <div class="chat-bubble received">
+                  <div class="bubble-text">Thank you Mr. Adeyemi! That is wonderful news. Is there anything she should focus on?</div>
+                  <div class="bubble-time">10:22 AM</div>
+                </div>
+                <div class="chat-bubble sent">
+                  <div class="bubble-text">She should work more on algebra. I will send practice materials this week.</div>
+                  <div class="bubble-time">10:24 AM</div>
+                </div>
+              </div>
+              <div class="chat-input-area">
+                <input class="input-field" type="text" id="chatInput" placeholder="Type a message..." onkeydown="sendMessage(event)" />
+                <button class="btn-sm wine" onclick="sendMessage()">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE TAB -->
+      <div class="tab-panel" id="tab-profile">
+        <div class="profile-page">
+
+          <!-- PROFILE HERO -->
+          <div class="profile-hero">
+            <div class="profile-hero-banner"></div>
+            <div class="profile-hero-body">
+              <div class="profile-hero-left">
+                <div class="profile-avatar-xl">A</div>
+                <div class="profile-hero-info">
+                  <h2>Mr. Adeyemi Taiwo</h2>
+                  <div class="profile-chips">
+                    <span class="profile-chip"><i data-lucide="book-open"></i> Mathematics Teacher</span>
+                    <span class="profile-chip"><i data-lucide="users"></i> JSS 2A</span>
+                    <span class="profile-chip"><i data-lucide="badge-check"></i> Staff ID: TCH/001</span>
+                    <span class="profile-chip chip-accent"><i data-lucide="check-circle"></i> Active Staff</span>
+                  </div>
+                </div>
+              </div>
+              <button class="btn-sm wine profile-save-btn" onclick="saveProfile()">
+                <i data-lucide="save"></i> Save Changes
+              </button>
+            </div>
+          </div>
+
+          <!-- PROFILE GRID -->
+          <div class="profile-grid">
+
+            <!-- PERSONAL INFO -->
+            <div class="card profile-section-card">
+              <div class="card-header">
+                <div class="profile-section-title"><i data-lucide="user"></i> Personal Information</div>
+              </div>
+              <div class="card-body">
+                <div class="profile-form-grid">
+                  <div class="form-field">
+                    <label class="input-label">Full Name</label>
+                    <input class="input-field" type="text" value="Mr. Adeyemi Taiwo" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Gender</label>
+                    <select class="input-field">
+                      <option selected>Male</option>
+                      <option>Female</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Email Address</label>
+                    <input class="input-field" type="email" value="adeyemi.taiwo@acaxel.edu.ng" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Phone Number</label>
+                    <input class="input-field" type="tel" value="+233 802 345 6789" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Date of Birth</label>
+                    <input class="input-field" type="date" value="1985-03-14" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Nationality</label>
+                    <input class="input-field" type="text" value="Nigerian" />
+                  </div>
+                  <div class="form-field profile-form-full">
+                    <label class="input-label">Residential Address</label>
+                    <input class="input-field" type="text" value="22 Okpara Avenue, Enugu, Nigeria" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROFESSIONAL INFO -->
+            <div class="card profile-section-card">
+              <div class="card-header">
+                <div class="profile-section-title"><i data-lucide="briefcase"></i> Professional Details</div>
+              </div>
+              <div class="card-body">
+                <div class="profile-form-grid">
+                  <div class="form-field">
+                    <label class="input-label">Subject(s) Taught</label>
+                    <input class="input-field" type="text" value="Mathematics" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Assigned Class</label>
+                    <input class="input-field" type="text" value="JSS 2A" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Department</label>
+                    <input class="input-field" type="text" value="Sciences & Technology" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Qualification</label>
+                    <input class="input-field" type="text" value="B.Sc. Mathematics (UNILAG)" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Employment Type</label>
+                    <select class="input-field">
+                      <option selected>Full-Time</option>
+                      <option>Part-Time</option>
+                      <option>Contract</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Date Joined</label>
+                    <input class="input-field" type="date" value="2019-09-02" />
+                  </div>
+                </div>
+                <div class="profile-stats-row">
+                  <div class="profile-stat-box">
+                    <div class="profile-stat-value">38</div>
+                    <div class="profile-stat-label">Students</div>
+                  </div>
+                  <div class="profile-stat-box">
+                    <div class="profile-stat-value">5</div>
+                    <div class="profile-stat-label">Yrs Experience</div>
+                  </div>
+                  <div class="profile-stat-box">
+                    <div class="profile-stat-value">92%</div>
+                    <div class="profile-stat-label">Class Attendance</div>
+                  </div>
+                  <div class="profile-stat-box">
+                    <div class="profile-stat-value">B+</div>
+                    <div class="profile-stat-label">Class Avg Grade</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- EMERGENCY CONTACT -->
+            <div class="card profile-section-card">
+              <div class="card-header">
+                <div class="profile-section-title"><i data-lucide="phone-call"></i> Emergency Contact</div>
+              </div>
+              <div class="card-body">
+                <div class="profile-form-grid">
+                  <div class="form-field">
+                    <label class="input-label">Contact Name</label>
+                    <input class="input-field" type="text" value="Mrs. Taiwo Folake" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Relationship</label>
+                    <input class="input-field" type="text" value="Spouse" />
+                  </div>
+                  <div class="form-field profile-form-full">
+                    <label class="input-label">Emergency Phone</label>
+                    <input class="input-field" type="tel" value="+233 803 987 6543" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECURITY -->
+            <div class="card profile-section-card">
+              <div class="card-header">
+                <div class="profile-section-title"><i data-lucide="shield"></i> Account & Security</div>
+              </div>
+              <div class="card-body">
+                <div class="profile-info-row">
+                  <span class="profile-info-label">Staff ID</span>
+                  <span class="profile-info-value">TCH/001</span>
+                </div>
+                <div class="profile-info-row">
+                  <span class="profile-info-label">Account Status</span>
+                  <span class="badge badge-paid">Active</span>
+                </div>
+                <div class="profile-info-row">
+                  <span class="profile-info-label">Last Login</span>
+                  <span class="profile-info-value">Today, 8:05 AM</span>
+                </div>
+                <div class="profile-form-grid">
+                  <div class="form-field">
+                    <label class="input-label">New Password</label>
+                    <input class="input-field" type="password" placeholder="Enter new password" />
+                  </div>
+                  <div class="form-field">
+                    <label class="input-label">Confirm Password</label>
+                    <input class="input-field" type="password" placeholder="Repeat new password" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- end profile-grid -->
+        </div><!-- end profile-page -->
+      </div>
+
+      <!-- ═══════════════════ TIMETABLE TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-timetable">
+
+        <div class="ci-page-header">
+          <div>
+            <h2 class="ci-page-title">My Weekly Timetable</h2>
+            <p class="ci-page-sub">Your class schedule — current lesson is highlighted</p>
+          </div>
+          <div class="ci-live-time" id="tchTTClock"></div>
+        </div>
+
+        <!-- Day strip -->
+        <div class="tch-tt-day-strip" id="tchTTDayStrip">
+          <button class="tch-tt-day" data-day="1" onclick="tchTTSwitchDay(1,this)">Mon</button>
+          <button class="tch-tt-day" data-day="2" onclick="tchTTSwitchDay(2,this)">Tue</button>
+          <button class="tch-tt-day" data-day="3" onclick="tchTTSwitchDay(3,this)">Wed</button>
+          <button class="tch-tt-day" data-day="4" onclick="tchTTSwitchDay(4,this)">Thu</button>
+          <button class="tch-tt-day" data-day="5" onclick="tchTTSwitchDay(5,this)">Fri</button>
+        </div>
+
+        <!-- Schedule table -->
+        <div class="card">
+          <div class="card-body-flush">
+            <div class="table-wrap">
+              <table class="ci-admin-table" style="table-layout:fixed;">
+                <thead>
+                  <tr>
+                    <th style="width:120px;">Time</th>
+                    <th>Subject</th>
+                    <th style="width:100px;">Class</th>
+                    <th style="width:110px;">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="tchTTBody"></tbody>
+              </table>
+              <div id="tchTTEmpty" class="ci-admin-empty" style="display:none;">
+                <i data-lucide="calendar-off"></i>
+                <p>No lessons scheduled for this day.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next lesson banner -->
+        <div class="tch-next-lesson" id="tchNextLesson" style="display:none;">
+          <div class="tch-next-icon"><i data-lucide="bell-ring"></i></div>
+          <div class="tch-next-body">
+            <div class="tch-next-label">Up Next</div>
+            <div class="tch-next-text" id="tchNextText"></div>
+          </div>
+        </div>
+
+      </div><!-- end timetable -->
+
+      <!-- ═══════════════════ TEACHER CLOCK-IN TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-clockin">
+
+        <div class="ci-page-header">
+          <div>
+            <h2 class="ci-page-title">Staff Clock-In</h2>
+            <p class="ci-page-sub">Record your daily presence at school</p>
+          </div>
+          <div class="ci-live-time" id="tchCiClock"></div>
+        </div>
+
+        <!-- Hero clock-in card -->
+        <div class="tch-ci-hero">
+          <div class="tch-ci-status-ring" id="tchCiRing">
+            <div class="tch-ci-ring-inner">
+              <div class="tch-ci-status-icon" id="tchCiIcon"><i data-lucide="scan-line"></i></div>
+              <div class="tch-ci-status-label" id="tchCiLabel">Not Clocked In</div>
+              <div class="tch-ci-status-time"  id="tchCiTime"></div>
+            </div>
+          </div>
+          <div class="tch-ci-action-row">
+            <button class="tch-ci-btn" id="tchCiBtn" onclick="tchOpenScanner()">
+              <i data-lucide="scan-line"></i>
+              <span id="tchCiBtnLabel">Scan QR to Clock In</span>
+            </button>
+            <button class="tch-ci-btn btn-clockout" id="tchCiOutBtn" onclick="tchClockOut()" style="display:none;">
+              <i data-lucide="log-out"></i>
+              <span>Clock Out</span>
+            </button>
+          </div>
+          <p class="tch-ci-hint" id="tchCiHint">Scan the school gate QR code to record your arrival</p>
+
+          <!-- Manual fallback -->
+          <div class="tch-ci-manual">
+            <span class="tch-ci-manual-label">No camera?</span>
+            <div class="tch-ci-manual-row">
+              <input type="text" id="tchCiManualCode" class="input-field" placeholder="Enter gate code manually…" style="font-size:0.84rem;" />
+              <button class="btn-sm wine" onclick="tchManualVerify()">Verify</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today summary row -->
+        <div class="tch-ci-summary">
+          <div class="tch-ci-summary-item">
+            <div class="tch-ci-summary-lbl">Clock-In</div>
+            <div class="tch-ci-summary-val" id="tchCiInTime">—</div>
+          </div>
+          <div class="tch-ci-summary-divider"></div>
+          <div class="tch-ci-summary-item">
+            <div class="tch-ci-summary-lbl">Clock-Out</div>
+            <div class="tch-ci-summary-val" id="tchCiOutTime">—</div>
+          </div>
+          <div class="tch-ci-summary-divider"></div>
+          <div class="tch-ci-summary-item">
+            <div class="tch-ci-summary-lbl">Status</div>
+            <div class="tch-ci-summary-val" id="tchCiStatusVal">—</div>
+          </div>
+          <div class="tch-ci-summary-divider"></div>
+          <div class="tch-ci-summary-item">
+            <div class="tch-ci-summary-lbl">Duration</div>
+            <div class="tch-ci-summary-val" id="tchCiDuration">—</div>
+          </div>
+        </div>
+
+        <!-- Weekly presence grid -->
+        <div class="ci-log-section">
+          <div class="ci-log-header">
+            <h3 class="ci-log-title">This Week</h3>
+          </div>
+          <div class="tch-ci-week-grid" id="tchCiWeekGrid"></div>
+        </div>
+
+        <!-- Attendance log -->
+        <div class="ci-log-section" style="margin-top:24px;">
+          <div class="ci-log-header">
+            <h3 class="ci-log-title">Attendance Log</h3>
+            <button class="ci-clear-btn" onclick="tchCiExport()">
+              <i data-lucide="download"></i> Export CSV
+            </button>
+          </div>
+          <div id="tchCiLogList" class="ci-log-list"></div>
+        </div>
+
+      </div><!-- end clockin -->
+
+      <!-- ═══════════════════ SUPPORT TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-support">
+        <div class="sp-page">
+          <div class="sp-hero">
+            <div class="sp-hero-icon"><i data-lucide="life-buoy"></i></div>
+            <div>
+              <h2 class="sp-hero-title">Help &amp; Support</h2>
+              <p class="sp-hero-sub">Find answers, contact the team, or send a support request</p>
+            </div>
+          </div>
+          <div class="sp-grid">
+            <div class="sp-left">
+              <div class="sp-section-card">
+                <div class="sp-section-head"><i data-lucide="help-circle"></i><h3>Frequently Asked Questions</h3></div>
+                <div class="sp-search-row">
+                  <i data-lucide="search"></i>
+                  <input type="text" id="spSearchInput" class="sp-search-input" placeholder="Search FAQs…" oninput="spSearchFaq()" />
+                </div>
+                <div id="spFaqList" class="sp-faq-list"></div>
+              </div>
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head"><i data-lucide="send"></i><h3>Send a Support Request</h3></div>
+                <p class="sp-form-hint">We'll get back to you within 24 hours on school days.</p>
+                <div class="form-field" style="margin-top:12px;"><label class="input-label">Subject</label><input class="input-field" type="text" id="spTicketSubject" placeholder="e.g. Cannot log in…" /></div>
+                <div class="form-field" style="margin-top:10px;"><label class="input-label">Message</label><textarea class="input-field sp-textarea" id="spTicketMsg" placeholder="Describe your issue…" rows="4"></textarea></div>
+                <button class="btn-sm wine" style="margin-top:10px;width:100%;justify-content:center;" onclick="spSubmitTicket()"><i data-lucide="send"></i> Submit Request</button>
+                <div id="spTicketStatus" class="sp-ticket-status"></div>
+              </div>
+            </div>
+            <div class="sp-right">
+              <div class="sp-section-card">
+                <div class="sp-section-head"><i data-lucide="phone"></i><h3>Contact Us</h3></div>
+                <div class="sp-contact-list">
+                  <div class="sp-contact-item"><span class="sp-contact-icon"><i data-lucide="mail"></i></span><div><div class="sp-contact-lbl">Email</div><div class="sp-contact-val" id="spContactEmail"></div></div></div>
+                  <div class="sp-contact-item"><span class="sp-contact-icon"><i data-lucide="phone"></i></span><div><div class="sp-contact-lbl">Phone</div><div class="sp-contact-val" id="spContactPhone"></div></div></div>
+                  <div class="sp-contact-item"><span class="sp-contact-icon"><i data-lucide="clock"></i></span><div><div class="sp-contact-lbl">Support Hours</div><div class="sp-contact-val" id="spContactHours"></div></div></div>
+                  <div class="sp-contact-item"><span class="sp-contact-icon"><i data-lucide="map-pin"></i></span><div><div class="sp-contact-lbl">Address</div><div class="sp-contact-val" id="spContactAddress"></div></div></div>
+                </div>
+              </div>
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head"><i data-lucide="zap"></i><h3>Quick Actions</h3></div>
+                <div class="sp-quick-grid">
+                  <button class="sp-quick-btn" onclick="window.open('mailto:support@acaxel.edu.ng')"><i data-lucide="mail"></i><span>Email Support</span></button>
+                  <button class="sp-quick-btn" onclick="toggleAI()"><i data-lucide="bot"></i><span>Ask AI Assistant</span></button>
+                  <button class="sp-quick-btn" onclick="window.print()"><i data-lucide="printer"></i><span>Print This Page</span></button>
+                  <button class="sp-quick-btn" onclick="location.reload()"><i data-lucide="refresh-cw"></i><span>Reload Dashboard</span></button>
+                </div>
+              </div>
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head"><i data-lucide="info"></i><h3>System Info</h3></div>
+                <div class="sp-info-list">
+                  <div class="sp-info-row"><span>Platform</span><span>Acaxel School Portal</span></div>
+                  <div class="sp-info-row"><span>Version</span><span>v2.4.0</span></div>
+                  <div class="sp-info-row"><span>Browser</span><span id="spBrowser">—</span></div>
+                  <div class="sp-info-row"><span>Data Storage</span><span>Local (Browser)</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end support -->
+
+    </div>
+  </main>
+</div>
+
+<!-- TEACHER QR SCANNER MODAL -->
+<div class="modal-overlay" id="tchScanModal" style="z-index:1100;">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header">
+      <h3 style="display:flex;align-items:center;gap:8px;"><i data-lucide="scan-line" style="width:18px;height:18px;stroke:var(--accent);"></i> Scan Gate QR Code</h3>
+      <span class="modal-close" onclick="tchCloseScanner()">&#10005;</span>
+    </div>
+    <div class="modal-body" style="padding:16px;">
+      <!-- Camera feed -->
+      <div class="ci-camera-wrap">
+        <div id="tchCameraFeed" class="ci-camera-feed"></div>
+        <div class="ci-scan-frame">
+          <span class="ci-scan-corner ci-corner-tl"></span>
+          <span class="ci-scan-corner ci-corner-tr"></span>
+          <span class="ci-scan-corner ci-corner-bl"></span>
+          <span class="ci-scan-corner ci-corner-br"></span>
+          <div class="ci-scan-line"></div>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:0.8rem;color:var(--text-light);margin:10px 0 0;">Point your camera at the school gate QR code</p>
+    </div>
+  </div>
+</div>
+
+<!-- ADD STUDENT MODAL -->
+<div class="modal-overlay" id="addStudentModal">
+  <div class="modal">
+    <div class="modal-header"><h3>Add New Student</h3><span class="modal-close" onclick="closeModal('addStudentModal')">&#10005;</span></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="form-field"><label class="input-label">First Name</label><input class="input-field" type="text" id="newFirstName" placeholder="First name" /></div>
+        <div class="form-field"><label class="input-label">Last Name</label><input class="input-field" type="text" id="newLastName" placeholder="Last name" /></div>
+      </div>
+      <div class="form-field"><label class="input-label">Student ID</label><input class="input-field" type="text" id="newStudentId" placeholder="e.g. HC/2026/050" /></div>
+      <div class="form-field"><label class="input-label">Parent Name</label><input class="input-field" type="text" id="newParentName" placeholder="Parent/Guardian name" /></div>
+      <div class="form-field"><label class="input-label">Parent Email</label><input class="input-field" type="email" id="newParentEmail" placeholder="parent@email.com" /></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm ghost" onclick="closeModal('addStudentModal')">Cancel</button>
+      <button class="btn-sm wine" onclick="addStudent()">Add Student</button>
+    </div>
+  </div>
+</div>
+
+<!-- RECORD PAYMENT MODAL -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal">
+    <div class="modal-header"><h3>Record Payment</h3><span class="modal-close" onclick="closeModal('paymentModal')">&#10005;</span></div>
+    <div class="modal-body">
+      <div class="form-field"><label class="input-label">Student</label><input class="input-field" type="text" id="payStudent" readonly /></div>
+      <div class="form-field"><label class="input-label">Amount Paid (&#8373;)</label><input class="input-field" type="number" id="payAmount" placeholder="0" /></div>
+      <div class="form-field"><label class="input-label">Payment Date</label><input class="input-field" type="date" id="payDate" /></div>
+      <div class="form-field"><label class="input-label">Payment Method</label>
+        <select class="input-field" id="payMethod">
+          <option>Bank Transfer</option><option>Cash</option><option>POS</option><option>Online Payment</option>
+        </select>
+      </div>
+      <div class="form-field"><label class="input-label">Reference Number</label><input class="input-field" type="text" id="payRef" placeholder="Transaction reference" /></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm ghost" onclick="closeModal('paymentModal')">Cancel</button>
+      <button class="btn-sm wine" onclick="confirmPayment()">Confirm Payment</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/dashboard.js"></script>
+<script src="js/teacher-dashboard.js"></script>
+<script src="js/theme-panel.js"></script>
+<script src="js/ai-assistant.js"></script>
+<script src="js/support.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script src="js/offline-clockin.js"></script>
+<script src="js/teacher-clockin.js"></script>
+<script>
+lucide.createIcons();
+(function() {
+  const accent = '#6366f1';
+  const border = '#e5e7eb';
+  const textMid = '#6b7280';
+
+  // Class average line chart
+  const ctxLine = document.getElementById('teacherGradeChart');
+  if (ctxLine) {
+    new Chart(ctxLine, {
+      type: 'line',
+      data: {
+        labels: ['CA1','CA2','CA3','Mid-Term','CA4','CA5','Exam'],
+        datasets: [{
+          label: 'Class Avg',
+          data: [62, 65, 70, 68, 74, 71, 78],
+          borderColor: accent,
+          borderWidth: 2.5,
+          tension: 0.4,
+          fill: true,
+          backgroundColor: 'rgba(99,102,241,0.12)',
+          pointRadius: [0,0,0,5,0,0,5],
+          pointBackgroundColor: accent,
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        animation: {
+          duration: 1400,
+          easing: 'easeInOutQuart',
+          delay(ctx) { return ctx.dataIndex * 80; }
+        },
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { min: 40, max: 100, ticks: { color: textMid, stepSize: 10 }, grid: { color: border } },
+          x: { ticks: { color: textMid }, grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // Attendance donut
+  const ctxDonut = document.getElementById('teacherDonut');
+  if (ctxDonut) {
+    new Chart(ctxDonut, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [35, 3, 2],
+          backgroundColor: [accent, '#dc2626', '#d97706'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '82%', responsive: true, maintainAspectRatio: false,
+        plugins: { tooltip: { enabled: false } },
+        animation: { animateRotate: true, animateScale: true, duration: 1200, easing: 'easeOutCubic' }
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

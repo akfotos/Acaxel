@@ -1,0 +1,2373 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/dashboard.css?v=13" />
+  <link rel="stylesheet" href="css/theme.css?v=13" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="sidebar-brand">
+      <img src="images/Logo/logo.png" class="sidebar-logo-img" alt="Acaxel Logo" />
+      <span class="sidebar-name">Acaxel</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Main</div>
+      <button class="nav-item active" onclick="switchTab('overview',this)">
+        <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
+        <span class="nav-item-label">Overview</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('students',this)">
+        <span class="nav-icon"><i data-lucide="users"></i></span>
+        <span class="nav-item-label">Students</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('staff',this)">
+        <span class="nav-icon"><i data-lucide="briefcase"></i></span>
+        <span class="nav-item-label">Staff</span>
+      </button>
+      <div class="sidebar-section-label">Finance</div>
+      <button class="nav-item" onclick="switchTab('fees',this)">
+        <span class="nav-icon"><i data-lucide="credit-card"></i></span>
+        <span class="nav-item-label">Fee Records</span>
+        <span class="nav-badge">7</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('billing',this)">
+        <span class="nav-icon"><i data-lucide="file-text"></i></span>
+        <span class="nav-item-label">Send Bills</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('feeding',this)">
+        <span class="nav-icon"><i data-lucide="utensils"></i></span>
+        <span class="nav-item-label">Feeding Collection</span>
+      </button>
+      <div class="sidebar-section-label">Academic</div>
+      <button class="nav-item" onclick="switchTab('grades',this)">
+        <span class="nav-icon"><i data-lucide="award"></i></span>
+        <span class="nav-item-label">Grades &amp; Exams</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('attendance',this)">
+        <span class="nav-icon"><i data-lucide="calendar-check"></i></span>
+        <span class="nav-item-label">Attendance</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('clockin',this)">
+        <span class="nav-icon"><i data-lucide="scan-line"></i></span>
+        <span class="nav-item-label">Clock-In Log</span>
+        <span class="nav-badge" id="adminCiTodayBadge">0</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('timetable',this)">
+        <span class="nav-icon"><i data-lucide="clock"></i></span>
+        <span class="nav-item-label">Timetable</span>
+      </button>
+      <div class="sidebar-section-label">Communication</div>
+      <button class="nav-item" onclick="switchTab('messages',this)">
+        <span class="nav-icon"><i data-lucide="message-square"></i></span>
+        <span class="nav-item-label">Messages</span>
+        <span class="nav-badge">3</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('announcements',this)">
+        <span class="nav-icon"><i data-lucide="megaphone"></i></span>
+        <span class="nav-item-label">Announcements</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('events',this)">
+        <span class="nav-icon"><i data-lucide="calendar"></i></span>
+        <span class="nav-item-label">Events &amp; Calendar</span>
+      </button>
+      <div class="sidebar-section-label">Admin</div>
+      <button class="nav-item" onclick="switchTab('inventory',this)">
+        <span class="nav-icon"><i data-lucide="package"></i></span>
+        <span class="nav-item-label">Inventory</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('updates',this)">
+        <span class="nav-icon"><i data-lucide="newspaper"></i></span>
+        <span class="nav-item-label">Updates</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('newsletter',this)">
+        <span class="nav-icon"><i data-lucide="mail"></i></span>
+        <span class="nav-item-label">Newsletter</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('reports',this)">
+        <span class="nav-icon"><i data-lucide="bar-chart-2"></i></span>
+        <span class="nav-item-label">Reports</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('settings',this)">
+        <span class="nav-icon"><i data-lucide="settings"></i></span>
+        <span class="nav-item-label">Settings</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('support',this)">
+        <span class="nav-icon"><i data-lucide="life-buoy"></i></span>
+        <span class="nav-item-label">Support</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn sidebar-collapse-btn--bottom" onclick="toggleSidebar()" aria-label="Collapse sidebar">
+        <i data-lucide="chevron-left"></i>
+        <span class="sidebar-collapse-label">Collapse</span>
+      </button>
+      <button class="sidebar-logout-btn" onclick="logout()">
+        <i data-lucide="log-out"></i>
+        <span class="sidebar-logout-label">Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- TOP NAV -->
+  <header class="dash-topnav">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="sidebar-hamburger" onclick="toggleSidebar()" aria-label="Open menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+    <div class="dash-search">
+      <span><i data-lucide="search"></i></span>
+      <input type="text" placeholder="Search students, staff..." />
+    </div>
+    <div class="dash-topnav-right">
+      <button class="notif-btn" onclick="toggleNotif()" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+        <span class="notif-count" id="notifCount">5</span>
+      </button>
+      <div class="user-chip">
+        <div class="user-avatar">P</div>
+        <div>
+          <div class="user-chip-name">Dorcas Matilda kusi</div>
+          <div class="user-chip-role">School Administrator</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NOTIFICATION BACKDROP -->
+  <div class="notif-backdrop" id="notifBackdrop" onclick="closeNotif()"></div>
+
+  <!-- NOTIFICATION PANEL -->
+  <div class="notif-panel" id="notifPanel">
+    <div class="notif-panel-header">
+      <span class="notif-panel-title">Notifications</span>
+      <div class="notif-panel-actions">
+        <button class="notif-mark-all" onclick="markAllRead()">Mark all read</button>
+        <button class="notif-close-btn" onclick="closeNotif()"><i data-lucide="x"></i></button>
+      </div>
+    </div>
+    <div class="notif-tabs">
+      <button class="notif-tab active" onclick="switchNotifTab('all',this)">All <span class="notif-tab-badge">5</span></button>
+      <button class="notif-tab" onclick="switchNotifTab('school',this)">School <span class="notif-tab-badge">3</span></button>
+      <button class="notif-tab" onclick="switchNotifTab('messages',this)">Finance <span class="notif-tab-badge">2</span></button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item unread" data-category="school" onclick="markRead(this)">
+        <div class="notif-unread-dot"></div>
+        <div class="notif-item-icon notif-icon-fee"><i data-lucide="credit-card"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">7 students have overdue fees</div>
+          <div class="notif-item-text">Total outstanding: ₵312,500 across JSS and SSS classes.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Today, 8:00 AM</div>
+        </div>
+      </div>
+      <div class="notif-item unread" data-category="school" onclick="markRead(this)">
+        <div class="notif-unread-dot"></div>
+        <div class="notif-item-icon notif-icon-announce"><i data-lucide="megaphone"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">Term 2 Exams start April 28</div>
+          <div class="notif-item-text">Exam timetables have been distributed. All teachers notified.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Yesterday, 3:00 PM</div>
+        </div>
+      </div>
+      <div class="notif-item unread" data-category="messages" onclick="markRead(this)">
+        <div class="notif-unread-dot"></div>
+        <div class="notif-item-icon notif-icon-grade"><i data-lucide="trending-up"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">Monthly fee collection report ready</div>
+          <div class="notif-item-text">April collection rate: 87%. Download the full report.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Apr 19, 2026</div>
+        </div>
+      </div>
+      <div class="notif-item" data-category="school" onclick="markRead(this)">
+        <div class="notif-item-icon notif-icon-announce"><i data-lucide="calendar"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">New student enrollment: 3 pending approvals</div>
+          <div class="notif-item-text">Three new enrollment applications require admin review.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Apr 18, 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="dash-main">
+    <div class="dash-content">
+
+      <!-- ═══════════════════ OVERVIEW TAB ═══════════════════ -->
+      <div class="tab-panel active" id="tab-overview">
+
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Good morning, Mrs. Adu</h2>
+            <p class="adm-page-sub">Here's what's happening at Acaxel School today — Term 2, 2026.</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline" onclick="switchTab('reports',document.querySelector('[onclick*=reports]'))"><i data-lucide="download"></i> Export Report</button>
+            <button class="btn-sm wine" onclick="switchTab('billing',document.querySelector('[onclick*=billing]'))"><i data-lucide="send"></i> Send Bill</button>
+          </div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="adm-kpi-row">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="users" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body">
+              <div class="adm-kpi-val">1,240</div>
+              <div class="adm-kpi-lbl">Total Students</div>
+              <div class="adm-kpi-pill green">+12 this term</div>
+            </div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="briefcase" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body">
+              <div class="adm-kpi-val">86</div>
+              <div class="adm-kpi-lbl">Teaching Staff</div>
+              <div class="adm-kpi-pill blue">4 on leave</div>
+            </div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="credit-card" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body">
+              <div class="adm-kpi-val">₵1.24M</div>
+              <div class="adm-kpi-lbl">Fees Collected</div>
+              <div class="adm-kpi-pill green">87% rate</div>
+            </div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="alert-circle" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body">
+              <div class="adm-kpi-val">₵312k</div>
+              <div class="adm-kpi-lbl">Outstanding Fees</div>
+              <div class="adm-kpi-pill red">7 overdue</div>
+            </div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f5f3ff;"><i data-lucide="calendar-check" style="stroke:#7c3aed;"></i></div>
+            <div class="adm-kpi-body">
+              <div class="adm-kpi-val">91%</div>
+              <div class="adm-kpi-lbl">Attendance Today</div>
+              <div class="adm-kpi-pill green">1,128 present</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="grid-2" style="margin-bottom:16px;">
+          <div class="card">
+            <div class="card-header">
+              <h3>Fee Collection — 2026</h3>
+              <span class="adm-term-chip">Term 2</span>
+            </div>
+            <div class="card-body">
+              <div style="height:200px;position:relative;"><canvas id="feeCollectionChart"></canvas></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Attendance Trend — This Week</h3>
+              <span class="adm-term-chip">This Week</span>
+            </div>
+            <div class="card-body">
+              <div style="height:200px;position:relative;"><canvas id="attendanceTrendChart"></canvas></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM 3-COL -->
+        <div class="adm-tri-grid">
+
+          <!-- Recent Payments -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Recent Payments</h3>
+              <button class="adm-link-btn" onclick="switchTab('fees',document.querySelector('[onclick*=fees]'))">View All</button>
+            </div>
+            <div class="card-body-flush">
+              <div class="adm-pay-item">
+                <div class="adm-pay-avatar">O</div>
+                <div class="adm-pay-info"><div class="adm-pay-name">Adaeze Okonkwo</div><div class="adm-pay-meta">JSS 2A · Apr 22</div></div>
+                <div class="adm-pay-amount green">+₵45,000</div>
+              </div>
+              <div class="adm-pay-item">
+                <div class="adm-pay-avatar">A</div>
+                <div class="adm-pay-info"><div class="adm-pay-name">Kwame Asante</div><div class="adm-pay-meta">SSS 1B · Apr 21</div></div>
+                <div class="adm-pay-amount green">+₵62,000</div>
+              </div>
+              <div class="adm-pay-item">
+                <div class="adm-pay-avatar">I</div>
+                <div class="adm-pay-info"><div class="adm-pay-name">Ifunanya Obi</div><div class="adm-pay-meta">JSS 3A · Apr 21</div></div>
+                <div class="adm-pay-amount green">+₵38,500</div>
+              </div>
+              <div class="adm-pay-item">
+                <div class="adm-pay-avatar">T</div>
+                <div class="adm-pay-info"><div class="adm-pay-name">Tunde Bakare</div><div class="adm-pay-meta">JSS 2A · Apr 20</div></div>
+                <div class="adm-pay-amount red">Partial</div>
+              </div>
+              <div class="adm-pay-item">
+                <div class="adm-pay-avatar">F</div>
+                <div class="adm-pay-info"><div class="adm-pay-name">Fatima Aliyu</div><div class="adm-pay-meta">JSS 2A · Apr 20</div></div>
+                <div class="adm-pay-amount red">Overdue</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcements -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Announcements</h3>
+              <button class="adm-link-btn" onclick="switchTab('announcements',document.querySelector('[onclick*=announcements]'))">Manage</button>
+            </div>
+            <div class="card-body">
+              <div class="adm-ann-item">
+                <div class="adm-ann-dot" style="background:#6366f1;"></div>
+                <div>
+                  <div class="adm-ann-title">2nd Term Exams Begin April 28</div>
+                  <div class="adm-ann-meta">All classes · Posted Apr 18</div>
+                </div>
+              </div>
+              <div class="adm-ann-item">
+                <div class="adm-ann-dot" style="background:#d97706;"></div>
+                <div>
+                  <div class="adm-ann-title">Inter-House Sports Day — May 10</div>
+                  <div class="adm-ann-meta">All students · Posted Apr 15</div>
+                </div>
+              </div>
+              <div class="adm-ann-item">
+                <div class="adm-ann-dot" style="background:#16a34a;"></div>
+                <div>
+                  <div class="adm-ann-title">3rd Term Fee Payment Opens May 1</div>
+                  <div class="adm-ann-meta">Parents · Posted Apr 12</div>
+                </div>
+              </div>
+              <div class="adm-ann-item">
+                <div class="adm-ann-dot" style="background:#7c3aed;"></div>
+                <div>
+                  <div class="adm-ann-title">Staff Meeting — Tomorrow 8:00 AM</div>
+                  <div class="adm-ann-meta">Teaching staff · Posted Apr 22</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Tasks -->
+          <div class="card">
+            <div class="card-header"><h3>Pending Actions</h3></div>
+            <div class="card-body">
+              <div class="adm-task-item">
+                <div class="adm-task-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="user-plus" style="stroke:#6366f1;"></i></div>
+                <div class="adm-task-body"><div class="adm-task-title">3 New Enrollment Requests</div><div class="adm-task-sub">Awaiting admin approval</div></div>
+                <button class="adm-task-btn" onclick="switchTab('students',document.querySelector('[onclick*=students]'))">Review</button>
+              </div>
+              <div class="adm-task-item">
+                <div class="adm-task-icon" style="background:#fef2f2;"><i data-lucide="alert-triangle" style="stroke:#dc2626;"></i></div>
+                <div class="adm-task-body"><div class="adm-task-title">7 Overdue Fee Accounts</div><div class="adm-task-sub">Send reminders to parents</div></div>
+                <button class="adm-task-btn" onclick="switchTab('billing',document.querySelector('[onclick*=billing]'))">Send</button>
+              </div>
+              <div class="adm-task-item">
+                <div class="adm-task-icon" style="background:#fffbeb;"><i data-lucide="calendar" style="stroke:#d97706;"></i></div>
+                <div class="adm-task-body"><div class="adm-task-title">Exam Timetable Needs Publishing</div><div class="adm-task-sub">Term 2 — not yet published</div></div>
+                <button class="adm-task-btn" onclick="switchTab('timetable',document.querySelector('[onclick*=timetable]'))">Publish</button>
+              </div>
+              <div class="adm-task-item">
+                <div class="adm-task-icon" style="background:#f0fdf4;"><i data-lucide="file-text" style="stroke:#16a34a;"></i></div>
+                <div class="adm-task-body"><div class="adm-task-title">April Collection Report</div><div class="adm-task-sub">Ready to download</div></div>
+                <button class="adm-task-btn" onclick="switchTab('reports',document.querySelector('[onclick*=reports]'))">View</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end tri-grid -->
+      </div><!-- end overview -->
+
+      <!-- ═══════════════════ STUDENTS TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-students">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Students</h2>
+            <p class="adm-page-sub">1,240 enrolled — Term 2, 2026</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline" onclick="exportStudents()"><i data-lucide="download"></i> Export CSV</button>
+            <button class="btn-sm wine" onclick="openModal('addStudentModal')"><i data-lucide="user-plus"></i> Add Student</button>
+          </div>
+        </div>
+
+        <!-- STUDENT KPI -->
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="users" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">1,240</div><div class="adm-kpi-lbl">Total Enrolled</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="user-check" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">1,128</div><div class="adm-kpi-lbl">Present Today</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="user-x" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">112</div><div class="adm-kpi-lbl">Absent Today</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="clock" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">3</div><div class="adm-kpi-lbl">Pending Approval</div><div class="adm-kpi-pill amber">New</div></div>
+          </div>
+        </div>
+
+        <!-- SEARCH + FILTER -->
+        <div class="adm-filter-bar">
+          <div class="adm-filter-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search by name, ID, class..." oninput="filterStudents(this.value)" id="studentSearch" />
+          </div>
+          <div class="adm-filter-pills">
+            <button class="adm-filter-pill active" onclick="filterByClass('all',this)">All Classes</button>
+            <button class="adm-filter-pill" onclick="filterByClass('jss1',this)">JSS 1</button>
+            <button class="adm-filter-pill" onclick="filterByClass('jss2',this)">JSS 2</button>
+            <button class="adm-filter-pill" onclick="filterByClass('jss3',this)">JSS 3</button>
+            <button class="adm-filter-pill" onclick="filterByClass('sss1',this)">SSS 1</button>
+            <button class="adm-filter-pill" onclick="filterByClass('sss2',this)">SSS 2</button>
+            <button class="adm-filter-pill" onclick="filterByClass('sss3',this)">SSS 3</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body-flush">
+            <div class="table-wrap">
+              <table id="studentTable">
+                <thead><tr><th>#</th><th>Student Name</th><th>Student ID</th><th>Class</th><th>Parent / Guardian</th><th>Attendance</th><th>Fee Status</th><th>Actions</th></tr></thead>
+                <tbody id="studentTableBody">
+                  <tr data-class="jss2"><td>1</td><td><strong>Adaeze Okonkwo</strong></td><td>HC/2024/042</td><td>JSS 2A</td><td>Mrs. Okonkwo</td><td>94%</td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-class="jss2"><td>2</td><td><strong>Emeka Nwosu</strong></td><td>HC/2024/015</td><td>JSS 2A</td><td>Mr. Nwosu</td><td>88%</td><td><span class="badge badge-overdue">Overdue</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-class="jss2"><td>3</td><td><strong>Fatima Aliyu</strong></td><td>HC/2024/023</td><td>JSS 2A</td><td>Mrs. Aliyu</td><td>96%</td><td><span class="badge badge-pending">Partial</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-class="jss2"><td>4</td><td><strong>Tunde Bakare</strong></td><td>HC/2024/031</td><td>JSS 2A</td><td>Mr. Bakare</td><td>79%</td><td><span class="badge badge-overdue">Overdue</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-class="jss1"><td>5</td><td><strong>Chukwuemeka Obi</strong></td><td>HC/2025/008</td><td>JSS 1B</td><td>Mr. Obi</td><td>91%</td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-class="sss1"><td>6</td><td><strong>Kwame Asante</strong></td><td>HC/2023/019</td><td>SSS 1B</td><td>Mrs. Asante</td><td>97%</td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-class="sss2"><td>7</td><td><strong>Amina Sule</strong></td><td>HC/2022/027</td><td>SSS 2A</td><td>Mrs. Sule</td><td>85%</td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-class="jss3"><td>8</td><td><strong>Ifunanya Obi</strong></td><td>HC/2023/044</td><td>JSS 3A</td><td>Dr. Obi</td><td>93%</td><td><span class="badge badge-pending">Partial</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- end students -->
+
+      <!-- ═══════════════════ STAFF TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-staff">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Staff Management</h2>
+            <p class="adm-page-sub">86 staff members — 72 teaching, 14 non-teaching</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline" onclick="exportStaff()"><i data-lucide="download"></i> Export CSV</button>
+            <button class="btn-sm wine" onclick="openModal('addStaffModal')"><i data-lucide="user-plus"></i> Add Staff</button>
+          </div>
+        </div>
+
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="briefcase" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">86</div><div class="adm-kpi-lbl">Total Staff</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="book-open" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">72</div><div class="adm-kpi-lbl">Teaching Staff</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="tool" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">14</div><div class="adm-kpi-lbl">Non-Teaching</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="user-minus" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">4</div><div class="adm-kpi-lbl">On Leave</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>All Staff</h3>
+            <div class="adm-filter-search" style="max-width:240px;">
+              <i data-lucide="search"></i>
+              <input type="text" id="staffSearchInput" placeholder="Search staff..." oninput="filterStaff(this.value)" />
+            </div>
+          </div>
+          <div class="card-body-flush">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>Name</th><th>Staff ID</th><th>Role</th><th>Subject / Dept</th><th>Classes</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="staffTableBody">
+                  <tr><td>1</td><td><strong>Mr. Adeyemi Taiwo</strong></td><td>TCH/001</td><td>Teacher</td><td>Mathematics</td><td>JSS 2A, JSS 2B, SSS 1</td><td><span class="badge badge-paid">Active</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteStaffRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr><td>2</td><td><strong>Mrs. Chinelo Eze</strong></td><td>TCH/002</td><td>Teacher</td><td>English Language</td><td>JSS 1A, JSS 1B, JSS 2A</td><td><span class="badge badge-paid">Active</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteStaffRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr><td>3</td><td><strong>Mr. Yusuf Bello</strong></td><td>TCH/003</td><td>Teacher</td><td>Basic Science</td><td>JSS 1A, JSS 1B</td><td><span class="badge badge-pending">On Leave</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteStaffRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr><td>4</td><td><strong>Mrs. Patience Adu</strong></td><td>ADM/001</td><td>Administrator</td><td>Administration</td><td>—</td><td><span class="badge badge-paid">Active</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteStaffRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr><td>5</td><td><strong>Mr. Kofi Mensah</strong></td><td>TCH/012</td><td>Teacher</td><td>Social Studies</td><td>JSS 3A, JSS 3B</td><td><span class="badge badge-paid">Active</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteStaffRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr><td>6</td><td><strong>Mrs. Aisha Garba</strong></td><td>TCH/019</td><td>Teacher</td><td>Biology</td><td>SSS 1A, SSS 1B, SSS 2</td><td><span class="badge badge-paid">Active</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteStaffRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- end staff -->
+
+      <!-- ═══════════════════ FEES TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-fees">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Fee Records</h2>
+            <p class="adm-page-sub">All student fee accounts — Term 2, 2026</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline"><i data-lucide="download"></i> Export</button>
+            <button class="btn-sm wine" onclick="switchTab('billing',document.querySelector('[onclick*=billing]'))"><i data-lucide="send"></i> Send Bills</button>
+          </div>
+        </div>
+
+        <!-- FEE KPIs -->
+        <div class="fees-stats">
+          <div class="fees-stat-card fees-stat-neutral">
+            <div class="fees-stat-icon"><i data-lucide="users"></i></div>
+            <div class="fees-stat-body"><div class="fees-stat-value">1,240</div><div class="fees-stat-label">Total Accounts</div></div>
+          </div>
+          <div class="fees-stat-card fees-stat-green">
+            <div class="fees-stat-icon"><i data-lucide="check-circle"></i></div>
+            <div class="fees-stat-body"><div class="fees-stat-value">1,081</div><div class="fees-stat-label">Fully Paid</div></div>
+          </div>
+          <div class="fees-stat-card fees-stat-red">
+            <div class="fees-stat-icon"><i data-lucide="alert-circle"></i></div>
+            <div class="fees-stat-body"><div class="fees-stat-value">159</div><div class="fees-stat-label">Outstanding</div></div>
+          </div>
+          <div class="fees-stat-card fees-stat-blue">
+            <div class="fees-stat-icon"><i data-lucide="trending-up"></i></div>
+            <div class="fees-stat-body"><div class="fees-stat-value">₵1.24M</div><div class="fees-stat-label">Total Collected</div></div>
+          </div>
+        </div>
+
+        <!-- PROGRESS -->
+        <div class="card" style="margin-bottom:16px;">
+          <div class="card-header">
+            <div class="fees-progress-title"><i data-lucide="trending-up"></i> Overall Collection Progress</div>
+            <span class="adm-term-chip">Term 2 · 87% Collected</span>
+          </div>
+          <div class="card-body" style="padding-top:6px;">
+            <div class="fees-progress-track"><div class="fees-progress-fill" style="width:87%;"></div></div>
+            <div class="fees-progress-legend">
+              <span><span class="fees-legend-dot" style="background:var(--accent);"></span>Collected — ₵1,240,000</span>
+              <span><span class="fees-legend-dot" style="background:#fee2e2;"></span>Outstanding — ₵185,500</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILTER BAR -->
+        <div class="adm-filter-bar">
+          <div class="adm-filter-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search student name or ID..." />
+          </div>
+          <div class="adm-filter-pills">
+            <button class="adm-filter-pill active">All</button>
+            <button class="adm-filter-pill">Paid</button>
+            <button class="adm-filter-pill">Partial</button>
+            <button class="adm-filter-pill">Overdue</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body-flush">
+            <div class="fees-item-list" id="feesList">
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-paid"><i data-lucide="check"></i></div>
+                <div class="fees-item-info"><div class="fees-item-name">Adaeze Okonkwo</div><div class="fees-item-due">HC/2024/042 · JSS 2A · Paid Apr 22</div></div>
+                <div class="fees-item-amounts"><div class="fees-item-billed">₵117,500 billed</div><div class="fees-item-balance fees-balance-zero">₵0 balance</div></div>
+                <span class="badge badge-paid">Paid</span>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-overdue"><i data-lucide="alert-circle"></i></div>
+                <div class="fees-item-info"><div class="fees-item-name">Emeka Nwosu</div><div class="fees-item-due">HC/2024/015 · JSS 2A · Due Apr 10 (overdue)</div></div>
+                <div class="fees-item-amounts"><div class="fees-item-billed">₵117,500 billed</div><div class="fees-item-balance fees-balance-owed">₵32,500 owed</div></div>
+                <span class="badge badge-overdue">Overdue</span>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-pending"><i data-lucide="clock"></i></div>
+                <div class="fees-item-info"><div class="fees-item-name">Fatima Aliyu</div><div class="fees-item-due">HC/2024/023 · JSS 2A · Due Apr 20</div></div>
+                <div class="fees-item-amounts"><div class="fees-item-billed">₵117,500 billed</div><div class="fees-item-balance fees-balance-owed">₵15,000 owed</div></div>
+                <span class="badge badge-pending">Partial</span>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-overdue"><i data-lucide="alert-circle"></i></div>
+                <div class="fees-item-info"><div class="fees-item-name">Tunde Bakare</div><div class="fees-item-due">HC/2024/031 · JSS 2A · Overdue</div></div>
+                <div class="fees-item-amounts"><div class="fees-item-billed">₵117,500 billed</div><div class="fees-item-balance fees-balance-owed">₵45,000 owed</div></div>
+                <span class="badge badge-overdue">Overdue</span>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-paid"><i data-lucide="check"></i></div>
+                <div class="fees-item-info"><div class="fees-item-name">Kwame Asante</div><div class="fees-item-due">HC/2023/019 · SSS 1B · Paid Apr 21</div></div>
+                <div class="fees-item-amounts"><div class="fees-item-billed">₵145,000 billed</div><div class="fees-item-balance fees-balance-zero">₵0 balance</div></div>
+                <span class="badge badge-paid">Paid</span>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-paid"><i data-lucide="check"></i></div>
+                <div class="fees-item-info"><div class="fees-item-name">Amina Sule</div><div class="fees-item-due">HC/2022/027 · SSS 2A · Paid Apr 18</div></div>
+                <div class="fees-item-amounts"><div class="fees-item-billed">₵145,000 billed</div><div class="fees-item-balance fees-balance-zero">₵0 balance</div></div>
+                <span class="badge badge-paid">Paid</span>
+              </div>
+              <div class="fees-list-item">
+                <div class="fees-item-icon fees-icon-pending"><i data-lucide="clock"></i></div>
+                <div class="fees-item-info"><div class="fees-item-name">Ifunanya Obi</div><div class="fees-item-due">HC/2023/044 · JSS 3A · Due Apr 25</div></div>
+                <div class="fees-item-amounts"><div class="fees-item-billed">₵117,500 billed</div><div class="fees-item-balance fees-balance-owed">₵12,500 owed</div></div>
+                <span class="badge badge-pending">Partial</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end fees -->
+
+      <!-- ═══════════════════ BILLING TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-billing">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Send Bills</h2>
+            <p class="adm-page-sub">Compose and send fee invoices to students or entire classes</p>
+          </div>
+        </div>
+
+        <div class="bill-compose-grid">
+          <!-- COMPOSE FORM -->
+          <div class="card">
+            <div class="card-header"><h3>Compose Bill</h3></div>
+            <div class="card-body">
+              <div class="form-field">
+                <label class="input-label">Send To</label>
+                <select class="input-field" id="billTo" onchange="updatePreview()">
+                  <option value="">— Select recipient —</option>
+                  <optgroup label="All Students">
+                    <option value="all">All Students (1,240)</option>
+                  </optgroup>
+                  <optgroup label="By Class">
+                    <option value="jss1a">JSS 1A (40 students)</option>
+                    <option value="jss1b">JSS 1B (38 students)</option>
+                    <option value="jss2a">JSS 2A (38 students)</option>
+                    <option value="jss2b">JSS 2B (36 students)</option>
+                    <option value="jss3a">JSS 3A (39 students)</option>
+                    <option value="jss3b">JSS 3B (37 students)</option>
+                    <option value="sss1a">SSS 1A (42 students)</option>
+                    <option value="sss1b">SSS 1B (40 students)</option>
+                    <option value="sss2a">SSS 2A (38 students)</option>
+                    <option value="sss3a">SSS 3A (36 students)</option>
+                  </optgroup>
+                  <optgroup label="Individual Students">
+                    <option value="adaeze">Adaeze Okonkwo — JSS 2A</option>
+                    <option value="emeka">Emeka Nwosu — JSS 2A</option>
+                    <option value="fatima">Fatima Aliyu — JSS 2A</option>
+                    <option value="tunde">Tunde Bakare — JSS 2A</option>
+                    <option value="kwame">Kwame Asante — SSS 1B</option>
+                    <option value="amina">Amina Sule — SSS 2A</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="input-label">Bill Title</label>
+                <input class="input-field" type="text" id="billTitle" placeholder="e.g. 3rd Term Tuition Fee" oninput="updatePreview()" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Academic Term</label>
+                <select class="input-field" id="billTerm" onchange="updatePreview()">
+                  <option>Term 2, 2025/2026</option>
+                  <option>Term 3, 2025/2026</option>
+                  <option>Term 1, 2026/2027</option>
+                </select>
+              </div>
+              <div id="billItems">
+                <div class="form-field bill-item-row">
+                  <div style="display:grid;grid-template-columns:1fr 130px;gap:8px;align-items:end;">
+                    <div>
+                      <label class="input-label">Item Description</label>
+                      <input class="input-field" type="text" placeholder="e.g. Tuition Fee" oninput="updatePreview()" />
+                    </div>
+                    <div>
+                      <label class="input-label">Amount (₵)</label>
+                      <input class="input-field" type="number" placeholder="0" oninput="updatePreview()" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn-sm outline" style="margin-bottom:14px;" onclick="addBillItem()"><i data-lucide="plus"></i> Add Line Item</button>
+              <div class="form-field">
+                <label class="input-label">Due Date</label>
+                <input class="input-field" type="date" id="billDue" onchange="updatePreview()" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Payment Instructions (optional)</label>
+                <textarea class="input-field" id="billNote" rows="3" placeholder="e.g. Pay to school bursary or via mobile money..." oninput="updatePreview()"></textarea>
+              </div>
+              <div class="adm-bill-actions">
+                <button class="btn-sm outline" onclick="clearBill()"><i data-lucide="trash-2"></i> Clear</button>
+                <button class="btn-sm wine" onclick="sendBill()"><i data-lucide="send"></i> Send Bill</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PREVIEW PANEL -->
+          <div>
+            <div class="bill-preview">
+              <div class="bill-preview-header">
+                <h3>Acaxel School</h3>
+                <div style="font-size:0.78rem;color:var(--text-light);">Accra, Ghana &nbsp;|&nbsp; Term 2, 2025/2026</div>
+                <div style="font-size:0.82rem;margin-top:8px;font-weight:600;" id="previewTitle">Fee Invoice Preview</div>
+              </div>
+              <div style="font-size:0.82rem;margin-bottom:16px;">
+                <strong>To:</strong> <span id="previewTo">—</span><br/>
+                <strong>Due:</strong> <span id="previewDue">—</span>
+              </div>
+              <div id="previewItems"><div class="bill-line"><span>No items yet</span><span>—</span></div></div>
+              <div class="bill-total"><span>Total</span><span id="previewTotal">₵0</span></div>
+              <div id="previewNote" style="margin-top:12px;font-size:0.8rem;color:var(--text-light);"></div>
+            </div>
+
+            <!-- Sent Bills History -->
+            <div class="card" style="margin-top:16px;">
+              <div class="card-header"><h3>Recently Sent Bills</h3></div>
+              <div class="card-body-flush">
+                <div class="adm-pay-item">
+                  <div class="adm-pay-avatar" style="background:#f0fdf4;color:#16a34a;font-size:1rem;">✓</div>
+                  <div class="adm-pay-info"><div class="adm-pay-name">JSS 2A — Term 2 Tuition</div><div class="adm-pay-meta">38 recipients · Sent Apr 1</div></div>
+                  <div class="adm-pay-amount">₵117,500</div>
+                </div>
+                <div class="adm-pay-item">
+                  <div class="adm-pay-avatar" style="background:#f0fdf4;color:#16a34a;font-size:1rem;">✓</div>
+                  <div class="adm-pay-info"><div class="adm-pay-name">SSS 1 — Exam Levy</div><div class="adm-pay-meta">82 recipients · Sent Mar 28</div></div>
+                  <div class="adm-pay-amount">₵8,500</div>
+                </div>
+                <div class="adm-pay-item">
+                  <div class="adm-pay-avatar" style="background:#fef2f2;color:#dc2626;font-size:0.85rem;">!</div>
+                  <div class="adm-pay-info"><div class="adm-pay-name">Emeka Nwosu — Reminder</div><div class="adm-pay-meta">1 recipient · Sent Apr 15</div></div>
+                  <div class="adm-pay-amount red">₵32,500</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end billing -->
+
+      <!-- ═══════════════════ ATTENDANCE TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-attendance">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Attendance</h2>
+            <p class="adm-page-sub">School-wide attendance overview — today and term summary</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline"><i data-lucide="download"></i> Export</button>
+          </div>
+        </div>
+
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="user-check" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">1,128</div><div class="adm-kpi-lbl">Present Today</div><div class="adm-kpi-pill green">91%</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="user-x" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">112</div><div class="adm-kpi-lbl">Absent Today</div><div class="adm-kpi-pill red">9%</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="clock" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">34</div><div class="adm-kpi-lbl">Late Arrivals</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="calendar" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">93%</div><div class="adm-kpi-lbl">Term Average</div></div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:16px;">
+          <div class="card">
+            <div class="card-header"><h3>Attendance by Class — Today</h3></div>
+            <div class="card-body-flush">
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Class</th><th>Teacher</th><th>Present</th><th>Absent</th><th>Rate</th></tr></thead>
+                  <tbody>
+                    <tr><td>JSS 1A</td><td>Mrs. Eze</td><td>37</td><td>3</td><td><div class="adm-att-bar"><div style="width:92%;background:#16a34a;"></div></div> 92%</td></tr>
+                    <tr><td>JSS 1B</td><td>Mr. Bello</td><td>35</td><td>3</td><td><div class="adm-att-bar"><div style="width:92%;background:#16a34a;"></div></div> 92%</td></tr>
+                    <tr><td>JSS 2A</td><td>Mr. Adeyemi</td><td>35</td><td>3</td><td><div class="adm-att-bar"><div style="width:92%;background:#16a34a;"></div></div> 92%</td></tr>
+                    <tr><td>JSS 2B</td><td>Mr. Adeyemi</td><td>30</td><td>6</td><td><div class="adm-att-bar"><div style="width:83%;background:#d97706;"></div></div> 83%</td></tr>
+                    <tr><td>JSS 3A</td><td>Mr. Mensah</td><td>38</td><td>1</td><td><div class="adm-att-bar"><div style="width:97%;background:#16a34a;"></div></div> 97%</td></tr>
+                    <tr><td>SSS 1A</td><td>Mrs. Garba</td><td>40</td><td>2</td><td><div class="adm-att-bar"><div style="width:95%;background:#16a34a;"></div></div> 95%</td></tr>
+                    <tr><td>SSS 2A</td><td>Mrs. Garba</td><td>34</td><td>4</td><td><div class="adm-att-bar"><div style="width:89%;background:#16a34a;"></div></div> 89%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3>Weekly Trend</h3></div>
+            <div class="card-body">
+              <div style="height:220px;position:relative;"><canvas id="weekAttChart"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end attendance -->
+
+      <!-- ═══════════════════ TIMETABLE TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-timetable">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Timetable</h2>
+            <p class="adm-page-sub">Click any cell to edit. Changes are saved per class.</p>
+          </div>
+          <div class="adm-page-actions">
+            <select class="input-field" id="ttClassSelect" style="width:160px;padding:8px 12px;font-size:0.85rem;" onchange="loadAdminTimetable(this.value)">
+              <option value="JSS1A">JSS 1A</option><option value="JSS1B">JSS 1B</option>
+              <option value="JSS2A" selected>JSS 2A</option><option value="JSS2B">JSS 2B</option>
+              <option value="JSS3A">JSS 3A</option><option value="JSS3B">JSS 3B</option>
+              <option value="SSS1A">SSS 1A</option><option value="SSS2A">SSS 2A</option>
+            </select>
+            <button class="btn-sm outline" onclick="ttAddRow()"><i data-lucide="plus"></i> Add Row</button>
+            <button class="btn-sm outline" onclick="window.print()"><i data-lucide="printer"></i> Print</button>
+            <button class="btn-sm wine" onclick="saveTimetable()"><i data-lucide="save"></i> Save</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:12px;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span style="font-size:0.8rem;color:var(--text-light);font-weight:600;">EDIT GUIDE:</span>
+          <span style="font-size:0.8rem;color:var(--text-mid);">Click a cell to edit subject &amp; teacher &bull; Double-click the time column to change slot &bull; Use the delete icon to remove a row</span>
+          <span id="ttSaveStatus" style="margin-left:auto;font-size:0.8rem;color:var(--success,#16a34a);font-weight:600;display:none;">✓ Saved</span>
+        </div>
+
+        <!-- STAFF NOTIFICATION SETTINGS -->
+        <div class="ttn-settings-card" id="ttnSettingsCard">
+          <div class="ttn-settings-header">
+            <div class="ttn-settings-left">
+              <div class="ttn-settings-icon"><i data-lucide="bell-ring"></i></div>
+              <div>
+                <div class="ttn-settings-title">Staff Class Reminders</div>
+                <div class="ttn-settings-sub">Teachers are always notified before their lesson starts — cannot be disabled</div>
+              </div>
+            </div>
+            <div class="ttn-forced-badge">
+              <i data-lucide="shield-check"></i>
+              <span>Always On</span>
+            </div>
+          </div>
+
+          <div class="ttn-settings-body" id="ttnSettingsBody">
+            <div class="ttn-settings-row">
+
+              <div class="ttn-setting-field">
+                <label class="ttn-field-label">Remind teachers</label>
+                <select id="ttnLeadTime" class="input-field" style="font-size:0.85rem;" onchange="ttnSaveSettings()">
+                  <option value="5">5 minutes before</option>
+                  <option value="10" selected>10 minutes before</option>
+                  <option value="15">15 minutes before</option>
+                  <option value="20">20 minutes before</option>
+                </select>
+              </div>
+
+              <div class="ttn-setting-field">
+                <label class="ttn-field-label">Notification method</label>
+                <select id="ttnMethod" class="input-field" style="font-size:0.85rem;" onchange="ttnSaveSettings()">
+                  <option value="both" selected>In-app toast + Browser</option>
+                  <option value="inapp">In-app toast only</option>
+                  <option value="browser">Browser notification only</option>
+                </select>
+              </div>
+
+              <div class="ttn-setting-field">
+                <label class="ttn-field-label">Active days</label>
+                <div class="ttn-days-row">
+                  <label class="ttn-day-chip"><input type="checkbox" value="1" checked onchange="ttnSaveSettings()" /><span>Mon</span></label>
+                  <label class="ttn-day-chip"><input type="checkbox" value="2" checked onchange="ttnSaveSettings()" /><span>Tue</span></label>
+                  <label class="ttn-day-chip"><input type="checkbox" value="3" checked onchange="ttnSaveSettings()" /><span>Wed</span></label>
+                  <label class="ttn-day-chip"><input type="checkbox" value="4" checked onchange="ttnSaveSettings()" /><span>Thu</span></label>
+                  <label class="ttn-day-chip"><input type="checkbox" value="5" checked onchange="ttnSaveSettings()" /><span>Fri</span></label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="ttn-settings-footer">
+              <div class="ttn-status-row" id="ttnStatusRow">
+                <span class="ttn-status-dot" id="ttnStatusDot"></span>
+                <span id="ttnStatusText">Scheduler ready</span>
+              </div>
+              <button class="btn-sm outline" onclick="ttnRequestPermission()">
+                <i data-lucide="bell-ring" style="width:13px;height:13px;margin-right:4px;vertical-align:middle;"></i>
+                Allow Browser Notifications
+              </button>
+              <button class="btn-sm outline" onclick="ttnTestAlert()">
+                <i data-lucide="zap" style="width:13px;height:13px;margin-right:4px;vertical-align:middle;"></i>
+                Send Test Alert
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body-flush">
+            <div class="table-wrap">
+              <table class="timetable-table" id="ttTable">
+                <thead>
+                  <tr>
+                    <th class="time-cell">Time</th>
+                    <th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th>
+                    <th style="width:36px;"></th>
+                  </tr>
+                </thead>
+                <tbody id="ttBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- end timetable -->
+
+      <!-- ═══════════════════ ANNOUNCEMENTS TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-announcements">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Announcements</h2>
+            <p class="adm-page-sub">Broadcast messages to students, parents and staff</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm wine" onclick="openModal('addAnnouncementModal')"><i data-lucide="plus"></i> New Announcement</button>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:0;">
+          <!-- COMPOSE -->
+          <div class="card">
+            <div class="card-header"><h3>Post Announcement</h3></div>
+            <div class="card-body">
+              <div class="form-field">
+                <label class="input-label">Audience</label>
+                <select class="input-field">
+                  <option>All (Students, Parents &amp; Staff)</option>
+                  <option>Students Only</option>
+                  <option>Parents Only</option>
+                  <option>Teaching Staff Only</option>
+                  <option>All Staff</option>
+                  <option>Specific Class</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="input-label">Priority</label>
+                <select class="input-field" id="annPriority">
+                  <option value="normal">Normal</option>
+                  <option value="urgent">Urgent</option>
+                  <option value="info">Information</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="input-label">Title</label>
+                <input class="input-field" type="text" placeholder="Announcement title..." id="annTitle" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Message</label>
+                <textarea class="input-field" rows="5" placeholder="Write your announcement here..." id="annBody"></textarea>
+              </div>
+              <button class="btn-sm wine" style="width:100%;" onclick="postAnnouncement()"><i data-lucide="megaphone"></i> Post Announcement</button>
+            </div>
+          </div>
+
+          <!-- PUBLISHED -->
+          <div class="card">
+            <div class="card-header"><h3>Published Announcements</h3></div>
+            <div class="card-body" style="padding:0;">
+              <div id="announcementList">
+                <div class="adm-ann-card urgent">
+                  <div class="adm-ann-card-header">
+                    <span class="badge badge-overdue">Urgent</span>
+                    <span class="adm-ann-card-date">Apr 22, 2026</span>
+                  </div>
+                  <div class="adm-ann-card-title">Staff Meeting — Tomorrow 8:00 AM</div>
+                  <div class="adm-ann-card-body">Compulsory staff briefing before Term 2 exams begin. Venue: Main Hall. All teaching staff must attend.</div>
+                  <div class="adm-ann-card-footer"><span class="adm-ann-card-aud">Teaching Staff</span><button class="adm-link-btn">Delete</button></div>
+                </div>
+                <div class="adm-ann-card">
+                  <div class="adm-ann-card-header">
+                    <span class="badge badge-pending">Info</span>
+                    <span class="adm-ann-card-date">Apr 18, 2026</span>
+                  </div>
+                  <div class="adm-ann-card-title">2nd Term Exams Begin April 28</div>
+                  <div class="adm-ann-card-body">All students should prepare. Exam timetables have been distributed via class teachers.</div>
+                  <div class="adm-ann-card-footer"><span class="adm-ann-card-aud">All Students</span><button class="adm-link-btn">Delete</button></div>
+                </div>
+                <div class="adm-ann-card">
+                  <div class="adm-ann-card-header">
+                    <span class="badge badge-paid">Normal</span>
+                    <span class="adm-ann-card-date">Apr 15, 2026</span>
+                  </div>
+                  <div class="adm-ann-card-title">Inter-House Sports Day — May 10</div>
+                  <div class="adm-ann-card-body">Students are encouraged to participate. Wear your house colour. No uniforms required on this day.</div>
+                  <div class="adm-ann-card-footer"><span class="adm-ann-card-aud">All Students &amp; Parents</span><button class="adm-link-btn">Delete</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end announcements -->
+
+      <!-- ═══════════════════ GRADES TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-grades">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Grades &amp; Exams</h2>
+            <p class="adm-page-sub">Manage exam scores and academic performance — Term 2, 2026</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline"><i data-lucide="download"></i> Export Results</button>
+            <button class="btn-sm wine"><i data-lucide="plus"></i> Enter Scores</button>
+          </div>
+        </div>
+
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="trending-up" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">78.4%</div><div class="adm-kpi-lbl">School Average</div><div class="adm-kpi-pill green">+2.1% vs Term 1</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="award" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">342</div><div class="adm-kpi-lbl">A Grades</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="alert-circle" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">58</div><div class="adm-kpi-lbl">Failing Students</div><div class="adm-kpi-pill red">Need support</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="book-open" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">42</div><div class="adm-kpi-lbl">Subjects</div></div>
+          </div>
+        </div>
+
+        <div class="adm-filter-bar">
+          <div class="adm-filter-search"><i data-lucide="search"></i><input type="text" placeholder="Search student or subject..." /></div>
+          <div class="adm-filter-pills">
+            <button class="adm-filter-pill active">All Classes</button>
+            <button class="adm-filter-pill">JSS 1</button>
+            <button class="adm-filter-pill">JSS 2</button>
+            <button class="adm-filter-pill">JSS 3</button>
+            <button class="adm-filter-pill">SSS 1</button>
+            <button class="adm-filter-pill">SSS 2</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h3>Term 2 Exam Results</h3><span class="adm-term-chip">2025/2026</span></div>
+          <div class="card-body-flush">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>Student</th><th>Class</th><th>Maths</th><th>English</th><th>Science</th><th>Social St.</th><th>Average</th><th>Grade</th><th>Actions</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><strong>Adaeze Okonkwo</strong></td><td>JSS 2A</td><td>88</td><td>91</td><td>85</td><td>82</td><td>86.5</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>2</td><td><strong>Emeka Nwosu</strong></td><td>JSS 2A</td><td>72</td><td>68</td><td>74</td><td>70</td><td>71.0</td><td><span class="badge badge-pending">B</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>3</td><td><strong>Fatima Aliyu</strong></td><td>JSS 2A</td><td>95</td><td>89</td><td>92</td><td>90</td><td>91.5</td><td><span class="badge badge-paid">A+</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>4</td><td><strong>Tunde Bakare</strong></td><td>JSS 2A</td><td>55</td><td>60</td><td>52</td><td>58</td><td>56.3</td><td><span class="badge badge-overdue">C</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>5</td><td><strong>Kwame Asante</strong></td><td>SSS 1B</td><td>80</td><td>78</td><td>83</td><td>77</td><td>79.5</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>6</td><td><strong>Amina Sule</strong></td><td>SSS 2A</td><td>91</td><td>87</td><td>89</td><td>93</td><td>90.0</td><td><span class="badge badge-paid">A+</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>7</td><td><strong>Ifunanya Obi</strong></td><td>JSS 3A</td><td>76</td><td>82</td><td>79</td><td>74</td><td>77.8</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- end grades -->
+
+      <!-- ═══════════════════ MESSAGES TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-messages">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Messages</h2>
+            <p class="adm-page-sub">Inbox and outbox — communicate with parents and staff</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm wine" onclick="openModal('composeModal')"><i data-lucide="edit"></i> Compose</button>
+          </div>
+        </div>
+
+        <div class="adm-messages-layout">
+          <!-- INBOX LIST -->
+          <div class="card adm-msg-list-card">
+            <div class="card-header">
+              <h3>Inbox</h3>
+              <span class="nav-badge" style="animation:none;">3 unread</span>
+            </div>
+            <div class="card-body-flush">
+              <div class="adm-msg-item adm-msg-unread" onclick="showMessage(this,'Mrs. Okonkwo','Adaeze fee payment','Dear Admin, I have made the payment for Adaeze\'s Term 2 fees. Please confirm receipt. Thank you.')">
+                <div class="adm-msg-avatar">O</div>
+                <div class="adm-msg-body"><div class="adm-msg-from">Mrs. Okonkwo <span class="adm-msg-role">Parent</span></div><div class="adm-msg-preview">Re: Adaeze fee payment confirmation</div><div class="adm-msg-time">Today, 8:14 AM</div></div>
+              </div>
+              <div class="adm-msg-item adm-msg-unread" onclick="showMessage(this,'Mr. Adeyemi Taiwo','JSS 2A Results','I have entered all JSS 2A scores for Term 2. Kindly review and approve before publishing to parents.')">
+                <div class="adm-msg-avatar">A</div>
+                <div class="adm-msg-body"><div class="adm-msg-from">Mr. Adeyemi Taiwo <span class="adm-msg-role">Teacher</span></div><div class="adm-msg-preview">JSS 2A Term 2 scores submitted</div><div class="adm-msg-time">Yesterday, 3:45 PM</div></div>
+              </div>
+              <div class="adm-msg-item adm-msg-unread" onclick="showMessage(this,'Mrs. Aliyu','Fatima sick leave','Fatima will be absent for the next 3 days due to illness. Please excuse her attendance.')">
+                <div class="adm-msg-avatar">A</div>
+                <div class="adm-msg-body"><div class="adm-msg-from">Mrs. Aliyu <span class="adm-msg-role">Parent</span></div><div class="adm-msg-preview">Fatima absence notification</div><div class="adm-msg-time">Apr 21, 2026</div></div>
+              </div>
+              <div class="adm-msg-item" onclick="showMessage(this,'Mr. Nwosu','Emeka overdue fees','I am aware of the outstanding balance. I will make payment by end of week.')">
+                <div class="adm-msg-avatar">N</div>
+                <div class="adm-msg-body"><div class="adm-msg-from">Mr. Nwosu <span class="adm-msg-role">Parent</span></div><div class="adm-msg-preview">Regarding Emeka's overdue fees</div><div class="adm-msg-time">Apr 19, 2026</div></div>
+              </div>
+              <div class="adm-msg-item" onclick="showMessage(this,'Mrs. Eze','English syllabus','I have completed the Term 2 English syllabus for all JSS classes. Report attached.')">
+                <div class="adm-msg-avatar">E</div>
+                <div class="adm-msg-body"><div class="adm-msg-from">Mrs. Chinelo Eze <span class="adm-msg-role">Teacher</span></div><div class="adm-msg-preview">English syllabus completion report</div><div class="adm-msg-time">Apr 17, 2026</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MESSAGE VIEW -->
+          <div class="card adm-msg-view-card">
+            <div id="adm-msg-view-content">
+              <div class="adm-msg-empty"><i data-lucide="message-square"></i><p>Select a message to read</p></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end messages -->
+
+      <!-- ═══════════════════ EVENTS TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-events">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Events &amp; Calendar</h2>
+            <p class="adm-page-sub">School events, holidays and important dates — 2025/2026</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm wine" onclick="openModal('addEventModal')"><i data-lucide="plus"></i> Add Event</button>
+          </div>
+        </div>
+
+        <div class="adm-events-layout">
+          <!-- UPCOMING EVENTS -->
+          <div class="card">
+            <div class="card-header"><h3>Upcoming Events</h3></div>
+            <div class="card-body" style="padding:0;">
+              <div class="adm-event-item">
+                <div class="adm-event-date"><div class="adm-event-day">28</div><div class="adm-event-month">Apr</div></div>
+                <div class="adm-event-body">
+                  <div class="adm-event-title">Term 2 Exams Begin</div>
+                  <div class="adm-event-meta"><i data-lucide="users"></i> All Students &nbsp;·&nbsp; <i data-lucide="clock"></i> 8:00 AM</div>
+                </div>
+                <span class="badge badge-overdue">Urgent</span>
+              </div>
+              <div class="adm-event-item">
+                <div class="adm-event-date"><div class="adm-event-day">30</div><div class="adm-event-month">Apr</div></div>
+                <div class="adm-event-body">
+                  <div class="adm-event-title">Term 2 Ends</div>
+                  <div class="adm-event-meta"><i data-lucide="calendar"></i> Last day of school</div>
+                </div>
+                <span class="badge badge-pending">Info</span>
+              </div>
+              <div class="adm-event-item">
+                <div class="adm-event-date"><div class="adm-event-day">10</div><div class="adm-event-month">May</div></div>
+                <div class="adm-event-body">
+                  <div class="adm-event-title">Inter-House Sports Day</div>
+                  <div class="adm-event-meta"><i data-lucide="users"></i> All Students &nbsp;·&nbsp; <i data-lucide="map-pin"></i> School Field</div>
+                </div>
+                <span class="badge badge-paid">School</span>
+              </div>
+              <div class="adm-event-item">
+                <div class="adm-event-date"><div class="adm-event-day">18</div><div class="adm-event-month">May</div></div>
+                <div class="adm-event-body">
+                  <div class="adm-event-title">Term 3 Begins</div>
+                  <div class="adm-event-meta"><i data-lucide="book-open"></i> All Classes Resume</div>
+                </div>
+                <span class="badge badge-paid">Academic</span>
+              </div>
+              <div class="adm-event-item">
+                <div class="adm-event-date"><div class="adm-event-day">5</div><div class="adm-event-month">Jun</div></div>
+                <div class="adm-event-body">
+                  <div class="adm-event-title">Parent-Teacher Conference</div>
+                  <div class="adm-event-meta"><i data-lucide="users"></i> Parents &amp; Teachers &nbsp;·&nbsp; <i data-lucide="clock"></i> 10:00 AM</div>
+                </div>
+                <span class="badge badge-pending">Meeting</span>
+              </div>
+              <div class="adm-event-item">
+                <div class="adm-event-date"><div class="adm-event-day">25</div><div class="adm-event-month">Jul</div></div>
+                <div class="adm-event-body">
+                  <div class="adm-event-title">End of Academic Year</div>
+                  <div class="adm-event-meta"><i data-lucide="award"></i> Graduation &amp; Prize Giving</div>
+                </div>
+                <span class="badge badge-paid">School</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADD EVENT FORM -->
+          <div class="card">
+            <div class="card-header"><h3>Add New Event</h3></div>
+            <div class="card-body">
+              <div class="form-field">
+                <label class="input-label">Event Title</label>
+                <input class="input-field" type="text" placeholder="e.g. Parent-Teacher Conference" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Event Date</label>
+                <input class="input-field" type="date" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Time</label>
+                <input class="input-field" type="time" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Audience</label>
+                <select class="input-field">
+                  <option>All (Students, Parents &amp; Staff)</option>
+                  <option>Students Only</option>
+                  <option>Parents Only</option>
+                  <option>Teaching Staff Only</option>
+                  <option>All Staff</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="input-label">Category</label>
+                <select class="input-field">
+                  <option>Academic</option>
+                  <option>Sports</option>
+                  <option>Meeting</option>
+                  <option>Holiday</option>
+                  <option>Cultural</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="input-label">Description (optional)</label>
+                <textarea class="input-field" rows="3" placeholder="Event details..."></textarea>
+              </div>
+              <button class="btn-sm wine" style="width:100%;"><i data-lucide="plus"></i> Save Event</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- end events -->
+
+      <!-- ═══════════════════ REPORTS TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-reports">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Reports &amp; Analytics</h2>
+            <p class="adm-page-sub">School performance metrics and downloadable reports</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm wine"><i data-lucide="download"></i> Download All</button>
+          </div>
+        </div>
+
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="trending-up" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">78.4%</div><div class="adm-kpi-lbl">School Average Grade</div><div class="adm-kpi-pill green">+2.1% vs Term 1</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="award" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">93%</div><div class="adm-kpi-lbl">Term Attendance Rate</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="credit-card" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">87%</div><div class="adm-kpi-lbl">Fee Collection Rate</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f5f3ff;"><i data-lucide="book-open" style="stroke:#7c3aed;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val">42</div><div class="adm-kpi-lbl">Subjects Taught</div></div>
+          </div>
+        </div>
+
+        <!-- REPORT CARDS -->
+        <div class="adm-report-grid">
+          <div class="card adm-report-card">
+            <div class="card-header"><h3>Fee Collection Report</h3></div>
+            <div class="card-body">
+              <div style="height:180px;position:relative;"><canvas id="reportFeeChart"></canvas></div>
+              <div class="adm-report-meta">Term 2, 2026 · Generated Apr 22</div>
+              <button class="btn-sm wine" style="width:100%;margin-top:12px;"><i data-lucide="download"></i> Download PDF</button>
+            </div>
+          </div>
+          <div class="card adm-report-card">
+            <div class="card-header"><h3>Attendance Report</h3></div>
+            <div class="card-body">
+              <div style="height:180px;position:relative;"><canvas id="reportAttChart"></canvas></div>
+              <div class="adm-report-meta">Term 2, 2026 · Generated Apr 22</div>
+              <button class="btn-sm wine" style="width:100%;margin-top:12px;"><i data-lucide="download"></i> Download PDF</button>
+            </div>
+          </div>
+          <div class="card adm-report-card">
+            <div class="card-header"><h3>Grade Performance</h3></div>
+            <div class="card-body">
+              <div style="height:180px;position:relative;"><canvas id="reportGradeChart"></canvas></div>
+              <div class="adm-report-meta">Term 2, 2026 · Generated Apr 22</div>
+              <button class="btn-sm wine" style="width:100%;margin-top:12px;"><i data-lucide="download"></i> Download PDF</button>
+            </div>
+          </div>
+          <div class="card adm-report-card">
+            <div class="card-header"><h3>Enrollment Summary</h3></div>
+            <div class="card-body">
+              <div style="height:180px;position:relative;"><canvas id="reportEnrollChart"></canvas></div>
+              <div class="adm-report-meta">2025/2026 Session · Generated Apr 22</div>
+              <button class="btn-sm wine" style="width:100%;margin-top:12px;"><i data-lucide="download"></i> Download PDF</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- end reports -->
+
+      <!-- ═══════════════════ SETTINGS TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-settings">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Settings</h2>
+            <p class="adm-page-sub">School configuration and system preferences</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm wine" onclick="saveSettings()"><i data-lucide="save"></i> Save Changes</button>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- SCHOOL INFO -->
+          <div class="card">
+            <div class="card-header"><h3>School Information</h3></div>
+            <div class="card-body">
+              <div class="form-field">
+                <label class="input-label">School Name</label>
+                <input class="input-field" type="text" value="Acaxel School" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Address</label>
+                <input class="input-field" type="text" value="14 Education Lane, Accra, Ghana" />
+              </div>
+              <div class="profile-form-grid">
+                <div class="form-field">
+                  <label class="input-label">Phone</label>
+                  <input class="input-field" type="tel" value="+233 20 123 4567" />
+                </div>
+                <div class="form-field">
+                  <label class="input-label">Email</label>
+                  <input class="input-field" type="email" value="admin@acaxel.edu.gh" />
+                </div>
+              </div>
+              <div class="form-field">
+                <label class="input-label">School Motto</label>
+                <input class="input-field" type="text" value="Excellence Through Knowledge" />
+              </div>
+              <div class="profile-form-grid">
+                <div class="form-field">
+                  <label class="input-label">Current Session</label>
+                  <input class="input-field" type="text" value="2025/2026" />
+                </div>
+                <div class="form-field">
+                  <label class="input-label">Current Term</label>
+                  <select class="input-field">
+                    <option>Term 1</option><option selected>Term 2</option><option>Term 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FEE SETTINGS -->
+          <div class="card">
+            <div class="card-header"><h3>Fee Configuration</h3></div>
+            <div class="card-body">
+              <div class="form-field">
+                <label class="input-label">JSS Tuition Fee (₵ per term)</label>
+                <input class="input-field" type="number" value="117500" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">SSS Tuition Fee (₵ per term)</label>
+                <input class="input-field" type="number" value="145000" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Exam Levy (₵)</label>
+                <input class="input-field" type="number" value="8500" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Late Payment Penalty (%)</label>
+                <input class="input-field" type="number" value="5" />
+              </div>
+              <div class="form-field">
+                <label class="input-label">Payment Reminder Frequency</label>
+                <select class="input-field">
+                  <option>Weekly</option><option selected>Every 3 Days</option><option>Daily</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- TERM DATES -->
+          <div class="card">
+            <div class="card-header"><h3>Academic Calendar</h3></div>
+            <div class="card-body">
+              <div class="profile-form-grid">
+                <div class="form-field">
+                  <label class="input-label">Term 1 Start</label>
+                  <input class="input-field" type="date" value="2025-09-08" />
+                </div>
+                <div class="form-field">
+                  <label class="input-label">Term 1 End</label>
+                  <input class="input-field" type="date" value="2025-12-12" />
+                </div>
+                <div class="form-field">
+                  <label class="input-label">Term 2 Start</label>
+                  <input class="input-field" type="date" value="2026-01-12" />
+                </div>
+                <div class="form-field">
+                  <label class="input-label">Term 2 End</label>
+                  <input class="input-field" type="date" value="2026-04-30" />
+                </div>
+                <div class="form-field">
+                  <label class="input-label">Term 3 Start</label>
+                  <input class="input-field" type="date" value="2026-05-18" />
+                </div>
+                <div class="form-field">
+                  <label class="input-label">Term 3 End</label>
+                  <input class="input-field" type="date" value="2026-07-25" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADMIN ACCOUNT -->
+          <div class="card">
+            <div class="card-header"><h3>Administrator Account</h3></div>
+            <div class="card-body">
+              <div class="profile-info-row">
+                <span class="profile-info-label">Admin ID</span>
+                <span class="profile-info-value">ADM/001</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-label">Full Name</span>
+                <span class="profile-info-value">Mrs. Patience Adu</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-label">Role</span>
+                <span class="badge badge-paid">Super Admin</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-label">Last Login</span>
+                <span class="profile-info-value">Today, 7:48 AM</span>
+              </div>
+              <div class="profile-form-grid" style="margin-top:16px;">
+                <div class="form-field">
+                  <label class="input-label">New Password</label>
+                  <input class="input-field" type="password" placeholder="••••••••" />
+                </div>
+                <div class="form-field">
+                  <label class="input-label">Confirm Password</label>
+                  <input class="input-field" type="password" placeholder="••••••••" />
+                </div>
+              </div>
+              <button class="btn-sm wine" style="margin-top:4px;">Update Password</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- end settings -->
+
+      <!-- ═══════════════════ FEEDING COLLECTION TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-feeding">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Feeding Collection</h2>
+            <p class="adm-page-sub">Track and manage daily student feeding fees</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline" onclick="exportFeeding()"><i data-lucide="file-down"></i> Export PDF</button>
+            <button class="btn-sm wine" onclick="openModal('addFeedingModal')"><i data-lucide="plus"></i> Record Payment</button>
+          </div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="utensils" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="fdTotalPaid">0</div><div class="adm-kpi-lbl">Paid Today</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="user-x" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="fdTotalUnpaid">0</div><div class="adm-kpi-lbl">Unpaid Today</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="coins" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="fdTotalAmount">₵0</div><div class="adm-kpi-lbl">Collected Today</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="calendar" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="fdDate"></div><div class="adm-kpi-lbl">Today's Date</div></div>
+          </div>
+        </div>
+
+        <!-- FEEDING TIMETABLE -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+            <div>
+              <h3 style="margin:0;">Weekly Meal Timetable</h3>
+              <p style="margin:2px 0 0;font-size:0.8rem;color:var(--text-light);" id="fdWeekLabel"></p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <button class="btn-sm outline" onclick="fdWeekNav(-1)"><i data-lucide="chevron-left"></i></button>
+              <button class="btn-sm outline" onclick="fdWeekNav(1)"><i data-lucide="chevron-right"></i></button>
+              <button class="btn-sm wine" onclick="openModal('editMenuModal')"><i data-lucide="edit-2"></i> Edit Menu</button>
+            </div>
+          </div>
+          <div class="card-body-flush">
+            <div class="table-wrap">
+              <table class="timetable-table fd-menu-table">
+                <thead>
+                  <tr>
+                    <th class="fd-day-col">Day &amp; Date</th>
+                    <th>Breakfast</th>
+                    <th>Lunch</th>
+                    <th>Snack / Supper</th>
+                    <th class="fd-fee-col">Fee (₵)</th>
+                  </tr>
+                </thead>
+                <tbody id="feedingTimetableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEARCH + FILTER -->
+        <div class="adm-filter-bar">
+          <div class="adm-filter-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search by name, class, ID..." oninput="filterFeeding(this.value)" />
+          </div>
+          <div class="adm-filter-pills">
+            <button class="adm-filter-pill active" onclick="filterFeedingStatus('all',this)">All</button>
+            <button class="adm-filter-pill" onclick="filterFeedingStatus('paid',this)">Paid</button>
+            <button class="adm-filter-pill" onclick="filterFeedingStatus('unpaid',this)">Unpaid</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body-flush">
+            <div class="table-wrap">
+              <table id="feedingTable">
+                <thead><tr><th>#</th><th>Student Name</th><th>Student ID</th><th>Class</th><th>Amount (₵)</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="feedingTableBody">
+                  <tr data-status="paid"><td>1</td><td><strong>Adaeze Okonkwo</strong></td><td>HC/2024/042</td><td>JSS 2A</td><td>₵5.00</td><td id="fdDateCell"></td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteFeedingRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-status="unpaid"><td>2</td><td><strong>Emeka Nwosu</strong></td><td>HC/2024/015</td><td>JSS 2A</td><td>—</td><td></td><td><span class="badge badge-overdue">Unpaid</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteFeedingRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-status="paid"><td>3</td><td><strong>Fatima Aliyu</strong></td><td>HC/2024/023</td><td>JSS 2A</td><td>₵5.00</td><td></td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteFeedingRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-status="unpaid"><td>4</td><td><strong>Tunde Bakare</strong></td><td>HC/2024/031</td><td>JSS 2A</td><td>—</td><td></td><td><span class="badge badge-overdue">Unpaid</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteFeedingRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr data-status="paid"><td>5</td><td><strong>Kwame Asante</strong></td><td>HC/2023/019</td><td>SSS 1B</td><td>₵5.00</td><td></td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="Delete" onclick="deleteFeedingRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- end feeding -->
+
+      <!-- ═══════════════════ INVENTORY TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-inventory">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Inventory</h2>
+            <p class="adm-page-sub">Manage school supplies, uniforms, textbooks and equipment</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline" onclick="exportInventory()"><i data-lucide="file-down"></i> Export PDF</button>
+            <button class="btn-sm wine" onclick="openInventoryModal()"><i data-lucide="plus"></i> Add Item</button>
+          </div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="package" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="invTotalItems">0</div><div class="adm-kpi-lbl">Total Items</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="alert-triangle" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="invLowStock">0</div><div class="adm-kpi-lbl">Low Stock</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="check-circle" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="invInStock">0</div><div class="adm-kpi-lbl">In Stock</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="tag" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="invTotalValue">₵0</div><div class="adm-kpi-lbl">Total Value</div></div>
+          </div>
+        </div>
+
+        <!-- SEARCH + CATEGORY FILTERS -->
+        <div class="adm-filter-bar">
+          <div class="adm-filter-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search items..." oninput="filterInventory(this.value)" id="invSearchInput" />
+          </div>
+          <div class="adm-filter-pills">
+            <button class="adm-filter-pill active" onclick="filterInvCategory('all',this)">All</button>
+            <button class="adm-filter-pill" onclick="filterInvCategory('uniform',this)">Uniforms</button>
+            <button class="adm-filter-pill" onclick="filterInvCategory('textbook',this)">Textbooks</button>
+            <button class="adm-filter-pill" onclick="filterInvCategory('stationery',this)">Stationery</button>
+            <button class="adm-filter-pill" onclick="filterInvCategory('equipment',this)">Equipment</button>
+            <button class="adm-filter-pill" onclick="filterInvCategory('sports',this)">Sports</button>
+            <button class="adm-filter-pill" onclick="filterInvCategory('other',this)">Other</button>
+          </div>
+        </div>
+
+        <!-- INVENTORY GRID -->
+        <div class="inv-grid" id="invGrid"></div>
+
+      </div><!-- end inventory -->
+
+      <!-- ═══════════════════ UPDATES TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-updates">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Weekly &amp; Monthly Updates</h2>
+            <p class="adm-page-sub">Post and manage school updates, notices and reports for parents and staff</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm wine" onclick="openModal('addUpdateModal')"><i data-lucide="plus"></i> New Update</button>
+          </div>
+        </div>
+
+        <!-- KPI ROW -->
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="newspaper" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="updTotal">0</div><div class="adm-kpi-lbl">Total Updates</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="calendar-days" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="updWeekly">0</div><div class="adm-kpi-lbl">This Week</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="calendar" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="updMonthly">0</div><div class="adm-kpi-lbl">This Month</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="pin" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="updPinned">0</div><div class="adm-kpi-lbl">Pinned</div></div>
+          </div>
+        </div>
+
+        <!-- FILTER BAR -->
+        <div class="adm-filter-bar">
+          <div class="adm-filter-search">
+            <i data-lucide="search"></i>
+            <input type="text" id="updSearchInput" placeholder="Search updates..." oninput="filterUpdates(this.value)" />
+          </div>
+          <div class="adm-filter-pills">
+            <button class="adm-filter-pill active" onclick="filterUpdPeriod('all',this)">All</button>
+            <button class="adm-filter-pill" onclick="filterUpdPeriod('week',this)">This Week</button>
+            <button class="adm-filter-pill" onclick="filterUpdPeriod('month',this)">This Month</button>
+            <button class="adm-filter-pill" onclick="filterUpdPeriod('pinned',this)">Pinned</button>
+          </div>
+          <div class="adm-filter-pills">
+            <button class="adm-filter-pill active" onclick="filterUpdType('all',this)" id="updTypeAll">All Types</button>
+            <button class="adm-filter-pill" onclick="filterUpdType('weekly',this)">Weekly</button>
+            <button class="adm-filter-pill" onclick="filterUpdType('monthly',this)">Monthly</button>
+            <button class="adm-filter-pill" onclick="filterUpdType('notice',this)">Notice</button>
+            <button class="adm-filter-pill" onclick="filterUpdType('academic',this)">Academic</button>
+          </div>
+        </div>
+
+        <!-- UPDATES FEED -->
+        <div class="upd-feed" id="updFeed"></div>
+
+      </div><!-- end updates -->
+
+      <!-- ═══════════════════ NEWSLETTER TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-newsletter">
+        <div class="adm-page-header">
+          <div>
+            <h2 class="adm-page-title">Newsletter</h2>
+            <p class="adm-page-sub">Create, manage and export school newsletters for parents and staff</p>
+          </div>
+          <div class="adm-page-actions">
+            <button class="btn-sm outline" onclick="exportAllNewsletters()"><i data-lucide="file-down"></i> Export All PDF</button>
+            <button class="btn-sm wine" onclick="openNewsletterModal()"><i data-lucide="plus"></i> Create Newsletter</button>
+          </div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="mail" style="stroke:#6366f1;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="nlTotal">0</div><div class="adm-kpi-lbl">Total Issues</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="send" style="stroke:#16a34a;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="nlSent">0</div><div class="adm-kpi-lbl">Sent</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fffbeb;"><i data-lucide="file-edit" style="stroke:#d97706;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="nlDraft">0</div><div class="adm-kpi-lbl">Drafts</div></div>
+          </div>
+          <div class="adm-kpi-card">
+            <div class="adm-kpi-icon" style="background:#fef2f2;"><i data-lucide="calendar" style="stroke:#dc2626;"></i></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="nlThisMonth">0</div><div class="adm-kpi-lbl">This Month</div></div>
+          </div>
+        </div>
+
+        <!-- SEARCH + FILTERS -->
+        <div class="adm-filter-bar">
+          <div class="adm-filter-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search newsletters..." oninput="filterNewsletters(this.value)" />
+          </div>
+          <div class="adm-filter-pills">
+            <button class="adm-filter-pill active" onclick="filterNlStatus('all',this)">All</button>
+            <button class="adm-filter-pill" onclick="filterNlStatus('draft',this)">Drafts</button>
+            <button class="adm-filter-pill" onclick="filterNlStatus('sent',this)">Sent</button>
+          </div>
+        </div>
+
+        <!-- NEWSLETTER CARDS GRID -->
+        <div class="nl-grid" id="nlGrid"></div>
+
+      </div><!-- end newsletter -->
+
+      <!-- ═══════════════════ SUPPORT TAB ═══════════════════ -->
+      <div class="tab-panel" id="tab-support">
+        <div class="sp-page">
+
+          <!-- Header -->
+          <div class="sp-hero">
+            <div class="sp-hero-icon"><i data-lucide="life-buoy"></i></div>
+            <div>
+              <h2 class="sp-hero-title">Help &amp; Support</h2>
+              <p class="sp-hero-sub">Find answers, contact the team, or send a support request</p>
+            </div>
+          </div>
+
+          <div class="sp-grid">
+
+            <!-- Left: FAQ + Search -->
+            <div class="sp-left">
+              <div class="sp-section-card">
+                <div class="sp-section-head">
+                  <i data-lucide="help-circle"></i>
+                  <h3>Frequently Asked Questions</h3>
+                </div>
+                <div class="sp-search-row">
+                  <i data-lucide="search"></i>
+                  <input type="text" id="spSearchInput" class="sp-search-input" placeholder="Search FAQs…" oninput="spSearchFaq()" />
+                </div>
+                <div id="spFaqList" class="sp-faq-list"></div>
+              </div>
+
+              <!-- Contact form -->
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head">
+                  <i data-lucide="send"></i>
+                  <h3>Send a Support Request</h3>
+                </div>
+                <p class="sp-form-hint">We'll get back to you within 24 hours on school days.</p>
+                <div class="form-field" style="margin-top:12px;">
+                  <label class="input-label">Subject</label>
+                  <input class="input-field" type="text" id="spTicketSubject" placeholder="e.g. Cannot log in, Payment issue…" />
+                </div>
+                <div class="form-field" style="margin-top:10px;">
+                  <label class="input-label">Message</label>
+                  <textarea class="input-field sp-textarea" id="spTicketMsg" placeholder="Describe your issue in detail…" rows="4"></textarea>
+                </div>
+                <button class="btn-sm wine" style="margin-top:10px;width:100%;justify-content:center;" onclick="spSubmitTicket()">
+                  <i data-lucide="send"></i> Submit Request
+                </button>
+                <div id="spTicketStatus" class="sp-ticket-status"></div>
+              </div>
+            </div>
+
+            <!-- Right: Contact + Quick links -->
+            <div class="sp-right">
+
+              <!-- Contact info -->
+              <div class="sp-section-card">
+                <div class="sp-section-head">
+                  <i data-lucide="phone"></i>
+                  <h3>Contact Us</h3>
+                </div>
+                <div class="sp-contact-list">
+                  <div class="sp-contact-item">
+                    <span class="sp-contact-icon"><i data-lucide="mail"></i></span>
+                    <div><div class="sp-contact-lbl">Email</div><div class="sp-contact-val" id="spContactEmail"></div></div>
+                  </div>
+                  <div class="sp-contact-item">
+                    <span class="sp-contact-icon"><i data-lucide="phone"></i></span>
+                    <div><div class="sp-contact-lbl">Phone</div><div class="sp-contact-val" id="spContactPhone"></div></div>
+                  </div>
+                  <div class="sp-contact-item">
+                    <span class="sp-contact-icon"><i data-lucide="clock"></i></span>
+                    <div><div class="sp-contact-lbl">Support Hours</div><div class="sp-contact-val" id="spContactHours"></div></div>
+                  </div>
+                  <div class="sp-contact-item">
+                    <span class="sp-contact-icon"><i data-lucide="map-pin"></i></span>
+                    <div><div class="sp-contact-lbl">Address</div><div class="sp-contact-val" id="spContactAddress"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick actions -->
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head">
+                  <i data-lucide="zap"></i>
+                  <h3>Quick Actions</h3>
+                </div>
+                <div class="sp-quick-grid">
+                  <button class="sp-quick-btn" onclick="window.open('mailto:support@acaxel.edu.ng')">
+                    <i data-lucide="mail"></i><span>Email Support</span>
+                  </button>
+                  <button class="sp-quick-btn" onclick="toggleAI()">
+                    <i data-lucide="bot"></i><span>Ask AI Assistant</span>
+                  </button>
+                  <button class="sp-quick-btn" onclick="window.print()">
+                    <i data-lucide="printer"></i><span>Print This Page</span>
+                  </button>
+                  <button class="sp-quick-btn" onclick="location.reload()">
+                    <i data-lucide="refresh-cw"></i><span>Reload Dashboard</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- System info -->
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head">
+                  <i data-lucide="info"></i>
+                  <h3>System Info</h3>
+                </div>
+                <div class="sp-info-list">
+                  <div class="sp-info-row"><span>Platform</span><span>Acaxel School Portal</span></div>
+                  <div class="sp-info-row"><span>Version</span><span>v2.4.0</span></div>
+                  <div class="sp-info-row"><span>Browser</span><span id="spBrowser">—</span></div>
+                  <div class="sp-info-row"><span>Data Storage</span><span>Local (Browser)</span></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- end support -->
+
+    </div><!-- end dash-content -->
+  </main>
+
+  <!-- CREATE / EDIT NEWSLETTER MODAL -->
+  <div class="modal-overlay" id="nlModal" onclick="if(event.target===this)closeModal('nlModal')" style="align-items:flex-start;padding-top:30px;">
+    <div class="modal" style="max-width:700px;width:100%;">
+      <div class="modal-header">
+        <h3 id="nlModalTitle">Create Newsletter</h3>
+        <button class="modal-close" onclick="closeModal('nlModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" style="max-height:75vh;overflow-y:auto;">
+        <input type="hidden" id="nlEditIndex" value="" />
+        <div class="profile-form-grid">
+          <div class="form-field profile-form-full">
+            <label class="input-label">Newsletter Title</label>
+            <input class="input-field" id="nlTitle" type="text" placeholder="e.g. Acaxel School Newsletter — May 2026 Issue 3" />
+          </div>
+          <div class="form-field">
+            <label class="input-label">Issue / Volume</label>
+            <input class="input-field" id="nlIssue" type="text" placeholder="e.g. Vol. 2, Issue 5" />
+          </div>
+          <div class="form-field">
+            <label class="input-label">Date</label>
+            <input class="input-field" id="nlDate" type="date" />
+          </div>
+          <div class="form-field">
+            <label class="input-label">Audience</label>
+            <select class="input-field" id="nlAudience">
+              <option value="all">All (Parents, Staff &amp; Students)</option>
+              <option value="parents">Parents Only</option>
+              <option value="staff">Staff Only</option>
+              <option value="students">Students Only</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="input-label">Editor / Author</label>
+            <input class="input-field" id="nlAuthor" type="text" placeholder="e.g. Head Teacher" value="Admin" />
+          </div>
+          <div class="form-field profile-form-full">
+            <label class="input-label">Introduction / Opening Message</label>
+            <textarea class="input-field" id="nlIntro" rows="3" placeholder="Welcome message from the head teacher..."></textarea>
+          </div>
+
+          <div class="nl-section-head">Academic Highlights</div>
+          <div class="form-field profile-form-full">
+            <textarea class="input-field" id="nlAcademic" rows="3" placeholder="Notable academic achievements, test results, upcoming exams..."></textarea>
+          </div>
+
+          <div class="nl-section-head">Events &amp; Activities</div>
+          <div class="form-field profile-form-full">
+            <textarea class="input-field" id="nlEvents" rows="3" placeholder="Upcoming events, sports day, excursions, cultural activities..."></textarea>
+          </div>
+
+          <div class="nl-section-head">Health &amp; Safety</div>
+          <div class="form-field profile-form-full">
+            <textarea class="input-field" id="nlHealth" rows="2" placeholder="Health reminders, hygiene notices, safety updates..."></textarea>
+          </div>
+
+          <div class="nl-section-head">Finance &amp; Fees</div>
+          <div class="form-field profile-form-full">
+            <textarea class="input-field" id="nlFinance" rows="2" placeholder="Fee payment reminders, feeding collection, uniform purchases..."></textarea>
+          </div>
+
+          <div class="nl-section-head">General Notices</div>
+          <div class="form-field profile-form-full">
+            <textarea class="input-field" id="nlNotices" rows="2" placeholder="Any other announcements for parents or staff..."></textarea>
+          </div>
+
+          <div class="form-field profile-form-full">
+            <label class="input-label">Closing / Sign-off Message</label>
+            <textarea class="input-field" id="nlClosing" rows="2" placeholder="e.g. Thank you for your continued support..."></textarea>
+          </div>
+
+          <div class="form-field profile-form-full" style="display:flex;align-items:center;gap:12px;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.88rem;font-weight:600;color:var(--text);">
+              <input type="checkbox" id="nlMarkSent" style="width:16px;height:16px;accent-color:var(--accent);" />
+              Mark as Sent (distributing to audience)
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm outline" onclick="closeModal('nlModal')">Cancel</button>
+        <button class="btn-sm outline" onclick="saveNewsletter(false)"><i data-lucide="save"></i> Save as Draft</button>
+        <button class="btn-sm wine" onclick="saveNewsletter(true)"><i data-lucide="send"></i> Save &amp; Export PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD STUDENT MODAL -->
+  <div class="modal-overlay" id="addStudentModal" onclick="if(event.target===this)closeModal('addStudentModal')">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add New Student</h3>
+        <button class="modal-close" onclick="closeModal('addStudentModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="profile-form-grid">
+          <div class="form-field"><label class="input-label">First Name</label><input class="input-field" id="stFirstName" type="text" placeholder="First name" /></div>
+          <div class="form-field"><label class="input-label">Last Name</label><input class="input-field" id="stLastName" type="text" placeholder="Last name" /></div>
+          <div class="form-field"><label class="input-label">Student ID</label><input class="input-field" id="stStudentId" type="text" placeholder="e.g. HC/2026/050" /></div>
+          <div class="form-field"><label class="input-label">Date of Birth</label><input class="input-field" id="stDob" type="date" /></div>
+          <div class="form-field"><label class="input-label">Gender</label><select class="input-field" id="stGender"><option>Male</option><option>Female</option></select></div>
+          <div class="form-field"><label class="input-label">Class</label><select class="input-field" id="stClass" data-classkey=""><option value="jss1">JSS 1A</option><option value="jss1">JSS 1B</option><option value="jss2">JSS 2A</option><option value="jss2">JSS 2B</option><option value="jss3">JSS 3A</option><option value="jss3">JSS 3B</option><option value="sss1">SSS 1A</option><option value="sss1">SSS 1B</option><option value="sss2">SSS 2A</option><option value="sss2">SSS 2B</option><option value="sss3">SSS 3A</option></select></div>
+          <div class="form-field"><label class="input-label">House</label><select class="input-field" id="stHouse"><option>Volta</option><option>Densu</option><option>Pra</option><option>Offin</option></select></div>
+          <div class="form-field profile-form-full"><label class="input-label">Parent / Guardian Name</label><input class="input-field" id="stGuardian" type="text" placeholder="Full name" /></div>
+          <div class="form-field"><label class="input-label">Guardian Phone</label><input class="input-field" id="stPhone" type="tel" placeholder="+233..." /></div>
+          <div class="form-field"><label class="input-label">Guardian Email</label><input class="input-field" id="stEmail" type="email" placeholder="email@example.com" /></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm outline" onclick="closeModal('addStudentModal')">Cancel</button>
+        <button class="btn-sm wine" onclick="addStudent()">Add Student</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD STAFF MODAL -->
+  <div class="modal-overlay" id="addStaffModal" onclick="if(event.target===this)closeModal('addStaffModal')">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add New Staff Member</h3>
+        <button class="modal-close" onclick="closeModal('addStaffModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="profile-form-grid">
+          <div class="form-field"><label class="input-label">First Name</label><input class="input-field" id="sfFirstName" type="text" placeholder="e.g. Kwame" /></div>
+          <div class="form-field"><label class="input-label">Last Name</label><input class="input-field" id="sfLastName" type="text" placeholder="e.g. Mensah" /></div>
+          <div class="form-field"><label class="input-label">Role</label><select class="input-field" id="sfRole"><option>Teacher</option><option>Administrator</option><option>Accountant</option><option>Support Staff</option></select></div>
+          <div class="form-field"><label class="input-label">Subject / Department</label><input class="input-field" id="sfSubject" type="text" placeholder="e.g. Mathematics" /></div>
+          <div class="form-field"><label class="input-label">Classes Assigned</label><input class="input-field" id="sfClasses" type="text" placeholder="e.g. JSS 1A, JSS 2B" /></div>
+          <div class="form-field"><label class="input-label">Staff ID</label><input class="input-field" id="sfStaffId" type="text" placeholder="e.g. TCH/025" /></div>
+          <div class="form-field"><label class="input-label">Phone</label><input class="input-field" id="sfPhone" type="tel" /></div>
+          <div class="form-field"><label class="input-label">Email</label><input class="input-field" id="sfEmail" type="email" /></div>
+          <div class="form-field profile-form-full"><label class="input-label">Date Joined</label><input class="input-field" id="sfDateJoined" type="date" /></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm outline" onclick="closeModal('addStaffModal')">Cancel</button>
+        <button class="btn-sm wine" onclick="addStaff()">Add Staff</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW / EDIT UPDATE MODAL -->
+  <div class="modal-overlay" id="addUpdateModal" onclick="if(event.target===this)closeModal('addUpdateModal')">
+    <div class="modal" style="max-width:620px;">
+      <div class="modal-header">
+        <h3 id="updModalTitle">New Update</h3>
+        <button class="modal-close" onclick="closeModal('addUpdateModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="updEditIndex" value="" />
+        <div class="profile-form-grid">
+          <div class="form-field profile-form-full">
+            <label class="input-label">Title</label>
+            <input class="input-field" id="updTitle" type="text" placeholder="e.g. Week 3 Academic Update" />
+          </div>
+          <div class="form-field">
+            <label class="input-label">Type</label>
+            <select class="input-field" id="updType">
+              <option value="weekly">Weekly Update</option>
+              <option value="monthly">Monthly Update</option>
+              <option value="notice">General Notice</option>
+              <option value="academic">Academic Report</option>
+              <option value="finance">Finance Notice</option>
+              <option value="health">Health &amp; Safety</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="input-label">Date</label>
+            <input class="input-field" id="updDate" type="date" />
+          </div>
+          <div class="form-field">
+            <label class="input-label">Author / Posted By</label>
+            <input class="input-field" id="updAuthor" type="text" placeholder="e.g. Head Teacher" value="Admin" />
+          </div>
+          <div class="form-field">
+            <label class="input-label">Audience</label>
+            <select class="input-field" id="updAudience">
+              <option value="all">All (Parents, Staff &amp; Students)</option>
+              <option value="parents">Parents Only</option>
+              <option value="staff">Staff Only</option>
+              <option value="students">Students Only</option>
+            </select>
+          </div>
+          <div class="form-field profile-form-full">
+            <label class="input-label">Content / Body</label>
+            <textarea class="input-field" id="updBody" rows="5" placeholder="Write the full update here..."></textarea>
+          </div>
+          <div class="form-field profile-form-full" style="display:flex;align-items:center;gap:12px;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.88rem;font-weight:600;color:var(--text);">
+              <input type="checkbox" id="updPinCheck" style="width:16px;height:16px;accent-color:var(--accent);" />
+              Pin this update (shows at top of feed)
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm outline" onclick="closeModal('addUpdateModal')">Cancel</button>
+        <button class="btn-sm wine" onclick="saveUpdate()"><i data-lucide="send"></i> Post Update</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVENTORY ADD/EDIT MODAL -->
+  <div class="modal-overlay" id="invItemModal" onclick="if(event.target===this)closeModal('invItemModal')">
+    <div class="modal" style="max-width:600px;">
+      <div class="modal-header">
+        <h3 id="invModalTitle">Add Inventory Item</h3>
+        <button class="modal-close" onclick="closeModal('invItemModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="profile-form-grid">
+          <input type="hidden" id="invEditIndex" value="" />
+          <div class="form-field"><label class="input-label">Item Name</label><input class="input-field" id="invName" type="text" placeholder="e.g. School Shirt (Boys)" /></div>
+          <div class="form-field"><label class="input-label">Category</label>
+            <select class="input-field" id="invCategory">
+              <option value="uniform">Uniform</option>
+              <option value="textbook">Textbook</option>
+              <option value="stationery">Stationery</option>
+              <option value="equipment">Equipment</option>
+              <option value="sports">Sports</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-field"><label class="input-label">Quantity in Stock</label><input class="input-field" id="invQty" type="number" min="0" placeholder="e.g. 50" /></div>
+          <div class="form-field"><label class="input-label">Low Stock Alert (qty)</label><input class="input-field" id="invLowAlert" type="number" min="0" placeholder="e.g. 10" /></div>
+          <div class="form-field"><label class="input-label">Unit Price (₵)</label><input class="input-field" id="invPrice" type="number" min="0" step="0.01" placeholder="e.g. 25.00" /></div>
+          <div class="form-field"><label class="input-label">Supplier / Source</label><input class="input-field" id="invSupplier" type="text" placeholder="e.g. Ghana Uniforms Ltd" /></div>
+          <div class="form-field"><label class="input-label">Size / Variant</label><input class="input-field" id="invSize" type="text" placeholder="e.g. S, M, L or N/A" /></div>
+          <div class="form-field"><label class="input-label">Location / Store</label><input class="input-field" id="invLocation" type="text" placeholder="e.g. Store Room A" /></div>
+          <div class="form-field profile-form-full"><label class="input-label">Notes</label><input class="input-field" id="invNotes" type="text" placeholder="Any additional info..." /></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm outline" onclick="closeModal('invItemModal')">Cancel</button>
+        <button class="btn-sm wine" onclick="saveInventoryItem()"><i data-lucide="save"></i> Save Item</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVENTORY RECEIPT MODAL -->
+  <div class="modal-overlay" id="invReceiptModal" onclick="if(event.target===this)closeModal('invReceiptModal')">
+    <div class="modal" style="max-width:540px;">
+      <div class="modal-header">
+        <h3><i data-lucide="receipt" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;stroke:#6366f1;"></i>Issue Item &amp; Print Receipt</h3>
+        <button class="modal-close" onclick="closeModal('invReceiptModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- ITEM SUMMARY -->
+        <div style="background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.2);border-radius:10px;padding:14px 18px;margin-bottom:18px;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Item Being Issued</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+            <div>
+              <div style="font-weight:700;font-size:0.95rem;color:var(--text);" id="rcItemName">—</div>
+              <div style="font-size:0.78rem;color:var(--text-light);margin-top:2px;"><span id="rcCategory"></span> &bull; Size: <span id="rcSize"></span></div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.75rem;color:var(--text-light);">Unit Price</div>
+              <div style="font-size:1.1rem;font-weight:800;color:var(--accent);" id="rcUnitPrice">₵0.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-form-grid">
+          <!-- Student details -->
+          <div class="form-field"><label class="input-label">Student Name</label><input class="input-field" id="rcStudentName" type="text" placeholder="e.g. Adaeze Okonkwo" /></div>
+          <div class="form-field"><label class="input-label">Student ID</label><input class="input-field" id="rcStudentId" type="text" placeholder="e.g. HC/2024/042" /></div>
+          <div class="form-field"><label class="input-label">Class</label><input class="input-field" id="rcClass" type="text" placeholder="e.g. JSS 2A" /></div>
+          <div class="form-field"><label class="input-label">Parent / Guardian Name</label><input class="input-field" id="rcParentName" type="text" placeholder="e.g. Mrs. Okonkwo" /></div>
+
+          <!-- Purchase details -->
+          <div class="form-field">
+            <label class="input-label">Quantity</label>
+            <input class="input-field" id="rcQtyInput" type="number" min="1" value="1" oninput="rcUpdateTotal()" />
+          </div>
+          <div class="form-field">
+            <label class="input-label">Payment Method</label>
+            <select class="input-field" id="rcPayMethod">
+              <option>Cash</option>
+              <option>Mobile Money</option>
+              <option>Bank Transfer</option>
+              <option>Waived / Free</option>
+            </select>
+          </div>
+          <div class="form-field"><label class="input-label">Date of Issue</label><input class="input-field" id="rcDate" type="date" /></div>
+          <div class="form-field" style="display:flex;align-items:flex-end;">
+            <div style="width:100%;background:rgba(99,102,241,0.07);border:1.5px solid rgba(99,102,241,0.25);border-radius:9px;padding:10px 14px;text-align:center;">
+              <div style="font-size:0.72rem;color:var(--text-light);font-weight:600;margin-bottom:2px;">TOTAL AMOUNT</div>
+              <div style="font-size:1.3rem;font-weight:800;color:var(--accent);" id="rcTotal">₵0.00</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm outline" onclick="closeModal('invReceiptModal')">Cancel</button>
+        <button class="btn-sm wine" onclick="printReceipt()"><i data-lucide="printer"></i> Print Receipt &amp; Issue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT FEEDING MENU MODAL -->
+  <div class="modal-overlay" id="editMenuModal" onclick="if(event.target===this)closeModal('editMenuModal')" style="align-items:flex-start;padding-top:40px;">
+    <div class="modal" style="max-width:680px;width:100%;">
+      <div class="modal-header">
+        <h3>Edit Weekly Meal Menu</h3>
+        <button class="modal-close" onclick="closeModal('editMenuModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" style="max-height:70vh;overflow-y:auto;">
+        <div id="editMenuFields"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm outline" onclick="closeModal('editMenuModal')">Cancel</button>
+        <button class="btn-sm wine" onclick="saveMenu()"><i data-lucide="save"></i> Save Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECORD FEEDING PAYMENT MODAL -->
+  <div class="modal-overlay" id="addFeedingModal" onclick="if(event.target===this)closeModal('addFeedingModal')">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Record Feeding Payment</h3>
+        <button class="modal-close" onclick="closeModal('addFeedingModal')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="profile-form-grid">
+          <div class="form-field"><label class="input-label">Student Name</label><input class="input-field" id="fdStudentName" type="text" placeholder="e.g. Kwame Asante" /></div>
+          <div class="form-field"><label class="input-label">Student ID</label><input class="input-field" id="fdStudentId" type="text" placeholder="e.g. HC/2024/042" /></div>
+          <div class="form-field"><label class="input-label">Class</label><select class="input-field" id="fdClass"><option>JSS 1A</option><option>JSS 1B</option><option>JSS 2A</option><option>JSS 2B</option><option>JSS 3A</option><option>JSS 3B</option><option>SSS 1A</option><option>SSS 1B</option><option>SSS 2A</option><option>SSS 2B</option></select></div>
+          <div class="form-field"><label class="input-label">Amount (₵)</label><input class="input-field" id="fdAmount" type="number" min="0" step="0.01" placeholder="e.g. 5.00" /></div>
+          <div class="form-field"><label class="input-label">Date</label><input class="input-field" id="fdPayDate" type="date" /></div>
+          <div class="form-field"><label class="input-label">Payment Method</label><select class="input-field" id="fdMethod"><option>Cash</option><option>Mobile Money</option><option>Bank Transfer</option></select></div>
+          <div class="form-field profile-form-full"><label class="input-label">Notes (optional)</label><input class="input-field" id="fdNotes" type="text" placeholder="Any remarks..." /></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm outline" onclick="closeModal('addFeedingModal')">Cancel</button>
+        <button class="btn-sm wine" onclick="recordFeedingPayment()">Record Payment</button>
+      </div>
+    </div>
+  </div>
+
+      <!-- CLOCK-IN LOG TAB (Admin) -->
+      <div class="tab-panel" id="tab-clockin">
+        <div class="ci-page-header">
+          <div>
+            <h2 class="ci-page-title">Clock-In Log</h2>
+            <p class="ci-page-sub">Live record of all student arrivals verified by parent QR scan</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <div class="ci-live-time" id="adminCiClock"></div>
+            <button class="btn-sm wine" onclick="adminCiExport()"><i data-lucide="download" style="width:14px;height:14px;margin-right:4px;"></i>Export CSV</button>
+          </div>
+        </div>
+
+        <!-- KPI ROW -->
+        <div class="ci-admin-kpi-row">
+          <div class="ci-admin-kpi">
+            <div class="ci-admin-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="users" style="stroke:#6366f1;"></i></div>
+            <div><div class="ci-admin-kpi-val" id="adminCiTotal">0</div><div class="ci-admin-kpi-lbl">Total Today</div></div>
+          </div>
+          <div class="ci-admin-kpi">
+            <div class="ci-admin-kpi-icon" style="background:#f0fdf4;"><i data-lucide="check-circle" style="stroke:#16a34a;"></i></div>
+            <div><div class="ci-admin-kpi-val" id="adminCiOnTime">0</div><div class="ci-admin-kpi-lbl">On Time</div></div>
+          </div>
+          <div class="ci-admin-kpi">
+            <div class="ci-admin-kpi-icon" style="background:#fffbeb;"><i data-lucide="clock" style="stroke:#d97706;"></i></div>
+            <div><div class="ci-admin-kpi-val" id="adminCiLate">0</div><div class="ci-admin-kpi-lbl">Late</div></div>
+          </div>
+          <div class="ci-admin-kpi">
+            <div class="ci-admin-kpi-icon" style="background:#fef2f2;"><i data-lucide="user-x" style="stroke:#dc2626;"></i></div>
+            <div><div class="ci-admin-kpi-val" id="adminCiAbsent">0</div><div class="ci-admin-kpi-lbl">Not Clocked In</div></div>
+          </div>
+        </div>
+
+        <!-- FILTER & SEARCH -->
+        <div class="asg-filter-bar" style="margin-bottom:16px;">
+          <div class="asg-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search by student or parent name..." oninput="adminCiFilter(this.value)" />
+          </div>
+          <div class="asg-pills">
+            <button class="asg-pill active" onclick="adminCiStatusFilter('all',this)">All</button>
+            <button class="asg-pill" onclick="adminCiStatusFilter('on-time',this)">On Time</button>
+            <button class="asg-pill" onclick="adminCiStatusFilter('late',this)">Late</button>
+          </div>
+          <input type="date" id="adminCiDateFilter" class="input-field" style="max-width:170px;font-size:0.85rem;" onchange="adminCiRender()" />
+        </div>
+
+        <!-- LOG TABLE -->
+        <div class="ci-admin-table-wrap">
+          <table class="ci-admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Student</th>
+                <th>Class</th>
+                <th>Parent</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Method</th>
+              </tr>
+            </thead>
+            <tbody id="adminCiTableBody"></tbody>
+          </table>
+          <div id="adminCiEmpty" class="ci-admin-empty" style="display:none;">
+            <i data-lucide="inbox"></i>
+            <p>No clock-in records for this date yet.</p>
+          </div>
+        </div>
+
+        <!-- GATE QR GENERATOR -->
+        <div class="ci-gate-qr-section">
+
+          <!-- Section header -->
+          <div class="ci-qrgen-header">
+            <div>
+              <h3 class="ci-log-title">Gate QR Code Generator</h3>
+              <p style="font-size:0.82rem;color:var(--text-light);margin:3px 0 0;">Generate, customise and print the QR code parents scan at the school gate</p>
+            </div>
+            <span class="ci-qr-status-pill" id="adminQrStatusPill">
+              <i data-lucide="circle-check" style="width:13px;height:13px;"></i>
+              Active
+            </span>
+          </div>
+
+          <!-- Config row -->
+          <div class="ci-qrgen-config">
+            <div class="ci-qrgen-field">
+              <label class="ci-qrgen-label">Gate / Location Label</label>
+              <input type="text" id="adminQrLabel" class="input-field" value="Acaxel School — Main Gate" placeholder="e.g. Main Gate, Block A Entrance" />
+            </div>
+            <div class="ci-qrgen-field" style="max-width:130px;">
+              <label class="ci-qrgen-label">Valid From</label>
+              <input type="time" id="adminQrFrom" class="input-field" value="07:00" />
+            </div>
+            <div class="ci-qrgen-field" style="max-width:130px;">
+              <label class="ci-qrgen-label">Valid Until</label>
+              <input type="time" id="adminQrUntil" class="input-field" value="08:30" />
+            </div>
+            <div class="ci-qrgen-field" style="max-width:120px;">
+              <label class="ci-qrgen-label">QR Size</label>
+              <select id="adminQrSize" class="input-field" onchange="adminUpdateGateQR()">
+                <option value="180">Small</option>
+                <option value="220" selected>Medium</option>
+                <option value="280">Large</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- QR body -->
+          <div class="ci-gate-qr-body">
+
+            <!-- QR card -->
+            <div class="ci-gate-qr-card" id="adminQrPrintArea">
+              <div class="ci-qr-school-name">Acaxel School</div>
+              <div id="adminGateQR"></div>
+              <div class="ci-gate-qr-label" id="adminQrLabelDisplay">Acaxel School — Main Gate</div>
+              <div class="ci-qr-validity" id="adminQrValidityDisplay">Valid: 07:00 – 08:30</div>
+              <div class="ci-gate-qr-code-txt" id="adminQrCodeDisplay">ACAXEL-GATE-2026</div>
+            </div>
+
+            <!-- Controls -->
+            <div class="ci-gate-qr-desc">
+              <p>This QR code is displayed at the school entrance. Parents open their Clock-In tab and scan it to verify their child's arrival. The system records the timestamp automatically.</p>
+
+              <!-- Active code info -->
+              <div class="ci-qr-code-info">
+                <span class="ci-qrgen-label">Active Code</span>
+                <div class="ci-qr-code-row">
+                  <code id="adminQrCodeText" class="ci-qr-code-value">ACAXEL-GATE-2026</code>
+                  <button class="ci-qr-copy-btn" onclick="adminCopyQrCode()" title="Copy code">
+                    <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="ci-qrgen-actions">
+                <button class="btn-sm wine" onclick="adminRegenerateQR()">
+                  <i data-lucide="refresh-cw" style="width:13px;height:13px;margin-right:5px;vertical-align:middle;"></i>Regenerate Code
+                </button>
+                <button class="btn-sm outline" onclick="adminDownloadQR()">
+                  <i data-lucide="image-down" style="width:13px;height:13px;margin-right:5px;vertical-align:middle;"></i>Download PNG
+                </button>
+                <button class="btn-sm outline" onclick="adminPrintQR()">
+                  <i data-lucide="printer" style="width:13px;height:13px;margin-right:5px;vertical-align:middle;"></i>Print
+                </button>
+                <button class="btn-sm outline" onclick="adminCiExport()">
+                  <i data-lucide="download" style="width:13px;height:13px;margin-right:5px;vertical-align:middle;"></i>Export Log CSV
+                </button>
+              </div>
+
+              <p style="font-size:0.75rem;color:var(--text-light);margin-top:4px;line-height:1.6;">
+                <i data-lucide="info" style="width:12px;height:12px;margin-right:3px;vertical-align:middle;"></i>
+                Regenerating creates a new unique code. Update parents via the announcements tab after regenerating.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div><!-- end clockin admin -->
+
+</div><!-- end dash-body -->
+
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="js/dashboard.js?v=13"></script>
+<script src="js/admin-dashboard.js?v=13"></script>
+<script src="js/theme-panel.js?v=13"></script>
+<script src="js/ai-assistant.js"></script>
+<script src="js/support.js"></script>
+<script src="js/offline-clockin.js"></script>
+<script src="js/clockin.js"></script>
+<script src="js/tt-notify.js"></script>
+</body>
+</html>

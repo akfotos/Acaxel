@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portals — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="home">
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
+    <span class="nav-name">Acaxel</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="features.html">Features</a></li>
+    <li><a href="portals.html" class="nav-active">Portals</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-ghost">Sign In</a>
+    <a href="signup.html" class="btn-primary">Get Started</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="features.html">Features</a>
+  <a href="portals.html">Portals</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <div class="nav-actions mobile-nav-actions">
+    <a href="login.html" class="btn-ghost">Sign In</a>
+    <a href="signup.html" class="btn-primary">Get Started</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="section-tag">Portals</div>
+  <h1>Four Portals. One Platform.</h1>
+  <p>Every member of your school community has a dedicated, role-aware portal — with AI assistance, QR clock-in, real-time timetables, and a built-in support centre.</p>
+</div>
+
+<!-- PORTALS -->
+<section class="section portals">
+  <div class="portals-grid portals-grid-4">
+
+    <!-- PARENT -->
+    <div class="portal-card parent portal-card-img">
+      <div class="portal-card-img-overlay"></div>
+      <div class="portal-card-tag"><i data-lucide="users"></i> Parents</div>
+      <h3>Parent Portal</h3>
+      <p>Stay fully connected to your child's school life — fees, grades, assignments, and messages — in one place.</p>
+      <ul class="portal-features">
+        <li>View and pay outstanding fees</li>
+        <li>Download invoices and receipts</li>
+        <li>Track attendance and grades</li>
+        <li>Monitor pending &amp; overdue assignments</li>
+        <li>Message teachers directly</li>
+        <li>QR gate clock-in for school visits</li>
+        <li>AI Assistant for instant answers</li>
+        <li>Help &amp; Support centre</li>
+      </ul>
+      <a href="signup.html?role=parent" class="btn-white">Join as Parent</a>
+    </div>
+
+    <!-- STUDENT -->
+    <div class="portal-card student portal-card-img">
+      <div class="portal-card-img-overlay"></div>
+      <div class="portal-card-tag"><i data-lucide="graduation-cap"></i> Students</div>
+      <h3>Student Portal</h3>
+      <p>Access your full academic life — results, timetables, assignments, and daily attendance — all from one dashboard.</p>
+      <ul class="portal-features">
+        <li>View grades and term results</li>
+        <li>Check daily &amp; weekly timetable</li>
+        <li>See full attendance records</li>
+        <li>View, filter, and track assignments</li>
+        <li>QR code check-in at school gate</li>
+        <li>Check outstanding fee balance</li>
+        <li>AI Assistant for homework help</li>
+        <li>Help &amp; Support centre</li>
+      </ul>
+      <a href="signup.html?role=student" class="btn-white">Join as Student</a>
+    </div>
+
+    <!-- TEACHER -->
+    <div class="portal-card teacher portal-card-img">
+      <div class="portal-card-img-overlay"></div>
+      <div class="portal-card-tag"><i data-lucide="book-open"></i> Teachers</div>
+      <h3>Teacher Portal</h3>
+      <p>Focus on teaching — your portal handles records, scheduling, clock-in, and parent communication.</p>
+      <ul class="portal-features">
+        <li>QR code clock-in &amp; clock-out</li>
+        <li>Weekly timetable with live "Up Next"</li>
+        <li>Mark and manage class attendance</li>
+        <li>Enter and publish student grades</li>
+        <li>Message parents and administrators</li>
+        <li>Export attendance log as CSV</li>
+        <li>AI Assistant for teaching support</li>
+        <li>Help &amp; Support centre</li>
+      </ul>
+      <a href="signup.html?role=teacher" class="btn-white">Join as Teacher</a>
+    </div>
+
+    <!-- ADMINISTRATOR -->
+    <div class="portal-card admin portal-card-img">
+      <div class="portal-card-img-overlay"></div>
+      <div class="portal-card-tag"><i data-lucide="shield"></i> Administrators</div>
+      <h3>Administrator Portal</h3>
+      <p>Manage every aspect of school operations from one powerful, centralised dashboard.</p>
+      <ul class="portal-features">
+        <li>Add, edit, and manage students &amp; staff</li>
+        <li>Generate and send bills &amp; invoices</li>
+        <li>Manage feeding collection &amp; weekly menu</li>
+        <li>Build timetables with staff notifications</li>
+        <li>Manage school inventory &amp; stock</li>
+        <li>Publish updates &amp; newsletters</li>
+        <li>View financial &amp; academic reports</li>
+        <li>AI Assistant &amp; Help centre</li>
+      </ul>
+      <a href="signup.html?role=admin" class="btn-wine">Join as Administrator</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SPLIT IMAGE ROW -->
+<div class="portals-photo-row portals-photo-row-4">
+  <div class="portals-photo-col">
+    <img src="images/portals/parent-reviewing.jpg" alt="African parent reviewing child progress" loading="lazy" />
+    <div class="portals-photo-caption">Parents stay informed, always.</div>
+  </div>
+  <div class="portals-photo-col">
+    <img src="images/portals/students-studying.jpg" alt="African students studying" loading="lazy" />
+    <div class="portals-photo-caption">Students own their progress.</div>
+  </div>
+  <div class="portals-photo-col">
+    <img src="images/portals/teacher-classroom.jpg" alt="African teacher in classroom" loading="lazy" />
+    <div class="portals-photo-caption">Teachers teach with confidence.</div>
+  </div>
+  <div class="portals-photo-col">
+    <img src="images/portals/administrator-desk.jpg" alt="African administrator at desk" loading="lazy" />
+    <div class="portals-photo-caption">Administrators work smarter.</div>
+  </div>
+</div>
+
+<!-- SHARED FEATURES BANNER -->
+<section class="section" style="padding-top:0;">
+  <div class="section-header">
+    <div class="section-tag">Every Portal Includes</div>
+    <h2>Built-in for Everyone</h2>
+    <p>Features every user gets, regardless of their role.</p>
+  </div>
+  <div class="features-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="feature-card" style="text-align:center;">
+      <div class="feature-icon" style="margin:0 auto 16px;"><i data-lucide="bot"></i></div>
+      <h3>AI Assistant</h3>
+      <p>Role-aware AI chat that answers questions, explains features, and guides navigation — no API key needed.</p>
+    </div>
+    <div class="feature-card" style="text-align:center;">
+      <div class="feature-icon" style="margin:0 auto 16px;"><i data-lucide="scan-line"></i></div>
+      <h3>QR Clock-In</h3>
+      <p>Scan the school gate QR code to mark arrival instantly. Manual code fallback included for every role.</p>
+    </div>
+    <div class="feature-card" style="text-align:center;">
+      <div class="feature-icon" style="margin:0 auto 16px;"><i data-lucide="life-buoy"></i></div>
+      <h3>Help &amp; Support</h3>
+      <p>Role-specific FAQ accordion, contact form, support ticket submission, and direct links to school contacts.</p>
+    </div>
+    <div class="feature-card" style="text-align:center;">
+      <div class="feature-icon" style="margin:0 auto 16px;"><i data-lucide="moon"></i></div>
+      <h3>Dark Mode</h3>
+      <p>Full light/dark theme support with automatic preference saving across all four portals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" style="padding-top:0;">
+  <div class="section-header">
+    <div class="section-tag">How It Works</div>
+    <h2>Up and Running in Minutes</h2>
+    <p>Getting started with Acaxel is simple. No technical setup required.</p>
+  </div>
+  <div class="features-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="feature-card" style="text-align:center;">
+      <div class="feature-icon" style="margin:0 auto 16px;"><i data-lucide="user-plus"></i></div>
+      <h3>1. Create an Account</h3>
+      <p>Sign up in under two minutes. Choose your role — parent, student, teacher, or admin.</p>
+    </div>
+    <div class="feature-card" style="text-align:center;">
+      <div class="feature-icon" style="margin:0 auto 16px;"><i data-lucide="layout-dashboard"></i></div>
+      <h3>2. Access Your Portal</h3>
+      <p>Log in to your personalised dashboard. Your data, tabs, and tools are ready immediately.</p>
+    </div>
+    <div class="feature-card" style="text-align:center;">
+      <div class="feature-icon" style="margin:0 auto 16px;"><i data-lucide="qr-code"></i></div>
+      <h3>3. Clock In at School</h3>
+      <p>Scan the school gate QR code on arrival to mark your presence. On-time tracking is automatic.</p>
+    </div>
+    <div class="feature-card" style="text-align:center;">
+      <div class="feature-icon" style="margin:0 auto 16px;"><i data-lucide="check-circle"></i></div>
+      <h3>4. Stay Connected</h3>
+      <p>Manage fees, grades, timetables, messages, and more — ask the AI Assistant anytime you need help.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Choose Your Portal</h2>
+  <p>Join parents, students, teachers, and administrators already using Acaxel.</p>
+  <div class="cta-actions">
+    <a href="signup.html?role=parent" class="btn-white btn-lg">Parent</a>
+    <a href="signup.html?role=student" class="btn-ghost btn-lg cta-ghost">Student</a>
+    <a href="signup.html?role=teacher" class="btn-ghost btn-lg cta-ghost">Teacher</a>
+    <a href="signup.html?role=admin" class="btn-ghost btn-lg cta-ghost">Administrator</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top-bar">
+    <div class="footer-top-inner">
+      <div class="footer-top-item"><i data-lucide="phone"></i><span>+233 55 6924 358</span></div>
+      <div class="footer-top-divider"></div>
+      <div class="footer-top-item"><i data-lucide="mail"></i><span>info@acaxel.edu.gh</span></div>
+      <div class="footer-top-divider"></div>
+      <div class="footer-top-item"><i data-lucide="map-pin"></i><span>14 Academy Road, Accra, Ghana</span></div>
+    </div>
+  </div>
+  <div class="footer-body">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-row"><img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" /><span class="footer-school-name">Acaxel School</span></div>
+        <p class="footer-tagline">Nurturing Excellence, Building Character.</p>
+        <p class="footer-desc">A forward-thinking institution dedicated to academic excellence and holistic student growth.</p>
+        <div class="footer-accreditation">
+          <span class="footer-badge"><i data-lucide="shield-check"></i> GES Accredited</span>
+          <span class="footer-badge"><i data-lucide="award"></i> ISO 9001:2015</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="features.html"><i data-lucide="chevron-right"></i> Features</a></li>
+          <li><a href="portals.html"><i data-lucide="chevron-right"></i> Portals</a></li>
+          <li><a href="pricing.html"><i data-lucide="chevron-right"></i> Pricing</a></li>
+          <li><a href="about.html"><i data-lucide="chevron-right"></i> About</a></li>
+          <li><a href="contact.html"><i data-lucide="chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Portals</h5>
+        <ul>
+          <li><a href="login.html"><i data-lucide="chevron-right"></i> Sign In</a></li>
+          <li><a href="signup.html?role=parent"><i data-lucide="chevron-right"></i> Parent Portal</a></li>
+          <li><a href="signup.html?role=student"><i data-lucide="chevron-right"></i> Student Portal</a></li>
+          <li><a href="signup.html?role=teacher"><i data-lucide="chevron-right"></i> Teacher Portal</a></li>
+          <li><a href="signup.html?role=admin"><i data-lucide="chevron-right"></i> Administrator Portal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Current Term</h5>
+        <div class="footer-term-card">
+          <div class="footer-term-label">2025/2026 Academic Year</div>
+          <div class="footer-term-row"><span class="footer-term-badge footer-term-done">Term 1</span><span class="footer-term-dates">Sep 9 &ndash; Dec 13, 2025</span></div>
+          <div class="footer-term-row"><span class="footer-term-badge footer-term-active">Term 2</span><span class="footer-term-dates">Jan 13 &ndash; Apr 11, 2026</span></div>
+          <div class="footer-term-row"><span class="footer-term-badge footer-term-upcoming">Term 3</span><span class="footer-term-dates">Apr 27 &ndash; Jul 18, 2026</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left"><span>&copy; 2026 Acaxel School. All rights reserved.</span></div>
+    <div class="footer-bottom-center">
+      <a href="#">Privacy Policy</a><span class="footer-dot">&middot;</span>
+      <a href="#">Terms of Use</a><span class="footer-dot">&middot;</span>
+      <a href="#">Safeguarding Policy</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" class="footer-social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+      <a href="#" class="footer-social-btn" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+      <a href="#" class="footer-social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

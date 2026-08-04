@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acaxel School — Excellence in Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://db.onlinewebfonts.com/c/04e6981992c0e2e7642af2074ebe3901?family=Helvetica+Now+Display+Bold" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
+</head>
+<body class="home">
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
+    <span class="nav-name">Acaxel</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="features.html">Features</a></li>
+    <li><a href="portals.html">Portals</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-ghost">Sign In</a>
+    <a href="signup.html" class="btn-primary">Get Started</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="features.html">Features</a>
+  <a href="portals.html">Portals</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <div class="nav-actions mobile-nav-actions">
+    <a href="login.html" class="btn-ghost">Sign In</a>
+    <a href="signup.html" class="btn-primary">Get Started</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero hero-video-bg">
+
+  <!-- Background video -->
+  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"></video>
+
+  <!-- Dark gradient filter so text pops -->
+  <div class="hero-video-overlay"></div>
+
+  <!-- Content -->
+  <div class="hero-content hero-content-vb">
+    <div class="hero-badge-vb"><span class="hero-badge-dot"></span>School Management Platform</div>
+    <h1 class="hero-heading-vb">
+      <i data-lucide="zap" class="hero-icon-inline"></i>
+      Manage <em>Acaxel</em> with
+      <i data-lucide="graduation-cap" class="hero-icon-inline"></i>
+      Clarity &amp; Ease
+      <i data-lucide="shield-check" class="hero-icon-inline"></i>
+    </h1>
+    <p class="hero-sub-vb">Zero stress, total control. Acaxel keeps your school running with seamless fee tracking, real-time grades, attendance monitoring, and instant parent communication — all in one place.</p>
+    <div class="hero-actions-vb">
+      <a href="signup.html" class="hero-cta-vb">
+        <span>Get Started Free</span>
+        <i data-lucide="arrow-right-circle" class="hero-cta-icon"></i>
+      </a>
+      <a href="login.html" class="hero-signin-vb">Sign In</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item"><div class="num">1,240+</div><div class="label">Enrolled Students</div></div>
+  <div class="stat-item"><div class="num">86</div><div class="label">Teaching Staff</div></div>
+  <div class="stat-item"><div class="num">98%</div><div class="label">Fee Collection Rate</div></div>
+  <div class="stat-item"><div class="num">24/7</div><div class="label">Portal Access</div></div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-header">
+    <div class="section-tag">Features</div>
+    <h2>Everything Your School Needs</h2>
+    <p>From fee management to grade tracking, Acaxel brings your entire school administration online.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon"><i data-lucide="credit-card"></i></div>
+      <h3>Fee Management</h3>
+      <p>Track tuition, levies, and outstanding balances. Generate invoices and send payment reminders automatically.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i data-lucide="bar-chart-2"></i></div>
+      <h3>Grade Tracking</h3>
+      <p>Administrators enter scores directly. Parents see real-time academic performance with subject breakdowns.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i data-lucide="calendar-check"></i></div>
+      <h3>Attendance Records</h3>
+      <p>Daily attendance marking with instant parent notifications for absences and late arrivals.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i data-lucide="message-square"></i></div>
+      <h3>Direct Messaging</h3>
+      <p>Secure in-app messaging between parents and administrators. No more missed notes or phone tag.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i data-lucide="file-text"></i></div>
+      <h3>Billing &amp; Invoices</h3>
+      <p>Compose and send itemised bills to individual students or entire classes with one click.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i data-lucide="megaphone"></i></div>
+      <h3>Announcements</h3>
+      <p>Broadcast school news, event reminders, and urgent notices to all parents and staff instantly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE SHOWCASE STRIP -->
+<div class="img-showcase-strip">
+  <div class="img-showcase-item">
+    <img src="images/home/students-collaborating.jpg" alt="Students collaborating in class" loading="lazy" />
+    <div class="img-showcase-label">Collaborative Learning</div>
+  </div>
+  <div class="img-showcase-item img-showcase-tall">
+    <img src="images/home/teacher-instructing.jpg" alt="Teacher instructing students" loading="lazy" />
+    <div class="img-showcase-label">Expert Administrators</div>
+  </div>
+  <div class="img-showcase-item">
+    <img src="images/home/students-studying.jpg" alt="Students studying together" loading="lazy" />
+    <div class="img-showcase-label">Student Success</div>
+  </div>
+  <div class="img-showcase-item img-showcase-tall">
+    <img src="images/home/school-library.jpg" alt="Students in school library" loading="lazy" />
+    <div class="img-showcase-label">Modern Facilities</div>
+  </div>
+</div>
+
+<!-- PORTALS -->
+<section class="section portals" id="portals">
+  <div class="section-header">
+    <div class="section-tag">Portals</div>
+    <h2>Built for Parents &amp; Administrators</h2>
+    <p>Two dedicated portals, each designed for the specific needs of its users.</p>
+  </div>
+  <div class="portals-grid">
+    <div class="portal-card parent">
+      <h3>Parent Portal</h3>
+      <p>Stay connected to your child's school life without the back-and-forth.</p>
+      <ul class="portal-features">
+        <li>View and pay outstanding fees</li>
+        <li>Download invoices and receipts</li>
+        <li>Track attendance and grades</li>
+        <li>Message administrators directly</li>
+        <li>Receive school announcements</li>
+      </ul>
+      <a href="signup.html?role=parent" class="btn-white">Join as Parent</a>
+    </div>
+    <div class="portal-card teacher">
+      <h3>Administrator Portal</h3>
+      <p>Manage classes, records, and parent communication from one dashboard.</p>
+      <ul class="portal-features">
+        <li>Mark daily attendance</li>
+        <li>Enter and manage grades</li>
+        <li>Send bills and fee records</li>
+        <li>Add and manage students</li>
+        <li>Message parents directly</li>
+      </ul>
+      <a href="signup.html?role=teacher" class="btn-wine">Join as Administrator</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <div class="section-header">
+    <div class="section-tag">Pricing</div>
+    <h2>Simple, Transparent Plans</h2>
+    <p>Choose the plan that fits your school's size and needs. All plans include a 14-day free trial.</p>
+    <div class="pricing-toggle">
+      <span class="pricing-toggle-label">Monthly</span>
+      <button class="pricing-toggle-btn" id="billingToggle" onclick="toggleBilling()" aria-label="Toggle billing">
+        <span class="pricing-toggle-knob"></span>
+      </button>
+      <span class="pricing-toggle-label">Annual <span class="pricing-save-badge">Save 20%</span></span>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- BASIC -->
+    <div class="pricing-card">
+      <div class="pricing-card-top">
+        <div class="pricing-plan-icon pricing-icon-basic"><i data-lucide="package"></i></div>
+        <div class="pricing-plan-name">Basic</div>
+        <div class="pricing-plan-desc">For small schools getting started with digital management.</div>
+        <div class="pricing-price-row">
+          <span class="pricing-currency">₵</span>
+          <span class="pricing-amount" data-monthly="10" data-annual="8">10</span>
+          <span class="pricing-per">/mo</span>
+        </div>
+        <div class="pricing-billed-note" id="billedNoteBasic">Billed monthly</div>
+      </div>
+      <ul class="pricing-features">
+        <li class="feat-yes"><i data-lucide="check"></i> Up to 100 students</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Parent &amp; Administrator portals</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking &amp; invoices</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Attendance records</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Basic announcements</li>
+        <li class="feat-no"><i data-lucide="x"></i> Grade analytics &amp; reports</li>
+        <li class="feat-no"><i data-lucide="x"></i> Bulk bill sending</li>
+        <li class="feat-no"><i data-lucide="x"></i> SMS &amp; email notifications</li>
+        <li class="feat-no"><i data-lucide="x"></i> Priority support</li>
+      </ul>
+      <a href="signup.html" class="pricing-cta pricing-cta-outline">Start Free Trial</a>
+    </div>
+
+    <!-- INTERMEDIATE -->
+    <div class="pricing-card pricing-card-featured">
+      <div class="pricing-popular-badge">Most Popular</div>
+      <div class="pricing-card-top">
+        <div class="pricing-plan-icon pricing-icon-inter"><i data-lucide="zap"></i></div>
+        <div class="pricing-plan-name">Intermediate</div>
+        <div class="pricing-plan-desc">For growing schools that need deeper insights and automation.</div>
+        <div class="pricing-price-row">
+          <span class="pricing-currency">₵</span>
+          <span class="pricing-amount" data-monthly="25" data-annual="20">25</span>
+          <span class="pricing-per">/mo</span>
+        </div>
+        <div class="pricing-billed-note" id="billedNoteInter">Billed monthly</div>
+      </div>
+      <ul class="pricing-features">
+        <li class="feat-yes"><i data-lucide="check"></i> Up to 500 students</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Parent &amp; Administrator portals</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking &amp; invoices</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Attendance records</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Advanced announcements</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Grade analytics &amp; reports</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Bulk bill sending</li>
+        <li class="feat-no"><i data-lucide="x"></i> SMS &amp; email notifications</li>
+        <li class="feat-no"><i data-lucide="x"></i> Priority support</li>
+      </ul>
+      <a href="signup.html" class="pricing-cta pricing-cta-solid">Start Free Trial</a>
+    </div>
+
+    <!-- ADVANCED -->
+    <div class="pricing-card">
+      <div class="pricing-card-top">
+        <div class="pricing-plan-icon pricing-icon-adv"><i data-lucide="shield-check"></i></div>
+        <div class="pricing-plan-name">Advanced</div>
+        <div class="pricing-plan-desc">For large institutions that need the full platform with premium support.</div>
+        <div class="pricing-price-row">
+          <span class="pricing-currency">₵</span>
+          <span class="pricing-amount" data-monthly="50" data-annual="40">50</span>
+          <span class="pricing-per">/mo</span>
+        </div>
+        <div class="pricing-billed-note" id="billedNoteAdv">Billed monthly</div>
+      </div>
+      <ul class="pricing-features">
+        <li class="feat-yes"><i data-lucide="check"></i> Unlimited students</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Parent &amp; Administrator portals</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Fee tracking &amp; invoices</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Attendance records</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Advanced announcements</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Grade analytics &amp; reports</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Bulk bill sending</li>
+        <li class="feat-yes"><i data-lucide="check"></i> SMS &amp; email notifications</li>
+        <li class="feat-yes"><i data-lucide="check"></i> Priority support &amp; onboarding</li>
+      </ul>
+      <a href="signup.html" class="pricing-cta pricing-cta-outline">Start Free Trial</a>
+    </div>
+
+  </div>
+
+  <p class="pricing-footnote">All prices in GHS (Ghana Cedis). School pricing available for multi-campus setups. <a href="contact.html">Contact us</a> for a custom quote.</p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Simplify School Management?</h2>
+  <p>Join hundreds of parents and administrators already using Acaxel.</p>
+  <div class="cta-actions">
+    <a href="signup.html" class="btn-white btn-lg">Create Free Account</a>
+    <a href="login.html" class="btn-ghost btn-lg cta-ghost">Sign In</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+
+  <!-- Top accent bar -->
+  <div class="footer-top-bar">
+    <div class="footer-top-inner">
+      <div class="footer-top-item">
+        <i data-lucide="phone"></i>
+        <span>+233 55 6924 358</span>
+      </div>
+      <div class="footer-top-divider"></div>
+      <div class="footer-top-item">
+        <i data-lucide="mail"></i>
+        <span>info@acaxel.edu.gh</span>
+      </div>
+      <div class="footer-top-divider"></div>
+      <div class="footer-top-item">
+        <i data-lucide="map-pin"></i>
+        <span>14 Academy Road, Accra, Ghana</span>
+      </div>
+      <div class="footer-top-divider"></div>
+      <div class="footer-top-item">
+        <i data-lucide="clock"></i>
+        <span>Mon &ndash; Fri &nbsp;7:30 AM &ndash; 4:00 PM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main footer body -->
+  <div class="footer-body">
+    <div class="footer-grid">
+
+      <!-- Brand + about -->
+      <div class="footer-brand">
+        <div class="footer-logo-row">
+          <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
+          <span class="footer-school-name">Acaxel School</span>
+        </div>
+        <p class="footer-tagline">Nurturing Excellence, Building Character.</p>
+        <p class="footer-desc">Acaxel is a forward-thinking institution dedicated to academic excellence, moral development, and the holistic growth of every student.</p>
+        <div class="footer-accreditation">
+          <span class="footer-badge"><i data-lucide="shield-check"></i> GES Accredited</span>
+          <span class="footer-badge"><i data-lucide="award"></i> ISO 9001:2015</span>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="features.html"><i data-lucide="chevron-right"></i> Features</a></li>
+          <li><a href="portals.html"><i data-lucide="chevron-right"></i> Portals</a></li>
+          <li><a href="pricing.html"><i data-lucide="chevron-right"></i> Pricing</a></li>
+          <li><a href="about.html"><i data-lucide="chevron-right"></i> About</a></li>
+          <li><a href="login.html"><i data-lucide="chevron-right"></i> Sign In</a></li>
+          <li><a href="contact.html"><i data-lucide="chevron-right"></i> Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Academic Info -->
+      <div class="footer-col">
+        <h5>Academic</h5>
+        <ul>
+          <li><a href="#"><i data-lucide="chevron-right"></i> Academic Calendar</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> Admission Process</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> School Timetable</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> Fee Schedule</a></li>
+          <li><a href="#"><i data-lucide="chevron-right"></i> Exam Results</a></li>
+        </ul>
+      </div>
+
+      <!-- Term Dates -->
+      <div class="footer-col">
+        <h5>Current Term</h5>
+        <div class="footer-term-card">
+          <div class="footer-term-label">2025/2026 Academic Year</div>
+          <div class="footer-term-row">
+            <span class="footer-term-badge footer-term-done">Term 1</span>
+            <span class="footer-term-dates">Sep 9 &ndash; Dec 13, 2025</span>
+          </div>
+          <div class="footer-term-row">
+            <span class="footer-term-badge footer-term-active">Term 2</span>
+            <span class="footer-term-dates">Jan 13 &ndash; Apr 11, 2026</span>
+          </div>
+          <div class="footer-term-row">
+            <span class="footer-term-badge footer-term-upcoming">Term 3</span>
+            <span class="footer-term-dates">Apr 27 &ndash; Jul 18, 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <span>&copy; 2026 Acaxel School. All rights reserved.</span>
+    </div>
+    <div class="footer-bottom-center">
+      <a href="#">Privacy Policy</a>
+      <span class="footer-dot">&middot;</span>
+      <a href="#">Terms of Use</a>
+      <span class="footer-dot">&middot;</span>
+      <a href="#">Safeguarding Policy</a>
+      <span class="footer-dot">&middot;</span>
+      <a href="#">Accessibility</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" class="footer-social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+      <a href="#" class="footer-social-btn" aria-label="Twitter/X"><i data-lucide="twitter"></i></a>
+      <a href="#" class="footer-social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+      <a href="#" class="footer-social-btn" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+    </div>
+  </div>
+
+</footer>
+
+<script src="js/main.js"></script>
+<script>lucide.createIcons();</script>
+<script>
+(function(){
+  var video = document.getElementById('heroVideo');
+  var src = 'https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8';
+  if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = src;
+  } else if (Hls.isSupported()) {
+    var hls = new Hls({ autoStartLoad: true, startLevel: -1 });
+    hls.loadSource(src);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function() { video.play(); });
+  }
+})();
+</script>
+</body>
+</html>

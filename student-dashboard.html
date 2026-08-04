@@ -1,0 +1,1323 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard — Acaxel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="sidebar-brand">
+      <img src="images/Logo/logo.png" class="sidebar-logo-img" alt="Acaxel Logo" />
+      <span class="sidebar-name">Acaxel</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Menu</div>
+      <button class="nav-item active" onclick="switchTab('overview',this)">
+        <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
+        <span class="nav-item-label">Overview</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('grades',this)">
+        <span class="nav-icon"><i data-lucide="bar-chart-2"></i></span>
+        <span class="nav-item-label">My Grades</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('attendance',this)">
+        <span class="nav-icon"><i data-lucide="calendar-check"></i></span>
+        <span class="nav-item-label">Attendance</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('timetable',this)">
+        <span class="nav-icon"><i data-lucide="clock"></i></span>
+        <span class="nav-item-label">Timetable</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('assignments',this)">
+        <span class="nav-icon"><i data-lucide="file-text"></i></span>
+        <span class="nav-item-label">Assignments</span>
+        <span class="nav-badge">3</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('fees',this)">
+        <span class="nav-icon"><i data-lucide="credit-card"></i></span>
+        <span class="nav-item-label">Fee Status</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('messages',this)">
+        <span class="nav-icon"><i data-lucide="message-square"></i></span>
+        <span class="nav-item-label">Messages</span>
+        <span class="nav-badge">2</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('clockin',this)">
+        <span class="nav-icon"><i data-lucide="scan-line"></i></span>
+        <span class="nav-item-label">Clock-In</span>
+        <span class="nav-badge" id="stuCiStatusBadge" style="display:none;">✓</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('support',this)">
+        <span class="nav-icon"><i data-lucide="life-buoy"></i></span>
+        <span class="nav-item-label">Support</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('profile',this)">
+        <span class="nav-icon"><i data-lucide="user"></i></span>
+        <span class="nav-item-label">My Profile</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn sidebar-collapse-btn--bottom" onclick="toggleSidebar()" aria-label="Collapse sidebar">
+        <i data-lucide="chevron-left"></i>
+        <span class="sidebar-collapse-label">Collapse</span>
+      </button>
+      <button class="sidebar-logout-btn" onclick="logout()">
+        <i data-lucide="log-out"></i>
+        <span class="sidebar-logout-label">Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MOBILE SIDEBAR OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- TOP NAV -->
+  <header class="dash-topnav">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="sidebar-hamburger" onclick="toggleSidebar()" aria-label="Open menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+    <div class="dash-search">
+      <span><i data-lucide="search"></i></span>
+      <input type="text" placeholder="Search subjects, assignments..." />
+    </div>
+    <div class="dash-topnav-right">
+      <button class="notif-btn" onclick="toggleNotif()" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+        <span class="notif-count" id="notifCount">2</span>
+      </button>
+      <div class="user-chip">
+        <div class="user-avatar" id="topnavAvatar">K</div>
+        <div>
+          <div class="user-chip-name" id="topnavName">Kwame Mensah</div>
+          <div class="user-chip-role">JSS 2A &middot; Student</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NOTIFICATION BACKDROP -->
+  <div class="notif-backdrop" id="notifBackdrop" onclick="closeNotif()"></div>
+
+  <!-- NOTIFICATION PANEL -->
+  <div class="notif-panel" id="notifPanel">
+    <div class="notif-panel-header">
+      <span class="notif-panel-title">Notifications</span>
+      <div class="notif-panel-actions">
+        <button class="notif-mark-all" onclick="markAllRead()">Mark all read</button>
+        <button class="notif-close-btn" onclick="closeNotif()"><i data-lucide="x"></i></button>
+      </div>
+    </div>
+    <div class="notif-tabs">
+      <button class="notif-tab active" onclick="switchNotifTab('all', this)">All <span class="notif-tab-badge" id="notifBadgeAll">2</span></button>
+      <button class="notif-tab" onclick="switchNotifTab('school', this)">School <span class="notif-tab-badge" id="notifBadgeSchool">1</span></button>
+      <button class="notif-tab" onclick="switchNotifTab('messages', this)">Messages <span class="notif-tab-badge" id="notifBadgeMsgs">1</span></button>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-item unread" data-category="school" onclick="markRead(this)">
+        <div class="notif-unread-dot"></div>
+        <div class="notif-item-icon notif-icon-announce"><i data-lucide="megaphone"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">Mid-Term Exams &mdash; 17 Feb</div>
+          <div class="notif-item-text">All JSS students should prepare for mid-term assessments starting Monday 17th February.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Today, 8:00 AM</div>
+        </div>
+      </div>
+      <div class="notif-item unread" data-category="messages" onclick="markRead(this)">
+        <div class="notif-unread-dot"></div>
+        <div class="notif-item-icon notif-icon-msg"><i data-lucide="message-square"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">New message from Mr. Asare</div>
+          <div class="notif-item-text">&ldquo;Your mid-term score has been uploaded. You scored 42/50 &mdash; a very solid performance...&rdquo;</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Today, 9:10 AM</div>
+        </div>
+      </div>
+      <div class="notif-item" data-category="school" onclick="markRead(this)">
+        <div class="notif-item-icon notif-icon-grade"><i data-lucide="bar-chart-2"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">Term 2 Report Card Available</div>
+          <div class="notif-item-text">Your Term 2 grades have been updated. Current average: 78.6% &mdash; 3rd in class.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Yesterday, 3:00 PM</div>
+        </div>
+      </div>
+      <div class="notif-item" data-category="school" onclick="markRead(this)">
+        <div class="notif-item-icon notif-icon-announce"><i data-lucide="calendar"></i></div>
+        <div class="notif-item-body">
+          <div class="notif-item-title">Science Fair Registration Closes Friday</div>
+          <div class="notif-item-text">Interested students should see Mr. Boateng before end of day Friday to register.</div>
+          <div class="notif-item-time"><i data-lucide="clock"></i> Yesterday, 3:15 PM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="dash-main">
+  <div class="dash-content">
+
+    <!-- ══ OVERVIEW ══ -->
+    <div class="dash-tab active" id="tab-overview">
+
+      <!-- HERO BANNER -->
+      <div class="stu-hero-banner">
+        <div class="stu-hero-left">
+          <div class="stu-hero-avatar" id="heroAvatar">K</div>
+          <div>
+            <div class="stu-hero-greeting">Good morning, <span id="greetName">Kwame</span> 👋</div>
+            <div class="stu-hero-sub">JSS 2A &nbsp;·&nbsp; Student ID: AX/2024/042 &nbsp;·&nbsp; Volta House</div>
+            <div class="stu-hero-tags">
+              <span class="stu-hero-tag green"><i data-lucide="check-circle"></i> Term 2 Fees Paid</span>
+              <span class="stu-hero-tag blue"><i data-lucide="award"></i> 3rd in Class</span>
+              <span class="stu-hero-tag amber"><i data-lucide="file-text"></i> 3 Assignments Due</span>
+            </div>
+          </div>
+        </div>
+        <div class="stu-hero-right">
+          <div class="stu-term-card">
+            <div class="stu-term-label">Current Term</div>
+            <div class="stu-term-name">Term 2 — 2025/2026</div>
+            <div class="stu-term-dates">13 Jan – 11 Apr 2026</div>
+            <div class="stu-term-progress-wrap">
+              <div class="stu-term-progress-bar"><div class="stu-term-progress-fill" style="width:58%"></div></div>
+              <span class="stu-term-pct">58% complete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stu-stat-row">
+        <div class="stu-stat-card" onclick="switchTab('grades', document.querySelector('[onclick*=grades]'))">
+          <div class="stu-stat-icon" style="background:#f0f0ff;"><i data-lucide="bar-chart-2" style="stroke:#6366f1;"></i></div>
+          <div class="stu-stat-body">
+            <div class="stu-stat-val">78.6%</div>
+            <div class="stu-stat-lbl">Average Grade</div>
+            <div class="stu-stat-pill blue">B+ Overall</div>
+          </div>
+        </div>
+        <div class="stu-stat-card" onclick="switchTab('attendance', document.querySelector('[onclick*=attendance]'))">
+          <div class="stu-stat-icon" style="background:#f0fdf4;"><i data-lucide="calendar-check" style="stroke:#16a34a;"></i></div>
+          <div class="stu-stat-body">
+            <div class="stu-stat-val">94%</div>
+            <div class="stu-stat-lbl">Attendance Rate</div>
+            <div class="stu-stat-pill green">47 / 50 days</div>
+          </div>
+        </div>
+        <div class="stu-stat-card" onclick="switchTab('assignments', document.querySelector('[onclick*=assignments]'))">
+          <div class="stu-stat-icon" style="background:#fffbeb;"><i data-lucide="file-text" style="stroke:#d97706;"></i></div>
+          <div class="stu-stat-body">
+            <div class="stu-stat-val">3</div>
+            <div class="stu-stat-lbl">Pending Assignments</div>
+            <div class="stu-stat-pill amber">Due this week</div>
+          </div>
+        </div>
+        <div class="stu-stat-card" onclick="switchTab('grades', document.querySelector('[onclick*=grades]'))">
+          <div class="stu-stat-icon" style="background:#f5f3ff;"><i data-lucide="award" style="stroke:#7c3aed;"></i></div>
+          <div class="stu-stat-body">
+            <div class="stu-stat-val">3rd</div>
+            <div class="stu-stat-lbl">Class Position</div>
+            <div class="stu-stat-pill purple">Out of 32</div>
+          </div>
+        </div>
+        <div class="stu-stat-card" onclick="switchTab('fees', document.querySelector('[onclick*=fees]'))">
+          <div class="stu-stat-icon" style="background:#f0fdf4;"><i data-lucide="credit-card" style="stroke:#16a34a;"></i></div>
+          <div class="stu-stat-body">
+            <div class="stu-stat-val">₵0</div>
+            <div class="stu-stat-lbl">Outstanding Fees</div>
+            <div class="stu-stat-pill green">Fully Paid</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK ACTIONS -->
+      <div class="stu-quick-row">
+        <button class="stu-quick-btn" onclick="switchTab('grades', document.querySelector('[onclick*=grades]'))">
+          <div class="stu-quick-icon" style="background:#f0f0ff;"><i data-lucide="bar-chart-2" style="stroke:#6366f1;"></i></div>
+          <span>My Grades</span>
+        </button>
+        <button class="stu-quick-btn" onclick="switchTab('timetable', document.querySelector('[onclick*=timetable]'))">
+          <div class="stu-quick-icon" style="background:#fff7ed;"><i data-lucide="clock" style="stroke:#ea580c;"></i></div>
+          <span>Timetable</span>
+        </button>
+        <button class="stu-quick-btn" onclick="switchTab('assignments', document.querySelector('[onclick*=assignments]'))">
+          <div class="stu-quick-icon" style="background:#fffbeb;"><i data-lucide="file-text" style="stroke:#d97706;"></i></div>
+          <span>Assignments</span>
+          <span class="stu-quick-badge">3</span>
+        </button>
+        <button class="stu-quick-btn" onclick="switchTab('attendance', document.querySelector('[onclick*=attendance]'))">
+          <div class="stu-quick-icon" style="background:#f0fdf4;"><i data-lucide="calendar-check" style="stroke:#16a34a;"></i></div>
+          <span>Attendance</span>
+        </button>
+        <button class="stu-quick-btn" onclick="switchTab('messages', document.querySelector('[onclick*=messages]'))">
+          <div class="stu-quick-icon" style="background:#fdf4ff;"><i data-lucide="message-square" style="stroke:#9333ea;"></i></div>
+          <span>Messages</span>
+          <span class="stu-quick-badge">2</span>
+        </button>
+        <button class="stu-quick-btn" onclick="switchTab('fees', document.querySelector('[onclick*=fees]'))">
+          <div class="stu-quick-icon" style="background:#f0fdf4;"><i data-lucide="credit-card" style="stroke:#16a34a;"></i></div>
+          <span>Fee Status</span>
+        </button>
+      </div>
+
+      <!-- BOTTOM ROW: SUBJECTS + TODAY + ANNOUNCEMENTS -->
+      <div class="stu-bottom-grid">
+
+        <!-- SUBJECT PERFORMANCE -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>Subject Performance</h3>
+            <button class="dash-card-link" onclick="switchTab('grades', document.querySelector('[onclick*=grades]'))">Full Report &rarr;</button>
+          </div>
+          <div class="subject-grades-list">
+            <div class="subject-grade-row"><div class="subject-info"><span class="subject-name">ICT</span><span class="subject-teacher">Mr. Larbi</span></div><div class="subject-bar-wrap"><div class="subject-bar" style="width:91%"></div></div><div class="subject-score grade-a">91</div></div>
+            <div class="subject-grade-row"><div class="subject-info"><span class="subject-name">Mathematics</span><span class="subject-teacher">Mr. Asare</span></div><div class="subject-bar-wrap"><div class="subject-bar" style="width:88%"></div></div><div class="subject-score grade-a">88</div></div>
+            <div class="subject-grade-row"><div class="subject-info"><span class="subject-name">Basic Science</span><span class="subject-teacher">Mr. Boateng</span></div><div class="subject-bar-wrap"><div class="subject-bar" style="width:82%"></div></div><div class="subject-score grade-a">82</div></div>
+            <div class="subject-grade-row"><div class="subject-info"><span class="subject-name">English</span><span class="subject-teacher">Mrs. Owusu</span></div><div class="subject-bar-wrap"><div class="subject-bar" style="width:76%"></div></div><div class="subject-score grade-b">76</div></div>
+            <div class="subject-grade-row"><div class="subject-info"><span class="subject-name">Social Studies</span><span class="subject-teacher">Mrs. Adu</span></div><div class="subject-bar-wrap"><div class="subject-bar" style="width:70%"></div></div><div class="subject-score grade-b">70</div></div>
+            <div class="subject-grade-row"><div class="subject-info"><span class="subject-name">French</span><span class="subject-teacher">Mme. Tetteh</span></div><div class="subject-bar-wrap"><div class="subject-bar" style="width:65%;background:linear-gradient(90deg,#f59e0b,#f97316);"></div></div><div class="subject-score grade-c">65</div></div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+
+          <!-- TODAY'S CLASSES -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3>Today's Classes</h3>
+              <button class="dash-card-link" onclick="switchTab('timetable', document.querySelector('[onclick*=timetable]'))">Full Timetable &rarr;</button>
+            </div>
+            <div class="bs-calendar-strip" id="studentCalStrip">
+              <div class="bs-day-box" onclick="switchDay('student',0,this)"><span>M</span><div class="bs-date">26</div></div>
+              <div class="bs-day-box" onclick="switchDay('student',1,this)"><span>T</span><div class="bs-date">27</div></div>
+              <div class="bs-day-box" onclick="switchDay('student',2,this)"><span>W</span><div class="bs-date">28</div></div>
+              <div class="bs-day-box" onclick="switchDay('student',3,this)"><span>T</span><div class="bs-date">29</div></div>
+              <div class="bs-day-box" onclick="switchDay('student',4,this)"><span>F</span><div class="bs-date">30</div></div>
+            </div>
+            <div class="today-classes-list" id="studentScheduleList"></div>
+          </div>
+
+          <!-- ANNOUNCEMENTS -->
+          <div class="dash-card">
+            <div class="dash-card-header"><h3>Announcements</h3><span class="stu-unread-pill">2 new</span></div>
+            <div class="announcement-list">
+              <div class="announcement-item unread">
+                <div class="ann-dot"></div>
+                <div><div class="ann-title">Mid-term Exams — 17 Feb</div><div class="ann-body">All JSS students should prepare for mid-term assessments starting 17th February.</div><div class="ann-time">Today, 8:00 AM</div></div>
+              </div>
+              <div class="announcement-item unread">
+                <div class="ann-dot"></div>
+                <div><div class="ann-title">Science Fair — 24 Feb</div><div class="ann-body">Registration for the Annual Science Fair closes this Friday. See Mr. Boateng.</div><div class="ann-time">Yesterday, 3:15 PM</div></div>
+              </div>
+              <div class="announcement-item">
+                <div class="ann-dot read"></div>
+                <div><div class="ann-title">Library Hours Extended</div><div class="ann-body">Open until 5:00 PM on weekdays during exam season.</div><div class="ann-time">Mon, Jan 20</div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ GRADES ══ -->
+    <div class="dash-tab" id="tab-grades">
+      <div class="dash-page-header">
+        <div><h1 class="dash-page-title">My Grades</h1><p class="dash-page-sub">Term 2 · JSS 2A · 2025/2026</p></div>
+        <div class="dash-header-actions"><span class="dash-term-badge">In Progress</span></div>
+      </div>
+
+      <!-- GRADE SUMMARY CARDS -->
+      <div class="stu-stat-row" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stu-stat-card">
+          <div class="stu-stat-icon" style="background:#f0f0ff;"><i data-lucide="trending-up" style="stroke:#6366f1;"></i></div>
+          <div class="stu-stat-body"><div class="stu-stat-val">78.6%</div><div class="stu-stat-lbl">Overall Average</div><div class="stu-stat-pill blue">B+</div></div>
+        </div>
+        <div class="stu-stat-card">
+          <div class="stu-stat-icon" style="background:#f5f3ff;"><i data-lucide="award" style="stroke:#7c3aed;"></i></div>
+          <div class="stu-stat-body"><div class="stu-stat-val">3rd</div><div class="stu-stat-lbl">Class Position</div><div class="stu-stat-pill purple">of 32 students</div></div>
+        </div>
+        <div class="stu-stat-card">
+          <div class="stu-stat-icon" style="background:#f0fdf4;"><i data-lucide="star" style="stroke:#16a34a;"></i></div>
+          <div class="stu-stat-body"><div class="stu-stat-val">ICT</div><div class="stu-stat-lbl">Best Subject</div><div class="stu-stat-pill green">91 / 100</div></div>
+        </div>
+        <div class="stu-stat-card">
+          <div class="stu-stat-icon" style="background:#fffbeb;"><i data-lucide="alert-circle" style="stroke:#d97706;"></i></div>
+          <div class="stu-stat-body"><div class="stu-stat-val">French</div><div class="stu-stat-lbl">Needs Attention</div><div class="stu-stat-pill amber">65 / 100</div></div>
+        </div>
+      </div>
+
+      <!-- TERM SELECTOR -->
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h3>Term 2 Report Card</h3>
+          <div style="display:flex;gap:8px;">
+            <button class="stu-term-tab active" onclick="selectTerm(this,'t2')">Term 2</button>
+            <button class="stu-term-tab" onclick="selectTerm(this,'t1')">Term 1</button>
+          </div>
+        </div>
+
+        <!-- TERM 2 -->
+        <div id="grades-t2">
+          <table class="dash-table">
+            <thead><tr><th>Subject</th><th>Teacher</th><th>CA1&nbsp;(20)</th><th>CA2&nbsp;(20)</th><th>Exam&nbsp;(60)</th><th>Total</th><th>Grade</th><th>Remark</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Mathematics</strong></td><td>Mr. Asare</td><td>18</td><td>18</td><td>52</td><td><strong>88</strong></td><td><span class="grade-badge grade-a">A</span></td><td>Excellent</td></tr>
+              <tr><td><strong>English Language</strong></td><td>Mrs. Owusu</td><td>15</td><td>15</td><td>46</td><td><strong>76</strong></td><td><span class="grade-badge grade-b">B+</span></td><td>Good</td></tr>
+              <tr><td><strong>Basic Science</strong></td><td>Mr. Boateng</td><td>17</td><td>17</td><td>48</td><td><strong>82</strong></td><td><span class="grade-badge grade-a">A&minus;</span></td><td>Very Good</td></tr>
+              <tr><td><strong>Social Studies</strong></td><td>Mrs. Adu</td><td>14</td><td>14</td><td>42</td><td><strong>70</strong></td><td><span class="grade-badge grade-b">B</span></td><td>Good</td></tr>
+              <tr><td><strong>ICT</strong></td><td>Mr. Larbi</td><td>19</td><td>19</td><td>53</td><td><strong>91</strong></td><td><span class="grade-badge grade-a">A</span></td><td>Excellent</td></tr>
+              <tr><td><strong>French</strong></td><td>Mme. Tetteh</td><td>13</td><td>12</td><td>40</td><td><strong>65</strong></td><td><span class="grade-badge grade-c">C</span></td><td>Average</td></tr>
+              <tr><td><strong>Agricultural Sci.</strong></td><td>Mr. Nkrumah</td><td>16</td><td>16</td><td>46</td><td><strong>78</strong></td><td><span class="grade-badge grade-b">B+</span></td><td>Good</td></tr>
+              <tr><td><strong>Physical Education</strong></td><td>Coach Mensah</td><td colspan="3" style="color:var(--text-light);font-size:0.82rem;">Continuous Assessment</td><td>—</td><td><span class="grade-badge" style="background:#f1f5f9;color:#64748b;">Pass</span></td><td>Satisfactory</td></tr>
+            </tbody>
+          </table>
+          <div class="grades-footer-row">
+            <div class="grades-footer-item"><span>Total Score</span><strong>550 / 700</strong></div>
+            <div class="grades-footer-item"><span>Average</span><strong style="color:#6366f1;">78.6%</strong></div>
+            <div class="grades-footer-item"><span>Class Position</span><strong style="color:var(--accent);">3rd / 32</strong></div>
+            <div class="grades-footer-item"><span>Teacher's Remark</span><strong>Very Good — Keep it up!</strong></div>
+          </div>
+        </div>
+
+        <!-- TERM 1 (hidden by default) -->
+        <div id="grades-t1" style="display:none;">
+          <table class="dash-table">
+            <thead><tr><th>Subject</th><th>Teacher</th><th>CA1&nbsp;(20)</th><th>CA2&nbsp;(20)</th><th>Exam&nbsp;(60)</th><th>Total</th><th>Grade</th><th>Remark</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Mathematics</strong></td><td>Mr. Asare</td><td>17</td><td>16</td><td>50</td><td><strong>83</strong></td><td><span class="grade-badge grade-a">A&minus;</span></td><td>Very Good</td></tr>
+              <tr><td><strong>English Language</strong></td><td>Mrs. Owusu</td><td>14</td><td>15</td><td>44</td><td><strong>73</strong></td><td><span class="grade-badge grade-b">B</span></td><td>Good</td></tr>
+              <tr><td><strong>Basic Science</strong></td><td>Mr. Boateng</td><td>16</td><td>17</td><td>47</td><td><strong>80</strong></td><td><span class="grade-badge grade-a">A&minus;</span></td><td>Very Good</td></tr>
+              <tr><td><strong>Social Studies</strong></td><td>Mrs. Adu</td><td>13</td><td>14</td><td>40</td><td><strong>67</strong></td><td><span class="grade-badge grade-b">B&minus;</span></td><td>Good</td></tr>
+              <tr><td><strong>ICT</strong></td><td>Mr. Larbi</td><td>18</td><td>19</td><td>50</td><td><strong>87</strong></td><td><span class="grade-badge grade-a">A</span></td><td>Excellent</td></tr>
+              <tr><td><strong>French</strong></td><td>Mme. Tetteh</td><td>12</td><td>11</td><td>38</td><td><strong>61</strong></td><td><span class="grade-badge grade-c">C</span></td><td>Average</td></tr>
+              <tr><td><strong>Agricultural Sci.</strong></td><td>Mr. Nkrumah</td><td>15</td><td>16</td><td>44</td><td><strong>75</strong></td><td><span class="grade-badge grade-b">B</span></td><td>Good</td></tr>
+              <tr><td><strong>Physical Education</strong></td><td>Coach Mensah</td><td colspan="3" style="color:var(--text-light);font-size:0.82rem;">Continuous Assessment</td><td>—</td><td><span class="grade-badge" style="background:#f1f5f9;color:#64748b;">Pass</span></td><td>Satisfactory</td></tr>
+            </tbody>
+          </table>
+          <div class="grades-footer-row">
+            <div class="grades-footer-item"><span>Total Score</span><strong>526 / 700</strong></div>
+            <div class="grades-footer-item"><span>Average</span><strong style="color:#6366f1;">75.1%</strong></div>
+            <div class="grades-footer-item"><span>Class Position</span><strong style="color:var(--accent);">5th / 32</strong></div>
+            <div class="grades-footer-item"><span>Teacher's Remark</span><strong>Good — Room to improve.</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ATTENDANCE ══ -->
+    <div class="dash-tab" id="tab-attendance">
+      <div class="dash-page-header">
+        <div><h1 class="dash-page-title">Attendance</h1><p class="dash-page-sub">Term 2 · JSS 2A · 2025/2026</p></div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stu-stat-row" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#f0fdf4;"><i data-lucide="check-circle" style="stroke:#16a34a;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">47</div><div class="stu-stat-lbl">Days Present</div><div class="stu-stat-pill green">Term 2</div></div></div>
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#fef2f2;"><i data-lucide="x-circle" style="stroke:#dc2626;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">2</div><div class="stu-stat-lbl">Days Absent</div><div class="stu-stat-pill red">Excused</div></div></div>
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#fffbeb;"><i data-lucide="clock" style="stroke:#d97706;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">1</div><div class="stu-stat-lbl">Late Arrivals</div><div class="stu-stat-pill amber">This term</div></div></div>
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#f0f0ff;"><i data-lucide="percent" style="stroke:#6366f1;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">94%</div><div class="stu-stat-lbl">Attendance Rate</div><div class="stu-stat-pill blue">Above target</div></div></div>
+      </div>
+
+      <!-- VISUAL RING + LOG -->
+      <div class="att-layout">
+
+        <!-- CIRCULAR SUMMARY -->
+        <div class="dash-card att-summary-card">
+          <div class="dash-card-header"><h3>Term 2 Summary</h3></div>
+          <div class="att-donut-wrap">
+            <svg viewBox="0 0 120 120" class="att-donut">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#e2e8f0" stroke-width="12"/>
+              <circle class="donut-progress" cx="60" cy="60" r="50" fill="none" stroke="#16a34a" stroke-width="12"
+                stroke-dasharray="296 314" stroke-dashoffset="78" stroke-linecap="round"/>
+            </svg>
+            <div class="att-donut-label"><span class="att-donut-pct">94%</span><span class="att-donut-sub">Present</span></div>
+          </div>
+          <div class="att-legend">
+            <div class="att-legend-row"><span class="att-legend-dot" style="background:#16a34a;"></span><span>Present</span><strong>47</strong></div>
+            <div class="att-legend-row"><span class="att-legend-dot" style="background:#dc2626;"></span><span>Absent</span><strong>2</strong></div>
+            <div class="att-legend-row"><span class="att-legend-dot" style="background:#f59e0b;"></span><span>Late</span><strong>1</strong></div>
+            <div class="att-legend-row" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);"><span>Total School Days</span><strong>50</strong></div>
+          </div>
+        </div>
+
+        <!-- FULL LOG -->
+        <div class="dash-card" style="flex:1;">
+          <div class="dash-card-header"><h3>Attendance Log — January & February 2026</h3></div>
+          <table class="dash-table">
+            <thead><tr><th>Date</th><th>Day</th><th>Status</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 13 Jan</td><td>Monday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Tue 14 Jan</td><td>Tuesday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Wed 15 Jan</td><td>Wednesday</td><td><span class="status-badge absent">Absent</span></td><td>Sick — medical note submitted</td></tr>
+              <tr><td>Thu 16 Jan</td><td>Thursday</td><td><span class="status-badge absent">Absent</span></td><td>Sick — medical note submitted</td></tr>
+              <tr><td>Fri 17 Jan</td><td>Friday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Mon 20 Jan</td><td>Monday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Tue 21 Jan</td><td>Tuesday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Wed 22 Jan</td><td>Wednesday</td><td><span class="status-badge late">Late</span></td><td>Arrived 8:24 AM</td></tr>
+              <tr><td>Thu 23 Jan</td><td>Thursday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Fri 24 Jan</td><td>Friday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Mon 27 Jan</td><td>Monday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Tue 28 Jan</td><td>Tuesday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Wed 29 Jan</td><td>Wednesday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Thu 30 Jan</td><td>Thursday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Mon 3 Feb</td><td>Monday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Tue 4 Feb</td><td>Tuesday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Wed 5 Feb</td><td>Wednesday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Thu 6 Feb</td><td>Thursday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+              <tr><td>Fri 7 Feb</td><td>Friday</td><td><span class="status-badge present">Present</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TIMETABLE ══ -->
+    <div class="dash-tab" id="tab-timetable">
+      <div class="dash-page-header">
+        <div><h1 class="dash-page-title">Timetable</h1><p class="dash-page-sub">JSS 2A · Term 2 Weekly Schedule</p></div>
+        <div class="dash-header-actions"><span class="dash-term-badge">Week of 10 Feb 2026</span></div>
+      </div>
+      <div class="dash-card">
+        <table class="dash-table timetable-table">
+          <thead>
+            <tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="time-cell">7:30 – 8:00</td><td colspan="5" style="text-align:center;color:var(--text-mid);font-size:0.82rem;">Morning Assembly</td></tr>
+            <tr><td class="time-cell">8:00 – 8:40</td><td class="tt-cell accent-tt">Mathematics<br/><span>Mr. Asare</span></td><td class="tt-cell">English<br/><span>Mrs. Owusu</span></td><td class="tt-cell">ICT<br/><span>Mr. Larbi</span></td><td class="tt-cell">Mathematics<br/><span>Mr. Asare</span></td><td class="tt-cell">Social Studies<br/><span>Mrs. Adu</span></td></tr>
+            <tr><td class="time-cell">8:40 – 9:20</td><td class="tt-cell">English<br/><span>Mrs. Owusu</span></td><td class="tt-cell accent-tt">Mathematics<br/><span>Mr. Asare</span></td><td class="tt-cell">Basic Science<br/><span>Mr. Boateng</span></td><td class="tt-cell">French<br/><span>Mme. Tetteh</span></td><td class="tt-cell accent-tt">Mathematics<br/><span>Mr. Asare</span></td></tr>
+            <tr><td class="time-cell">9:20 – 10:00</td><td class="tt-cell">Basic Science<br/><span>Mr. Boateng</span></td><td class="tt-cell">ICT<br/><span>Mr. Larbi</span></td><td class="tt-cell">Social Studies<br/><span>Mrs. Adu</span></td><td class="tt-cell">English<br/><span>Mrs. Owusu</span></td><td class="tt-cell">Basic Science<br/><span>Mr. Boateng</span></td></tr>
+            <tr><td class="time-cell break-row">10:00 – 10:20</td><td colspan="5" class="break-row" style="text-align:center;color:var(--text-mid);font-size:0.82rem;">Break</td></tr>
+            <tr><td class="time-cell">10:20 – 11:00</td><td class="tt-cell">Social Studies<br/><span>Mrs. Adu</span></td><td class="tt-cell">Agric. Sci.<br/><span>Mr. Nkrumah</span></td><td class="tt-cell">English<br/><span>Mrs. Owusu</span></td><td class="tt-cell">ICT<br/><span>Mr. Larbi</span></td><td class="tt-cell">French<br/><span>Mme. Tetteh</span></td></tr>
+            <tr><td class="time-cell">11:00 – 11:40</td><td class="tt-cell">French<br/><span>Mme. Tetteh</span></td><td class="tt-cell">Basic Science<br/><span>Mr. Boateng</span></td><td class="tt-cell">Agric. Sci.<br/><span>Mr. Nkrumah</span></td><td class="tt-cell">Agric. Sci.<br/><span>Mr. Nkrumah</span></td><td class="tt-cell">ICT<br/><span>Mr. Larbi</span></td></tr>
+            <tr><td class="time-cell">11:40 – 12:20</td><td class="tt-cell">ICT<br/><span>Mr. Larbi</span></td><td class="tt-cell">French<br/><span>Mme. Tetteh</span></td><td class="tt-cell accent-tt">Mathematics<br/><span>Mr. Asare</span></td><td class="tt-cell">Basic Science<br/><span>Mr. Boateng</span></td><td class="tt-cell">Agric. Sci.<br/><span>Mr. Nkrumah</span></td></tr>
+            <tr><td class="time-cell break-row">12:20 – 1:00</td><td colspan="5" class="break-row" style="text-align:center;color:var(--text-mid);font-size:0.82rem;">Lunch Break</td></tr>
+            <tr><td class="time-cell">1:00 – 1:40</td><td class="tt-cell">Agric. Sci.<br/><span>Mr. Nkrumah</span></td><td class="tt-cell">Social Studies<br/><span>Mrs. Adu</span></td><td class="tt-cell">French<br/><span>Mme. Tetteh</span></td><td class="tt-cell">P.E.<br/><span>Coach Mensah</span></td><td class="tt-cell">English<br/><span>Mrs. Owusu</span></td></tr>
+            <tr><td class="time-cell">1:40 – 2:20</td><td class="tt-cell">P.E.<br/><span>Coach Mensah</span></td><td class="tt-cell">P.E.<br/><span>Coach Mensah</span></td><td class="tt-cell">P.E.<br/><span>Coach Mensah</span></td><td class="tt-cell">Social Studies<br/><span>Mrs. Adu</span></td><td class="tt-cell">P.E.<br/><span>Coach Mensah</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ ASSIGNMENTS ══ -->
+    <div class="dash-tab" id="tab-assignments">
+      <div class="dash-page-header">
+        <div><h1 class="dash-page-title">Assignments</h1><p class="dash-page-sub">3 pending · Term 2</p></div>
+      </div>
+
+      <!-- ASSIGNMENT STAT STRIP -->
+      <div class="stu-stat-row" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#fffbeb;"><i data-lucide="clock" style="stroke:#d97706;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">3</div><div class="stu-stat-lbl">Pending</div><div class="stu-stat-pill amber">Due this week</div></div></div>
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#f0f0ff;"><i data-lucide="upload" style="stroke:#6366f1;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">2</div><div class="stu-stat-lbl">Submitted</div><div class="stu-stat-pill blue">Awaiting mark</div></div></div>
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#f0fdf4;"><i data-lucide="check-circle" style="stroke:#16a34a;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">1</div><div class="stu-stat-lbl">Graded</div><div class="stu-stat-pill green">34 / 40</div></div></div>
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#f5f3ff;"><i data-lucide="book-open" style="stroke:#7c3aed;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">6</div><div class="stu-stat-lbl">Total This Term</div><div class="stu-stat-pill purple">All subjects</div></div></div>
+      </div>
+
+      <!-- PENDING ASSIGNMENTS -->
+      <div class="dash-card">
+        <div class="dash-card-header"><h3>Pending Assignments</h3><span class="stu-unread-pill">3 due</span></div>
+        <div class="asgn-cards">
+          <div class="asgn-card urgent">
+            <div class="asgn-subject-tag" style="background:#fef2f2;color:#dc2626;">Mathematics</div>
+            <div class="asgn-title">Quadratic Equations — Exercise 4B</div>
+            <div class="asgn-meta"><i data-lucide="user"></i> Mr. Asare &nbsp;·&nbsp; <i data-lucide="calendar"></i> Due <strong>17 Feb 2026</strong></div>
+            <div class="asgn-desc">Complete all questions in Exercise 4B on page 112. Show all working clearly. Marks will be deducted for missing steps.</div>
+            <div class="asgn-actions"><button class="btn-sm wine"><i data-lucide="download"></i> Download</button><span class="status-badge pending">Pending</span></div>
+          </div>
+          <div class="asgn-card urgent">
+            <div class="asgn-subject-tag" style="background:#fff7ed;color:#ea580c;">Basic Science</div>
+            <div class="asgn-title">Photosynthesis Lab Report</div>
+            <div class="asgn-meta"><i data-lucide="user"></i> Mr. Boateng &nbsp;·&nbsp; <i data-lucide="calendar"></i> Due <strong>19 Feb 2026</strong></div>
+            <div class="asgn-desc">Write a full lab report on the photosynthesis experiment. Include: Introduction, Hypothesis, Method, Results, and Conclusion.</div>
+            <div class="asgn-actions"><button class="btn-sm wine"><i data-lucide="download"></i> Download</button><span class="status-badge pending">Pending</span></div>
+          </div>
+          <div class="asgn-card">
+            <div class="asgn-subject-tag" style="background:#f0f0ff;color:#6366f1;">English Language</div>
+            <div class="asgn-title">Comprehension Passage — Unit 6</div>
+            <div class="asgn-meta"><i data-lucide="user"></i> Mrs. Owusu &nbsp;·&nbsp; <i data-lucide="calendar"></i> Due <strong>21 Feb 2026</strong></div>
+            <div class="asgn-desc">Read the passage on page 78 and answer all comprehension questions. Write a 1-paragraph summary at the end.</div>
+            <div class="asgn-actions"><button class="btn-sm wine"><i data-lucide="download"></i> Download</button><span class="status-badge pending">Pending</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMITTED & GRADED -->
+      <div class="dash-card">
+        <div class="dash-card-header"><h3>Submitted &amp; Graded</h3></div>
+        <table class="dash-table">
+          <thead><tr><th>Subject</th><th>Title</th><th>Set By</th><th>Submitted</th><th>Status</th><th>Score</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>ICT</td><td>Spreadsheet Project — Budget Model</td><td>Mr. Larbi</td><td>9 Feb 2026</td><td><span class="status-badge submitted">Submitted</span></td><td>—</td><td><button class="btn-sm outline">View</button></td></tr>
+            <tr><td>French</td><td>Dialogue Writing — Unit 3</td><td>Mme. Tetteh</td><td>4 Feb 2026</td><td><span class="status-badge submitted">Submitted</span></td><td>—</td><td><button class="btn-sm outline">View</button></td></tr>
+            <tr><td>Social Studies</td><td>Ghana's Political History Essay</td><td>Mrs. Adu</td><td>27 Jan 2026</td><td><span class="status-badge graded">Graded</span></td><td><strong style="color:#16a34a;">34 / 40</strong></td><td><button class="btn-sm outline">View</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ FEES ══ -->
+    <div class="dash-tab" id="tab-fees">
+      <div class="dash-page-header">
+        <div><h1 class="dash-page-title">Fee Status</h1><p class="dash-page-sub">2025/2026 Academic Year</p></div>
+      </div>
+
+      <!-- FEE BANNER -->
+      <div class="fee-banner-card">
+        <div class="fee-banner-left">
+          <div class="fee-banner-icon"><i data-lucide="check-circle"></i></div>
+          <div>
+            <div class="fee-banner-title">All fees are up to date</div>
+            <div class="fee-banner-sub">Term 2 payment was received on 15 Jan 2026. Next payment due: <strong>Apr 27, 2026 (Term 3)</strong></div>
+          </div>
+        </div>
+        <div class="fee-banner-amount">
+          <div class="fee-banner-amount-label">Outstanding Balance</div>
+          <div class="fee-banner-amount-val">₵0.00</div>
+        </div>
+      </div>
+
+      <!-- FEE STAT CARDS -->
+      <div class="stu-stat-row" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#f0fdf4;"><i data-lucide="check-circle" style="stroke:#16a34a;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">₵90,000</div><div class="stu-stat-lbl">Total Paid (2 Terms)</div><div class="stu-stat-pill green">Cleared</div></div></div>
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#fef2f2;"><i data-lucide="alert-circle" style="stroke:#dc2626;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">₵0</div><div class="stu-stat-lbl">Outstanding</div><div class="stu-stat-pill green">None</div></div></div>
+        <div class="stu-stat-card"><div class="stu-stat-icon" style="background:#fffbeb;"><i data-lucide="calendar" style="stroke:#d97706;"></i></div><div class="stu-stat-body"><div class="stu-stat-val">₵45,000</div><div class="stu-stat-lbl">Term 3 Due</div><div class="stu-stat-pill amber">Apr 27, 2026</div></div></div>
+      </div>
+
+      <!-- PAYMENT HISTORY -->
+      <div class="dash-card">
+        <div class="dash-card-header"><h3>Payment History</h3></div>
+        <table class="dash-table">
+          <thead><tr><th>Term</th><th>Description</th><th>Billed</th><th>Paid</th><th>Date Paid</th><th>Status</th><th>Receipt</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Term 1</strong></td><td>Tuition Fee</td><td>₵40,000</td><td>₵40,000</td><td>10 Sep 2025</td>
+              <td><span class="status-badge present">Paid</span></td><td><button class="btn-sm outline">Download</button></td>
+            </tr>
+            <tr>
+              <td><strong>Term 1</strong></td><td>Levies &amp; Activities</td><td>₵5,000</td><td>₵5,000</td><td>10 Sep 2025</td>
+              <td><span class="status-badge present">Paid</span></td><td><button class="btn-sm outline">Download</button></td>
+            </tr>
+            <tr>
+              <td><strong>Term 2</strong></td><td>Tuition Fee</td><td>₵40,000</td><td>₵40,000</td><td>15 Jan 2026</td>
+              <td><span class="status-badge present">Paid</span></td><td><button class="btn-sm outline">Download</button></td>
+            </tr>
+            <tr>
+              <td><strong>Term 2</strong></td><td>Levies &amp; Activities</td><td>₵5,000</td><td>₵5,000</td><td>15 Jan 2026</td>
+              <td><span class="status-badge present">Paid</span></td><td><button class="btn-sm outline">Download</button></td>
+            </tr>
+            <tr style="opacity:0.6;">
+              <td><strong>Term 3</strong></td><td>Tuition + Levies</td><td>₵45,000</td><td>—</td><td>—</td>
+              <td><span class="status-badge pending">Upcoming</span></td><td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ MESSAGES ══ -->
+    <div class="dash-tab" id="tab-messages">
+      <div class="dash-page-header">
+        <div><h1 class="dash-page-title">Messages</h1><p class="dash-page-sub">2 unread</p></div>
+      </div>
+      <div class="messages-layout">
+        <div class="messages-list">
+          <div class="msg-search"><i data-lucide="search"></i><input type="text" placeholder="Search messages..."/></div>
+          <div class="message-item unread active-msg" onclick="openMessage(this,'msg1')">
+            <div class="msg-avatar" style="background:#6366f1;">A</div>
+            <div class="msg-preview"><div class="msg-sender">Mr. Asare <span class="msg-subject-tag">Mathematics</span></div><div class="msg-snippet">Your mid-term score has been uploaded...</div></div>
+            <div class="msg-meta"><div class="msg-time">9:10 AM</div><div class="msg-dot"></div></div>
+          </div>
+          <div class="message-item unread" onclick="openMessage(this,'msg2')">
+            <div class="msg-avatar" style="background:#7c3aed;">B</div>
+            <div class="msg-preview"><div class="msg-sender">Mr. Boateng <span class="msg-subject-tag">Basic Science</span></div><div class="msg-snippet">Please remember to submit your lab report...</div></div>
+            <div class="msg-meta"><div class="msg-time">Yesterday</div><div class="msg-dot"></div></div>
+          </div>
+          <div class="message-item" onclick="openMessage(this,'msg3')">
+            <div class="msg-avatar" style="background:#16a34a;">O</div>
+            <div class="msg-preview"><div class="msg-sender">Mrs. Owusu <span class="msg-subject-tag">English</span></div><div class="msg-snippet">Well done on the comprehension exercise...</div></div>
+            <div class="msg-meta"><div class="msg-time">Mon</div></div>
+          </div>
+          <div class="message-item" onclick="openMessage(this,'msg4')">
+            <div class="msg-avatar" style="background:#ea580c;">N</div>
+            <div class="msg-preview"><div class="msg-sender">Mr. Nkrumah <span class="msg-subject-tag">Agric. Sci.</span></div><div class="msg-snippet">Don't forget your farm tools on Thursday...</div></div>
+            <div class="msg-meta"><div class="msg-time">Mon</div></div>
+          </div>
+          <div class="message-item" onclick="openMessage(this,'msg5')">
+            <div class="msg-avatar" style="background:#0891b2;">S</div>
+            <div class="msg-preview"><div class="msg-sender">School Admin <span class="msg-subject-tag">Notice</span></div><div class="msg-snippet">Mid-term exam timetable is now available...</div></div>
+            <div class="msg-meta"><div class="msg-time">Fri</div></div>
+          </div>
+        </div>
+        <div class="message-detail" id="messageDetail">
+          <div id="msg1" class="msg-content active-msg-content">
+            <div class="msg-detail-header">
+              <div class="msg-avatar" style="width:48px;height:48px;font-size:1.2rem;background:#6366f1;">A</div>
+              <div><div class="msg-detail-sender">Mr. Asare — Mathematics</div><div class="msg-detail-time">Today, 9:10 AM</div></div>
+            </div>
+            <div class="msg-detail-subject">Re: Mid-Term Score Uploaded</div>
+            <div class="msg-detail-body">Hi Kwame,<br/><br/>Your mid-term score has been uploaded to the system. You scored <strong>42/50</strong> — a very solid performance. Keep it up and continue practicing the quadratic equations section before the end-of-term exams.<br/><br/>Pay particular attention to completing the square and the discriminant. I have uploaded some extra practice questions to the system — please check your Assignments tab.<br/><br/>Let me know if you have any questions.<br/><br/>Regards,<br/><strong>Mr. Asare</strong><br/><span style="font-size:0.8rem;color:var(--text-light);">Mathematics Dept. · JSS 2A</span></div>
+          </div>
+          <div id="msg2" class="msg-content">
+            <div class="msg-detail-header">
+              <div class="msg-avatar" style="width:48px;height:48px;font-size:1.2rem;background:#7c3aed;">B</div>
+              <div><div class="msg-detail-sender">Mr. Boateng — Basic Science</div><div class="msg-detail-time">Yesterday, 2:45 PM</div></div>
+            </div>
+            <div class="msg-detail-subject">Lab Report Reminder</div>
+            <div class="msg-detail-body">Hi Kwame,<br/><br/>This is a reminder that your <strong>Photosynthesis Lab Report</strong> is due by Friday 19th February. Please ensure it follows the standard format we discussed in class:<br/><br/>1. Introduction<br/>2. Hypothesis<br/>3. Materials &amp; Method<br/>4. Results (include your diagram)<br/>5. Conclusion &amp; Discussion<br/><br/>Submit a physical copy to me by end of day Friday. Late submissions will lose marks.<br/><br/><strong>Mr. Boateng</strong><br/><span style="font-size:0.8rem;color:var(--text-light);">Basic Science · JSS 2A</span></div>
+          </div>
+          <div id="msg3" class="msg-content">
+            <div class="msg-detail-header">
+              <div class="msg-avatar" style="width:48px;height:48px;font-size:1.2rem;background:#16a34a;">O</div>
+              <div><div class="msg-detail-sender">Mrs. Owusu — English Language</div><div class="msg-detail-time">Monday, 11:30 AM</div></div>
+            </div>
+            <div class="msg-detail-subject">Comprehension Feedback</div>
+            <div class="msg-detail-body">Dear Kwame,<br/><br/>Well done on the comprehension exercise. Your summary was clear and concise, and your vocabulary choices showed good understanding of the passage.<br/><br/>I would like you to work a bit more on <strong>paragraph structure</strong> for the next assignment. Each paragraph should have a clear topic sentence, supporting details, and a concluding idea.<br/><br/>Keep up the great work!<br/><br/><strong>Mrs. Owusu</strong><br/><span style="font-size:0.8rem;color:var(--text-light);">English Language · JSS 2A</span></div>
+          </div>
+          <div id="msg4" class="msg-content">
+            <div class="msg-detail-header">
+              <div class="msg-avatar" style="width:48px;height:48px;font-size:1.2rem;background:#ea580c;">N</div>
+              <div><div class="msg-detail-sender">Mr. Nkrumah — Agricultural Science</div><div class="msg-detail-time">Monday, 8:00 AM</div></div>
+            </div>
+            <div class="msg-detail-subject">Reminder: Farm Tools Thursday</div>
+            <div class="msg-detail-body">Hello Class,<br/><br/>Just a reminder that on <strong>Thursday 13th February</strong> we will be doing our practical session at the school farm. All students must come with their farm tools — hoe, cutlass, and gloves.<br/><br/>Students without tools will not be allowed to participate and will lose their practical marks for the week.<br/><br/><strong>Mr. Nkrumah</strong><br/><span style="font-size:0.8rem;color:var(--text-light);">Agricultural Science · JSS 2A</span></div>
+          </div>
+          <div id="msg5" class="msg-content">
+            <div class="msg-detail-header">
+              <div class="msg-avatar" style="width:48px;height:48px;font-size:1.2rem;background:#0891b2;">S</div>
+              <div><div class="msg-detail-sender">School Administration</div><div class="msg-detail-time">Friday, 3:00 PM</div></div>
+            </div>
+            <div class="msg-detail-subject">Mid-Term Exam Timetable — Term 2</div>
+            <div class="msg-detail-body">Dear Students,<br/><br/>The <strong>Mid-Term Examination Timetable</strong> for Term 2 is now available. Exams begin on <strong>Monday 17th February 2026</strong>.<br/><br/>Please ensure you are well-prepared and arrive at the examination hall at least 15 minutes before your scheduled time. No student will be admitted after the exam has started.<br/><br/>The timetable is posted on the school noticeboard and has been uploaded to your portal.<br/><br/><strong>Academic Affairs Office</strong><br/><span style="font-size:0.8rem;color:var(--text-light);">Acaxel School Administration</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROFILE ══ -->
+    <div class="dash-tab" id="tab-profile">
+      <div class="dash-page-header">
+        <div><h1 class="dash-page-title">My Profile</h1><p class="dash-page-sub">Student Information · 2025/2026</p></div>
+      </div>
+
+      <!-- PROFILE HERO -->
+      <div class="stu-profile-hero">
+        <div class="stu-profile-hero-banner"></div>
+        <div class="stu-profile-hero-body">
+          <div class="stu-profile-xl" id="profileAvatar">K</div>
+          <div class="stu-profile-hero-info">
+            <div class="stu-profile-hero-name" id="profileName">Kwame Mensah</div>
+            <div class="stu-profile-hero-meta">JSS 2A &nbsp;·&nbsp; Student ID: AX/2024/042 &nbsp;·&nbsp; Volta House &nbsp;·&nbsp; Enrolled Sep 2023</div>
+            <div class="stu-hero-tags">
+              <span class="stu-hero-tag blue"><i data-lucide="award"></i> 3rd in Class</span>
+              <span class="stu-hero-tag green"><i data-lucide="calendar-check"></i> 94% Attendance</span>
+              <span class="stu-hero-tag purple"><i data-lucide="star"></i> Best in ICT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE GRID -->
+      <div class="stu-profile-grid">
+
+        <!-- PERSONAL INFO -->
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Personal Information</h3></div>
+          <div class="profile-info-list">
+            <div class="profile-info-row"><span>Full Name</span><strong id="profileFullName">Kwame Mensah</strong></div>
+            <div class="profile-info-row"><span>Student ID</span><strong>AX/2024/042</strong></div>
+            <div class="profile-info-row"><span>Date of Birth</span><strong>14 March 2012</strong></div>
+            <div class="profile-info-row"><span>Gender</span><strong>Male</strong></div>
+            <div class="profile-info-row"><span>Nationality</span><strong>Ghanaian</strong></div>
+            <div class="profile-info-row"><span>Religion</span><strong>Christian</strong></div>
+            <div class="profile-info-row"><span>House</span><strong>Volta House</strong></div>
+            <div class="profile-info-row"><span>Email</span><strong>kwame@demo.com</strong></div>
+          </div>
+        </div>
+
+        <!-- GUARDIAN + ACADEMIC -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div class="dash-card">
+            <div class="dash-card-header"><h3>Guardian Information</h3></div>
+            <div class="profile-info-list">
+              <div class="profile-info-row"><span>Guardian Name</span><strong>Mrs. Adaeze Mensah</strong></div>
+              <div class="profile-info-row"><span>Relationship</span><strong>Mother</strong></div>
+              <div class="profile-info-row"><span>Phone</span><strong>+233 800 123 456</strong></div>
+              <div class="profile-info-row"><span>Email</span><strong>adaeze@demo.com</strong></div>
+              <div class="profile-info-row"><span>Address</span><strong>14 Adenta Road, Accra</strong></div>
+            </div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-header"><h3>Academic Summary</h3></div>
+            <div class="profile-info-list">
+              <div class="profile-info-row"><span>Class</span><strong>JSS 2A</strong></div>
+              <div class="profile-info-row"><span>Term 2 Average</span><strong style="color:#6366f1;">78.6% — B+</strong></div>
+              <div class="profile-info-row"><span>Class Position</span><strong style="color:var(--accent);">3rd / 32</strong></div>
+              <div class="profile-info-row"><span>Attendance</span><strong>94% (47 / 50 days)</strong></div>
+              <div class="profile-info-row"><span>Best Subject</span><strong>ICT — 91%</strong></div>
+              <div class="profile-info-row"><span>Needs Work</span><strong style="color:#d97706;">French — 65%</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCHOOL YEAR -->
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>School Year Calendar</h3></div>
+          <div class="stu-term-timeline">
+            <div class="stu-timeline-item done">
+              <div class="stu-tl-dot done"></div>
+              <div class="stu-tl-body">
+                <div class="stu-tl-label">Term 1 <span class="stu-tl-badge done-badge">Complete</span></div>
+                <div class="stu-tl-dates">9 Sep – 13 Dec 2025</div>
+                <div class="stu-tl-result">Position: 5th &nbsp;·&nbsp; Average: 75.1%</div>
+              </div>
+            </div>
+            <div class="stu-timeline-item active">
+              <div class="stu-tl-dot active"></div>
+              <div class="stu-tl-body">
+                <div class="stu-tl-label">Term 2 <span class="stu-tl-badge active-badge">In Progress</span></div>
+                <div class="stu-tl-dates">13 Jan – 11 Apr 2026</div>
+                <div class="stu-tl-result">Position: 3rd &nbsp;·&nbsp; Average: 78.6% (so far)</div>
+              </div>
+            </div>
+            <div class="stu-timeline-item">
+              <div class="stu-tl-dot"></div>
+              <div class="stu-tl-body">
+                <div class="stu-tl-label">Term 3 <span class="stu-tl-badge upcoming-badge">Upcoming</span></div>
+                <div class="stu-tl-dates">27 Apr – 18 Jul 2026</div>
+                <div class="stu-tl-result">Fees due: 27 Apr 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+      <!-- ═══════════════════ CLOCK-IN TAB ═══════════════════ -->
+      <div class="dash-tab" id="tab-clockin">
+
+        <div class="ci-page-header">
+          <div>
+            <h2 class="ci-page-title">School Clock-In</h2>
+            <p class="ci-page-sub">Scan the school gate QR code to mark your attendance</p>
+          </div>
+          <div class="ci-live-time" id="stuCiClock"></div>
+        </div>
+
+        <!-- Hero scan card -->
+        <div class="tch-ci-hero">
+          <div class="tch-ci-status-ring" id="stuCiRing">
+            <div class="tch-ci-ring-inner">
+              <div class="tch-ci-status-icon" id="stuCiIcon"><i data-lucide="scan-line"></i></div>
+              <div class="tch-ci-status-label" id="stuCiLabel">Not Checked In</div>
+              <div class="tch-ci-status-time"  id="stuCiTime"></div>
+            </div>
+          </div>
+
+          <div class="tch-ci-action-row">
+            <button class="tch-ci-btn" id="stuCiBtn" onclick="stuOpenScanner()">
+              <i data-lucide="scan-line"></i>
+              <span id="stuCiBtnLabel">Scan QR to Check In</span>
+            </button>
+          </div>
+          <p class="tch-ci-hint" id="stuCiHint">Scan the school gate QR code to record your arrival</p>
+
+          <!-- Manual fallback -->
+          <div class="tch-ci-manual">
+            <span class="tch-ci-manual-label">No camera? Enter code manually</span>
+            <div class="tch-ci-manual-row">
+              <input type="text" id="stuCiManualCode" class="input-field" placeholder="Enter gate code…" style="font-size:0.84rem;" />
+              <button class="btn-sm wine" onclick="stuManualVerify()">Verify</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today summary -->
+        <div class="tch-ci-summary">
+          <div class="tch-ci-summary-item">
+            <div class="tch-ci-summary-lbl">Check-In</div>
+            <div class="tch-ci-summary-val" id="stuCiInTime">—</div>
+          </div>
+          <div class="tch-ci-summary-divider"></div>
+          <div class="tch-ci-summary-item">
+            <div class="tch-ci-summary-lbl">Date</div>
+            <div class="tch-ci-summary-val" id="stuCiDateVal">—</div>
+          </div>
+          <div class="tch-ci-summary-divider"></div>
+          <div class="tch-ci-summary-item">
+            <div class="tch-ci-summary-lbl">Status</div>
+            <div class="tch-ci-summary-val" id="stuCiStatusVal">—</div>
+          </div>
+          <div class="tch-ci-summary-divider"></div>
+          <div class="tch-ci-summary-item">
+            <div class="tch-ci-summary-lbl">Method</div>
+            <div class="tch-ci-summary-val" id="stuCiMethod">—</div>
+          </div>
+        </div>
+
+        <!-- Weekly grid -->
+        <div class="ci-log-section">
+          <div class="ci-log-header">
+            <h3 class="ci-log-title">This Week</h3>
+          </div>
+          <div class="tch-ci-week-grid" id="stuCiWeekGrid"></div>
+        </div>
+
+        <!-- Log -->
+        <div class="ci-log-section" style="margin-top:24px;">
+          <div class="ci-log-header">
+            <h3 class="ci-log-title">Attendance Log</h3>
+            <button class="ci-clear-btn" onclick="stuCiExport()">
+              <i data-lucide="download"></i> Export CSV
+            </button>
+          </div>
+          <div id="stuCiLogList" class="ci-log-list"></div>
+        </div>
+
+      </div><!-- end clockin -->
+
+      <!-- ═══════════════════ SUPPORT TAB ═══════════════════ -->
+      <div class="dash-tab" id="tab-support">
+        <div class="sp-page">
+          <div class="sp-hero">
+            <div class="sp-hero-icon"><i data-lucide="life-buoy"></i></div>
+            <div>
+              <h2 class="sp-hero-title">Help &amp; Support</h2>
+              <p class="sp-hero-sub">Find answers, contact the team, or send a support request</p>
+            </div>
+          </div>
+          <div class="sp-grid">
+            <div class="sp-left">
+              <div class="sp-section-card">
+                <div class="sp-section-head"><i data-lucide="help-circle"></i><h3>Frequently Asked Questions</h3></div>
+                <div class="sp-search-row">
+                  <i data-lucide="search"></i>
+                  <input type="text" id="spSearchInput" class="sp-search-input" placeholder="Search FAQs…" oninput="spSearchFaq()" />
+                </div>
+                <div id="spFaqList" class="sp-faq-list"></div>
+              </div>
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head"><i data-lucide="send"></i><h3>Send a Support Request</h3></div>
+                <p class="sp-form-hint">We'll get back to you within 24 hours on school days.</p>
+                <div class="form-field" style="margin-top:12px;"><label class="input-label">Subject</label><input class="input-field" type="text" id="spTicketSubject" placeholder="e.g. Cannot log in…" /></div>
+                <div class="form-field" style="margin-top:10px;"><label class="input-label">Message</label><textarea class="input-field sp-textarea" id="spTicketMsg" placeholder="Describe your issue…" rows="4"></textarea></div>
+                <button class="btn-sm wine" style="margin-top:10px;width:100%;justify-content:center;" onclick="spSubmitTicket()"><i data-lucide="send"></i> Submit Request</button>
+                <div id="spTicketStatus" class="sp-ticket-status"></div>
+              </div>
+            </div>
+            <div class="sp-right">
+              <div class="sp-section-card">
+                <div class="sp-section-head"><i data-lucide="phone"></i><h3>Contact Us</h3></div>
+                <div class="sp-contact-list">
+                  <div class="sp-contact-item"><span class="sp-contact-icon"><i data-lucide="mail"></i></span><div><div class="sp-contact-lbl">Email</div><div class="sp-contact-val" id="spContactEmail"></div></div></div>
+                  <div class="sp-contact-item"><span class="sp-contact-icon"><i data-lucide="phone"></i></span><div><div class="sp-contact-lbl">Phone</div><div class="sp-contact-val" id="spContactPhone"></div></div></div>
+                  <div class="sp-contact-item"><span class="sp-contact-icon"><i data-lucide="clock"></i></span><div><div class="sp-contact-lbl">Support Hours</div><div class="sp-contact-val" id="spContactHours"></div></div></div>
+                  <div class="sp-contact-item"><span class="sp-contact-icon"><i data-lucide="map-pin"></i></span><div><div class="sp-contact-lbl">Address</div><div class="sp-contact-val" id="spContactAddress"></div></div></div>
+                </div>
+              </div>
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head"><i data-lucide="zap"></i><h3>Quick Actions</h3></div>
+                <div class="sp-quick-grid">
+                  <button class="sp-quick-btn" onclick="window.open('mailto:support@acaxel.edu.ng')"><i data-lucide="mail"></i><span>Email Support</span></button>
+                  <button class="sp-quick-btn" onclick="toggleAI()"><i data-lucide="bot"></i><span>Ask AI Assistant</span></button>
+                  <button class="sp-quick-btn" onclick="window.print()"><i data-lucide="printer"></i><span>Print This Page</span></button>
+                  <button class="sp-quick-btn" onclick="location.reload()"><i data-lucide="refresh-cw"></i><span>Reload Dashboard</span></button>
+                </div>
+              </div>
+              <div class="sp-section-card" style="margin-top:20px;">
+                <div class="sp-section-head"><i data-lucide="info"></i><h3>System Info</h3></div>
+                <div class="sp-info-list">
+                  <div class="sp-info-row"><span>Platform</span><span>Acaxel School Portal</span></div>
+                  <div class="sp-info-row"><span>Version</span><span>v2.4.0</span></div>
+                  <div class="sp-info-row"><span>Browser</span><span id="spBrowser">—</span></div>
+                  <div class="sp-info-row"><span>Data Storage</span><span>Local (Browser)</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end support -->
+
+  </div>
+  </main>
+</div>
+
+<style>
+/* ── TAB SHOW/HIDE ── */
+.dash-tab { display:none; }
+.dash-tab.active { display:block; animation:tabSlideIn 0.3s cubic-bezier(0.4,0,0.2,1) both; }
+
+/* ── PAGE HEADER ── */
+.dash-page-header { display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap; }
+.dash-page-title { font-size:1.5rem;font-weight:800;color:var(--text);letter-spacing:-0.03em;margin-bottom:4px; }
+.dash-page-sub { font-size:0.82rem;color:var(--text-light); }
+.dash-header-actions { display:flex;align-items:center;gap:10px;flex-shrink:0; }
+.dash-term-badge { background:#ede9fe;color:#6d28d9;font-size:0.75rem;font-weight:700;padding:5px 12px;border-radius:100px; }
+
+/* ── DASH CARD ── */
+.dash-card { background:var(--bg);border:1px solid var(--border);border-radius:var(--radius,12px);overflow:hidden;margin-bottom:20px; }
+.dash-card-header { display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--border); }
+.dash-card-header h3 { font-size:0.95rem;font-weight:700;color:var(--text); }
+.dash-card-body { padding:22px; }
+/* Pad non-table card children */
+.dash-card .subject-grades-list,
+.dash-card .today-classes-list,
+.dash-card .announcement-list,
+.dash-card .att-legend,
+.dash-card .asgn-cards,
+.dash-card .profile-info-list,
+.dash-card .stu-term-timeline { padding:16px 22px; }
+.dash-card .bs-calendar-strip { padding:0 22px 4px; }
+.dash-card { margin-bottom:16px; }
+
+/* ── DASH TABLE ── */
+.dash-table { width:100%;border-collapse:collapse;font-size:0.83rem; }
+.dash-table th { text-align:left;padding:10px 14px;font-size:0.72rem;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.05em;border-bottom:1.5px solid var(--border);background:var(--surface,#f8fafc); }
+.dash-table td { padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text-mid);vertical-align:middle; }
+.dash-table tr:last-child td { border-bottom:none; }
+.dash-table tr:hover td { background:var(--surface,#f8fafc); }
+
+/* ── MESSAGES LAYOUT ── */
+.messages-layout { display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius,12px);overflow:hidden;background:var(--bg);min-height:500px; }
+.messages-list { border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto; }
+.message-detail { overflow-y:auto; }
+.message-item { display:flex;align-items:center;gap:10px;padding:14px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s; }
+.message-item:hover,.message-item.active-msg { background:var(--surface,#f8fafc); }
+.message-item.unread { background:#faf5ff; }
+.msg-avatar { width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:800;color:white;flex-shrink:0; }
+.msg-preview { flex:1;min-width:0; }
+.msg-sender { font-size:0.82rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.msg-snippet { font-size:0.75rem;color:var(--text-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.msg-meta { display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0; }
+.msg-time { font-size:0.7rem;color:var(--text-light); }
+.msg-dot { width:8px;height:8px;border-radius:50%;background:#6366f1; }
+.msg-content { display:none;padding:28px;height:100%; }
+.msg-content.active-msg-content { display:block; }
+.msg-detail-header { display:flex;align-items:center;gap:14px;margin-bottom:8px; }
+.msg-detail-sender { font-size:0.95rem;font-weight:700;color:var(--text); }
+.msg-detail-time { font-size:0.75rem;color:var(--text-light);margin-top:2px; }
+.msg-detail-body { font-size:0.875rem;color:var(--text-mid);line-height:1.75; }
+
+/* ── OVERVIEW HERO ── */
+.stu-hero-banner{display:flex;align-items:center;justify-content:space-between;gap:24px;background:linear-gradient(135deg,#1e1b4b 0%,#4c1d95 60%,#6d28d9 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:white;flex-wrap:wrap;}
+.stu-hero-left{display:flex;align-items:center;gap:20px;}
+.stu-hero-avatar{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.2);border:3px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;color:white;flex-shrink:0;}
+.stu-hero-greeting{font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px;}
+.stu-hero-sub{font-size:0.82rem;color:rgba(255,255,255,0.7);margin-bottom:10px;}
+.stu-hero-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.stu-hero-tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;font-size:0.72rem;font-weight:700;}
+.stu-hero-tag i,.stu-hero-tag svg{width:12px;height:12px;stroke-width:2.5;}
+.stu-hero-tag.green{background:rgba(34,197,94,0.2);color:#86efac;stroke:#86efac;}
+.stu-hero-tag.green i,.stu-hero-tag.green svg{stroke:#86efac;}
+.stu-hero-tag.blue{background:rgba(99,102,241,0.3);color:#c7d2fe;}
+.stu-hero-tag.blue i,.stu-hero-tag.blue svg{stroke:#c7d2fe;}
+.stu-hero-tag.amber{background:rgba(251,191,36,0.2);color:#fde68a;}
+.stu-hero-tag.amber i,.stu-hero-tag.amber svg{stroke:#fde68a;}
+.stu-hero-tag.purple{background:rgba(167,139,250,0.2);color:#ddd6fe;}
+.stu-hero-tag.purple i,.stu-hero-tag.purple svg{stroke:#ddd6fe;}
+.stu-hero-right{flex-shrink:0;}
+.stu-term-card{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:16px 20px;min-width:220px;backdrop-filter:blur(4px);}
+.stu-term-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.6);margin-bottom:4px;}
+.stu-term-name{font-size:1rem;font-weight:800;color:white;}
+.stu-term-dates{font-size:0.78rem;color:rgba(255,255,255,0.65);margin-bottom:10px;}
+.stu-term-progress-wrap{display:flex;align-items:center;gap:8px;}
+.stu-term-progress-bar{flex:1;height:6px;background:rgba(255,255,255,0.2);border-radius:100px;overflow:hidden;}
+.stu-term-progress-fill{height:100%;background:#a78bfa;border-radius:100px;}
+.stu-term-pct{font-size:0.72rem;color:rgba(255,255,255,0.7);white-space:nowrap;}
+
+/* ── STAT ROW ── */
+.stu-stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:16px;}
+.stu-stat-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:18px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:box-shadow 0.2s,transform 0.2s;}
+.stu-stat-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.08);transform:translateY(-2px);}
+.stu-stat-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.stu-stat-icon i,.stu-stat-icon svg{width:20px;height:20px;stroke-width:2;}
+.stu-stat-body{display:flex;flex-direction:column;gap:2px;}
+.stu-stat-val{font-size:1.4rem;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;}
+.stu-stat-lbl{font-size:0.75rem;color:var(--text-light);}
+.stu-stat-pill{display:inline-flex;align-items:center;padding:2px 8px;border-radius:100px;font-size:0.68rem;font-weight:700;margin-top:4px;align-self:flex-start;}
+.stu-stat-pill.blue{background:#ede9fe;color:#6d28d9;}
+.stu-stat-pill.green{background:#dcfce7;color:#15803d;}
+.stu-stat-pill.amber{background:#fef3c7;color:#b45309;}
+.stu-stat-pill.purple{background:#f5f3ff;color:#7c3aed;}
+.stu-stat-pill.red{background:#fee2e2;color:#dc2626;}
+
+/* ── QUICK ACTIONS ── */
+.stu-quick-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px;}
+.stu-quick-btn{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;font-size:0.78rem;font-weight:600;color:var(--text-mid);transition:all 0.18s;position:relative;}
+.stu-quick-btn:hover{border-color:#6366f1;color:#6366f1;box-shadow:0 4px 16px rgba(99,102,241,0.12);transform:translateY(-1px);}
+.stu-quick-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.stu-quick-icon i,.stu-quick-icon svg{width:18px;height:18px;stroke-width:2;}
+.stu-quick-badge{position:absolute;top:8px;right:8px;background:#6366f1;color:white;font-size:0.62rem;font-weight:800;padding:1px 6px;border-radius:100px;}
+
+/* ── BOTTOM GRID ── */
+.stu-bottom-grid{display:grid;grid-template-columns:1fr 400px;gap:16px;}
+
+/* ── TODAY'S CLASSES ── */
+.today-classes-list{display:flex;flex-direction:column;gap:0;}
+.today-class-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.today-class-item:last-child{border-bottom:none;}
+.tc-time{font-size:0.75rem;font-weight:700;color:var(--text-light);width:40px;flex-shrink:0;}
+.tc-bar{width:3px;height:32px;border-radius:100px;background:var(--border);flex-shrink:0;}
+.today-class-item.done .tc-bar{background:#cbd5e1;}
+.today-class-item.now .tc-bar{background:#6366f1;}
+.tc-info{flex:1;}
+.tc-name{font-size:0.85rem;font-weight:600;color:var(--text);}
+.today-class-item.done .tc-name{color:var(--text-light);text-decoration:line-through;}
+.tc-teacher{font-size:0.72rem;color:var(--text-light);}
+.tc-badge{font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:100px;flex-shrink:0;}
+.done-badge{background:#f1f5f9;color:#94a3b8;}
+.now-badge{background:#ede9fe;color:#7c3aed;animation:pulse 1.8s infinite;}
+.upcoming-badge{background:#fef3c7;color:#b45309;}
+
+/* ── ANNOUNCEMENT UNREAD PILL ── */
+.stu-unread-pill{background:#fee2e2;color:#dc2626;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:100px;}
+
+/* ── GRADES ── */
+.grades-footer-row{display:flex;gap:0;border-top:2px solid var(--border);margin-top:0;}
+.grades-footer-item{flex:1;padding:14px 20px;display:flex;flex-direction:column;gap:3px;border-right:1px solid var(--border);}
+.grades-footer-item:last-child{border-right:none;}
+.grades-footer-item span{font-size:0.72rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;}
+.grades-footer-item strong{font-size:0.9rem;color:var(--text);}
+.stu-term-tab{padding:6px 14px;border-radius:7px;border:1.5px solid var(--border);background:transparent;font-size:0.78rem;font-weight:600;color:var(--text-mid);cursor:pointer;transition:all 0.15s;}
+.stu-term-tab.active,.stu-term-tab:hover{background:#6366f1;color:white;border-color:#6366f1;}
+.dash-card-link{background:none;border:none;color:#6366f1;font-size:0.8rem;font-weight:600;cursor:pointer;padding:0;}
+.dash-card-link:hover{text-decoration:underline;}
+
+/* ── ATTENDANCE ── */
+.att-layout{display:flex;gap:20px;align-items:flex-start;}
+.att-summary-card{width:260px;flex-shrink:0;}
+.att-donut-wrap{position:relative;display:flex;align-items:center;justify-content:center;margin:16px 0;}
+.att-donut{width:160px;height:160px;transform:rotate(-90deg);}
+.att-donut-label{position:absolute;display:flex;flex-direction:column;align-items:center;}
+.att-donut-pct{font-size:2rem;font-weight:800;color:var(--text);letter-spacing:-0.04em;}
+.att-donut-sub{font-size:0.78rem;color:var(--text-light);margin-top:2px;}
+
+/* SVG donut draw-in animation */
+@keyframes donutDraw {
+  from { stroke-dasharray: 0 314; }
+  to   { stroke-dasharray: 296 314; }
+}
+@keyframes donutFade { from{opacity:0;} to{opacity:1;} }
+.att-donut .donut-progress {
+  animation: donutDraw 1.4s cubic-bezier(0.4,0,0.2,1) both, donutFade 0.4s ease both;
+}
+
+/* Subject bars slide-in */
+@keyframes barGrow {
+  from { width: 0 !important; }
+}
+.subject-bar { animation: barGrow 1.2s cubic-bezier(0.4,0,0.2,1) both; }
+.subject-grade-row:nth-child(1) .subject-bar { animation-delay: 0.05s; }
+.subject-grade-row:nth-child(2) .subject-bar { animation-delay: 0.13s; }
+.subject-grade-row:nth-child(3) .subject-bar { animation-delay: 0.21s; }
+.subject-grade-row:nth-child(4) .subject-bar { animation-delay: 0.29s; }
+.subject-grade-row:nth-child(5) .subject-bar { animation-delay: 0.37s; }
+.subject-grade-row:nth-child(6) .subject-bar { animation-delay: 0.45s; }
+.subject-grade-row:nth-child(7) .subject-bar { animation-delay: 0.53s; }
+.att-legend{display:flex;flex-direction:column;gap:8px;}
+.att-legend-row{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--text-mid);}
+.att-legend-row strong{margin-left:auto;font-size:0.9rem;color:var(--text);}
+.att-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+/* ── ASSIGNMENTS ── */
+.asgn-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:4px 0;}
+.asgn-card{border:1.5px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px;transition:box-shadow 0.2s;}
+.asgn-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+.asgn-card.urgent{border-color:#fca5a5;background:#fff8f8;}
+.asgn-subject-tag{display:inline-flex;align-self:flex-start;padding:3px 10px;border-radius:100px;font-size:0.7rem;font-weight:700;}
+.asgn-title{font-size:0.9rem;font-weight:700;color:var(--text);line-height:1.4;}
+.asgn-meta{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-light);flex-wrap:wrap;}
+.asgn-meta i,.asgn-meta svg{width:12px;height:12px;stroke:var(--text-light);stroke-width:2;}
+.asgn-desc{font-size:0.78rem;color:var(--text-mid);line-height:1.5;}
+.asgn-actions{display:flex;align-items:center;gap:10px;margin-top:4px;}
+.asgn-actions i,.asgn-actions svg{width:13px;height:13px;stroke:white;stroke-width:2;margin-right:4px;vertical-align:middle;}
+
+/* ── FEES ── */
+.fee-banner-card{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:14px;padding:24px 28px;margin-bottom:20px;flex-wrap:wrap;}
+.fee-banner-left{display:flex;align-items:center;gap:16px;}
+.fee-banner-icon{width:48px;height:48px;border-radius:50%;background:#16a34a;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.fee-banner-icon i,.fee-banner-icon svg{width:24px;height:24px;stroke:white;stroke-width:2.5;}
+.fee-banner-title{font-size:1rem;font-weight:700;color:#15803d;margin-bottom:4px;}
+.fee-banner-sub{font-size:0.82rem;color:#166534;}
+.fee-banner-amount{text-align:right;}
+.fee-banner-amount-label{font-size:0.72rem;color:#166534;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;}
+.fee-banner-amount-val{font-size:2rem;font-weight:800;color:#15803d;letter-spacing:-0.04em;}
+
+/* ── MESSAGES ── */
+.msg-search{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border);}
+.msg-search i,.msg-search svg{width:15px;height:15px;stroke:var(--text-light);stroke-width:2;flex-shrink:0;}
+.msg-search input{border:none;outline:none;background:none;font-size:0.82rem;color:var(--text);width:100%;}
+.msg-subject-tag{display:inline-block;font-size:0.62rem;font-weight:700;padding:1px 6px;border-radius:100px;background:#f1f5f9;color:#64748b;margin-left:6px;vertical-align:middle;}
+.msg-detail-subject{font-size:1rem;font-weight:700;color:var(--text);margin:16px 0 12px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+
+/* ── PROFILE ── */
+.stu-profile-hero{border-radius:16px;overflow:hidden;margin-bottom:20px;border:1px solid var(--border);}
+.stu-profile-hero-banner{height:100px;background:linear-gradient(135deg,#1e1b4b,#4c1d95,#6d28d9);}
+.stu-profile-hero-body{display:flex;align-items:flex-end;gap:20px;padding:0 28px 24px;background:var(--bg);}
+.stu-profile-xl{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;color:white;border:4px solid var(--bg);margin-top:-40px;flex-shrink:0;}
+.stu-profile-hero-name{font-size:1.3rem;font-weight:800;color:var(--text);}
+.stu-profile-hero-meta{font-size:0.78rem;color:var(--text-light);margin-top:4px;}
+.stu-profile-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+
+/* ── TIMELINE ── */
+.stu-term-timeline{display:flex;flex-direction:column;gap:0;padding:4px 0;}
+.stu-timeline-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--border);}
+.stu-timeline-item:last-child{border-bottom:none;}
+.stu-tl-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--border);background:var(--bg);flex-shrink:0;margin-top:4px;}
+.stu-tl-dot.done{background:#16a34a;border-color:#16a34a;}
+.stu-tl-dot.active{background:#6366f1;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.2);}
+.stu-tl-body{flex:1;}
+.stu-tl-label{font-size:0.88rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;margin-bottom:3px;}
+.stu-tl-dates{font-size:0.78rem;color:var(--text-light);margin-bottom:2px;}
+.stu-tl-result{font-size:0.78rem;color:var(--text-mid);}
+.stu-tl-badge{font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:100px;}
+.done-badge{background:#dcfce7;color:#15803d;}
+.active-badge{background:#ede9fe;color:#7c3aed;}
+.upcoming-badge{background:#fef3c7;color:#b45309;}
+
+/* ── STUDENT CLOCK-IN TAB ── */
+#tab-clockin .ci-page-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+#tab-clockin .ci-page-title{font-size:1.35rem;font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-bottom:3px;}
+#tab-clockin .ci-page-sub{font-size:0.82rem;color:var(--text-light);}
+#tab-clockin .ci-live-time{font-size:0.78rem;font-weight:600;color:var(--text-light);font-variant-numeric:tabular-nums;}
+
+/* ── RESPONSIVE ── */
+/* last-item cleanup */
+.messages-layout { margin-bottom:0; }
+.stu-profile-hero { margin-bottom:16px; }
+.stu-hero-tags { display:flex;gap:8px;margin-top:8px;flex-wrap:wrap; }
+
+@media(max-width:1100px){
+  .stu-stat-row{grid-template-columns:repeat(3,1fr);}
+  .stu-quick-row{grid-template-columns:repeat(3,1fr);}
+  .stu-bottom-grid{grid-template-columns:1fr;}
+  .stu-profile-grid{grid-template-columns:1fr 1fr;}
+  .asgn-cards{grid-template-columns:1fr 1fr;}
+  .att-layout{flex-direction:column;}
+  .att-summary-card{width:100%;}
+  .messages-layout{grid-template-columns:1fr;}
+  .stu-hero-banner{padding:24px;}
+}
+@media(max-width:768px){
+  .stu-stat-row{grid-template-columns:repeat(2,1fr);}
+  .stu-quick-row{grid-template-columns:repeat(3,1fr);}
+  .stu-hero-banner{flex-direction:column;align-items:flex-start;padding:20px;gap:16px;}
+  .stu-hero-right{width:100%;}
+  .stu-term-card{min-width:0;width:100%;box-sizing:border-box;}
+  .stu-profile-grid{grid-template-columns:1fr;}
+  .asgn-cards{grid-template-columns:1fr 1fr;}
+  .grades-footer-row{flex-wrap:wrap;}
+  .grades-footer-item{min-width:50%;}
+  .messages-layout{min-height:auto;}
+  .messages-list{display:flex;}
+  .stu-profile-hero-body{padding:0 16px 20px;}
+  .stu-profile-hero-name{font-size:1.1rem;}
+}
+@media(max-width:480px){
+  .stu-stat-row{grid-template-columns:1fr 1fr;}
+  .stu-quick-row{grid-template-columns:repeat(2,1fr);}
+  .asgn-cards{grid-template-columns:1fr;}
+  .stu-hero-left{flex-direction:column;align-items:flex-start;gap:12px;}
+}
+</style>
+
+<!-- STUDENT QR SCANNER MODAL -->
+<div class="modal-overlay" id="stuScanModal" style="z-index:1100;display:none;">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header">
+      <h3 style="display:flex;align-items:center;gap:8px;"><i data-lucide="scan-line" style="width:18px;height:18px;stroke:var(--accent);"></i> Scan Gate QR Code</h3>
+      <span class="modal-close" onclick="stuCloseScanner()">&#10005;</span>
+    </div>
+    <div class="modal-body" style="padding:16px;">
+      <div class="ci-camera-wrap">
+        <div id="stuCameraFeed" class="ci-camera-feed"></div>
+        <div class="ci-scan-frame">
+          <span class="ci-scan-corner ci-corner-tl"></span>
+          <span class="ci-scan-corner ci-corner-tr"></span>
+          <span class="ci-scan-corner ci-corner-bl"></span>
+          <span class="ci-scan-corner ci-corner-br"></span>
+          <div class="ci-scan-line"></div>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:0.8rem;color:var(--text-light);margin:10px 0 0;">Point your camera at the school gate QR code</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/theme-panel.js"></script>
+<script src="js/ai-assistant.js"></script>
+<script src="js/support.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script src="js/offline-clockin.js"></script>
+<script src="js/student-clockin.js"></script>
+<script>
+// ── Override switchTab to target .dash-tab (student dashboard uses .dash-tab, not .tab-panel) ──
+function switchTab(tab, btn) {
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('tab-' + tab);
+  if (panel) panel.classList.add('active');
+  if (btn) btn.classList.add('active');
+  lucide.createIcons();
+}
+
+// ── Messages panel ──
+function openMessage(item, id) {
+  document.querySelectorAll('.message-item').forEach(i => i.classList.remove('active-msg'));
+  document.querySelectorAll('.msg-content').forEach(c => c.classList.remove('active-msg-content'));
+  item.classList.add('active-msg');
+  item.classList.remove('unread');
+  const dot = item.querySelector('.msg-dot');
+  if (dot) dot.remove();
+  const detail = document.getElementById(id);
+  if (detail) detail.classList.add('active-msg-content');
+}
+
+// ── Grade term toggle ──
+function selectTerm(btn, id) {
+  document.querySelectorAll('.stu-term-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['grades-t1','grades-t2'].forEach(d => {
+    const el = document.getElementById(d);
+    if (el) el.style.display = (d === 'grades-' + id) ? '' : 'none';
+  });
+}
+
+// ── Session + icons on load ──
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+
+  const user = JSON.parse(localStorage.getItem('hc_user') || '{}');
+  const name = user.name || 'Kwame Mensah';
+  const first = name.split(' ')[0];
+  const initial = first[0].toUpperCase();
+
+  const ids = {
+    topnavName: name, topnavAvatar: initial,
+    greetName: first,
+    heroAvatar: initial,
+    profileName: name, profileAvatar: initial, profileFullName: name
+  };
+  Object.entries(ids).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+/* ============================================================
+   HOME PAGE — Modern Colour Override
+   Scoped entirely to body.home so no other page is affected.
+   Palette: deep midnight bg · electric indigo · violet · amber
+   ============================================================ */
+
+/* ── COLOUR TOKENS (home-only) ─────────────────────────── */
+body.home {
+  --accent:       #6366f1;        /* indigo-500          */
+  --accent-dark:  #4f46e5;        /* indigo-600          */
+  --accent-light: rgba(99,102,241,0.10);
+  --accent2:      #8b5cf6;        /* violet-500          */
+  --amber:        #f59e0b;        /* amber-400           */
+  --bg:           #0a0a0f;        /* near-black          */
+  --surface:      #111118;        /* dark card surface   */
+  --surface-2:    #1a1a26;        /* slightly lighter    */
+  --border:       rgba(255,255,255,0.08);
+  --text:         #f1f5f9;        /* slate-100           */
+  --text-mid:     #94a3b8;        /* slate-400           */
+  --text-light:   #64748b;        /* slate-500           */
+  --shadow:       0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md:    0 4px 24px rgba(0,0,0,0.5);
+  --shadow-lg:    0 8px 40px rgba(0,0,0,0.6);
+}
+
+/* ── BODY ───────────────────────────────────────────────── */
+body.home {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ── NAVBAR ─────────────────────────────────────────────── */
+body.home .navbar {
+  background: rgba(10,10,15,0.85);
+  border-bottom: 1px solid var(--border);
+}
+body.home .nav-logo {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+}
+body.home .nav-name { color: var(--text); }
+body.home .nav-links a { color: var(--text-mid); }
+body.home .nav-links a:hover { color: var(--text); }
+body.home .btn-ghost {
+  color: var(--text-mid); border-color: var(--border);
+}
+body.home .btn-ghost:hover { border-color: var(--text-mid); color: var(--text); }
+body.home .btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  border: none;
+}
+body.home .btn-primary:hover { filter: brightness(1.12); }
+body.home .hamburger span { background: var(--text); }
+
+/* Mobile nav */
+body.home .mobile-nav {
+  background: #0f0f18;
+  border-bottom-color: var(--border);
+}
+body.home .mobile-nav a { color: var(--text-mid); border-bottom-color: var(--border); }
+
+/* ── HERO ───────────────────────────────────────────────── */
+body.home .hero {
+  background: var(--bg);
+  min-height: 100vh;
+}
+body.home .hero::before {
+  background:
+    radial-gradient(ellipse 60% 70% at 85% 40%, rgba(99,102,241,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(139,92,246,0.12) 0%, transparent 60%);
+}
+
+/* Animated gradient mesh */
+body.home .hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle 300px at 70% 20%, rgba(99,102,241,0.07) 0%, transparent 70%),
+    radial-gradient(circle 200px at 20% 60%, rgba(245,158,11,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+body.home .hero-badge {
+  background: rgba(99,102,241,0.15);
+  color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.25);
+}
+body.home .hero-badge span { background: var(--accent); }
+body.home .hero h1 { color: var(--text); }
+body.home .hero h1 em {
+  color: transparent;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 60%, var(--amber) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+body.home .hero p { color: var(--text-mid); }
+body.home .btn-lg.btn-ghost {
+  color: var(--text-mid); border-color: var(--border);
+}
+body.home .btn-lg.btn-ghost:hover {
+  border-color: var(--accent); color: var(--accent);
+}
+
+/* Hero card */
+body.home .hero-card {
+  background: var(--surface-2);
+  border-color: var(--border);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6),
+              inset 0 1px 0 rgba(255,255,255,0.05);
+}
+body.home .hc-avatar {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+}
+body.home .hc-info h4 { color: var(--text); }
+body.home .hc-info span { color: var(--text-light); }
+body.home .hc-stat {
+  background: var(--surface); border-color: var(--border);
+}
+body.home .hc-stat .val {
+  color: transparent;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+body.home .hc-stat .lbl { color: var(--text-light); }
+body.home .hc-progress-label { color: var(--text-mid); }
+body.home .hc-progress-label span:last-child { color: var(--accent); }
+body.home .hc-bar { background: var(--surface); }
+body.home .hc-bar-fill {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+}
+
+/* ── STATS STRIP ────────────────────────────────────────── */
+body.home .stats-strip {
+  background: var(--surface);
+  border-top-color: var(--border);
+  border-bottom-color: var(--border);
+}
+body.home .stat-item .num {
+  color: transparent;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+body.home .stat-item .label { color: var(--text-mid); }
+
+/* ── ABOUT PAGE HERO ────────────────────────────────────── */
+body.home .about-page-hero { background: var(--bg); }
+body.home .about-page-hero::before {
+  background: radial-gradient(circle, rgba(99,102,241,0.22) 0%, transparent 70%);
+}
+body.home .about-page-hero::after {
+  background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%);
+}
+body.home .about-page-hero h1 { color: var(--text); }
+body.home .about-page-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, var(--accent) 0%, #8b5cf6 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+body.home .about-page-hero p { color: var(--text-mid); }
+
+/* ── AUTH PAGES ─────────────────────────────────────────── */
+body.home .auth-page { background: #0a0a1a; position: relative; }
+#auth-canvas {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+body.home .auth-page > * { position: relative; z-index: 1; }
+body.home .auth-left {
+  background: linear-gradient(160deg, #0d0d2e 0%, #1e1b4b 60%, #312e81 100%);
+  border-right: 1px solid rgba(99,102,241,0.2);
+}
+body.home .auth-left::before {
+  background: rgba(99,102,241,0.08);
+}
+body.home .auth-right {
+  background: #0d0d2e;
+}
+body.home .auth-form-wrap h2 { color: #ffffff; }
+body.home .auth-form-wrap > p { color: rgba(255,255,255,0.6); }
+body.home .auth-right .form-group label { color: rgba(255,255,255,0.75); }
+body.home .auth-right .form-group input,
+body.home .auth-right .form-group select {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(99,102,241,0.3);
+  color: #ffffff;
+}
+body.home .auth-right .form-group input::placeholder { color: rgba(255,255,255,0.35); }
+body.home .auth-right .form-group input:focus,
+body.home .auth-right .form-group select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+  background: rgba(99,102,241,0.08);
+}
+body.home .role-toggle { background: rgba(255,255,255,0.06); }
+body.home .role-btn { color: rgba(255,255,255,0.5); }
+body.home .role-btn.active { background: rgba(99,102,241,0.25); color: #a5b4fc; box-shadow: none; }
+body.home .auth-switch { color: rgba(255,255,255,0.45); }
+body.home .auth-switch a { color: #a5b4fc; }
+body.home .form-divider::before,
+body.home .form-divider::after { background: rgba(255,255,255,0.1); }
+body.home .form-divider span { color: rgba(255,255,255,0.35); }
+body.home .forgot-link { color: #a5b4fc; }
+body.home .perk-icon { background: rgba(255,255,255,0.1); }
+
+/* ── ABOUT / CONTACT FORM INPUTS ────────────────────────── */
+body.home .form-group input,
+body.home .form-group select,
+body.home textarea {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+body.home .form-group input:focus,
+body.home .form-group select:focus,
+body.home textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
+  outline: none;
+}
+body.home .form-group label { color: var(--text-mid); }
+
+/* ── PAGE HERO (inner pages like portals, features, etc.) ── */
+body.home .page-hero {
+  background: var(--bg);
+}
+body.home .page-hero::before {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,0.18) 0%, transparent 70%);
+}
+body.home .page-hero h1 { color: var(--text); }
+body.home .page-hero p  { color: var(--text-mid); }
+
+/* Plain sections on inner pages */
+body.home .section {
+  background: var(--bg);
+}
+
+/* ── SECTION TAGS ───────────────────────────────────────── */
+body.home .section-tag {
+  background: rgba(99,102,241,0.12);
+  color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.2);
+}
+body.home .section-header h2 { color: var(--text); }
+body.home .section-header p  { color: var(--text-mid); }
+
+/* ── FEATURES SHOWCASE ──────────────────────────────────── */
+body.home .features-showcase {
+  background: #0d0d2e;
+}
+body.home .features-showcase-text .section-tag {
+  background: rgba(99,102,241,0.15);
+  color: #a5b4fc;
+  border-color: rgba(99,102,241,0.25);
+}
+body.home .features-showcase-text h2 { color: #ffffff; }
+body.home .features-showcase-text p  { color: rgba(255,255,255,0.65); }
+
+/* ── FEATURE CARDS ──────────────────────────────────────── */
+body.home .section:not(.portals):not(.pricing-section) {
+  background: var(--bg);
+}
+body.home .feature-card {
+  background: #0d0d2e;
+  border-color: rgba(99,102,241,0.2);
+}
+body.home .feature-card:hover {
+  border-color: rgba(99,102,241,0.5);
+  box-shadow: 0 8px 32px rgba(99,102,241,0.18);
+}
+body.home .feature-card h3 { color: #ffffff; }
+body.home .feature-card p  { color: rgba(255,255,255,0.65); }
+body.home .feature-icon {
+  background: rgba(99,102,241,0.15);
+}
+body.home .feature-icon i,
+body.home .feature-icon svg { stroke: #a5b4fc; }
+
+/* ── IMAGE SHOWCASE STRIP ───────────────────────────────── */
+body.home .img-showcase-label {
+  color: white;
+}
+
+/* ── PORTALS SECTION ────────────────────────────────────── */
+body.home .portals {
+  background: var(--surface);
+}
+body.home .portal-card.teacher {
+  background: var(--surface-2);
+  border-color: var(--border);
+}
+body.home .portal-card.teacher h3 { color: var(--text); }
+body.home .portal-card.teacher p  { color: var(--text-mid); }
+body.home .portal-card.teacher .portal-features li { color: var(--text-mid); }
+body.home .portal-card.teacher .portal-features li::before { color: var(--accent); }
+body.home .portal-card.parent {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  border-color: transparent;
+  box-shadow: 0 8px 40px rgba(99,102,241,0.35);
+}
+body.home .btn-wine {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+}
+body.home .btn-wine:hover { filter: brightness(1.15); }
+
+/* ── PRICING SECTION ────────────────────────────────────── */
+body.home .pricing-section { background: var(--bg); }
+body.home .pricing-card {
+  background: #0d0d2e;
+  border-color: rgba(99,102,241,0.2);
+}
+body.home .pricing-card:hover {
+  border-color: rgba(99,102,241,0.5);
+  box-shadow: 0 8px 32px rgba(99,102,241,0.18);
+}
+body.home .pricing-plan-name  { color: #ffffff; }
+body.home .pricing-plan-desc  { color: rgba(255,255,255,0.6); }
+body.home .pricing-currency   { color: #ffffff; }
+body.home .pricing-amount     { color: #ffffff; }
+body.home .pricing-per        { color: rgba(255,255,255,0.6); }
+body.home .pricing-billed-note{ color: rgba(255,255,255,0.5); }
+body.home .feat-yes           { color: rgba(255,255,255,0.9); }
+body.home .feat-no            { color: rgba(255,255,255,0.3); }
+body.home .pricing-card-featured .feat-no  { color: rgba(255,255,255,0.55); }
+body.home .pricing-card-featured .feat-no i,
+body.home .pricing-card-featured .feat-no svg { stroke: rgba(255,255,255,0.4); }
+body.home .pricing-card-featured {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  border-color: transparent;
+  box-shadow: 0 8px 48px rgba(99,102,241,0.4);
+}
+body.home .pricing-card-featured .pricing-plan-name,
+body.home .pricing-card-featured .pricing-currency,
+body.home .pricing-card-featured .pricing-amount { color: white; }
+body.home .pricing-icon-basic  { background: rgba(99,102,241,0.12); }
+body.home .pricing-icon-basic  i,
+body.home .pricing-icon-basic  svg { stroke: var(--accent); }
+body.home .pricing-icon-adv    { background: rgba(99,102,241,0.12); }
+body.home .pricing-icon-adv    i,
+body.home .pricing-icon-adv    svg { stroke: var(--accent); }
+body.home .pricing-cta-outline {
+  border-color: var(--accent); color: var(--accent);
+}
+body.home .pricing-cta-outline:hover {
+  background: var(--accent); color: white;
+}
+body.home .pricing-toggle-btn { background: var(--surface-2); }
+body.home .pricing-toggle-btn.annual {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+body.home .pricing-toggle-label { color: var(--text-mid); }
+body.home .pricing-footnote { color: var(--text-light); }
+body.home .pricing-footnote a { color: var(--accent); }
+body.home .feat-yes { color: var(--text); }
+body.home .feat-no  { color: var(--text-light); }
+body.home .feat-no i, body.home .feat-no svg { stroke: var(--surface-2); }
+
+/* ── CTA SECTION ────────────────────────────────────────── */
+body.home .cta-section {
+  background: linear-gradient(135deg, #0d0d1f 0%, #13102a 50%, #0a0a0f 100%);
+  position: relative; overflow: hidden;
+}
+body.home .cta-section::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(99,102,241,0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+body.home .cta-section h2 { color: var(--text); position: relative; z-index: 1; }
+body.home .cta-section p  { color: var(--text-mid); position: relative; z-index: 1; }
+body.home .cta-actions    { position: relative; z-index: 1; }
+body.home .btn-white {
+  background: white; color: var(--accent-dark);
+}
+body.home .btn-white:hover { box-shadow: 0 4px 20px rgba(99,102,241,0.3); }
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+body.home footer { background: #07070e; }
+body.home .footer-top-bar {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+}
+body.home .footer-school-name { color: var(--text); }
+body.home .footer-col h5 { color: var(--text); }
+body.home .footer-col a { color: var(--text-light); }
+body.home .footer-col a:hover { color: var(--accent); }
+body.home .footer-badge {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+  color: var(--text-light);
+}
+body.home .footer-social-btn {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.08);
+}
+body.home .footer-social-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+body.home .footer-bottom {
+  border-top-color: var(--border);
+}
+body.home .footer-bottom-center a { color: var(--text-light); }
+body.home .footer-bottom-center a:hover { color: var(--accent); }
+body.home .footer-dot { color: var(--text-light); }
+body.home .footer-bottom-left span { color: var(--text-light); }
+
+/* Term badges */
+body.home .footer-term-card {
+  background: var(--surface-2);
+  border-color: var(--border);
+}
+body.home .footer-term-label { color: var(--text-mid); }
+body.home .footer-term-dates { color: var(--text-light); }
+body.home .footer-term-done     { background: rgba(255,255,255,0.08); color: var(--text-light); }
+body.home .footer-term-active   { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+body.home .footer-term-upcoming { background: rgba(245,158,11,0.15); color: #fcd34d; }
+
+/* ── MOBILE (≤768px) ──────────────────────────────────── */
+@media (max-width: 768px) {
+  body.home .mobile-nav {
+    background: #0f0f18;
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+  body.home .mobile-nav a {
+    color: rgba(255,255,255,0.65);
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+  body.home .auth-right {
+    background: #0d0d2e;
+    width: 100%;
+  }
+}
+
+/* ── SMALL MOBILE (≤480px) ────────────────────────────── */
+@media (max-width: 480px) {
+  body.home .stats-strip {
+    background: var(--surface);
+  }
+  body.home .about-page-hero {
+    padding: 100px 4% 48px;
+    text-align: center;
+  }
+  body.home .about-hero-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  body.home .about-hero-cta .btn-primary,
+  body.home .about-hero-cta .btn-ghost {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+  body.home .pricing-section { background: var(--bg); }
+  body.home .portals { background: var(--surface); }
+  body.home .footer-top-bar {
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+  }
+  body.home .footer-top-item { color: white; }
+}

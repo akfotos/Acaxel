@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="home">
+<canvas id="auth-canvas"></canvas>
+<div class="auth-page">
+
+  <!-- LEFT PANEL -->
+  <div class="auth-left">
+    <a href="index.html" class="auth-back-btn auth-back-btn--left"><i data-lucide="arrow-left"></i> Back to Homepage</a>
+    <a href="index.html" class="nav-brand" style="text-decoration:none;">
+      <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
+      <span class="nav-name">Acaxel</span>
+    </a>
+    <h2>Welcome Back</h2>
+    <p>Sign in to access your portal and stay connected with Acaxel School.</p>
+    <div class="auth-perks">
+      <div class="auth-perk">
+        <div class="perk-icon"><i data-lucide="credit-card"></i></div>
+        <div class="perk-text"><h5>Fee Tracking</h5><p>View balances and payment history</p></div>
+      </div>
+      <div class="auth-perk">
+        <div class="perk-icon"><i data-lucide="bar-chart-2"></i></div>
+        <div class="perk-text"><h5>Academic Records</h5><p>Grades, attendance, and reports</p></div>
+      </div>
+      <div class="auth-perk">
+        <div class="perk-icon"><i data-lucide="message-square"></i></div>
+        <div class="perk-text"><h5>Direct Messaging</h5><p>Communicate with teachers or parents</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="auth-right">
+    <a href="index.html" class="auth-back-btn auth-back-btn--mobile"><i data-lucide="arrow-left"></i> Back to Homepage</a>
+    <div class="auth-form-wrap">
+      <h2>Sign In</h2>
+      <p>Access your Acaxel portal</p>
+
+      <!-- ROLE TOGGLE -->
+      <div class="role-toggle">
+        <button class="role-btn active" data-role="parent" onclick="setRole('parent', this)">Parent</button>
+        <button class="role-btn" data-role="student" onclick="setRole('student', this)">Student</button>
+        <button class="role-btn" data-role="teacher" onclick="setRole('teacher', this)">Teacher</button>
+        <button class="role-btn" data-role="admin" onclick="setRole('admin', this)">Admin</button>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password <a href="#" class="forgot-link">Forgot password?</a></label>
+          <input type="password" id="password" placeholder="Enter your password" required />
+        </div>
+        <input type="hidden" id="loginRole" value="parent" />
+        <button type="submit" class="form-submit">Sign In</button>
+      </form>
+
+      <div class="form-divider"><span>try a demo account</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button class="btn-ghost" style="padding:10px;font-size:0.82rem;" onclick="demoLogin('parent')">Demo Parent</button>
+        <button class="btn-ghost" style="padding:10px;font-size:0.82rem;" onclick="demoLogin('student')">Demo Student</button>
+        <button class="btn-ghost" style="padding:10px;font-size:0.82rem;" onclick="demoLogin('teacher')">Demo Teacher</button>
+        <button class="btn-ghost" style="padding:10px;font-size:0.82rem;" onclick="demoLogin('admin')">Demo Admin</button>
+      </div>
+
+      <p class="auth-switch">Don't have an account? <a href="signup.html">Sign up here</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script>lucide.createIcons();</script>
+<script>
+(function(){
+  const c=document.getElementById('auth-canvas'),ctx=c.getContext('2d');
+  let W,H,pts;
+  const N=72,CONN=120,COLORS=['rgba(99,102,241,','rgba(139,92,246,','rgba(167,139,250,'];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  function mkPt(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*2+1,c:COLORS[Math.floor(Math.random()*COLORS.length)]};}
+  function init(){resize();pts=Array.from({length:N},mkPt);}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<N;i++){
+      const a=pts[i];
+      for(let j=i+1;j<N;j++){
+        const b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<CONN){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=a.c+(1-d/CONN)*0.18+')';ctx.lineWidth=.8;ctx.stroke();}
+      }
+      ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
+      ctx.fillStyle=a.c+'0.55)';ctx.fill();
+      a.x+=a.vx;a.y+=a.vy;
+      if(a.x<0||a.x>W)a.vx*=-1;
+      if(a.y<0||a.y>H)a.vy*=-1;
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();});
+  init();draw();
+})();
+</script>
+</body>
+</html>
