@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/theme.css?v=13" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/school-data.js"></script>
 </head>
 <body>
 <div class="dash-body">
@@ -213,7 +214,7 @@
         <div class="adm-page-header">
           <div>
             <h2 class="adm-page-title">Good morning, Dorcas Matilda Kusi</h2>
-            <p class="adm-page-sub">Here's what's happening at Acaxel School today — Term 2, 2026.</p>
+            <p class="adm-page-sub" id="adminWelcomeSub">Here's what's happening at Acaxel School today — Term 2, 2026.</p>
           </div>
           <div class="adm-page-actions">
             <button class="btn-sm outline" onclick="switchTab('reports',document.querySelector('[onclick*=reports]'))"><i data-lucide="download"></i> Export Report</button>
@@ -723,7 +724,7 @@
           <div>
             <div class="bill-preview">
               <div class="bill-preview-header">
-                <h3>Acaxel School</h3>
+                <h3 id="adminProfileSchoolName">Acaxel School</h3>
                 <div style="font-size:0.78rem;color:var(--text-light);">Accra, Ghana &nbsp;|&nbsp; Term 2, 2025/2026</div>
                 <div style="font-size:0.82rem;margin-top:8px;font-weight:600;" id="previewTitle">Fee Invoice Preview</div>
               </div>
@@ -1338,7 +1339,7 @@
             <div class="card-body">
               <div class="form-field">
                 <label class="input-label">School Name</label>
-                <input class="input-field" type="text" value="Acaxel School" />
+                <input class="input-field" id="adminSettingsSchoolName" type="text" value="Acaxel School" />
               </div>
               <div class="form-field">
                 <label class="input-label">Address</label>
@@ -2310,7 +2311,7 @@
 
             <!-- QR card -->
             <div class="ci-gate-qr-card" id="adminQrPrintArea">
-              <div class="ci-qr-school-name">Acaxel School</div>
+              <div class="ci-qr-school-name" id="adminQrSchoolName">Acaxel School</div>
               <div id="adminGateQR"></div>
               <div class="ci-gate-qr-label" id="adminQrLabelDisplay">Acaxel School — Main Gate</div>
               <div class="ci-qr-validity" id="adminQrValidityDisplay">Valid: 07:00 – 08:30</div>
@@ -2369,5 +2370,32 @@
 <script src="js/offline-clockin.js"></script>
 <script src="js/clockin.js"></script>
 <script src="js/tt-notify.js"></script>
+<script>
+(function() {
+  const stored = localStorage.getItem('hc_school_registered');
+  const school = stored ? JSON.parse(stored) : (window.schoolData ? schoolData.getSchoolInfo() : { name: 'Acaxel School' });
+
+  function setText(selector, value) {
+    const el = document.querySelector(selector);
+    if (el) el.textContent = value;
+  }
+  function setValue(selector, value) {
+    const el = document.querySelector(selector);
+    if (el) el.value = value;
+  }
+  function setPlaceholder(selector, value) {
+    const el = document.querySelector(selector);
+    if (el) el.placeholder = value;
+  }
+
+  setText('#adminWelcomeSub', `Here's what's happening at ${school.name || 'Acaxel School'} today.`);
+  setText('#adminProfileSchoolName', school.name || 'Acaxel School');
+  setValue('#adminSettingsSchoolName', school.name || 'Acaxel School');
+  setText('#adminQrSchoolName', school.name || 'Acaxel School');
+  setText('#adminQrLabelDisplay', `${school.name || 'Acaxel School'} — Main Gate`);
+  setValue('#adminQrLabel', `${school.name || 'Acaxel School'} — Main Gate`);
+  setPlaceholder('#nlTitle', `${school.name || 'Acaxel School'} Newsletter — May 2026 Issue 3`);
+})();
+</script>
 </body>
 </html>

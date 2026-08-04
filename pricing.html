@@ -151,6 +151,16 @@
   <p class="pricing-footnote">All prices in GHS (Ghana Cedis). School pricing available for multi-campus setups. <a href="contact.html">Contact us</a> for a custom quote.</p>
 </section>
 
+<!-- HIGHCREST FEE SCHEDULE -->
+<section class="section" id="feeScheduleSection" style="padding-top:0;">
+  <div class="section-header">
+    <div class="section-tag">Highcrest School</div>
+    <h2>2025/26 Fee Schedule</h2>
+    <p>Official class-level fee schedule imported from the Highcrest School register. Data is pulled from <code>js/school-data.js</code> and can be loaded directly from the Excel workbook.</p>
+  </div>
+  <div id="feeScheduleTable"></div>
+</section>
+
 <!-- FAQ -->
 <section class="section">
   <div class="section-header">
@@ -253,7 +263,11 @@
   </div>
 </footer>
 
+<script src="js/school-data.js"></script>
 <script src="js/main.js"></script>
-<script>lucide.createIcons();</script>
+<script>
+  lucide.createIcons();
+  if (window.schoolData) schoolData.renderFeeScheduleTable('#feeScheduleTable');
+</script>
 </body>
 </html>

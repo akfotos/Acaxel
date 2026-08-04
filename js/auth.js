@@ -14,6 +14,23 @@ const demoUsers = {
   admin:   { name: 'Mrs. Grace Acheampong', email: 'grace@demo.com' }
 };
 
+// Default school info (Highcrest School from the Excel workbook)
+const defaultSchoolInfo = {
+  name: 'Highcrest School',
+  code: 'HCS-2526-01',
+  shortName: 'Highcrest',
+  motto: 'Nurturing Excellence, Building Character.',
+  curriculum: 'Oxford International Curriculum',
+  address: 'Adentan, Accra',
+  city: 'Accra',
+  country: 'Ghana',
+  type: 'Combined (JHS + SHS)',
+  position: 'Principal',
+  adminName: demoUsers.admin.name,
+  adminEmail: demoUsers.admin.email,
+  registeredAt: new Date().toISOString()
+};
+
 /* ── helpers ────────────────────────────────────────────── */
 function adminIsRegistered() {
   return !!localStorage.getItem('hc_school_registered');
@@ -303,14 +320,15 @@ function handleSignup(e) {
 
   // Save school info when admin registers
   if (role === 'admin') {
-    const schoolName = document.getElementById('schoolName')?.value || 'My School';
-    const schoolCode = document.getElementById('schoolCode')?.value || '';
-    const schoolType = document.getElementById('schoolType')?.value || '';
-    const position   = document.getElementById('adminRole')?.value  || '';
+    const schoolName = document.getElementById('schoolName')?.value || defaultSchoolInfo.name;
+    const schoolCode = document.getElementById('schoolCode')?.value || defaultSchoolInfo.code;
+    const schoolType = document.getElementById('schoolType')?.value || defaultSchoolInfo.type;
+    const position   = document.getElementById('adminRole')?.value  || defaultSchoolInfo.position;
     localStorage.setItem('hc_school_registered', JSON.stringify({
-      name: schoolName, code: schoolCode, type: schoolType,
+      ...defaultSchoolInfo,
+      name: schoolName, code: schoolCode, type: schoolType, position,
       adminName: userData.name, adminEmail: userData.email,
-      position, registeredAt: new Date().toISOString(),
+      registeredAt: new Date().toISOString(),
     }));
   }
 
@@ -321,13 +339,9 @@ function handleSignup(e) {
 /* ── Demo login ──────────────────────────────────────────── */
 function demoLogin(role) {
   const user = demoUsers[role] || demoUsers.parent;
-  // Demo admin auto-registers a demo school so other demos work too
+  // Demo admin auto-registers the Highcrest School from the Excel workbook
   if (!adminIsRegistered()) {
-    localStorage.setItem('hc_school_registered', JSON.stringify({
-      name: 'Acaxel Demo School', code: 'DEMO-001', type: 'Combined (JHS + SHS)',
-      adminName: demoUsers.admin.name, adminEmail: demoUsers.admin.email,
-      position: 'Principal', registeredAt: new Date().toISOString(),
-    }));
+    localStorage.setItem('hc_school_registered', JSON.stringify(defaultSchoolInfo));
   }
   localStorage.setItem('hc_user', JSON.stringify({ ...user, role }));
   window.location.href = dashboardMap[role] || 'parent-dashboard.html';
