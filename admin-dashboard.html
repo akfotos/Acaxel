@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/theme.css?v=13" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/highcrest-students.js"></script>
   <script src="js/school-data.js"></script>
 </head>
 <body>
@@ -399,7 +400,7 @@
         <div class="adm-page-header">
           <div>
             <h2 class="adm-page-title">Students</h2>
-            <p class="adm-page-sub">1,240 enrolled — Term 2, 2026</p>
+            <p class="adm-page-sub" id="adminStudentsSub">Loading student records…</p>
           </div>
           <div class="adm-page-actions">
             <button class="btn-sm outline" onclick="exportStudents()"><i data-lucide="download"></i> Export CSV</button>
@@ -411,7 +412,7 @@
         <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
           <div class="adm-kpi-card">
             <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="users" style="stroke:#6366f1;"></i></div>
-            <div class="adm-kpi-body"><div class="adm-kpi-val">1,240</div><div class="adm-kpi-lbl">Total Enrolled</div></div>
+            <div class="adm-kpi-body"><div class="adm-kpi-val" id="adminTotalStudents">0</div><div class="adm-kpi-lbl">Total Enrolled</div></div>
           </div>
           <div class="adm-kpi-card">
             <div class="adm-kpi-icon" style="background:#f0fdf4;"><i data-lucide="user-check" style="stroke:#16a34a;"></i></div>
@@ -433,14 +434,8 @@
             <i data-lucide="search"></i>
             <input type="text" placeholder="Search by name, ID, class..." oninput="filterStudents(this.value)" id="studentSearch" />
           </div>
-          <div class="adm-filter-pills">
+          <div class="adm-filter-pills" id="adminClassFilters">
             <button class="adm-filter-pill active" onclick="filterByClass('all',this)">All Classes</button>
-            <button class="adm-filter-pill" onclick="filterByClass('jss1',this)">JSS 1</button>
-            <button class="adm-filter-pill" onclick="filterByClass('jss2',this)">JSS 2</button>
-            <button class="adm-filter-pill" onclick="filterByClass('jss3',this)">JSS 3</button>
-            <button class="adm-filter-pill" onclick="filterByClass('sss1',this)">SSS 1</button>
-            <button class="adm-filter-pill" onclick="filterByClass('sss2',this)">SSS 2</button>
-            <button class="adm-filter-pill" onclick="filterByClass('sss3',this)">SSS 3</button>
           </div>
         </div>
 
@@ -450,14 +445,7 @@
               <table id="studentTable">
                 <thead><tr><th>#</th><th>Student Name</th><th>Student ID</th><th>Class</th><th>Parent / Guardian</th><th>Attendance</th><th>Fee Status</th><th>Actions</th></tr></thead>
                 <tbody id="studentTableBody">
-                  <tr data-class="jss2"><td>1</td><td><strong>Adaeze Okonkwo</strong></td><td>HC/2024/042</td><td>JSS 2A</td><td>Mrs. Okonkwo</td><td>94%</td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
-                  <tr data-class="jss2"><td>2</td><td><strong>Emeka Nwosu</strong></td><td>HC/2024/015</td><td>JSS 2A</td><td>Mr. Nwosu</td><td>88%</td><td><span class="badge badge-overdue">Overdue</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
-                  <tr data-class="jss2"><td>3</td><td><strong>Fatima Aliyu</strong></td><td>HC/2024/023</td><td>JSS 2A</td><td>Mrs. Aliyu</td><td>96%</td><td><span class="badge badge-pending">Partial</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
-                  <tr data-class="jss2"><td>4</td><td><strong>Tunde Bakare</strong></td><td>HC/2024/031</td><td>JSS 2A</td><td>Mr. Bakare</td><td>79%</td><td><span class="badge badge-overdue">Overdue</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
-                  <tr data-class="jss1"><td>5</td><td><strong>Chukwuemeka Obi</strong></td><td>HC/2025/008</td><td>JSS 1B</td><td>Mr. Obi</td><td>91%</td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
-                  <tr data-class="sss1"><td>6</td><td><strong>Kwame Asante</strong></td><td>HC/2023/019</td><td>SSS 1B</td><td>Mrs. Asante</td><td>97%</td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
-                  <tr data-class="sss2"><td>7</td><td><strong>Amina Sule</strong></td><td>HC/2022/027</td><td>SSS 2A</td><td>Mrs. Sule</td><td>85%</td><td><span class="badge badge-paid">Paid</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
-                  <tr data-class="jss3"><td>8</td><td><strong>Ifunanya Obi</strong></td><td>HC/2023/044</td><td>JSS 3A</td><td>Dr. Obi</td><td>93%</td><td><span class="badge badge-pending">Partial</span></td><td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td></tr>
+                  <tr><td colspan="8" style="text-align:center;padding:24px;color:var(--text-mid);">Loading student records…</td></tr>
                 </tbody>
               </table>
             </div>
@@ -2370,6 +2358,72 @@
 <script src="js/offline-clockin.js"></script>
 <script src="js/clockin.js"></script>
 <script src="js/tt-notify.js"></script>
+<script>
+(function() {
+  // Populate student records from Highcrest Excel data
+  if (window.schoolData) {
+    const students = schoolData.getStudents();
+    const totalEl = document.getElementById('adminTotalStudents');
+    const subEl = document.getElementById('adminStudentsSub');
+    const tbody = document.getElementById('studentTableBody');
+    const filterContainer = document.getElementById('adminClassFilters');
+
+    if (totalEl) totalEl.textContent = students.length.toLocaleString();
+    if (subEl) subEl.textContent = `${students.length.toLocaleString()} enrolled — Term 3, 2026`;
+
+    const classes = schoolData.getUniqueClasses();
+    if (filterContainer && classes.length) {
+      filterContainer.innerHTML = '<button class="adm-filter-pill active" onclick="filterByClass(\'all\',this)">All Classes</button>' +
+        classes.map(c => `<button class="adm-filter-pill" onclick="filterByClass('${c}',this)">${c}</button>`).join('');
+    }
+
+    function renderStudents(filterClass, searchTerm) {
+      if (!tbody) return;
+      let list = students;
+      if (filterClass && filterClass !== 'all') list = list.filter(s => s.class === filterClass);
+      if (searchTerm) {
+        const term = searchTerm.toLowerCase();
+        list = list.filter(s => s.fullName.toLowerCase().includes(term) || (s.class && s.class.toLowerCase().includes(term)));
+      }
+      if (!list.length) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--text-mid);">No matching students.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = list.map((s, i) => `
+        <tr data-class="${(s.class || '').toLowerCase().replace(/\s+/g, '-')}">
+          <td>${i + 1}</td>
+          <td><strong>${s.fullName}</strong></td>
+          <td>HC/2025/${String(i + 1).padStart(3, '0')}</td>
+          <td>${s.class || '-'}</td>
+          <td>-</td>
+          <td>-</td>
+          <td><span class="badge badge-paid">Paid</span></td>
+          <td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td>
+        </tr>
+      `).join('');
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // Override filter/search functions
+    window._currentStudentFilter = 'all';
+    window._renderStudents = renderStudents;
+    window.filterByClass = function(cls, btn) {
+      window._currentStudentFilter = cls;
+      if (btn && btn.parentElement) {
+        btn.parentElement.querySelectorAll('.adm-filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      const search = document.getElementById('studentSearch')?.value || '';
+      renderStudents(cls, search);
+    };
+    window.filterStudents = function(term) {
+      renderStudents(window._currentStudentFilter, term);
+    };
+
+    renderStudents('all', '');
+  }
+})();
+</script>
 <script>
 (function() {
   const stored = localStorage.getItem('hc_school_registered');

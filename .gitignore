@@ -17,3 +17,9 @@ node_modules/
 .vscode/
 *.swp
 *.swo
+
+# Extraction temp files
+_tmp_*.xml
+sharedStrings.xml
+shared_strings_list.txt
+sheet*_debug.xml

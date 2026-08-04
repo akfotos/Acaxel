@@ -1048,6 +1048,46 @@ body.home .legal-page-section {
   .school-data-table th, .school-data-table td { white-space: nowrap; }
 }
 
+/* Student list rendered by school-data.js */
+.school-student-list {
+  list-style: none;
+  margin: 0; padding: 0;
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid var(--border-warm);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow-warm);
+}
+.school-student-list li {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-warm);
+  font-size: 0.9rem;
+  color: var(--charcoal);
+}
+.school-student-list li:last-child { border-bottom: none; }
+.school-student-list li:nth-child(even) { background: rgba(132, 169, 140, 0.04); }
+.school-student-list .ss-name { font-weight: 600; color: var(--forest); }
+.school-student-list .ss-meta {
+  font-size: 0.78rem; color: var(--mid);
+  background: var(--sand);
+  padding: 3px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.school-class-filter {
+  width: 100%; max-width: 260px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-warm);
+  border-radius: 10px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 12px center;
+  color: var(--charcoal);
+  font-size: 0.9rem;
+  -webkit-appearance: none; -moz-appearance: none; appearance: none;
+}
+
 /* Demo buttons on login */
 body.home .auth-right .btn-ghost {
   border-color: var(--border-warm); color: var(--forest);

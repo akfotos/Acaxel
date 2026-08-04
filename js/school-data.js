@@ -82,7 +82,7 @@
     ],
 
     // Optional list of students ready for import from a register
-    students: []
+    students: (typeof highcrestStudents !== 'undefined') ? highcrestStudents : []
   };
 
   // In-memory store (clone of defaults)
@@ -106,8 +106,6 @@
     getFeeSchedule: () => _data.feeSchedule,
 
     getFullYearRegister: () => _data.fullYearRegister,
-
-    getStudents: () => _data.students,
 
     // ----------------------------------------------------------------
     // Loaders (call these with arrays exported from the Excel sheets)
@@ -259,6 +257,68 @@
         fullYearRegister: _data.fullYearRegister,
         students: _data.students
       }, null, 2);
+    },
+
+    // ----------------------------------------------------------------
+    // Students
+    // ----------------------------------------------------------------
+    getStudents: function () {
+      return _data.students;
+    },
+
+    getStudentsByClass: function (className) {
+      return _data.students.filter(s => s.class === className);
+    },
+
+    getStudentsByBirdHouse: function (house) {
+      return _data.students.filter(s => s.birdHouse === house);
+    },
+
+    getUniqueClasses: function () {
+      return [...new Set(_data.students.map(s => s.class).filter(Boolean))];
+    },
+
+    getUniqueBirdHouses: function () {
+      return [...new Set(_data.students.map(s => s.birdHouse).filter(Boolean))];
+    },
+
+    renderStudentList: function (containerSelector, opts = {}) {
+      const container = document.querySelector(containerSelector);
+      if (!container) return;
+      const students = opts.class ? this.getStudentsByClass(opts.class) : _data.students;
+      const limit = opts.limit || students.length;
+      const showClass = opts.showClass !== false;
+      const showHouse = opts.showHouse !== false;
+
+      if (!students.length) {
+        container.innerHTML = '<p class="school-data-empty">No student records loaded.</p>';
+        return;
+      }
+
+      const displayed = students.slice(0, limit);
+      let html = '<ul class="school-student-list">';
+      displayed.forEach(s => {
+        const meta = [showClass ? s.class : null, showHouse ? s.birdHouse : null].filter(Boolean).join(' · ');
+        html += `<li><span class="ss-name">${s.fullName}</span>${meta ? `<span class="ss-meta">${meta}</span>` : ''}</li>`;
+      });
+      html += '</ul>';
+      if (students.length > limit) {
+        html += `<p class="school-data-empty" style="margin-top:10px;">Showing ${limit} of ${students.length} students.</p>`;
+      }
+      container.innerHTML = html;
+    },
+
+    renderStudentClassFilter: function (containerSelector, onChange) {
+      const container = document.querySelector(containerSelector);
+      if (!container) return;
+      const classes = this.getUniqueClasses();
+      let html = '<select class="school-class-filter"><option value="">All classes</option>';
+      classes.forEach(c => { html += `<option value="${c}">${c}</option>`; });
+      html += '</select>';
+      container.innerHTML = html;
+      container.querySelector('select').addEventListener('change', e => {
+        if (typeof onChange === 'function') onChange(e.target.value);
+      });
     }
   };
 
