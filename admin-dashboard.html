@@ -228,7 +228,7 @@
           <div class="adm-kpi-card">
             <div class="adm-kpi-icon" style="background:rgba(99,102,241,0.12);"><i data-lucide="users" style="stroke:#6366f1;"></i></div>
             <div class="adm-kpi-body">
-              <div class="adm-kpi-val" id="overviewTotalStudents">199</div>
+              <div class="adm-kpi-val" id="overviewTotalStudents">80</div>
               <div class="adm-kpi-lbl">Total Students</div>
               <div class="adm-kpi-pill green">Highcrest 2025/26</div>
             </div>
@@ -2344,6 +2344,12 @@
   if (window.schoolData) {
     const students = schoolData.getStudents();
     const totals = schoolData.getFullYearTotals();
+    const arrearsList = schoolData.getArrears ? schoolData.getArrears() : [];
+    const arrearsWordSets = arrearsList.map(a => new Set((a.pupilName || '').toLowerCase().split(/\s+/).filter(Boolean)));
+    function hasArrears(fullName) {
+      const nameWords = new Set((fullName || '').toLowerCase().split(/\s+/).filter(Boolean));
+      return arrearsWordSets.some(wordSet => [...wordSet].every(w => nameWords.has(w)));
+    }
     const enrolledTotal = totals ? totals.totalEnrolled : students.length;
     const totalEl = document.getElementById('adminTotalStudents');
     const subEl = document.getElementById('adminStudentsSub');
@@ -2371,7 +2377,12 @@
         tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--text-mid);">No matching students.</td></tr>';
         return;
       }
-      tbody.innerHTML = list.map((s, i) => `
+      tbody.innerHTML = list.map((s, i) => {
+        const owesArrears = hasArrears(s.fullName);
+        const statusBadge = owesArrears
+          ? '<span class="badge badge-pending">Arrears</span>'
+          : '<span class="badge badge-paid">Paid</span>';
+        return `
         <tr data-class="${(s.class || '').toLowerCase().replace(/\s+/g, '-')}">
           <td>${i + 1}</td>
           <td><strong>${s.fullName}</strong></td>
@@ -2379,10 +2390,11 @@
           <td>${s.class || '-'}</td>
           <td>-</td>
           <td>-</td>
-          <td><span class="badge badge-paid">Paid</span></td>
+          <td>${statusBadge}</td>
           <td class="adm-row-actions"><button class="btn-icon" title="View"><i data-lucide="eye"></i></button><button class="btn-icon" title="Delete" onclick="deleteStudentRow(this)"><i data-lucide="trash-2"></i></button></td>
         </tr>
-      `).join('');
+      `;
+      }).join('');
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
