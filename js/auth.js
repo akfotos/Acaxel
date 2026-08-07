@@ -9,7 +9,7 @@ const dashboardMap = {
 // Demo user map
 const demoUsers = {
   parent:  { name: 'Mrs. Adaeze Okonkwo',  email: 'adaeze@demo.com' },
-  student: { name: 'Kwame Mensah',          email: 'kwame@demo.com' },
+  student: { name: 'Asare Tony Papa Kwesi', email: 'kwesi@demo.com' },
   teacher: { name: 'Mr. Adeyemi Taiwo',     email: 'adeyemi@demo.com' },
   admin:   { name: 'Mrs. Grace Acheampong', email: 'grace@demo.com' }
 };
