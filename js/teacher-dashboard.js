@@ -196,10 +196,8 @@ function saveGrades() { showToast('Grades saved successfully!'); }
 
 // ===== ATTENDANCE =====
 const students = [
-  'Djaba Emily', 'Anaman Sam Darkoh', 'Benneh Gregoria', 'Bekoe Calvin Darko',
-  'Morkeh Michelle', 'Antwi Brion', 'Owusu Okyem Emmanuella', 'Mortty Elikem Galen',
-  'Ayeh-Kumi Fiifi Jody', 'Boamah Nakie Pearl', 'Kanati Ava Bubune', 'Lartey Madeeha Larley',
-  'Monney Aseda', 'Obeng Nana Osei Kwasi Agyemang Jayden', 'Agyemang Nunana Khloe'
+  'Afful Ewura-Yaa Nkunim', 'Antwi Brion', 'Appiah Zakiel Nana Kwame', 'Kanati Jesse Nuna',
+  'Morkeh Michelle', 'Mortty Gaius Eyiram', 'Tagoe Henry', 'Tsikata Eli-Vava Sebastian'
 ];
 
 function buildAttendanceGrid() {

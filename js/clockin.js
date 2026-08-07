@@ -40,8 +40,8 @@
 
   /* ── Sample children for parent dashboard ─────────────────── */
   const PARENT_CHILDREN = [
-    { id: 'child-001', name: 'Djaba Emily',    cls: 'Grade 1', avatar: 'DE' },
-    { id: 'child-002', name: 'Morkeh Bradley', cls: 'KG 2',    avatar: 'MB' },
+    { id: 'child-001', name: 'Afful Ewura-Yaa Nkunim', cls: 'Grade 2', avatar: 'AN' },
+    { id: 'child-002', name: 'Morkeh Bradley',          cls: 'KG 2',    avatar: 'MB' },
   ];
 
   /* ── Sample enrolled students for admin KPI ───────────────── */
@@ -97,7 +97,7 @@
       childId:   child.id,
       childName: child.name,
       cls:       child.cls,
-      parent:    'Mrs. Djaba',
+      parent:    'Mrs. Afful',
       date:      today,
       time:      time,
       status:    isLate(time) ? 'late' : 'on-time',
@@ -564,7 +564,7 @@
     const demo = [
       { id:'d1', childId:'c001', childName:'Boakye Wren Okatakyie',     cls:'Nursery 2', parent:'Mr. Boakye',      date:today, time:'07:42:10', status:'on-time', method:'QR Scan' },
       { id:'d2', childId:'c002', childName:'Sangber-Dery Jayden Mwinviel', cls:'Nursery 2', parent:'Mrs. Sangber-Dery', date:today, time:'07:55:30', status:'on-time', method:'QR Scan' },
-      { id:'d3', childId:'c003', childName:'Djaba Emily',              cls:'Grade 1',   parent:'Mrs. Djaba',      date:today, time:'08:12:45', status:'late',    method:'Manual Code' },
+      { id:'d3', childId:'c003', childName:'Afful Ewura-Yaa Nkunim',   cls:'Grade 2',   parent:'Mrs. Afful',      date:today, time:'08:12:45', status:'late',    method:'Manual Code' },
       { id:'d4', childId:'c004', childName:'Bekoe Nana Yaa',           cls:'Nursery 2', parent:'Mr. Bekoe',       date:today, time:'07:38:00', status:'on-time', method:'QR Scan' },
       { id:'d5', childId:'c005', childName:'Adugbire Mbo Ibiza',       cls:'Nursery 2', parent:'Mr. Adugbire',    date:today, time:'08:25:15', status:'late',    method:'QR Scan' },
     ];
