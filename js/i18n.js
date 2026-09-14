@@ -146,7 +146,7 @@
   }
 
   function init() {
-    injectToggle();
+    localStorage.setItem(LANG_KEY, 'en');
     applyLanguage();
   }
 
