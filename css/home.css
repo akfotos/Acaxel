@@ -1966,8 +1966,9 @@ body.home .portals-grid-4 { gap: 20px; }
 body.home .portal-card-img { background: #0f172a; border: 1px solid rgba(59,130,246,.2); }
 body.home .portal-card-img h3 { color: #fff; }
 body.home .portal-card-img p { color: rgba(255,255,255,.7); }
-body.home .portal-card-img .portal-features li { color: rgba(255,255,255,.8); }
-body.home .portal-card-img .portal-features li::before { color: #60a5fa; }
+body.home .portal-card-img .portal-features li { color: rgba(255,255,255,.8); align-items: center; }
+body.home .portal-card-img .portal-features li::before { display: none; }
+body.home .portal-card-img .portal-features li i { width: 16px; height: 16px; stroke: #60a5fa; color: #60a5fa; flex-shrink: 0; }
 body.home .portal-card-tag { color: #60a5fa; }
 body.home .portal-card-tag i { stroke: #60a5fa; }
 body.home .btn-white { background: #fff; color: #0f172a; }
