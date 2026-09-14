@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dashboard.css" />
   <link rel="stylesheet" href="css/theme.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#722F37" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -25,46 +27,46 @@
       <div class="sidebar-section-label">Menu</div>
       <button class="nav-item active" onclick="switchTab('overview',this)">
         <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
-        <span class="nav-item-label">Overview</span>
+        <span class="nav-item-label" data-i18n="side.overview">Overview</span>
       </button>
       <button class="nav-item" onclick="switchTab('grades',this)">
         <span class="nav-icon"><i data-lucide="bar-chart-2"></i></span>
-        <span class="nav-item-label">My Grades</span>
+        <span class="nav-item-label" data-i18n="side.mygrades">My Grades</span>
       </button>
       <button class="nav-item" onclick="switchTab('attendance',this)">
         <span class="nav-icon"><i data-lucide="calendar-check"></i></span>
-        <span class="nav-item-label">Attendance</span>
+        <span class="nav-item-label" data-i18n="side.attendance">Attendance</span>
       </button>
       <button class="nav-item" onclick="switchTab('timetable',this)">
         <span class="nav-icon"><i data-lucide="clock"></i></span>
-        <span class="nav-item-label">Timetable</span>
+        <span class="nav-item-label" data-i18n="side.timetable">Timetable</span>
       </button>
       <button class="nav-item" onclick="switchTab('assignments',this)">
         <span class="nav-icon"><i data-lucide="file-text"></i></span>
-        <span class="nav-item-label">Assignments</span>
+        <span class="nav-item-label" data-i18n="side.assignments">Assignments</span>
         <span class="nav-badge">3</span>
       </button>
       <button class="nav-item" onclick="switchTab('fees',this)">
         <span class="nav-icon"><i data-lucide="credit-card"></i></span>
-        <span class="nav-item-label">Fee Status</span>
+        <span class="nav-item-label" data-i18n="side.feestatus">Fee Status</span>
       </button>
       <button class="nav-item" onclick="switchTab('messages',this)">
         <span class="nav-icon"><i data-lucide="message-square"></i></span>
-        <span class="nav-item-label">Messages</span>
+        <span class="nav-item-label" data-i18n="side.messages">Messages</span>
         <span class="nav-badge">2</span>
       </button>
       <button class="nav-item" onclick="switchTab('clockin',this)">
         <span class="nav-icon"><i data-lucide="scan-line"></i></span>
-        <span class="nav-item-label">Clock-In</span>
+        <span class="nav-item-label" data-i18n="side.clockin">Clock-In</span>
         <span class="nav-badge" id="stuCiStatusBadge" style="display:none;">✓</span>
       </button>
       <button class="nav-item" onclick="switchTab('support',this)">
         <span class="nav-icon"><i data-lucide="life-buoy"></i></span>
-        <span class="nav-item-label">Support</span>
+        <span class="nav-item-label" data-i18n="side.support">Support</span>
       </button>
       <button class="nav-item" onclick="switchTab('profile',this)">
         <span class="nav-icon"><i data-lucide="user"></i></span>
-        <span class="nav-item-label">My Profile</span>
+        <span class="nav-item-label" data-i18n="side.myprofile">My Profile</span>
       </button>
     </nav>
     <div class="sidebar-footer">
@@ -74,7 +76,7 @@
       </button>
       <button class="sidebar-logout-btn" onclick="logout()">
         <i data-lucide="log-out"></i>
-        <span class="sidebar-logout-label">Sign Out</span>
+        <span class="sidebar-logout-label" data-i18n="btn.signout">Sign Out</span>
       </button>
     </div>
   </aside>
@@ -366,6 +368,7 @@
           <div style="display:flex;gap:8px;">
             <button class="stu-term-tab active" onclick="selectTerm(this,'t2')">Term 2</button>
             <button class="stu-term-tab" onclick="selectTerm(this,'t1')">Term 1</button>
+            <button class="btn-sm outline" onclick="printMyReportCard()"><i data-lucide="file-text"></i> Print Report Card</button>
           </div>
         </div>
 
@@ -802,6 +805,9 @@
             </div>
           </div>
         </div>
+
+        <!-- NOTIFICATION PREFERENCES (rendered by js/notification-prefs.js) -->
+        <div id="notifyPrefsContainer" style="margin-top:20px;"></div>
 
       </div>
     </div>
@@ -1259,6 +1265,11 @@
 
 <script src="js/main.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/momo-payment.js"></script>
+<script src="js/report-card.js"></script>
+<script src="js/notification-prefs.js"></script>
+<script src="js/i18n.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => hcNotifyPrefs.renderInto('#notifyPrefsContainer'));</script>
 <script src="js/theme-panel.js"></script>
 <script src="js/ai-assistant.js"></script>
 <script src="js/support.js"></script>
@@ -1296,6 +1307,36 @@ function selectTerm(btn, id) {
     const el = document.getElementById(d);
     if (el) el.style.display = (d === 'grades-' + id) ? '' : 'none';
   });
+}
+
+// ── Print my report card from the visible term table ──
+function printMyReportCard() {
+  const activeTerm = document.querySelector('.stu-term-tab.active')?.textContent.trim() || 'Term 2';
+  const visibleTable = document.querySelector('#grades-t2:not([style*="display: none"]) table, #grades-t1:not([style*="display: none"]) table')
+    || document.querySelector('#grades-t2 table');
+  const rows = visibleTable ? visibleTable.querySelectorAll('tbody tr') : [];
+  const subjects = [];
+  rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    const name = cells[0]?.textContent.trim();
+    const totalText = cells[5]?.textContent.trim();
+    const total = Number(totalText);
+    if (name && !isNaN(total)) subjects.push({ name, total });
+  });
+
+  const user = JSON.parse(localStorage.getItem('hc_user') || '{}');
+  const studentName = user.name || 'Asare Tony Papa Kwesi';
+
+  if (typeof printReportCard === 'function') {
+    printReportCard({
+      studentName,
+      class: 'KG 1',
+      term: activeTerm,
+      position: 3,
+      outOf: 32,
+      subjects
+    });
+  }
 }
 
 // ── Session + icons on load ──

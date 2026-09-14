@@ -385,7 +385,32 @@ function viewInvoice(num) {
 
 // ===== PAY NOW =====
 function payNow(invoiceId) {
-  alert(`Redirecting to payment gateway for ${invoiceId}...\n\n(In production, this would open a payment processor like Paystack or Flutterwave.)`);
+  if (typeof openMomoPayment !== 'function') {
+    alert(`Redirecting to payment gateway for ${invoiceId}...\n\n(In production, this would open a payment processor like Paystack or Flutterwave.)`);
+    return;
+  }
+  const card = event?.currentTarget?.closest('.invoice-card');
+  const amountText = card?.querySelector('.invoice-amount')?.textContent || '0';
+  const amount = parseFloat(amountText.replace(/[^0-9.]/g, '')) || 0;
+  const title = card?.querySelector('.invoice-title')?.textContent
+             || card?.querySelector('.invoice-info h4')?.textContent
+             || `Invoice ${invoiceId}`;
+  openMomoPayment({
+    amount,
+    title,
+    subtitle: invoiceId,
+    reference: invoiceId,
+    onSuccess: () => {
+      if (card) {
+        card.dataset.status = 'paid';
+        const badge = card.querySelector('.badge');
+        if (badge) { badge.className = 'badge badge-paid'; badge.textContent = 'Paid'; }
+        const btn = card.querySelector('.bills-pay-btn');
+        if (btn) btn.remove();
+      }
+      showToast(`Payment for ${invoiceId} completed successfully!`);
+    }
+  });
 }
 
 // ===== MESSAGES =====

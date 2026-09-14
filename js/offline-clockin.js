@@ -1,9 +1,11 @@
 /* ================================================================
-   ACAXEL — OFFLINE CLOCK-IN CACHE MANAGER
-   Works across all dashboards.
+   ACAXEL — OFFLINE SYNC MANAGER (clock-in, attendance & grades)
+   Works across all dashboards, and is the client-side data layer for
+   the PWA offline support (see manifest.json / sw.js).
    - Detects online/offline status in real time.
    - Shows a persistent banner when offline.
-   - Tags any clock-in performed while offline as { offline: true }.
+   - Tags any clock-in, attendance, or grade entry made while offline
+     as { offline: true } and queues it.
    - On reconnect, marks queued entries as synced and notifies user.
    - All data stays in localStorage — no server required.
    ================================================================ */
@@ -57,7 +59,7 @@
         </svg>
       </span>
       <span class="hc-offline-text">
-        <strong>You're offline</strong> — Clock-in records are being saved locally and will sync automatically when you reconnect.
+        <strong>You're offline</strong> — Clock-in, attendance and grade records are being saved locally and will sync automatically when you reconnect.
       </span>
       <span class="hc-offline-queue" id="hcOfflineCount"></span>`;
     document.body.appendChild(bar);
@@ -92,9 +94,11 @@
 
     /* Mark all queued entries as synced in their respective log keys */
     const logKeys = [
-      'hc_tch_ci_log',    /* teacher */
-      'hc_stu_ci_log',    /* student */
-      'hc_clockin_log',   /* parent / admin */
+      'hc_tch_ci_log',      /* teacher clock-in */
+      'hc_stu_ci_log',      /* student clock-in */
+      'hc_clockin_log',     /* parent / admin clock-in */
+      'hc_attendance_log',  /* teacher daily attendance */
+      'hc_grades_log',      /* teacher grade entry */
     ];
 
     logKeys.forEach(key => {
@@ -126,7 +130,7 @@
            stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M20 6L9 17l-5-5"/>
       </svg>
-      Back online — ${count} clock-in record${count > 1 ? 's' : ''} synced successfully.`;
+      Back online — ${count} record${count > 1 ? 's' : ''} synced successfully.`;
     document.body.appendChild(toast);
     requestAnimationFrame(() => toast.classList.add('hc-sync-toast-in'));
     setTimeout(() => {
@@ -236,7 +240,7 @@
     const patchedSetItem = (function () {
       const orig = localStorage.setItem.bind(localStorage);
       return function (key, value) {
-        const CI_KEYS = ['hc_tch_ci_log', 'hc_stu_ci_log', 'hc_clockin_log'];
+        const CI_KEYS = ['hc_tch_ci_log', 'hc_stu_ci_log', 'hc_clockin_log', 'hc_attendance_log', 'hc_grades_log'];
         if (CI_KEYS.includes(key) && !navigator.onLine) {
           try {
             const entries = JSON.parse(value);
@@ -275,6 +279,13 @@
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+  }
+
+  /* ── PWA: register service worker for offline app-shell caching ── */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
   }
 
 })();

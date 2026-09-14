@@ -9,8 +9,12 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dashboard.css" />
   <link rel="stylesheet" href="css/theme.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#722F37" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/highcrest-data.js"></script>
+  <script src="js/school-data.js"></script>
 </head>
 <body>
 <div class="dash-body">
@@ -25,41 +29,41 @@
       <div class="sidebar-section-label">Menu</div>
       <button class="nav-item active" onclick="switchTab('overview',this)">
         <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
-        <span class="nav-item-label">Overview</span>
+        <span class="nav-item-label" data-i18n="side.overview">Overview</span>
       </button>
       <button class="nav-item" onclick="switchTab('students',this)">
         <span class="nav-icon"><i data-lucide="users"></i></span>
-        <span class="nav-item-label">Students</span>
+        <span class="nav-item-label" data-i18n="side.students">Students</span>
       </button>
       <button class="nav-item" onclick="switchTab('grades',this)">
         <span class="nav-icon"><i data-lucide="bar-chart-2"></i></span>
-        <span class="nav-item-label">Grades</span>
+        <span class="nav-item-label" data-i18n="side.grades">Grades</span>
       </button>
       <button class="nav-item" onclick="switchTab('attendance',this)">
         <span class="nav-icon"><i data-lucide="calendar-check"></i></span>
-        <span class="nav-item-label">Attendance</span>
+        <span class="nav-item-label" data-i18n="side.attendance">Attendance</span>
       </button>
       <button class="nav-item" onclick="switchTab('messages',this)">
         <span class="nav-icon"><i data-lucide="message-square"></i></span>
-        <span class="nav-item-label">Messages</span>
+        <span class="nav-item-label" data-i18n="side.messages">Messages</span>
         <span class="nav-badge">5</span>
       </button>
       <button class="nav-item" onclick="switchTab('timetable',this)">
         <span class="nav-icon"><i data-lucide="calendar-days"></i></span>
-        <span class="nav-item-label">My Timetable</span>
+        <span class="nav-item-label" data-i18n="side.mytimetable">My Timetable</span>
       </button>
       <button class="nav-item" onclick="switchTab('clockin',this)">
         <span class="nav-icon"><i data-lucide="fingerprint"></i></span>
-        <span class="nav-item-label">Clock-In</span>
+        <span class="nav-item-label" data-i18n="side.clockin">Clock-In</span>
         <span class="nav-badge" id="tchCiStatusBadge" style="display:none;">✓</span>
       </button>
       <button class="nav-item" onclick="switchTab('support',this)">
         <span class="nav-icon"><i data-lucide="life-buoy"></i></span>
-        <span class="nav-item-label">Support</span>
+        <span class="nav-item-label" data-i18n="side.support">Support</span>
       </button>
       <button class="nav-item" onclick="switchTab('profile',this)">
         <span class="nav-icon"><i data-lucide="user"></i></span>
-        <span class="nav-item-label">My Profile</span>
+        <span class="nav-item-label" data-i18n="side.myprofile">My Profile</span>
       </button>
     </nav>
     <div class="sidebar-footer">
@@ -69,7 +73,7 @@
       </button>
       <button class="sidebar-logout-btn" onclick="logout()">
         <i data-lucide="log-out"></i>
-        <span class="sidebar-logout-label">Sign Out</span>
+        <span class="sidebar-logout-label" data-i18n="btn.signout">Sign Out</span>
       </button>
     </div>
   </aside>
@@ -593,7 +597,7 @@
           <div class="card-body card-body-flush">
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Student</th><th>CA1 (20)</th><th>CA2 (20)</th><th>Exam (60)</th><th>Total (100)</th><th>Grade</th></tr></thead>
+                <thead><tr><th>Student</th><th>CA1 (20)</th><th>CA2 (20)</th><th>Exam (60)</th><th>Total (100)</th><th>Grade</th><th>Report</th></tr></thead>
                 <tbody id="gradesTable">
                   <tr>
                     <td>Afful Ewura-Yaa Nkunim</td>
@@ -601,6 +605,7 @@
                     <td><input class="grade-input" type="number" min="0" max="20" value="16" oninput="calcGrade(this)"/></td>
                     <td><input class="grade-input" type="number" min="0" max="60" value="45" oninput="calcGrade(this)"/></td>
                     <td class="grade-total">78</td><td><span class="grade-letter grade-B">B+</span></td>
+                    <td><button class="btn-icon" title="Print Report Card" onclick="printTeacherReportCard(this)"><i data-lucide="file-text"></i></button></td>
                   </tr>
                   <tr>
                     <td>Antwi Brion</td>
@@ -608,6 +613,7 @@
                     <td><input class="grade-input" type="number" min="0" max="20" value="15" oninput="calcGrade(this)"/></td>
                     <td><input class="grade-input" type="number" min="0" max="60" value="41" oninput="calcGrade(this)"/></td>
                     <td class="grade-total">70</td><td><span class="grade-letter grade-B">B</span></td>
+                    <td><button class="btn-icon" title="Print Report Card" onclick="printTeacherReportCard(this)"><i data-lucide="file-text"></i></button></td>
                   </tr>
                   <tr>
                     <td>Appiah Zakiel Nana Kwame</td>
@@ -615,6 +621,7 @@
                     <td><input class="grade-input" type="number" min="0" max="20" value="18" oninput="calcGrade(this)"/></td>
                     <td><input class="grade-input" type="number" min="0" max="60" value="55" oninput="calcGrade(this)"/></td>
                     <td class="grade-total">92</td><td><span class="grade-letter grade-A">A</span></td>
+                    <td><button class="btn-icon" title="Print Report Card" onclick="printTeacherReportCard(this)"><i data-lucide="file-text"></i></button></td>
                   </tr>
                   <tr>
                     <td>Kanati Jesse Nuna</td>
@@ -622,6 +629,7 @@
                     <td><input class="grade-input" type="number" min="0" max="20" value="11" oninput="calcGrade(this)"/></td>
                     <td><input class="grade-input" type="number" min="0" max="60" value="35" oninput="calcGrade(this)"/></td>
                     <td class="grade-total">58</td><td><span class="grade-letter grade-C">C+</span></td>
+                    <td><button class="btn-icon" title="Print Report Card" onclick="printTeacherReportCard(this)"><i data-lucide="file-text"></i></button></td>
                   </tr>
                   <tr>
                     <td>Morkeh Michelle</td>
@@ -629,6 +637,7 @@
                     <td><input class="grade-input" type="number" min="0" max="20" value="17" oninput="calcGrade(this)"/></td>
                     <td><input class="grade-input" type="number" min="0" max="60" value="50" oninput="calcGrade(this)"/></td>
                     <td class="grade-total">85</td><td><span class="grade-letter grade-A">A-</span></td>
+                    <td><button class="btn-icon" title="Print Report Card" onclick="printTeacherReportCard(this)"><i data-lucide="file-text"></i></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -889,6 +898,9 @@
                 </div>
               </div>
             </div>
+
+            <!-- NOTIFICATION PREFERENCES (rendered by js/notification-prefs.js) -->
+            <div id="notifyPrefsContainer" style="grid-column:1/-1;"></div>
 
           </div><!-- end profile-grid -->
         </div><!-- end profile-page -->
@@ -1154,7 +1166,7 @@
       <div class="form-field"><label class="input-label">Payment Date</label><input class="input-field" type="date" id="payDate" /></div>
       <div class="form-field"><label class="input-label">Payment Method</label>
         <select class="input-field" id="payMethod">
-          <option>Bank Transfer</option><option>Cash</option><option>POS</option><option>Online Payment</option>
+          <option>Mobile Money</option><option>Bank Transfer</option><option>Cash</option><option>POS</option><option>Online Payment</option>
         </select>
       </div>
       <div class="form-field"><label class="input-label">Reference Number</label><input class="input-field" type="text" id="payRef" placeholder="Transaction reference" /></div>
@@ -1167,7 +1179,12 @@
 </div>
 
 <script src="js/dashboard.js"></script>
+<script src="js/momo-payment.js"></script>
+<script src="js/report-card.js"></script>
+<script src="js/notification-prefs.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/teacher-dashboard.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => hcNotifyPrefs.renderInto('#notifyPrefsContainer'));</script>
 <script src="js/theme-panel.js"></script>
 <script src="js/ai-assistant.js"></script>
 <script src="js/support.js"></script>

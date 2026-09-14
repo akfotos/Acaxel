@@ -157,10 +157,26 @@ function recordPayment(studentName) {
 
 function confirmPayment() {
   const student = document.getElementById('payStudent')?.value;
-  const amount = document.getElementById('payAmount')?.value;
+  const amount = Number(document.getElementById('payAmount')?.value);
+  const method = document.getElementById('payMethod')?.value;
   if (!amount || amount <= 0) { alert('Please enter a valid amount.'); return; }
+
+  if (method === 'Mobile Money' && typeof openMomoPayment === 'function') {
+    closeModal('paymentModal');
+    openMomoPayment({
+      amount,
+      title: 'Fee Payment',
+      subtitle: student,
+      reference: document.getElementById('payRef')?.value || undefined,
+      onSuccess: (result) => {
+        showToast(`Payment of ₵${amount.toLocaleString()} recorded for ${student} via ${result.network}`);
+      }
+    });
+    return;
+  }
+
   closeModal('paymentModal');
-  showToast(`Payment of ₵${Number(amount).toLocaleString()} recorded for ${student}`);
+  showToast(`Payment of ₵${amount.toLocaleString()} recorded for ${student}`);
 }
 
 // ===== GRADES =====
@@ -179,6 +195,33 @@ function calcGrade(input) {
   }
 }
 
+function printTeacherReportCard(btn) {
+  const row = btn.closest('tr');
+  const cells = row.querySelectorAll('td');
+  const studentName = cells[0]?.textContent.trim();
+  const ca = (Number(cells[1]?.querySelector('input')?.value) || 0) + (Number(cells[2]?.querySelector('input')?.value) || 0);
+  const exam = Number(cells[3]?.querySelector('input')?.value) || 0;
+  const total = ca + exam;
+
+  const allRows = Array.from(row.parentElement.querySelectorAll('tr'));
+  const ranked = allRows.map(r => {
+    const t = r.querySelector('.grade-total');
+    return { r, total: Number(t?.textContent) || 0 };
+  }).sort((a, b) => b.total - a.total);
+  const position = ranked.findIndex(x => x.r === row) + 1;
+
+  if (typeof printReportCard === 'function') {
+    printReportCard({
+      studentName,
+      class: 'Grade 2',
+      term: 'Term 2',
+      position,
+      outOf: allRows.length,
+      subjects: [{ name: 'Mathematics', ca, exam, total }]
+    });
+  }
+}
+
 function getGrade(score) {
   if (score >= 90) return { letter: 'A+', cls: 'A' };
   if (score >= 80) return { letter: 'A', cls: 'A' };
@@ -192,7 +235,33 @@ function getGrade(score) {
   return { letter: 'F', cls: 'F' };
 }
 
-function saveGrades() { showToast('Grades saved successfully!'); }
+function saveGrades() {
+  const rows = document.querySelectorAll('#gradesTable tr');
+  const entries = [];
+  rows.forEach(row => {
+    const name = row.cells[0]?.textContent;
+    const inputs = row.querySelectorAll('.grade-input');
+    if (!name || !inputs.length) return;
+    const [ca1, ca2, exam] = Array.from(inputs).map(i => Number(i.value) || 0);
+    const total = ca1 + ca2 + exam;
+    entries.push({ name, ca1, ca2, exam, total, grade: getGrade(total).letter });
+  });
+
+  const entry = {
+    id: `grd-${Date.now()}`,
+    subject: 'Mathematics', class: 'Grade 2', term: 'Term 2',
+    entries, offline: false, savedAt: new Date().toISOString()
+  };
+  const log = JSON.parse(localStorage.getItem('hc_grades_log') || '[]');
+  log.unshift(entry);
+  localStorage.setItem('hc_grades_log', JSON.stringify(log));
+
+  if (!navigator.onLine) {
+    showToast(`You're offline — grades saved locally and will sync automatically.`);
+  } else {
+    showToast('Grades saved successfully!');
+  }
+}
 
 // ===== ATTENDANCE =====
 const students = [
@@ -223,13 +292,40 @@ function buildAttendanceGrid() {
 function saveAttendance() {
   const date = document.getElementById('attendDate')?.value;
   let present = 0, absent = 0, late = 0;
-  students.forEach((_, i) => {
+  const records = students.map((name, i) => {
     const checked = document.querySelector(`input[name="att_${i}"]:checked`);
-    if (checked?.classList.contains('present')) present++;
-    else if (checked?.classList.contains('absent')) absent++;
-    else if (checked?.classList.contains('late')) late++;
+    const status = checked?.classList.contains('present') ? 'present'
+      : checked?.classList.contains('absent') ? 'absent'
+      : checked?.classList.contains('late') ? 'late' : 'unmarked';
+    if (status === 'present') present++;
+    else if (status === 'absent') absent++;
+    else if (status === 'late') late++;
+    return { name, status };
   });
-  showToast(`Attendance saved for ${date}: ${present} present, ${absent} absent, ${late} late`);
+
+  const entry = {
+    id: `att-${Date.now()}`,
+    date, class: 'Grade 2', present, absent, late, total: students.length,
+    records, offline: false, savedAt: new Date().toISOString()
+  };
+  const log = JSON.parse(localStorage.getItem('hc_attendance_log') || '[]');
+  log.unshift(entry);
+  localStorage.setItem('hc_attendance_log', JSON.stringify(log));
+
+  const wasQueuedOffline = !navigator.onLine;
+  if (wasQueuedOffline) {
+    showToast(`You're offline — attendance for ${date} saved locally and will sync automatically.`);
+  } else {
+    showToast(`Attendance saved for ${date}: ${present} present, ${absent} absent, ${late} late`);
+  }
+
+  // Simulated SMS alert to parents of absent pupils
+  if (typeof showSmsToast === 'function' && (!window.hcNotifyPrefs || window.hcNotifyPrefs.isEnabled('sms', 'attendance'))) {
+    const absentees = records.filter(r => r.status === 'absent');
+    if (absentees.length) {
+      showSmsToast(`${absentees.map(a => a.name).join(', ')} ${absentees.length > 1 ? 'were' : 'was'} marked absent today (${date}). Please contact the school if this is unexpected.`);
+    }
+  }
 }
 
 // ===== BILL COMPOSER =====

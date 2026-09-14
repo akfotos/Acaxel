@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dashboard.css" />
   <link rel="stylesheet" href="css/theme.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#722F37" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -28,47 +30,47 @@
       <div class="sidebar-section-label">Menu</div>
       <button class="nav-item active" onclick="switchTab('overview',this)">
         <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
-        <span class="nav-item-label">Overview</span>
+        <span class="nav-item-label" data-i18n="side.overview">Overview</span>
       </button>
       <button class="nav-item" onclick="switchTab('fees',this)">
         <span class="nav-icon"><i data-lucide="credit-card"></i></span>
-        <span class="nav-item-label">Fee Status</span>
+        <span class="nav-item-label" data-i18n="side.feestatus">Fee Status</span>
       </button>
       <button class="nav-item" onclick="switchTab('bills',this)">
         <span class="nav-icon"><i data-lucide="file-text"></i></span>
-        <span class="nav-item-label">Bills &amp; Invoices</span>
+        <span class="nav-item-label" data-i18n="side.billsinvoices">Bills &amp; Invoices</span>
       </button>
       <button class="nav-item" onclick="switchTab('children',this)">
         <span class="nav-icon"><i data-lucide="users"></i></span>
-        <span class="nav-item-label">My Children</span>
+        <span class="nav-item-label" data-i18n="side.mychildren">My Children</span>
       </button>
       <button class="nav-item" onclick="switchTab('messages',this)">
         <span class="nav-icon"><i data-lucide="message-square"></i></span>
-        <span class="nav-item-label">Messages</span>
+        <span class="nav-item-label" data-i18n="side.messages">Messages</span>
         <span class="nav-badge">3</span>
       </button>
       <button class="nav-item" onclick="switchTab('assignments',this)">
         <span class="nav-icon"><i data-lucide="clipboard-list"></i></span>
-        <span class="nav-item-label">Assignments</span>
+        <span class="nav-item-label" data-i18n="side.assignments">Assignments</span>
         <span class="nav-badge" id="asgPendingBadge">0</span>
       </button>
       <button class="nav-item" onclick="switchTab('clockin',this)">
         <span class="nav-icon"><i data-lucide="scan-line"></i></span>
-        <span class="nav-item-label">Clock-In</span>
+        <span class="nav-item-label" data-i18n="side.clockin">Clock-In</span>
       </button>
       <button class="nav-item" onclick="switchTab('support',this)">
         <span class="nav-icon"><i data-lucide="life-buoy"></i></span>
-        <span class="nav-item-label">Support</span>
+        <span class="nav-item-label" data-i18n="side.support">Support</span>
       </button>
       <button class="nav-item" onclick="switchTab('profile',this)">
         <span class="nav-icon"><i data-lucide="user"></i></span>
-        <span class="nav-item-label">My Profile</span>
+        <span class="nav-item-label" data-i18n="side.myprofile">My Profile</span>
       </button>
     </nav>
     <div class="sidebar-footer">
       <button class="sidebar-logout-btn" onclick="logout()">
         <i data-lucide="log-out"></i>
-        <span class="sidebar-logout-label">Sign Out</span>
+        <span class="sidebar-logout-label" data-i18n="btn.signout">Sign Out</span>
       </button>
     </div>
   </aside>
@@ -666,6 +668,7 @@
               <div class="child-progress-label">Term Progress</div>
               <div class="progress-bar"><div class="progress-fill" style="width:72%;"></div></div>
             </div>
+            <button class="btn-sm outline" style="margin-top:14px;width:100%;" onclick="printReportCard({studentName:'Afful Ewura-Yaa Nkunim',class:'Grade 2',position:3,outOf:8,subjects:[{name:'Mathematics',total:88},{name:'English Language',total:91},{name:'Basic Science',total:85},{name:'Social Studies',total:82}]})"><i data-lucide="file-text"></i> Print Report Card</button>
           </div>
           <div class="child-card">
             <div class="child-card-top">
@@ -684,6 +687,7 @@
               <div class="child-progress-label">Term Progress</div>
               <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
             </div>
+            <button class="btn-sm outline" style="margin-top:14px;width:100%;" onclick="printReportCard({studentName:'Morkeh Bradley',class:'KG 2',position:7,outOf:10,subjects:[{name:'Numeracy',total:74},{name:'Literacy',total:70},{name:'Creative Arts',total:80},{name:'Physical Development',total:72}]})"><i data-lucide="file-text"></i> Print Report Card</button>
           </div>
         </div>
       </div>
@@ -899,6 +903,9 @@
                 </div>
               </div>
             </div>
+
+            <!-- NOTIFICATION PREFERENCES (rendered by js/notification-prefs.js) -->
+            <div id="notifyPrefsContainer" style="grid-column:1/-1;"></div>
 
           </div><!-- end profile-grid -->
         </div><!-- end profile-page -->
@@ -1160,6 +1167,11 @@
 
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/momo-payment.js"></script>
+<script src="js/report-card.js"></script>
+<script src="js/notification-prefs.js"></script>
+<script src="js/i18n.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => hcNotifyPrefs.renderInto('#notifyPrefsContainer'));</script>
 <script src="js/theme-panel.js"></script>
 <script src="js/ai-assistant.js"></script>
 <script src="js/support.js"></script>
