@@ -2158,6 +2158,22 @@ body.home.contact .contact-form .form-submit:hover { background: linear-gradient
 body.home.contact .contact-success { background: rgba(22,163,74,.15); color: #86efac; }
 body.home.contact .contact-success i { stroke: #86efac; }
 
+/* ── SIGNUP FORM FIXES ─────────────────────────────────── */
+body.home .auth-form-wrap-simple .gen-field-wrap input { background: #fff !important; border-color: rgba(15,23,42,.15) !important; color: #0f172a !important; }
+body.home .auth-form-wrap-simple .gen-refresh-btn { background: rgba(59,130,246,.12); color: #3b82f6; }
+body.home .auth-form-wrap-simple .gen-refresh-btn:hover { background: #3b82f6; color: #fff; }
+body.home .auth-form-wrap-simple .gen-refresh-btn i { stroke: #3b82f6; }
+body.home .auth-form-wrap-simple .gen-refresh-btn:hover i { stroke: #fff; }
+body.home .auth-form-wrap-simple .gen-copy-btn { background: rgba(59,130,246,.12); color: #3b82f6; }
+body.home .auth-form-wrap-simple .gen-copy-btn:hover { background: #3b82f6; color: #fff; }
+body.home .auth-form-wrap-simple .gen-copy-btn i { stroke: #3b82f6; }
+body.home .auth-form-wrap-simple .gen-copy-btn:hover i { stroke: #fff; }
+body.home .auth-form-wrap-simple .gen-badge { background: #dbeafe; color: #1d4ed8; }
+body.home .auth-form-wrap-simple .form-group select { background: #fff; color: #0f172a; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px 16px; }
+body.home .auth-form-wrap-simple .form-group select option { background: #fff; color: #0f172a; }
+body.home .auth-form-wrap-simple .form-group select option:disabled,
+body.home .auth-form-wrap-simple .form-group select option[value=\"\"] { color: #6b7280; }
+
 /* ── LOGIN ROLE BUTTON COLORS ──────────────────────────── */
 body.home .role-toggle-simple .role-btn.active[data-role="parent"]  { background: #3b82f6; color: #fff; box-shadow: 0 4px 14px rgba(59,130,246,.35); }
 body.home .role-toggle-simple .role-btn.active[data-role="student"] { background: #0f172a; color: #fff; box-shadow: 0 4px 14px rgba(15,23,42,.35); }
