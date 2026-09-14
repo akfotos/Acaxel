@@ -4010,3 +4010,11 @@ body.proprietor .nav-item.active { background: rgba(244,63,94,0.18); color: #fff
   .prop-cash-stats { grid-template-columns: 1fr; }
 }
 
+/* Staff page */
+.prop-staff-table .staff-name { display: flex; flex-direction: column; }
+.prop-staff-table .staff-name strong { color: #fff; }
+.prop-staff-table .staff-post { color: rgba(255,255,255,0.55); font-size: 0.75rem; }
+.prop-staff-table .grade-cell { display: flex; align-items: center; gap: 6px; }
+.prop-staff-table .grade-cell .badge { font-size: 0.68rem; padding: 3px 8px; }
+.prop-staff-table .select-class { min-width: 120px; }
+
