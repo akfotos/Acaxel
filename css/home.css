@@ -1948,3 +1948,58 @@ body.home .contact-form input, body.home .contact-form select, body.home .contac
 body.home .contact-form input:focus, body.home .contact-form select:focus, body.home .contact-form textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59,130,246,.15); }
 body.home .contact-form .form-submit { background: linear-gradient(135deg, #3b82f6, #2563eb); }
 body.home .contact-form .form-submit:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+
+/* ── INNER PAGES BLUE-BLACK-WHITE THEME ───────────────── */
+body.home .section { background: #0b0f1e; color: #fff; }
+body.home .section-header .section-tag { color: #60a5fa; }
+body.home .section-header h2 { color: #fff; }
+body.home .section-header p { color: rgba(255,255,255,.7); }
+
+body.home .feature-card { background: #0f172a; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 32px; }
+body.home .feature-card h3 { color: #fff; }
+body.home .feature-card p { color: rgba(255,255,255,.7); }
+body.home .feature-icon { background: rgba(59,130,246,.15); color: #60a5fa; border-radius: 12px; }
+body.home .feature-icon i { stroke: #60a5fa; }
+
+body.home .portals { background: #0b0f1e; }
+body.home .portals-grid-4 { gap: 20px; }
+body.home .portal-card-img { background: #0f172a; border: 1px solid rgba(59,130,246,.2); }
+body.home .portal-card-img h3 { color: #fff; }
+body.home .portal-card-img p { color: rgba(255,255,255,.7); }
+body.home .portal-card-img .portal-features li { color: rgba(255,255,255,.8); }
+body.home .portal-card-img .portal-features li::before { color: #60a5fa; }
+body.home .portal-card-tag { color: #60a5fa; }
+body.home .portal-card-tag i { stroke: #60a5fa; }
+body.home .btn-white { background: #fff; color: #0f172a; }
+body.home .btn-white:hover { background: #e2e8f0; }
+body.home .btn-wine { background: #3b82f6; color: #fff; }
+body.home .btn-wine:hover { background: #2563eb; }
+
+body.home .portals-photo-row { background: #0b0f1e; }
+body.home .portals-photo-col img { border-radius: 12px; }
+body.home .portals-photo-caption { color: rgba(255,255,255,.8); }
+
+body.home .cta-section { background: #0b0f1e; color: #fff; }
+body.home .cta-section h2 { color: #fff; }
+body.home .cta-section p { color: rgba(255,255,255,.7); }
+body.home .cta-ghost { color: #fff; border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.05); }
+body.home .cta-ghost:hover { color: #fff; background: rgba(255,255,255,.1); }
+
+body.home footer { background: #0b0f1e; color: rgba(255,255,255,.75); border-top: 1px solid rgba(255,255,255,.1); }
+body.home footer h5 { color: #fff; }
+body.home footer a { color: rgba(255,255,255,.75); }
+body.home footer a:hover { color: #3b82f6; }
+body.home .footer-school-name { color: #fff; }
+body.home .footer-tagline { color: #fff; }
+body.home .footer-desc { color: rgba(255,255,255,.6); }
+body.home .footer-badge { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.1); }
+body.home .footer-top-bar { border-bottom-color: rgba(255,255,255,.1); }
+body.home .footer-top-item { color: rgba(255,255,255,.8); }
+body.home .footer-top-item i { stroke: rgba(255,255,255,.8); }
+body.home .footer-bottom { color: rgba(255,255,255,.55); border-top-color: rgba(255,255,255,.1); }
+body.home .footer-bottom a { color: rgba(255,255,255,.55); }
+body.home .footer-bottom a:hover { color: #3b82f6; }
+
+body.home .page-hero { background: #0b0f1e; color: #fff; }
+body.home .page-hero h1, body.home .page-hero p { color: #fff; }
+body.home .page-hero .section-tag { color: #60a5fa; }
