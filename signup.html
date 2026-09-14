@@ -12,18 +12,23 @@
 </head>
 <body class="home">
 <canvas id="auth-canvas"></canvas>
-<div class="auth-page">
+<div class="auth-page auth-page-simple">
 
   <!-- LEFT PANEL -->
-  <div class="auth-left">
-    <a href="index.html" class="auth-back-btn auth-back-btn--left"><i data-lucide="arrow-left"></i> Back to Homepage</a>
-    <a href="index.html" class="nav-brand" style="text-decoration:none;">
-      <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
-      <span class="nav-name">Acaxel</span>
-    </a>
-    <h2>Get Started with Acaxel</h2>
-    <p>School administrators register first to set up the platform. Teachers, parents, and students join once the school is live.</p>
-    <div class="auth-perks">
+  <div class="auth-left auth-left-simple">
+    <div class="auth-panel-top">
+      <a href="index.html" class="nav-brand" style="text-decoration:none;">
+        <img src="images/Logo/logo.png" class="nav-logo-img" alt="Highcrest Logo" />
+        <span class="nav-name">Acaxel</span>
+      </a>
+      <a href="index.html" class="auth-back-btn auth-back-btn--left"><i data-lucide="arrow-left"></i> Home</a>
+    </div>
+    <div class="auth-left-copy">
+      <span class="auth-eyebrow">Get started</span>
+      <h2>Get Started with Acaxel</h2>
+      <p>School administrators register first to set up the platform. Teachers, parents, and students join once the school is live.</p>
+    </div>
+    <div class="auth-perks auth-perks-simple">
       <div class="auth-perk">
         <div class="perk-icon"><i data-lucide="shield"></i></div>
         <div class="perk-text"><h5>Step 1 — Admin</h5><p>Register the school &amp; set up your portal</p></div>
@@ -40,11 +45,14 @@
   </div>
 
   <!-- RIGHT PANEL -->
-  <div class="auth-right">
+  <div class="auth-right auth-right-simple">
     <a href="index.html" class="auth-back-btn auth-back-btn--mobile"><i data-lucide="arrow-left"></i> Back to Homepage</a>
-    <div class="auth-form-wrap">
-      <h2>Create Account</h2>
-      <p id="signupSubtitle">Register your school to get started</p>
+    <div class="auth-form-wrap auth-form-wrap-simple">
+      <div class="auth-form-header">
+        <span class="auth-form-eyebrow">Create account</span>
+        <h2>Create Account</h2>
+        <p id="signupSubtitle">Register your school to get started</p>
+      </div>
 
       <!-- SCHOOL-FIRST NOTICE -->
       <div class="school-first-notice" id="schoolFirstNotice" style="display:none;">
@@ -53,8 +61,8 @@
       </div>
 
       <!-- ROLE TOGGLE -->
-      <div class="role-toggle">
-        <button class="role-btn active" data-role="admin" onclick="setRole('admin', this)"><i data-lucide="shield" style="width:13px;height:13px;vertical-align:-2px;"></i> Admin</button>
+      <div class="role-toggle role-toggle-simple">
+        <button class="role-btn active" data-role="admin" onclick="setRole('admin', this)">Admin</button>
         <button class="role-btn" data-role="teacher" onclick="setRole('teacher', this)">Teacher</button>
         <button class="role-btn" data-role="parent" onclick="setRole('parent', this)">Parent</button>
         <button class="role-btn" data-role="student" onclick="setRole('student', this)">Student</button>
