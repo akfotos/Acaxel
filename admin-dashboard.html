@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="css/style.css?v=13" />
   <link rel="stylesheet" href="css/dashboard.css?v=13" />
   <link rel="stylesheet" href="css/theme.css?v=13" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#722F37" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/highcrest-data.js"></script>
@@ -27,57 +29,57 @@
       <div class="sidebar-section-label">Main</div>
       <button class="nav-item active" onclick="switchTab('overview',this)">
         <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
-        <span class="nav-item-label">Overview</span>
+        <span class="nav-item-label" data-i18n="side.overview">Overview</span>
       </button>
       <button class="nav-item" onclick="switchTab('students',this)">
         <span class="nav-icon"><i data-lucide="users"></i></span>
-        <span class="nav-item-label">Students</span>
+        <span class="nav-item-label" data-i18n="side.students">Students</span>
       </button>
       <button class="nav-item" onclick="switchTab('staff',this)">
         <span class="nav-icon"><i data-lucide="briefcase"></i></span>
-        <span class="nav-item-label">Staff</span>
+        <span class="nav-item-label" data-i18n="side.staff">Staff</span>
       </button>
       <div class="sidebar-section-label">Finance</div>
       <button class="nav-item" onclick="switchTab('fees',this)">
         <span class="nav-icon"><i data-lucide="credit-card"></i></span>
-        <span class="nav-item-label">Fee Records</span>
+        <span class="nav-item-label" data-i18n="side.fees">Fee Records</span>
         <span class="nav-badge">7</span>
       </button>
       <button class="nav-item" onclick="switchTab('billing',this)">
         <span class="nav-icon"><i data-lucide="file-text"></i></span>
-        <span class="nav-item-label">Send Bills</span>
+        <span class="nav-item-label" data-i18n="side.billing">Send Bills</span>
       </button>
       <button class="nav-item" onclick="switchTab('feeding',this)">
         <span class="nav-icon"><i data-lucide="utensils"></i></span>
-        <span class="nav-item-label">Feeding Collection</span>
+        <span class="nav-item-label" data-i18n="side.feeding">Feeding Collection</span>
       </button>
       <div class="sidebar-section-label">Academic</div>
       <button class="nav-item" onclick="switchTab('grades',this)">
         <span class="nav-icon"><i data-lucide="award"></i></span>
-        <span class="nav-item-label">Grades &amp; Exams</span>
+        <span class="nav-item-label" data-i18n="side.grades">Grades &amp; Exams</span>
       </button>
       <button class="nav-item" onclick="switchTab('attendance',this)">
         <span class="nav-icon"><i data-lucide="calendar-check"></i></span>
-        <span class="nav-item-label">Attendance</span>
+        <span class="nav-item-label" data-i18n="side.attendance">Attendance</span>
       </button>
       <button class="nav-item" onclick="switchTab('clockin',this)">
         <span class="nav-icon"><i data-lucide="scan-line"></i></span>
-        <span class="nav-item-label">Clock-In Log</span>
+        <span class="nav-item-label" data-i18n="side.clockin">Clock-In Log</span>
         <span class="nav-badge" id="adminCiTodayBadge">0</span>
       </button>
       <button class="nav-item" onclick="switchTab('timetable',this)">
         <span class="nav-icon"><i data-lucide="clock"></i></span>
-        <span class="nav-item-label">Timetable</span>
+        <span class="nav-item-label" data-i18n="side.timetable">Timetable</span>
       </button>
       <div class="sidebar-section-label">Communication</div>
       <button class="nav-item" onclick="switchTab('messages',this)">
         <span class="nav-icon"><i data-lucide="message-square"></i></span>
-        <span class="nav-item-label">Messages</span>
+        <span class="nav-item-label" data-i18n="side.messages">Messages</span>
         <span class="nav-badge">3</span>
       </button>
       <button class="nav-item" onclick="switchTab('announcements',this)">
         <span class="nav-icon"><i data-lucide="megaphone"></i></span>
-        <span class="nav-item-label">Announcements</span>
+        <span class="nav-item-label" data-i18n="side.announcements">Announcements</span>
       </button>
       <button class="nav-item" onclick="switchTab('events',this)">
         <span class="nav-icon"><i data-lucide="calendar"></i></span>
@@ -86,7 +88,7 @@
       <div class="sidebar-section-label">Admin</div>
       <button class="nav-item" onclick="switchTab('inventory',this)">
         <span class="nav-icon"><i data-lucide="package"></i></span>
-        <span class="nav-item-label">Inventory</span>
+        <span class="nav-item-label" data-i18n="side.inventory">Inventory</span>
       </button>
       <button class="nav-item" onclick="switchTab('updates',this)">
         <span class="nav-icon"><i data-lucide="newspaper"></i></span>
@@ -98,15 +100,15 @@
       </button>
       <button class="nav-item" onclick="switchTab('reports',this)">
         <span class="nav-icon"><i data-lucide="bar-chart-2"></i></span>
-        <span class="nav-item-label">Reports</span>
+        <span class="nav-item-label" data-i18n="side.reports">Reports</span>
       </button>
       <button class="nav-item" onclick="switchTab('settings',this)">
         <span class="nav-icon"><i data-lucide="settings"></i></span>
-        <span class="nav-item-label">Settings</span>
+        <span class="nav-item-label" data-i18n="side.settings">Settings</span>
       </button>
       <button class="nav-item" onclick="switchTab('support',this)">
         <span class="nav-icon"><i data-lucide="life-buoy"></i></span>
-        <span class="nav-item-label">Support</span>
+        <span class="nav-item-label" data-i18n="side.support">Support</span>
       </button>
     </nav>
     <div class="sidebar-footer">
@@ -116,7 +118,7 @@
       </button>
       <button class="sidebar-logout-btn" onclick="logout()">
         <i data-lucide="log-out"></i>
-        <span class="sidebar-logout-label">Sign Out</span>
+        <span class="sidebar-logout-label" data-i18n="btn.signout">Sign Out</span>
       </button>
     </div>
   </aside>
@@ -614,38 +616,17 @@
 
         <div class="bill-compose-grid">
           <!-- COMPOSE FORM -->
-          <div class="card">
-            <div class="card-header"><h3>Compose Bill</h3></div>
+          <div class="card bill-compose-card">
+            <div class="card-header bill-compose-header"><div class="bill-header-icon"><i data-lucide="file-plus-2"></i></div><div><span class="bill-step-label">Create invoice</span><h3>Bill details</h3></div></div>
             <div class="card-body">
+              <div class="bill-section-label"><span>1</span><div><strong>Recipients</strong><small>Choose who should receive this invoice</small></div></div>
               <div class="form-field">
                 <label class="input-label">Send To</label>
                 <select class="input-field" id="billTo" onchange="updatePreview()">
-                  <option value="">— Select recipient —</option>
-                  <optgroup label="All Students">
-                    <option value="all">All Students (1,240)</option>
-                  </optgroup>
-                  <optgroup label="By Class">
-                    <option value="jss1a">JSS 1A (40 students)</option>
-                    <option value="jss1b">JSS 1B (38 students)</option>
-                    <option value="jss2a">JSS 2A (38 students)</option>
-                    <option value="jss2b">JSS 2B (36 students)</option>
-                    <option value="jss3a">JSS 3A (39 students)</option>
-                    <option value="jss3b">JSS 3B (37 students)</option>
-                    <option value="sss1a">SSS 1A (42 students)</option>
-                    <option value="sss1b">SSS 1B (40 students)</option>
-                    <option value="sss2a">SSS 2A (38 students)</option>
-                    <option value="sss3a">SSS 3A (36 students)</option>
-                  </optgroup>
-                  <optgroup label="Individual Students">
-                    <option value="adaeze">Afful Ewura-Yaa Nkunim — Grade 2</option>
-                    <option value="emeka">Antwi Brion — Grade 2</option>
-                    <option value="fatima">Appiah Zakiel Nana Kwame — Grade 2</option>
-                    <option value="tunde">Kanati Jesse Nuna — Grade 2</option>
-                    <option value="kwame">Djaba Larko Rhema — Grade 4</option>
-                    <option value="amina">Owusu Okyem Emmanuella — Grade 4</option>
-                  </optgroup>
+                  <option value="">— Select a class or student —</option>
                 </select>
               </div>
+              <div class="bill-section-label"><span>2</span><div><strong>Invoice details</strong><small>Add a clear title, term, and fee items</small></div></div>
               <div class="form-field">
                 <label class="input-label">Bill Title</label>
                 <input class="input-field" type="text" id="billTitle" placeholder="e.g. 3rd Term Tuition Fee" oninput="updatePreview()" />
@@ -672,7 +653,8 @@
                   </div>
                 </div>
               </div>
-              <button class="btn-sm outline" style="margin-bottom:14px;" onclick="addBillItem()"><i data-lucide="plus"></i> Add Line Item</button>
+              <button class="btn-sm outline bill-add-item" onclick="addBillItem()"><i data-lucide="plus"></i> Add another item</button>
+              <div class="bill-section-label"><span>3</span><div><strong>Payment</strong><small>Set the deadline and payment guidance</small></div></div>
               <div class="form-field">
                 <label class="input-label">Due Date</label>
                 <input class="input-field" type="date" id="billDue" onchange="updatePreview()" />
@@ -689,9 +671,11 @@
           </div>
 
           <!-- PREVIEW PANEL -->
-          <div>
+          <div class="bill-side-panel">
+            <div class="bill-preview-label"><span>Live preview</span><small>Updates as you type</small></div>
             <div class="bill-preview">
               <div class="bill-preview-header">
+                <div class="bill-invoice-mark"><i data-lucide="receipt-text"></i></div>
                 <h3 id="adminProfileSchoolName">Acaxel School</h3>
                 <div style="font-size:0.78rem;color:var(--text-light);">Accra, Ghana &nbsp;|&nbsp; Term 2, 2025/2026</div>
                 <div style="font-size:0.82rem;margin-top:8px;font-weight:600;" id="previewTitle">Fee Invoice Preview</div>
@@ -706,8 +690,8 @@
             </div>
 
             <!-- Sent Bills History -->
-            <div class="card" style="margin-top:16px;">
-              <div class="card-header"><h3>Recently Sent Bills</h3></div>
+            <div class="card bill-history-card">
+              <div class="card-header"><div><span class="bill-step-label">Activity</span><h3>Recently sent</h3></div><span class="bill-history-link">Last 30 days</span></div>
               <div class="card-body-flush">
                 <div class="adm-pay-item">
                   <div class="adm-pay-avatar" style="background:#f0fdf4;color:#16a34a;font-size:1rem;">✓</div>
@@ -1039,13 +1023,13 @@
               <table>
                 <thead><tr><th>#</th><th>Student</th><th>Class</th><th>Maths</th><th>English</th><th>Science</th><th>Social St.</th><th>Average</th><th>Grade</th><th>Actions</th></tr></thead>
                 <tbody>
-                  <tr><td>1</td><td><strong>Afful Ewura-Yaa Nkunim</strong></td><td>Grade 2</td><td>88</td><td>91</td><td>85</td><td>82</td><td>86.5</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
-                  <tr><td>2</td><td><strong>Antwi Brion</strong></td><td>Grade 2</td><td>72</td><td>68</td><td>74</td><td>70</td><td>71.0</td><td><span class="badge badge-pending">B</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
-                  <tr><td>3</td><td><strong>Appiah Zakiel Nana Kwame</strong></td><td>Grade 2</td><td>95</td><td>89</td><td>92</td><td>90</td><td>91.5</td><td><span class="badge badge-paid">A+</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
-                  <tr><td>4</td><td><strong>Kanati Jesse Nuna</strong></td><td>Grade 2</td><td>55</td><td>60</td><td>52</td><td>58</td><td>56.3</td><td><span class="badge badge-overdue">C</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
-                  <tr><td>5</td><td><strong>Djaba Larko Rhema</strong></td><td>Grade 4</td><td>80</td><td>78</td><td>83</td><td>77</td><td>79.5</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
-                  <tr><td>6</td><td><strong>Owusu Okyem Emmanuella</strong></td><td>Grade 4</td><td>91</td><td>87</td><td>89</td><td>93</td><td>90.0</td><td><span class="badge badge-paid">A+</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
-                  <tr><td>7</td><td><strong>Mensah-Aborampah Ayeyi Yeboah</strong></td><td>Grade 3</td><td>76</td><td>82</td><td>79</td><td>74</td><td>77.8</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon"><i data-lucide="eye"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>1</td><td><strong>Afful Ewura-Yaa Nkunim</strong></td><td>Grade 2</td><td>88</td><td>91</td><td>85</td><td>82</td><td>86.5</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon" title="Print Report Card" onclick="printReportCardFromRow(this)"><i data-lucide="file-text"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>2</td><td><strong>Antwi Brion</strong></td><td>Grade 2</td><td>72</td><td>68</td><td>74</td><td>70</td><td>71.0</td><td><span class="badge badge-pending">B</span></td><td class="adm-row-actions"><button class="btn-icon" title="Print Report Card" onclick="printReportCardFromRow(this)"><i data-lucide="file-text"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>3</td><td><strong>Appiah Zakiel Nana Kwame</strong></td><td>Grade 2</td><td>95</td><td>89</td><td>92</td><td>90</td><td>91.5</td><td><span class="badge badge-paid">A+</span></td><td class="adm-row-actions"><button class="btn-icon" title="Print Report Card" onclick="printReportCardFromRow(this)"><i data-lucide="file-text"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>4</td><td><strong>Kanati Jesse Nuna</strong></td><td>Grade 2</td><td>55</td><td>60</td><td>52</td><td>58</td><td>56.3</td><td><span class="badge badge-overdue">C</span></td><td class="adm-row-actions"><button class="btn-icon" title="Print Report Card" onclick="printReportCardFromRow(this)"><i data-lucide="file-text"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>5</td><td><strong>Djaba Larko Rhema</strong></td><td>Grade 4</td><td>80</td><td>78</td><td>83</td><td>77</td><td>79.5</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon" title="Print Report Card" onclick="printReportCardFromRow(this)"><i data-lucide="file-text"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>6</td><td><strong>Owusu Okyem Emmanuella</strong></td><td>Grade 4</td><td>91</td><td>87</td><td>89</td><td>93</td><td>90.0</td><td><span class="badge badge-paid">A+</span></td><td class="adm-row-actions"><button class="btn-icon" title="Print Report Card" onclick="printReportCardFromRow(this)"><i data-lucide="file-text"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
+                  <tr><td>7</td><td><strong>Mensah-Aborampah Ayeyi Yeboah</strong></td><td>Grade 3</td><td>76</td><td>82</td><td>79</td><td>74</td><td>77.8</td><td><span class="badge badge-paid">A</span></td><td class="adm-row-actions"><button class="btn-icon" title="Print Report Card" onclick="printReportCardFromRow(this)"><i data-lucide="file-text"></i></button><button class="btn-icon"><i data-lucide="edit-2"></i></button></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1437,6 +1421,9 @@
               <button class="btn-sm wine" style="margin-top:4px;">Update Password</button>
             </div>
           </div>
+
+          <!-- NOTIFICATION PREFERENCES (rendered by js/notification-prefs.js) -->
+          <div id="notifyPrefsContainer" style="grid-column:1/-1;"></div>
         </div>
       </div><!-- end settings -->
 
@@ -2331,7 +2318,12 @@
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script src="js/dashboard.js?v=13"></script>
-<script src="js/admin-dashboard.js?v=13"></script>
+<script src="js/momo-payment.js"></script>
+<script src="js/report-card.js"></script>
+<script src="js/notification-prefs.js"></script>
+<script src="js/i18n.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => hcNotifyPrefs.renderInto('#notifyPrefsContainer'));</script>
+<script src="js/admin-dashboard.js?v=14"></script>
 <script src="js/theme-panel.js?v=13"></script>
 <script src="js/ai-assistant.js"></script>
 <script src="js/support.js"></script>

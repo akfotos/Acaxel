@@ -157,6 +157,39 @@ function initBillPreview() {
   const today = new Date().toISOString().split('T')[0];
   const due = document.getElementById('billDue');
   if (due && !due.value) due.value = today;
+  populateBillRecipients();
+  updatePreview();
+}
+
+function populateBillRecipients() {
+  const select = document.getElementById('billTo');
+  const students = window.schoolData?.getStudents?.() || [];
+  if (!select || !students.length) return;
+
+  select.replaceChildren(new Option('— Select a class or student —', ''));
+  select.add(new Option(`All Students (${students.length})`, 'all'));
+
+  const studentsByClass = students.reduce((groups, student) => {
+    const className = student.class?.trim() || 'Unassigned';
+    (groups[className] ||= []).push(student);
+    return groups;
+  }, {});
+
+  Object.entries(studentsByClass).forEach(([className, classStudents]) => {
+    classStudents.sort((a, b) => studentDisplayName(a).localeCompare(studentDisplayName(b)));
+    const group = document.createElement('optgroup');
+    group.label = `${className} (${classStudents.length})`;
+    group.appendChild(new Option(`Entire ${className}`, `class:${className}`));
+    classStudents.forEach(student => {
+      const option = new Option(studentDisplayName(student), `student:${student.id || studentDisplayName(student)}`);
+      group.appendChild(option);
+    });
+    select.appendChild(group);
+  });
+}
+
+function studentDisplayName(student) {
+  return student.fullName?.trim() || [student.firstName, student.lastName].filter(Boolean).join(' ') || 'Unnamed student';
 }
 
 function addBillItem() {
@@ -766,6 +799,27 @@ function updateFeedingKPIs() {
 }
 
 function recordFeedingPayment() {
+  const name   = document.getElementById('fdStudentName')?.value.trim();
+  const method = document.getElementById('fdMethod')?.value;
+  const amount = parseFloat(document.getElementById('fdAmount')?.value) || 0;
+
+  if (!name) { alert('Please enter the student name.'); return; }
+
+  if (method === 'Mobile Money' && typeof openMomoPayment === 'function') {
+    closeModal('addFeedingModal');
+    openMomoPayment({
+      amount,
+      title: 'Feeding Fee',
+      subtitle: name,
+      onSuccess: () => finishFeedingPayment()
+    });
+    return;
+  }
+
+  finishFeedingPayment();
+}
+
+function finishFeedingPayment() {
   const name   = document.getElementById('fdStudentName')?.value.trim();
   const sid    = document.getElementById('fdStudentId')?.value.trim() || '—';
   const cls    = document.getElementById('fdClass')?.value || '—';
