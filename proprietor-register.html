@@ -127,77 +127,77 @@
       </div>
 
       <div class="prop-card">
-        <div class="prop-register-row" onclick="openClassRegister('Crèche Robins')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Crèche Robins')">
           <div class="prop-register-info">
             <h4>Crèche Robins</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('Nursery 1 Starlings')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Nursery 1 Starlings')">
           <div class="prop-register-info">
             <h4>Nursery 1 Starlings</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('Nursery 2 Goldfinches')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Nursery 2 Goldfinches')">
           <div class="prop-register-info">
             <h4>Nursery 2 Goldfinches</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('KG 1 Kingfishers')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'KG 1 Kingfishers')">
           <div class="prop-register-info">
             <h4>KG 1 Kingfishers</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('KG 2 Hawks')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'KG 2 Hawks')">
           <div class="prop-register-info">
             <h4>KG 2 Hawks</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('Grade 1 Skylarks')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Grade 1 Skylarks')">
           <div class="prop-register-info">
             <h4>Grade 1 Skylarks</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('Grade 2 Kestrels')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Grade 2 Kestrels')">
           <div class="prop-register-info">
             <h4>Grade 2 Kestrels</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('Grade 3 Woodpeckers')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Grade 3 Woodpeckers')">
           <div class="prop-register-info">
             <h4>Grade 3 Woodpeckers</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('Grade 4 Nightingales')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Grade 4 Nightingales')">
           <div class="prop-register-info">
             <h4>Grade 4 Nightingales</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('Grade 5 Falcons')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Grade 5 Falcons')">
           <div class="prop-register-info">
             <h4>Grade 5 Falcons</h4>
             <div class="prop-register-meta">0 on roll</div>
           </div>
           <span class="badge badge-pending">Not taken</span>
         </div>
-        <div class="prop-register-row" onclick="openClassRegister('Grade 6 Eagles')">
+        <div class="prop-register-row" onclick="openClassRegister(this, 'Grade 6 Eagles')">
           <div class="prop-register-info">
             <h4>Grade 6 Eagles</h4>
             <div class="prop-register-meta">0 on roll</div>
@@ -215,9 +215,17 @@
 <script src="js/theme-panel.js?v=13"></script>
 <script>
   lucide.createIcons();
-  function openClassRegister(className) {
-    // Placeholder for the per-class register flow
-    alert(className + ' has 0 pupils on roll. No register to take yet.');
+  function openClassRegister(row, className) {
+    const badge = row.querySelector('.badge');
+    if (badge.classList.contains('badge-pending')) {
+      badge.classList.remove('badge-pending');
+      badge.classList.add('badge-paid');
+      badge.textContent = 'Taken';
+    } else {
+      badge.classList.remove('badge-paid');
+      badge.classList.add('badge-pending');
+      badge.textContent = 'Not taken';
+    }
   }
 </script>
 </body>
