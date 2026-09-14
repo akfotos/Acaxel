@@ -119,34 +119,7 @@ function searchStudents(query) {
   });
 }
 
-// ===== ADD STUDENT =====
-function addStudent() {
-  const first = document.getElementById('newFirstName')?.value.trim();
-  const last = document.getElementById('newLastName')?.value.trim();
-  const id = document.getElementById('newStudentId')?.value.trim();
-  const parent = document.getElementById('newParentName')?.value.trim();
-  if (!first || !last) { alert('Please enter student name.'); return; }
-  const tbody = document.getElementById('studentsTable');
-  const rowCount = tbody.querySelectorAll('tr').length + 1;
-  const row = document.createElement('tr');
-  row.innerHTML = `
-    <td>${rowCount}</td>
-    <td>${first} ${last}</td>
-    <td>${id || 'HC/2026/0' + rowCount}</td>
-    <td>${parent || '—'}</td>
-    <td>—</td><td>—</td>
-    <td><span class="badge badge-pending">Pending</span></td>
-    <td><button class="btn-icon" title="View">&#128065;</button></td>
-  `;
-  tbody.appendChild(row);
-  closeModal('addStudentModal');
-  showToast(`${first} ${last} added to JSS 2A`);
-  // Clear fields
-  ['newFirstName','newLastName','newStudentId','newParentName','newParentEmail'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-}
+
 
 // ===== RECORD PAYMENT =====
 function recordPayment(studentName) {

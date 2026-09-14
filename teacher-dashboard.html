@@ -351,10 +351,7 @@
         <div class="card">
           <div class="card-header">
             <h3>Students — Grade 2</h3>
-            <div style="display:flex;gap:8px;">
-              <input class="input-field" type="text" placeholder="Search students..." style="width:200px;" oninput="searchStudents(this.value)" />
-              <button class="btn-sm wine" onclick="openModal('addStudentModal')">+ Add Student</button>
-            </div>
+            <input class="input-field" type="text" placeholder="Search students..." style="width:200px;" oninput="searchStudents(this.value)" />
           </div>
           <div class="card-body card-body-flush">
             <div class="table-wrap">
@@ -1132,26 +1129,6 @@
         </div>
       </div>
       <p style="text-align:center;font-size:0.8rem;color:var(--text-light);margin:10px 0 0;">Point your camera at the school gate QR code</p>
-    </div>
-  </div>
-</div>
-
-<!-- ADD STUDENT MODAL -->
-<div class="modal-overlay" id="addStudentModal">
-  <div class="modal">
-    <div class="modal-header"><h3>Add New Student</h3><span class="modal-close" onclick="closeModal('addStudentModal')">&#10005;</span></div>
-    <div class="modal-body">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <div class="form-field"><label class="input-label">First Name</label><input class="input-field" type="text" id="newFirstName" placeholder="First name" /></div>
-        <div class="form-field"><label class="input-label">Last Name</label><input class="input-field" type="text" id="newLastName" placeholder="Last name" /></div>
-      </div>
-      <div class="form-field"><label class="input-label">Student ID</label><input class="input-field" type="text" id="newStudentId" placeholder="e.g. HC/2026/050" /></div>
-      <div class="form-field"><label class="input-label">Parent Name</label><input class="input-field" type="text" id="newParentName" placeholder="Parent/Guardian name" /></div>
-      <div class="form-field"><label class="input-label">Parent Email</label><input class="input-field" type="email" id="newParentEmail" placeholder="parent@email.com" /></div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-sm ghost" onclick="closeModal('addStudentModal')">Cancel</button>
-      <button class="btn-sm wine" onclick="addStudent()">Add Student</button>
     </div>
   </div>
 </div>
