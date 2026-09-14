@@ -47,6 +47,7 @@
         <button type="button" class="role-btn" data-role="student" onclick="setRole('student', this)">Student</button>
         <button type="button" class="role-btn" data-role="teacher" onclick="setRole('teacher', this)">Teacher</button>
         <button type="button" class="role-btn" data-role="admin" onclick="setRole('admin', this)">Admin</button>
+        <button type="button" class="role-btn" data-role="proprietor" onclick="setRole('proprietor', this)">Proprietor</button>
       </div>
 
       <form id="loginForm" onsubmit="handleLogin(event)">
@@ -80,6 +81,7 @@
         <span>Explore without signing in</span>
         <button type="button" class="btn-ghost" onclick="demoLogin('parent')">Parent demo</button>
         <button type="button" class="btn-ghost" onclick="demoLogin('admin')">Admin demo</button>
+        <button type="button" class="btn-ghost" onclick="demoLogin('proprietor')">Proprietor demo</button>
       </div>
 
       <p class="auth-switch">New to Acaxel? <a href="signup.html">Create an account</a></p>

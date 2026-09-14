@@ -1,17 +1,19 @@
 ﻿// Dashboard map
 const dashboardMap = {
-  parent:  'parent-dashboard.html',
-  student: 'student-dashboard.html',
-  teacher: 'teacher-dashboard.html',
-  admin:   'admin-dashboard.html'
+  parent:     'parent-dashboard.html',
+  student:    'student-dashboard.html',
+  teacher:    'teacher-dashboard.html',
+  admin:      'admin-dashboard.html',
+  proprietor: 'proprietor-dashboard.html'
 };
 
 // Demo user map
 const demoUsers = {
-  parent:  { name: 'Mrs. Adaeze Okonkwo',  email: 'adaeze@demo.com' },
-  student: { name: 'Asare Tony Papa Kwesi', email: 'kwesi@demo.com' },
-  teacher: { name: 'Mr. Adeyemi Taiwo',     email: 'adeyemi@demo.com' },
-  admin:   { name: 'Mrs. Grace Acheampong', email: 'grace@demo.com' }
+  parent:     { name: 'Mrs. Adaeze Okonkwo',  email: 'adaeze@demo.com' },
+  student:    { name: 'Asare Tony Papa Kwesi', email: 'kwesi@demo.com' },
+  teacher:    { name: 'Mr. Adeyemi Taiwo',     email: 'adeyemi@demo.com' },
+  admin:      { name: 'Mrs. Grace Acheampong', email: 'grace@demo.com' },
+  proprietor: { name: 'Mr. Kwame Asante',      email: 'proprietor@demo.com' }
 };
 
 // Default school info (Highcrest School from the Excel workbook)

@@ -2179,6 +2179,7 @@ body.home .role-toggle-simple .role-btn.active[data-role="parent"]  { background
 body.home .role-toggle-simple .role-btn.active[data-role="student"] { background: #0f172a; color: #fff; box-shadow: 0 4px 14px rgba(15,23,42,.35); }
 body.home .role-toggle-simple .role-btn.active[data-role="teacher"] { background: #60a5fa; color: #fff; box-shadow: 0 4px 14px rgba(96,165,250,.35); }
 body.home .role-toggle-simple .role-btn.active[data-role="admin"]   { background: #1d4ed8; color: #fff; box-shadow: 0 4px 14px rgba(29,78,216,.35); }
+body.home .role-toggle-simple .role-btn.active[data-role="proprietor"] { background: #7c3aed; color: #fff; box-shadow: 0 4px 14px rgba(124,58,237,.35); }
 
 body.home .btn-primary { color: #fff !important; }
 body.home.modern .hero-cta-warm { color: #fff !important; }
