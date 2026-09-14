@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/dashboard.css?v=13" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="proprietor">
+<div class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="sidebar-brand">
+      <img src="images/Logo/logo.png" class="sidebar-logo-img" alt="Acaxel Logo" />
+      <span class="sidebar-name">Acaxel</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">School Day</div>
+      <a href="proprietor-dashboard.html" class="nav-item">Today</a>
+      <a href="proprietor-register.html" class="nav-item active">Register</a>
+      <button class="nav-item"><span class="nav-item-label">Pupils</span></button>
+      <button class="nav-item"><span class="nav-item-label">Assessment</span></button>
+      <button class="nav-item"><span class="nav-item-label">Notices</span></button>
+
+      <div class="sidebar-section-label">Office</div>
+      <button class="nav-item"><span class="nav-item-label">Fees</span></button>
+      <button class="nav-item"><span class="nav-item-label">Arrears</span></button>
+      <button class="nav-item"><span class="nav-item-label">Admissions</span></button>
+      <button class="nav-item"><span class="nav-item-label">Payroll</span></button>
+      <button class="nav-item"><span class="nav-item-label">Cash</span></button>
+
+      <div class="sidebar-section-label">Setup</div>
+      <button class="nav-item"><span class="nav-item-label">Staff</span></button>
+      <button class="nav-item"><span class="nav-item-label">Admin</span></button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn sidebar-collapse-btn--bottom" onclick="toggleSidebar()" aria-label="Collapse sidebar">
+        <i data-lucide="chevron-left"></i>
+        <span class="sidebar-collapse-label">Collapse</span>
+      </button>
+      <button class="sidebar-logout-btn" onclick="logout()">
+        <i data-lucide="log-out"></i>
+        <span class="sidebar-logout-label">Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- TOP NAV -->
+  <header class="dash-topnav">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="sidebar-hamburger" onclick="toggleSidebar()" aria-label="Open menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+    <div class="dash-topnav-right">
+      <button class="notif-btn" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+      </button>
+      <div class="user-chip">
+        <div class="user-avatar">P</div>
+        <div>
+          <div class="user-chip-name">Proprietor</div>
+          <div class="user-chip-role">School Owner</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <div class="dash-content" style="max-width:900px;">
+
+      <div class="prop-header" style="margin-bottom:28px;">
+        <h1>Register</h1>
+        <p>Take the register on a phone. Tap one mark per child, then save the class.</p>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-register-row" onclick="openClassRegister('Crèche Robins')">
+          <div class="prop-register-info">
+            <h4>Crèche Robins</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('Nursery 1 Starlings')">
+          <div class="prop-register-info">
+            <h4>Nursery 1 Starlings</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('Nursery 2 Goldfinches')">
+          <div class="prop-register-info">
+            <h4>Nursery 2 Goldfinches</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('KG 1 Kingfishers')">
+          <div class="prop-register-info">
+            <h4>KG 1 Kingfishers</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('KG 2 Hawks')">
+          <div class="prop-register-info">
+            <h4>KG 2 Hawks</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('Grade 1 Skylarks')">
+          <div class="prop-register-info">
+            <h4>Grade 1 Skylarks</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('Grade 2 Kestrels')">
+          <div class="prop-register-info">
+            <h4>Grade 2 Kestrels</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('Grade 3 Woodpeckers')">
+          <div class="prop-register-info">
+            <h4>Grade 3 Woodpeckers</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('Grade 4 Nightingales')">
+          <div class="prop-register-info">
+            <h4>Grade 4 Nightingales</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('Grade 5 Falcons')">
+          <div class="prop-register-info">
+            <h4>Grade 5 Falcons</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+        <div class="prop-register-row" onclick="openClassRegister('Grade 6 Eagles')">
+          <div class="prop-register-info">
+            <h4>Grade 6 Eagles</h4>
+            <div class="prop-register-meta">0 on roll</div>
+          </div>
+          <span class="badge badge-pending">Not taken</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+<script>
+  lucide.createIcons();
+  function openClassRegister(className) {
+    // Placeholder for the per-class register flow
+    alert(className + ' has 0 pupils on roll. No register to take yet.');
+  }
+</script>
+</body>
+</html>
