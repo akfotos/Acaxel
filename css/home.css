@@ -2119,3 +2119,37 @@ body.home .about-section-divider-dot { background: #60a5fa; }
   body.home .about-mission-layout { grid-template-columns: 1fr; }
   body.home .about-mission-right { order: -1; }
 }
+
+/* ── CONTACT PAGE REDESIGN ─────────────────────────────── */
+body.home.contact .page-hero.contact-hero { background: linear-gradient(165deg, #0b0f1e 0%, rgba(30,58,138,.85) 100%); }
+body.home.contact .contact-hero-badge { color: #93c5fd; }
+
+body.home.contact .contact-info-warm { background: #0b0f1e; background-image: none; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+body.home.contact .contact-info-warm-overlay { background: linear-gradient(165deg, rgba(15,23,42,.92) 0%, rgba(30,58,138,.88) 100%); border-radius: 22px; }
+body.home.contact .contact-info-warm h2 { color: #fff; }
+body.home.contact .contact-info-warm > p { color: rgba(255,255,255,.7); }
+body.home.contact .contact-info-icon { background: rgba(59,130,246,.15); }
+body.home.contact .contact-info-icon i { stroke: #60a5fa; }
+body.home.contact .contact-info-label { color: rgba(148,163,184,.85); }
+body.home.contact .contact-info-value { color: #fff; }
+body.home.contact .contact-social-row a { background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.25); color: #fff; }
+body.home.contact .contact-social-row a:hover { background: rgba(59,130,246,.25); border-color: rgba(59,130,246,.45); }
+
+body.home.contact .contact-form-warm { background: #0f172a; border-color: rgba(255,255,255,.1); }
+body.home.contact .contact-form-head h2 { color: #fff; }
+body.home.contact .contact-form-head p { color: rgba(255,255,255,.7); }
+body.home.contact .contact-form label { color: #fff; }
+body.home.contact .contact-form input,
+body.home.contact .contact-form select,
+body.home.contact .contact-form textarea { background: #0b0f1e; border-color: rgba(255,255,255,.15); color: #fff; }
+body.home.contact .contact-form input::placeholder,
+body.home.contact .contact-form textarea::placeholder { color: rgba(255,255,255,.5); }
+body.home.contact .contact-form select { color: #fff; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); }
+body.home.contact .contact-form select:focus { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); }
+body.home.contact .contact-form input:focus,
+body.home.contact .contact-form select:focus,
+body.home.contact .contact-form textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59,130,246,.15); }
+body.home.contact .contact-form .form-submit { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+body.home.contact .contact-form .form-submit:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+body.home.contact .contact-success { background: rgba(22,163,74,.15); color: #86efac; }
+body.home.contact .contact-success i { stroke: #86efac; }
