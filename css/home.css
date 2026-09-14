@@ -1790,3 +1790,47 @@ body.home.eco .cta-btn-primary:hover { background: #d8f3dc; color: var(--forest)
   body.home.eco .hero-img-main { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
   body.home.eco .hero-leaf { top: 70px; right: 40px; }
 }
+
+/* ── ECO TEXT VISIBILITY FIXES ────────────────────────── */
+body.home.eco .btn-ghost { color: var(--forest); border-color: var(--border-warm); }
+body.home.eco .btn-ghost:hover { border-color: var(--sage); color: var(--sage-dark); background: rgba(82,183,136,.08); }
+body.home.eco .feature-card-warm { background: #fff; }
+body.home.eco .feature-card-warm h3 { color: var(--forest); }
+body.home.eco .feature-card-warm p { color: var(--mid); }
+body.home.eco .portal-card-warm { background: #fff; }
+body.home.eco .portal-card-warm h3 { color: var(--forest); }
+body.home.eco .portal-card-warm p { color: var(--mid); }
+body.home.eco .portal-card-warm .portal-features li { color: var(--charcoal); }
+body.home.eco .portal-card-warm .portal-features i { stroke: var(--sage-dark); }
+body.home.eco .testimonial-card { background: #fff; border-color: var(--border-warm); }
+body.home.eco .testimonial-quote { color: var(--charcoal); }
+body.home.eco .testimonial-author strong { color: var(--forest); }
+body.home.eco .testimonial-author span { color: var(--mid); }
+body.home.eco .pricing-card-warm { background: #fff; }
+body.home.eco .pricing-card-warm .pricing-plan-name { color: var(--forest); }
+body.home.eco .pricing-card-warm .pricing-plan-desc { color: var(--mid); }
+body.home.eco .pricing-card-warm .pricing-amount { color: var(--forest); }
+body.home.eco .pricing-card-warm .pricing-currency,
+body.home.eco .pricing-card-warm .pricing-per { color: var(--mid); }
+body.home.eco .pricing-card-warm .pricing-billed-note { color: var(--light); }
+body.home.eco .pricing-card-warm .pricing-features li { color: var(--charcoal); }
+body.home.eco .pricing-card-warm .feat-yes i { color: var(--sage-dark); }
+body.home.eco .pricing-card-warm .feat-no i { color: var(--light); }
+body.home.eco .pricing-card-warm .feat-no { color: var(--light); }
+body.home.eco .pricing-card-warm .pricing-cta-warm-outline { border-color: var(--border-warm); color: var(--forest); }
+body.home.eco .pricing-card-warm .pricing-cta-warm-outline:hover { border-color: var(--sage); background: rgba(82,183,136,.08); }
+body.home.eco .pricing-card-warm.pricing-card-featured { background: linear-gradient(180deg, #1b4332 0%, #2d6a4f 100%); border-color: var(--sage); }
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-plan-name,
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-amount { color: #fff; }
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-plan-desc,
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-currency,
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-per,
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-billed-note { color: rgba(255,255,255,.75); }
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-features li { color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.1); }
+body.home.eco .pricing-card-warm.pricing-card-featured .feat-yes i { stroke: #d8f3dc; }
+body.home.eco .pricing-card-warm.pricing-card-featured .feat-no { color: rgba(255,255,255,.45); }
+body.home.eco .pricing-card-warm.pricing-card-featured .feat-no i { stroke: rgba(255,255,255,.45); }
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-cta-warm-outline { border-color: rgba(255,255,255,.35); color: #fff; }
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-cta-warm-outline:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-cta-warm-solid { background: #fff; color: var(--forest); box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+body.home.eco .pricing-card-warm.pricing-card-featured .pricing-cta-warm-solid:hover { background: #d8f3dc; }
