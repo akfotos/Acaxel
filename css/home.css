@@ -1704,3 +1704,89 @@ body.home.contact .contact-form .form-submit { background: linear-gradient(135de
 body.home.contact .contact-form .form-submit:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
 
 @media (prefers-reduced-motion: reduce) { body.home *, body.home *::before, body.home *::after { animation-duration: 0.01ms !important; } }
+
+/* ── ECO / LIVELY HOMEPAGE THEME ──────────────────────── */
+body.home.eco {
+  --cream: #f6faf3;
+  --cream-dark: #e6f2e0;
+  --sage: #52b788;
+  --sage-dark: #2d6a4f;
+  --forest: #1b4332;
+  --terracotta: #d4a373;
+  --terracotta-dark: #b08968;
+  --sand: #e9f5ec;
+  --amber: #f4a261;
+  --charcoal: #1b4332;
+  --mid: #52796f;
+  --light: #84a98c;
+  --border-warm: rgba(27, 67, 50, 0.12);
+  --shadow-warm: 0 16px 40px rgba(27, 67, 50, 0.10);
+  --shadow-lg: 0 28px 70px rgba(27, 67, 50, 0.14);
+}
+body.home.eco p { color: var(--mid); }
+body.home.eco a { color: var(--sage-dark); }
+body.home.eco a:hover { color: var(--terracotta); }
+body.home.eco .navbar { background: rgba(246,250,243,.92); border-color: rgba(27,67,50,.1); box-shadow: 0 10px 40px rgba(27,67,50,.08); }
+body.home.eco .nav-name { color: var(--forest); }
+body.home.eco .nav-links a { color: var(--mid); }
+body.home.eco .nav-links a:hover { color: var(--terracotta); }
+body.home.eco .btn-primary { background: linear-gradient(135deg, #40916c, #2d6a4f); box-shadow: 0 4px 14px rgba(45,106,79,.30); }
+body.home.eco .btn-primary:hover { background: linear-gradient(135deg, #2d6a4f, #1b4332); box-shadow: 0 6px 18px rgba(45,106,79,.35); }
+
+body.home.eco .hero.hero-warm {
+  min-height: 820px;
+  background:
+    radial-gradient(ellipse 60% 70% at 8% 20%, rgba(82,183,136,.18) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 92% 85%, rgba(233,245,236,.95) 0%, transparent 55%),
+    linear-gradient(145deg, #1b4332 0%, #2d6a4f 55%, #40916c 100%);
+}
+body.home.eco .hero.hero-warm::before { display: none; }
+body.home.eco .hero.hero-warm::after { content: ''; position: absolute; width: 640px; height: 640px; left: -380px; bottom: -420px; border: 100px solid rgba(255,255,255,.05); border-radius: 60% 40% 55% 45%; animation: blob 18s ease-in-out infinite; }
+body.home.eco .hero-badge-warm { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.25); color: #d8f3dc; }
+body.home.eco .hero-badge-warm .hero-badge-icon { color: #d8f3dc; stroke: #d8f3dc; }
+body.home.eco .hero-heading-warm { color: #fff; }
+body.home.eco .hero-heading-warm .text-accent { color: #d8f3dc; position: relative; }
+body.home.eco .hero-sub-warm { color: rgba(255,255,255,.78); }
+body.home.eco .hero-cta-warm { background: linear-gradient(135deg, #52b788, #40916c); box-shadow: 0 6px 20px rgba(64,145,108,.35); }
+body.home.eco .hero-cta-warm:hover { background: linear-gradient(135deg, #40916c, #2d6a4f); }
+body.home.eco .hero-ghost-warm { background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.35); }
+body.home.eco .hero-ghost-warm:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.55); }
+body.home.eco .hero-trust p { color: rgba(255,255,255,.7); }
+body.home.eco .hero-trust p strong { color: #fff; }
+body.home.eco .hero-img-main { border: 6px solid rgba(255,255,255,.15); border-radius: 40% 60% 55% 45% / 45% 55% 45% 55%; }
+body.home.eco .hero-img-main::after { display: none; }
+body.home.eco .hero-img-float-1 { border-color: var(--cream); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+body.home.eco .hero-img-float-2 { background: rgba(255,255,255,.95); backdrop-filter: blur(8px); }
+body.home.eco .hero-float-card i { background: #d8f3dc; color: var(--forest); }
+body.home.eco .hero-shape-1 { width: 160px; height: 160px; top: 10px; right: -10px; border: 0; border-radius: 60% 40% 55% 45%; background: rgba(216,243,220,.2); animation: blob 12s ease-in-out infinite; }
+body.home.eco .hero-shape-2 { width: 24px; height: 24px; bottom: 42px; left: 46%; border-radius: 60% 40% 55% 45%; background: #d8f3dc; }
+body.home.eco .hero-leaf { position: absolute; top: 100px; right: 110px; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; color: #d8f3dc; opacity: .8; animation: float 6s ease-in-out infinite; }
+body.home.eco .hero-leaf i { width: 52px; height: 52px; stroke-width: 1.2; }
+
+@keyframes blob { 0%, 100% { border-radius: 60% 40% 55% 45%; transform: rotate(0deg); } 50% { border-radius: 45% 55% 40% 60%; transform: rotate(5deg); } }
+@keyframes floatLeaf { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-14px) rotate(5deg); } }
+
+body.home.eco .stats-strip.stats-warm { background: rgba(255,255,255,.85); border: 1px solid var(--border-warm); border-radius: 22px; margin-top: -40px; box-shadow: var(--shadow-warm); }
+body.home.eco .stats-warm .stat-icon { background: #d8f3dc; color: var(--forest); }
+body.home.eco .stats-warm .stat-text .num { color: var(--forest); }
+body.home.eco .stats-warm .stat-text .label { color: var(--mid); }
+
+body.home.eco .feature-icon-warm { background: var(--sage); color: #fff; }
+body.home.eco .feature-card-warm:hover { background: #fff; box-shadow: var(--shadow-warm); }
+
+body.home.eco .testimonials-warm { background: var(--cream-dark); }
+body.home.eco .testimonials-warm .section-header-warm h2 { color: var(--forest); }
+body.home.eco .testimonials-warm .section-header-warm p { color: var(--mid); }
+body.home.eco .testimonial-featured { background: linear-gradient(180deg, #fff 0%, #f1f8f4 100%); border-color: rgba(82,183,136,.35); }
+body.home.eco .testimonial-featured .testimonial-stars { color: var(--terracotta); }
+
+body.home.eco .cta-warm { background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 40%, #52b788 100%); }
+body.home.eco .cta-warm::after { border-color: rgba(255,255,255,.08); }
+body.home.eco .cta-btn-primary { background: #fff; color: var(--forest); }
+body.home.eco .cta-btn-primary:hover { background: #d8f3dc; color: var(--forest); }
+
+@media (max-width: 768px) {
+  body.home.eco .hero.hero-warm { padding-top: 120px; }
+  body.home.eco .hero-img-main { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+  body.home.eco .hero-leaf { top: 70px; right: 40px; }
+}
