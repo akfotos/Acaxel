@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/home.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="home eco">
+<body class="home modern">
 
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
@@ -49,21 +49,22 @@
 </div>
 
 <!-- HERO -->
-<section class="hero hero-warm">
+<section class="hero hero-warm hero-showcase">
   <div class="hero-content hero-content-warm">
     <div class="hero-badge-warm">
-      <i data-lucide="leaf" class="hero-badge-icon"></i>
-      Eco-friendly school technology
+      <i data-lucide="sparkles" class="hero-badge-icon"></i>
+      <span>All-in-one school platform</span>
+      <i data-lucide="school" class="hero-badge-icon hero-badge-icon--right"></i>
     </div>
     <h1 class="hero-heading-warm">
-      School management that <span class="text-accent">grows</span> with your community.
+      Turn school admin into a <span class="text-accent">growth engine</span>.
     </h1>
     <p class="hero-sub-warm">
-      A paperless, people-first platform that helps schools reduce waste, save time, and keep every learner, parent, and teacher connected.
+      Acaxel connects fees, attendance, grades, and communication in one place — so staff, parents, and learners stay in sync.
     </p>
     <div class="hero-actions-warm">
       <a href="signup.html" class="btn-primary btn-lg hero-cta-warm">
-        <span>Start your free trial</span>
+        <span>Get Started</span>
         <i data-lucide="arrow-right" class="hero-cta-icon"></i>
       </a>
       <a href="login.html" class="btn-ghost btn-lg hero-ghost-warm">Sign In</a>
@@ -78,26 +79,59 @@
     </div>
   </div>
 
-  <div class="hero-visual hero-visual-warm">
-    <div class="hero-image-collage">
-      <div class="hero-img-main">
-        <img src="images/home/students-collaborating.jpg" alt="Students collaborating in a bright, modern learning space" />
+  <div class="hero-visual hero-visual-warm hero-showcase-viz">
+    <div class="showcase-hub" id="showcaseHub">
+      <svg class="showcase-connections" viewBox="0 0 100 52" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.35" />
+            <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:0.65" />
+            <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0.35" />
+          </linearGradient>
+        </defs>
+        <path d="M 50,26 C 38,26 28,10 12,10" />
+        <path d="M 50,26 C 40,26 28,26 12,26" />
+        <path d="M 50,26 C 38,26 28,42 12,42" />
+        <path d="M 50,26 C 62,26 72,10 88,10" />
+        <path d="M 50,26 C 60,26 72,26 88,26" />
+        <path d="M 50,26 C 62,26 72,42 88,42" />
+      </svg>
+
+      <div class="showcase-center">
+        <div class="showcase-center-icon"><i data-lucide="graduation-cap"></i></div>
+        <span class="showcase-center-label">Acaxel</span>
       </div>
-      <div class="hero-img-float hero-img-float-1">
-        <img src="images/home/students-collaborating.jpg" alt="Students collaborating" />
+
+      <div class="showcase-node showcase-node--1" data-side="left">
+        <div class="showcase-node-icon"><i data-lucide="credit-card"></i></div>
+        <div class="showcase-node-title">Fee Billing</div>
+        <div class="showcase-node-desc">Track, remind & collect</div>
       </div>
-      <div class="hero-img-float hero-img-float-2">
-        <div class="hero-float-card">
-          <i data-lucide="trending-up"></i>
-          <div>
-            <span class="hero-float-value">98%</span>
-            <span class="hero-float-label">Fee collection rate</span>
-          </div>
-        </div>
+      <div class="showcase-node showcase-node--2" data-side="left">
+        <div class="showcase-node-icon"><i data-lucide="calendar-check"></i></div>
+        <div class="showcase-node-title">Attendance</div>
+        <div class="showcase-node-desc">Daily roll & reports</div>
       </div>
-      <div class="hero-shape hero-shape-1"></div>
-      <div class="hero-shape hero-shape-2"></div>
-      <div class="hero-leaf"><i data-lucide="leaf"></i></div>
+      <div class="showcase-node showcase-node--3" data-side="left">
+        <div class="showcase-node-icon"><i data-lucide="bar-chart-2"></i></div>
+        <div class="showcase-node-title">Grade Reports</div>
+        <div class="showcase-node-desc">Clear, instant results</div>
+      </div>
+      <div class="showcase-node showcase-node--4" data-side="right">
+        <div class="showcase-node-icon"><i data-lucide="message-square"></i></div>
+        <div class="showcase-node-title">Messaging</div>
+        <div class="showcase-node-desc">Staff, parent & teacher</div>
+      </div>
+      <div class="showcase-node showcase-node--5" data-side="right">
+        <div class="showcase-node-icon"><i data-lucide="file-text"></i></div>
+        <div class="showcase-node-title">Admissions</div>
+        <div class="showcase-node-desc">Enrol & onboard fast</div>
+      </div>
+      <div class="showcase-node showcase-node--6" data-side="right">
+        <div class="showcase-node-icon"><i data-lucide="megaphone"></i></div>
+        <div class="showcase-node-title">Announcements</div>
+        <div class="showcase-node-desc">News in one click</div>
+      </div>
     </div>
   </div>
 </section>
