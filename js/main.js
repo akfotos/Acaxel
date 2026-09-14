@@ -26,7 +26,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.feature-card, .stat-item, .portal-card, .pricing-card, .testimonial-card, .section-header-warm, .cta-content, .img-showcase-item').forEach(el => {
+document.querySelectorAll('.feature-card:not(.no-fade), .stat-item, .portal-card:not(.no-fade), .pricing-card, .testimonial-card, .section-header-warm, .cta-content, .img-showcase-item').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
