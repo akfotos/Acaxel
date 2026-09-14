@@ -1776,8 +1776,8 @@ body.home.modern .showcase-center-icon i { width: 40px; height: 40px; }
 body.home.modern .showcase-center-label { font-size: 0.78rem; font-weight: 700; margin-top: 4px; }
 body.home.modern .showcase-node { position: absolute; transform: translate(-50%, -50%); width: 170px; background: rgba(15,23,42,.85); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 18px; text-align: center; box-shadow: var(--shadow-warm); transition: transform .2s, box-shadow .2s; }
 body.home.modern .showcase-node:hover { transform: translate(-50%, -50%) translateY(-4px); box-shadow: var(--shadow-lg); }
-body.home.modern .showcase-node-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(59,130,246,.15); color: var(--sage); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-body.home.modern .showcase-node-icon i { width: 22px; height: 22px; stroke: var(--sage); }
+body.home.modern .showcase-node-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(59,130,246,.15); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+body.home.modern .showcase-node-icon i { width: 22px; height: 22px; stroke: #fff; }
 body.home.modern .showcase-node-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
 body.home.modern .showcase-node-desc { font-size: 0.75rem; color: rgba(255,255,255,.6); line-height: 1.35; }
 body.home.modern .showcase-node--1 { left: 12%; top: 18%; }
