@@ -1877,3 +1877,74 @@ body.home.modern .footer-top-bar-warm { border-bottom-color: rgba(255,255,255,.1
 body.home.modern .footer-top-item { color: rgba(255,255,255,.8); }
 body.home.modern .footer-top-item i { stroke: rgba(255,255,255,.8); }
 body.home.modern .footer-bottom { color: rgba(255,255,255,.55); border-top-color: rgba(255,255,255,.1); }
+
+/* ── GLOBAL body.home TEXT & BUTTON CONTRAST FIXES ─────── */
+body.home .page-hero { background: #0b0f1e; color: #fff; }
+body.home .page-hero h1, body.home .page-hero p { color: #fff; }
+body.home .page-hero .section-tag { color: #60a5fa; }
+
+body.home .btn-ghost { color: #fff; border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.05); }
+body.home .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.1); }
+body.home .btn-primary { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; }
+body.home .btn-primary:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; }
+
+body.home .auth-right-simple .btn-ghost { color: #0f172a; border-color: rgba(15,23,42,.2); background: #fff; }
+body.home .auth-right-simple .btn-ghost:hover { background: #f1f5f9; color: #0f172a; }
+body.home .auth-right-simple .btn-primary { color: #fff; }
+body.home .auth-form-wrap-simple .form-submit { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+body.home .auth-form-wrap-simple .form-submit:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+
+body.home .cta-warm { background: #0b0f1e; color: #fff; }
+body.home .cta-warm h2 { color: #fff; }
+body.home .cta-warm p { color: rgba(255,255,255,.75); }
+body.home .cta-btn-ghost { color: #fff; border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.08); }
+body.home .cta-btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,.6); background: rgba(255,255,255,.15); }
+body.home .cta-btn-primary { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; }
+
+body.home .pricing-cta-warm-outline { color: #3b82f6; border-color: #3b82f6; }
+body.home .pricing-cta-warm-outline:hover { background: rgba(59,130,246,.1); color: #3b82f6; }
+
+body.home .section-header-warm h2 { color: #fff; }
+body.home .section-header-warm p { color: rgba(255,255,255,.7); }
+body.home .section-tag-warm { color: #60a5fa; }
+
+body.home .feature-card-warm { background: #0f172a; border: 1px solid rgba(255,255,255,.1); }
+body.home .feature-card-warm h3 { color: #fff; }
+body.home .feature-card-warm p { color: rgba(255,255,255,.7); }
+
+body.home .portal-card-warm { background: #0f172a; border: 1px solid rgba(255,255,255,.1); }
+body.home .portal-card-warm h3 { color: #fff; }
+body.home .portal-card-warm p { color: rgba(255,255,255,.7); }
+body.home .portal-card-warm .portal-features li { color: rgba(255,255,255,.8); }
+
+body.home .testimonial-card { background: #0f172a; border: 1px solid rgba(255,255,255,.1); }
+body.home .testimonial-card .testimonial-quote { color: #fff; }
+body.home .testimonial-author strong { color: #fff; }
+body.home .testimonial-author span { color: rgba(255,255,255,.6); }
+
+body.home .pricing-card-warm { background: #0f172a; border: 1px solid rgba(255,255,255,.1); }
+body.home .pricing-card-warm .pricing-plan-name, body.home .pricing-card-warm .pricing-amount { color: #fff; }
+body.home .pricing-card-warm .pricing-plan-desc, body.home .pricing-card-warm .pricing-currency, body.home .pricing-card-warm .pricing-per, body.home .pricing-card-warm .pricing-billed-note { color: rgba(255,255,255,.7); }
+body.home .pricing-card-warm .pricing-features li { color: rgba(255,255,255,.85); }
+body.home .pricing-card-warm .feat-yes i { color: #60a5fa; }
+body.home .pricing-card-warm .feat-no i { color: rgba(255,255,255,.45); }
+
+body.home .footer-warm { background: #0b0f1e; color: rgba(255,255,255,.75); border-top: 1px solid rgba(255,255,255,.1); }
+body.home .footer-warm h5 { color: #fff; }
+body.home .footer-warm a { color: rgba(255,255,255,.75); }
+body.home .footer-warm a:hover { color: #3b82f6; }
+body.home .footer-school-name { color: #fff; }
+body.home .footer-desc { color: rgba(255,255,255,.6); }
+body.home .footer-badge-warm { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.1); }
+body.home .footer-top-bar-warm { border-bottom-color: rgba(255,255,255,.1); }
+body.home .footer-bottom { color: rgba(255,255,255,.55); border-top-color: rgba(255,255,255,.1); }
+
+body.home .contact-info-warm-overlay { background: linear-gradient(165deg, rgba(11,15,30,.92) 0%, rgba(30,58,138,.88) 60%, rgba(37,99,235,.55) 100%); }
+body.home .contact-form-warm { background: #0f172a; border-color: rgba(255,255,255,.1); }
+body.home .contact-form-head h2 { color: #fff; }
+body.home .contact-form-head p { color: rgba(255,255,255,.7); }
+body.home .contact-form label { color: #fff; }
+body.home .contact-form input, body.home .contact-form select, body.home .contact-form textarea { background: #0b0f1e; border-color: rgba(255,255,255,.15); color: #fff; }
+body.home .contact-form input:focus, body.home .contact-form select:focus, body.home .contact-form textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59,130,246,.15); }
+body.home .contact-form .form-submit { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+body.home .contact-form .form-submit:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
