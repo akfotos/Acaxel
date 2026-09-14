@@ -2157,3 +2157,9 @@ body.home.contact .contact-form .form-submit { background: linear-gradient(135de
 body.home.contact .contact-form .form-submit:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
 body.home.contact .contact-success { background: rgba(22,163,74,.15); color: #86efac; }
 body.home.contact .contact-success i { stroke: #86efac; }
+
+/* ── LOGIN ROLE BUTTON COLORS ──────────────────────────── */
+body.home .role-toggle-simple .role-btn.active[data-role="parent"]  { background: #3b82f6; color: #fff; box-shadow: 0 4px 14px rgba(59,130,246,.35); }
+body.home .role-toggle-simple .role-btn.active[data-role="student"] { background: #0f172a; color: #fff; box-shadow: 0 4px 14px rgba(15,23,42,.35); }
+body.home .role-toggle-simple .role-btn.active[data-role="teacher"] { background: #60a5fa; color: #fff; box-shadow: 0 4px 14px rgba(96,165,250,.35); }
+body.home .role-toggle-simple .role-btn.active[data-role="admin"]   { background: #1d4ed8; color: #fff; box-shadow: 0 4px 14px rgba(29,78,216,.35); }
