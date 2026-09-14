@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payroll — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/dashboard.css?v=13" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="proprietor">
+<div class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="sidebar-brand">
+      <img src="images/Logo/logo.png" class="sidebar-logo-img" alt="Acaxel Logo" />
+      <span class="sidebar-name">Acaxel</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">School Day</div>
+      <a href="proprietor-dashboard.html" class="nav-item">Today</a>
+      <a href="proprietor-register.html" class="nav-item">Register</a>
+      <button class="nav-item"><span class="nav-item-label">Pupils</span></button>
+      <button class="nav-item"><span class="nav-item-label">Assessment</span></button>
+      <button class="nav-item"><span class="nav-item-label">Notices</span></button>
+
+      <div class="sidebar-section-label">Office</div>
+      <a href="proprietor-fees.html" class="nav-item">Fees</a>
+      <button class="nav-item"><span class="nav-item-label">Arrears</span></button>
+      <button class="nav-item"><span class="nav-item-label">Admissions</span></button>
+      <a href="proprietor-payroll.html" class="nav-item active">Payroll</a>
+      <button class="nav-item"><span class="nav-item-label">Cash</span></button>
+
+      <div class="sidebar-section-label">Setup</div>
+      <button class="nav-item"><span class="nav-item-label">Staff</span></button>
+      <button class="nav-item"><span class="nav-item-label">Admin</span></button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn sidebar-collapse-btn--bottom" onclick="toggleSidebar()" aria-label="Collapse sidebar">
+        <i data-lucide="chevron-left"></i>
+        <span class="sidebar-collapse-label">Collapse</span>
+      </button>
+      <button class="sidebar-logout-btn" onclick="logout()">
+        <i data-lucide="log-out"></i>
+        <span class="sidebar-logout-label">Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- TOP NAV -->
+  <header class="dash-topnav">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="sidebar-hamburger" onclick="toggleSidebar()" aria-label="Open menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+    <div class="dash-topnav-right">
+      <button class="notif-btn" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+      </button>
+      <div class="user-chip">
+        <div class="user-avatar">P</div>
+        <div>
+          <div class="user-chip-name">Proprietor</div>
+          <div class="user-chip-role">School Owner</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <div class="dash-content" style="max-width:1100px;">
+
+      <div class="prop-header" style="margin-bottom:20px;">
+        <h1>Payroll</h1>
+        <p>Term 1 2026/27 · staff cost summary</p>
+      </div>
+
+      <div class="prop-payroll-stats">
+        <div class="prop-stat-card prop-stat-red">
+          <div class="prop-stat-label">Employer cost</div>
+          <div class="prop-stat-num">20,097</div>
+          <div class="prop-stat-sub">a month · GHS 241,164 a year</div>
+        </div>
+        <div class="prop-stat-card prop-stat-green">
+          <div class="prop-stat-label">Net pay</div>
+          <div class="prop-stat-num">14,413</div>
+          <div class="prop-stat-sub">what staff receive</div>
+        </div>
+        <div class="prop-stat-card prop-stat-amber">
+          <div class="prop-stat-label">SSNIT and Tier 2</div>
+          <div class="prop-stat-num">3,127</div>
+          <div class="prop-stat-sub">to remit by the 14th</div>
+        </div>
+        <div class="prop-stat-card prop-stat-blue">
+          <div class="prop-stat-label">PAYE</div>
+          <div class="prop-stat-num">2,557</div>
+          <div class="prop-stat-sub">to remit by the 15th</div>
+        </div>
+      </div>
+
+      <div class="prop-card" style="margin-bottom:20px;">
+        <div class="prop-card-header">
+          <h3>The convention this book follows</h3>
+        </div>
+        <div class="prop-table-wrap">
+          <table class="prop-table prop-convention-table">
+            <tbody>
+              <tr><td style="width:35%;"><strong>Composite pay</strong></td><td>The contractual monthly figure quoted in the offer letter</td></tr>
+              <tr><td><strong>Basic pay</strong></td><td>Composite less the GHS 200 transport allowance</td></tr>
+              <tr><td><strong>Employee SSF</strong></td><td>5.5% of basic</td></tr>
+              <tr><td><strong>Employer SSF</strong></td><td>13% of basic. A cost to the school and never a deduction from take-home</td></tr>
+              <tr><td><strong>Taxable pay</strong></td><td>Composite less employee SSF</td></tr>
+              <tr><td><strong>PAYE</strong></td><td>Graduated monthly bands on taxable pay. Part-time at a flat 10%</td></tr>
+              <tr><td><strong>Net pay</strong></td><td>Composite less employee SSF less PAYE</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prop-payroll-note" style="margin:14px 18px 18px;">
+          <strong>Two things sit unsettled.</strong> Whether the transport allowance is pensionable: charging social security on basic only, as here, is the payroll's existing treatment. If SSNIT requires the allowance in the base, employer cost rises by roughly GHS 520 a month. And whether it is taxable: it is treated as taxable here. Confirm both with SSNIT and GRA before the September remittance.
+        </div>
+      </div>
+
+      <div class="prop-card" style="margin-bottom:20px;">
+        <div class="prop-card-header">
+          <h3>Teaching</h3>
+          <span style="font-size:0.72rem;color:rgba(255,255,255,0.55);">17 posts</span>
+        </div>
+        <div class="prop-table-wrap">
+          <table class="prop-table prop-staff-table">
+            <thead>
+              <tr>
+                <th>Post holder</th>
+                <th>Grade</th>
+                <th>Notch</th>
+                <th>Composite</th>
+                <th>Basic</th>
+                <th>Emp SSF</th>
+                <th>PAYE</th>
+                <th>Net</th>
+                <th>ER SSF</th>
+                <th>Cost</th>
+                <th style="text-align:right;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="staff-name"><strong>Celestine Aku Attah</strong><span class="staff-role">Crèche Practitioner</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Esther Naa Sackey</strong><span class="staff-role">Crèche Practitioner</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Sebastian Kokou Yovomele</strong><span class="staff-role">French Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Cecilia Akosua Agyekumwaa</strong><span class="staff-role">KG Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Adzalia Sesse</strong><span class="staff-role">Primary 6 Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><span style="color:#fff;font-weight:600;">2700</span></td>
+                <td><span style="color:#fff;">2,500.00</span></td>
+                <td><span style="color:#fff;">137.50</span></td>
+                <td><span style="color:#fff;">339.19</span></td>
+                <td><span style="color:#fff;">2,223.31</span></td>
+                <td><span style="color:#fff;">325.00</span></td>
+                <td><span style="color:#fff;font-weight:700;">3,025.00</span></td>
+                <td style="text-align:right;"><button class="btn-sm ghost">Payslip</button></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Deborah Osabro</strong><span class="staff-role">KG Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Evans Seidu</strong><span class="staff-role">Primary 6 Teacher</span></div></td>
+                <td><select class="input-field"><option value="" selected>G4</option><option>G1</option><option>G2</option><option>G3</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option value="" selected>4</option><option>1</option><option>2</option><option>3</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><span style="color:#fff;font-weight:600;">3000</span></td>
+                <td><span style="color:#fff;">2,800.00</span></td>
+                <td><span style="color:#fff;">154.00</span></td>
+                <td><span style="color:#fff;">388.80</span></td>
+                <td><span style="color:#fff;">2,457.20</span></td>
+                <td><span style="color:#fff;">364.00</span></td>
+                <td><span style="color:#fff;font-weight:700;">3,364.00</span></td>
+                <td style="text-align:right;"><button class="btn-sm ghost">Payslip</button></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Dora Osman Nyabo</strong><span class="staff-role">Primary 2 Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Deborah Sitsofe Nyabo</strong><span class="staff-role">Primary 4 Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Henry Asiedu Amoabeng</strong><span class="staff-role">SEND Facilitator</span></div></td>
+                <td><select class="input-field"><option value="" selected>G4</option><option>G1</option><option>G2</option><option>G3</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option value="" selected>4</option><option>1</option><option>2</option><option>3</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><span style="color:#fff;font-weight:600;">3000</span></td>
+                <td><span style="color:#fff;">2,800.00</span></td>
+                <td><span style="color:#fff;">154.00</span></td>
+                <td><span style="color:#fff;">388.80</span></td>
+                <td><span style="color:#fff;">2,457.20</span></td>
+                <td><span style="color:#fff;">364.00</span></td>
+                <td><span style="color:#fff;font-weight:700;">3,364.00</span></td>
+                <td style="text-align:right;"><button class="btn-sm ghost">Payslip</button></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Linda Adobea Danso</strong><span class="staff-role">Nursery Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Emmanuel Bukari</strong><span class="staff-role">Primary 5 Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Evans Kwarteng</strong><span class="staff-role">Ghanaian Language Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Blessing Visa Antwi</strong><span class="staff-role">Primary 3 Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Ezekiel Ali Azaluug</strong><span class="staff-role">Computing and Robotics</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Diana Akosua Asare</strong><span class="staff-role">Nursery Teaching Assistant</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Samuel Kofi Baah</strong><span class="staff-role">Primary 1 Teacher</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prop-signin-prompt" style="margin:14px 18px 18px;">
+          <span>Sign in to see this artifact's data</span>
+          <a href="login.html" class="btn-sm wine">Sign in</a>
+        </div>
+      </div>
+
+      <div class="prop-card" style="margin-bottom:20px;">
+        <div class="prop-card-header">
+          <h3>Non-teaching</h3>
+          <span style="font-size:0.72rem;color:rgba(255,255,255,0.55);">3 posts</span>
+        </div>
+        <div class="prop-table-wrap">
+          <table class="prop-table prop-staff-table">
+            <thead>
+              <tr>
+                <th>Post holder</th>
+                <th>Grade</th>
+                <th>Notch</th>
+                <th>Composite</th>
+                <th>Basic</th>
+                <th>Emp SSF</th>
+                <th>PAYE</th>
+                <th>Net</th>
+                <th>ER SSF</th>
+                <th>Cost</th>
+                <th style="text-align:right;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="staff-name"><strong>Dorcas Matilda Akosua Kusi</strong><span class="staff-role">School Administrator</span></div></td>
+                <td><select class="input-field"><option value="" selected>G4</option><option>G1</option><option>G2</option><option>G3</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option value="" selected>6</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><span style="color:#fff;font-weight:600;">3200</span></td>
+                <td><span style="color:#fff;">3,000.00</span></td>
+                <td><span style="color:#fff;">165.00</span></td>
+                <td><span style="color:#fff;">421.88</span></td>
+                <td><span style="color:#fff;">2,613.12</span></td>
+                <td><span style="color:#fff;">390.00</span></td>
+                <td><span style="color:#fff;font-weight:700;">3,590.00</span></td>
+                <td style="text-align:right;"><button class="btn-sm ghost">Payslip</button></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Victoria Yomly</strong><span class="staff-role">Cleaner</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><div class="staff-name"><strong>Owen Yanaieta Akua</strong><span class="staff-role">Admin Assistant</span></div></td>
+                <td><select class="input-field"><option>—</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option></select></td>
+                <td><select class="input-field"><option>—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+                <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span class="badge badge-pending">No pay set</span></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="prop-grid" style="grid-template-columns:1.25fr 1fr;">
+        <div class="prop-card">
+          <div class="prop-card-header">
+            <h3>The single spine</h3>
+            <span style="font-size:0.72rem;color:rgba(255,255,255,0.55);">Notch 1 and the step are the only inputs</span>
+          </div>
+          <div class="prop-table-wrap">
+            <table class="prop-table">
+              <thead>
+                <tr>
+                  <th>Grade</th>
+                  <th>Role / family</th>
+                  <th>Notch 1</th>
+                  <th>Step</th>
+                  <th>Notch 10</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>G6</strong></td>
+                  <td>Head Teacher and Principal</td>
+                  <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                  <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><strong>G5</strong></td>
+                  <td>Senior Leader</td>
+                  <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                  <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><strong>G4</strong></td>
+                  <td>Lead Teacher, Specialist and Administrator</td>
+                  <td><span style="color:#fff;">2700</span></td>
+                  <td><span style="color:#fff;">100</span></td>
+                  <td><span style="color:#fff;">3,600</span></td>
+                </tr>
+                <tr>
+                  <td><strong>G3</strong></td>
+                  <td>Class Teacher</td>
+                  <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                  <td><input type="text" class="input-field" style="min-width:70px;" placeholder="enter" /></td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prop-card">
+          <div class="prop-card-header">
+            <h3>PAYE bands</h3>
+            <button class="btn-sm outline">Verify with GRA</button>
+          </div>
+          <div class="prop-table-wrap">
+            <table class="prop-table">
+              <thead>
+                <tr>
+                  <th>Monthly slice</th>
+                  <th>Rate</th>
+                  <th>Tax on the slice</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>First 490.00</strong></td><td>0%</td><td>0.00</td></tr>
+                <tr><td><strong>Next 110.00</strong></td><td>5%</td><td>5.50</td></tr>
+                <tr><td><strong>Next 130.00</strong></td><td>10%</td><td>13.00</td></tr>
+                <tr><td><strong>Next 3,166.67</strong></td><td>17.5%</td><td>554.17</td></tr>
+                <tr><td><strong>Next 16,000.00</strong></td><td>25%</td><td>4,000.00</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>
