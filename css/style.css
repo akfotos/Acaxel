@@ -171,6 +171,7 @@ p { color: var(--text-mid); }
 
 /* ===== FEATURES ===== */
 .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.features-grid-4 { grid-template-columns: repeat(4, 1fr); }
 .feature-card {
   background: var(--bg); border-radius: var(--radius); padding: 28px;
   border: 1px solid var(--border); transition: var(--transition);
@@ -1327,6 +1328,7 @@ body.home .hero-video-bg::after { display: none; }
   .pricing-card-featured { transform: scale(1); }
   .pricing-card-featured:hover { transform: translateY(-3px); }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .features-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-top-inner { gap: 6px 0; }
   .footer-top-divider { display: none; }
@@ -1344,6 +1346,7 @@ body.home .hero-video-bg::after { display: none; }
   .portals-grid-4 { grid-template-columns: 1fr 1fr; }
   .portals-photo-row-4 { grid-template-columns: 1fr 1fr !important; }
   .features-grid { grid-template-columns: 1fr; }
+  .features-grid-4 { grid-template-columns: 1fr; }
   .features-grid-lg { grid-template-columns: 1fr; }
   .about-mission-layout { grid-template-columns: 1fr; gap: 36px; }
   .about-why-grid { grid-template-columns: 1fr; }

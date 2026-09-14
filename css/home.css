@@ -2182,3 +2182,17 @@ body.home .role-toggle-simple .role-btn.active[data-role="admin"]   { background
 
 body.home .btn-primary { color: #fff !important; }
 body.home.modern .hero-cta-warm { color: #fff !important; }
+
+/* ── MOBILE GRID REFINEMENTS ──────────────────────────── */
+@media (max-width: 480px) {
+  body.home .portals-grid-4 { grid-template-columns: 1fr; gap: 16px; }
+  body.home .portals-grid-4 .portal-card { padding: 24px 18px; }
+  body.home .portals-grid-4 .portal-card h3 { font-size: 1.15rem; }
+  body.home .portals-grid-4 .portal-features li { font-size: 0.88rem; }
+  body.home .portals-grid-4 .portal-card .btn-white,
+  body.home .portals-grid-4 .portal-card .btn-wine { width: 100%; text-align: center; }
+
+  body.home .features-grid-4 .feature-card { padding: 22px 18px; }
+  body.home .features-grid-4 .feature-card h3 { font-size: 1.1rem; }
+  body.home .features-grid-4 .feature-card .btn-primary { width: 100%; text-align: center; }
+}
