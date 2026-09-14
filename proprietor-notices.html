@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notices — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/theme.css?v=13" />
+  <link rel="stylesheet" href="css/dashboard.css?v=13" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="proprietor">
+<div class="dash-body">
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="sidebar-brand">
+      <img src="images/Logo/logo.png" class="sidebar-logo-img" alt="Acaxel Logo" />
+      <span class="sidebar-name">Acaxel</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">School Day</div>
+      <a href="proprietor-dashboard.html" class="nav-item">Today</a>
+      <a href="proprietor-register.html" class="nav-item">Register</a>
+      <a href="proprietor-pupils.html" class="nav-item">Pupils</a>
+      <a href="proprietor-assessment.html" class="nav-item">Assessment</a>
+      <a href="proprietor-notices.html" class="nav-item active">Notices</a>
+
+      <div class="sidebar-section-label">Office</div>
+      <a href="proprietor-fees.html" class="nav-item">Fees</a>
+      <a href="proprietor-arrears.html" class="nav-item">Arrears</a>
+      <a href="proprietor-admissions.html" class="nav-item">Admissions</a>
+      <a href="proprietor-payroll.html" class="nav-item">Payroll</a>
+      <a href="proprietor-cash.html" class="nav-item">Cash</a>
+
+      <div class="sidebar-section-label">Setup</div>
+      <a href="proprietor-staff.html" class="nav-item">Staff</a>
+      <a href="proprietor-admin.html" class="nav-item">Admin</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn sidebar-collapse-btn--bottom" onclick="toggleSidebar()" aria-label="Collapse sidebar"><i data-lucide="chevron-left"></i><span class="sidebar-collapse-label">Collapse</span></button>
+      <button class="sidebar-logout-btn" onclick="logout()"><i data-lucide="log-out"></i><span class="sidebar-logout-label">Sign Out</span></button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <header class="dash-topnav">
+    <div style="display:flex;align-items:center;gap:12px;"><button class="sidebar-hamburger" onclick="toggleSidebar()" aria-label="Open menu"><i data-lucide="menu"></i></button></div>
+    <div class="dash-topnav-right">
+      <button class="notif-btn" aria-label="Notifications"><i data-lucide="bell"></i></button>
+      <div class="user-chip"><div class="user-avatar">P</div><div><div class="user-chip-name">Proprietor</div><div class="user-chip-role">School Owner</div></div></div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <div class="dash-content" style="max-width:1100px;">
+
+      <div class="adm-page-header">
+        <div>
+          <h2 class="adm-page-title">Notices</h2>
+          <p class="adm-page-sub">Announcements and school-wide messages</p>
+        </div>
+        <div class="adm-page-actions">
+          <button class="btn-sm wine" onclick="alert('Post a new notice is coming soon.')"><i data-lucide="plus"></i> Post notice</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-header">
+          <h3>Term 1 reminders</h3>
+          <span class="adm-term-chip">14 Sept 2026</span>
+        </div>
+        <div class="card-body" style="padding:0 22px 18px;">
+          <div class="prop-missing-item" style="padding:14px 0;">
+            <p style="font-size:0.85rem;line-height:1.45;"><strong>Welcome to the 2026/27 academic year.</strong> The proprietor office is open for fee arrangements and admissions. Please settle term fees by 30 September 2026.</p>
+          </div>
+          <div class="prop-missing-item" style="padding:14px 0;">
+            <p style="font-size:0.85rem;line-height:1.45;"><strong>Staff meeting next Monday.</strong> All teachers and non-teaching staff should attend the term planning meeting at 3:30 PM.</p>
+          </div>
+          <div class="prop-missing-item" style="padding:14px 0;">
+            <p style="font-size:0.85rem;line-height:1.45;"><strong>Uniform order deadline.</strong> Phase 1 staff uniform measurements close on 30 September 2026. Confirm sizes with the admin office.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Recently posted</h3>
+          <span style="font-size:0.72rem;color:var(--text-light);">3 notices</span>
+        </div>
+        <div class="card-body" style="padding:0 22px 18px;">
+          <div class="prop-register-row" style="padding:14px 0;">
+            <div class="prop-register-info"><h4>Term 1 fee notice</h4><div class="prop-register-meta">All parents · Posted 14 Sept 2026</div></div>
+            <span class="badge badge-blue">Sent</span>
+          </div>
+          <div class="prop-register-row" style="padding:14px 0;">
+            <div class="prop-register-info"><h4>Staff meeting</h4><div class="prop-register-meta">All staff · Posted 14 Sept 2026</div></div>
+            <span class="badge badge-blue">Sent</span>
+          </div>
+          <div class="prop-register-row" style="padding:14px 0;">
+            <div class="prop-register-info"><h4>Uniform order deadline</h4><div class="prop-register-meta">All staff · Posted 14 Sept 2026</div></div>
+            <span class="badge badge-blue">Draft</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

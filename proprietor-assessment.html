@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assessment — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/theme.css?v=13" />
+  <link rel="stylesheet" href="css/dashboard.css?v=13" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="proprietor">
+<div class="dash-body">
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="sidebar-brand">
+      <img src="images/Logo/logo.png" class="sidebar-logo-img" alt="Acaxel Logo" />
+      <span class="sidebar-name">Acaxel</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">School Day</div>
+      <a href="proprietor-dashboard.html" class="nav-item">Today</a>
+      <a href="proprietor-register.html" class="nav-item">Register</a>
+      <a href="proprietor-pupils.html" class="nav-item">Pupils</a>
+      <a href="proprietor-assessment.html" class="nav-item active">Assessment</a>
+      <a href="proprietor-notices.html" class="nav-item">Notices</a>
+
+      <div class="sidebar-section-label">Office</div>
+      <a href="proprietor-fees.html" class="nav-item">Fees</a>
+      <a href="proprietor-arrears.html" class="nav-item">Arrears</a>
+      <a href="proprietor-admissions.html" class="nav-item">Admissions</a>
+      <a href="proprietor-payroll.html" class="nav-item">Payroll</a>
+      <a href="proprietor-cash.html" class="nav-item">Cash</a>
+
+      <div class="sidebar-section-label">Setup</div>
+      <a href="proprietor-staff.html" class="nav-item">Staff</a>
+      <a href="proprietor-admin.html" class="nav-item">Admin</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn sidebar-collapse-btn--bottom" onclick="toggleSidebar()" aria-label="Collapse sidebar"><i data-lucide="chevron-left"></i><span class="sidebar-collapse-label">Collapse</span></button>
+      <button class="sidebar-logout-btn" onclick="logout()"><i data-lucide="log-out"></i><span class="sidebar-logout-label">Sign Out</span></button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <header class="dash-topnav">
+    <div style="display:flex;align-items:center;gap:12px;"><button class="sidebar-hamburger" onclick="toggleSidebar()" aria-label="Open menu"><i data-lucide="menu"></i></button></div>
+    <div class="dash-topnav-right">
+      <button class="notif-btn" aria-label="Notifications"><i data-lucide="bell"></i></button>
+      <div class="user-chip"><div class="user-avatar">P</div><div><div class="user-chip-name">Proprietor</div><div class="user-chip-role">School Owner</div></div></div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <div class="dash-content" style="max-width:1200px;">
+
+      <div class="adm-page-header">
+        <div>
+          <h2 class="adm-page-title">Assessment</h2>
+          <p class="adm-page-sub">Track class performance and teacher grade records</p>
+        </div>
+        <div class="adm-page-actions">
+          <button class="btn-sm outline" onclick="alert('Assessment schedule is coming soon.')"><i data-lucide="calendar"></i> Schedule</button>
+          <button class="btn-sm wine" onclick="alert('Record marks is coming soon.')"><i data-lucide="pen-tool"></i> Record marks</button>
+        </div>
+      </div>
+
+      <div class="adm-kpi-row" style="grid-template-columns:repeat(4,1fr);">
+        <div class="adm-kpi-card"><div class="adm-kpi-icon" style="background:rgba(99,102,241,0.14);"><i data-lucide="book-open" style="stroke:#818cf8;"></i></div><div class="adm-kpi-body"><div class="adm-kpi-val">0</div><div class="adm-kpi-lbl">Assessments recorded</div><div class="adm-kpi-pill blue">Term 1</div></div></div>
+        <div class="adm-kpi-card"><div class="adm-kpi-icon" style="background:rgba(34,197,94,0.14);"><i data-lucide="check-circle" style="stroke:#22c55e;"></i></div><div class="adm-kpi-body"><div class="adm-kpi-val">0%</div><div class="adm-kpi-lbl">Class averages ready</div><div class="adm-kpi-pill green">No data</div></div></div>
+        <div class="adm-kpi-card"><div class="adm-kpi-icon" style="background:rgba(245,158,11,0.14);"><i data-lucide="clock" style="stroke:#f59e0b;"></i></div><div class="adm-kpi-body"><div class="adm-kpi-val">0</div><div class="adm-kpi-lbl">Pending reviews</div><div class="adm-kpi-pill amber">Awaiting input</div></div></div>
+        <div class="adm-kpi-card"><div class="adm-kpi-icon" style="background:rgba(244,63,94,0.14);"><i data-lucide="flag" style="stroke:#f43f5e;"></i></div><div class="adm-kpi-body"><div class="adm-kpi-val">0</div><div class="adm-kpi-lbl">Pupils flagged</div><div class="adm-kpi-pill red">All clear</div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Class assessment status</h3>
+          <span class="adm-term-chip">Term 1 2026/27</span>
+        </div>
+        <div class="prop-table-wrap">
+          <table class="prop-table" style="font-size:0.85rem;">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th style="text-align:center;">Teacher</th>
+                <th style="text-align:center;">Subject</th>
+                <th style="text-align:center;">Assessments</th>
+                <th style="text-align:center;">Average</th>
+                <th style="text-align:center;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Crèche Robins</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>Nursery 1 Starlings</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>Nursery 2 Goldfinches</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>KG 1 Kingfishers</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>KG 2 Hawks</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>Grade 1 Skylarks</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>Grade 2 Kestrels</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>Grade 3 Woodpeckers</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>Grade 4 Nightingales</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>Grade 5 Falcons</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+              <tr><td><strong>Grade 6 Eagles</strong></td><td style="text-align:center;"><span class="badge badge-pending">Unassigned</span></td><td style="text-align:center;">—</td><td style="text-align:center;">0</td><td style="text-align:center;">—</td><td style="text-align:center;"><span class="badge badge-pending">No records</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prop-cash-note" style="margin:14px 22px 18px;">No assessment records have been entered. Teachers can record marks once classes and pupils are set.</div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

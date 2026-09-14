@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   // Render schedules
   initSchedules();
+  // Attach notification bell action across dashboards
+  document.querySelectorAll('.notif-btn').forEach(btn => {
+    if (!btn.onclick && !btn.dataset.notifWired) {
+      btn.dataset.notifWired = '1';
+      btn.onclick = toggleNotif;
+    }
+  });
 });
 
 // ===== TAB SWITCHING =====
@@ -75,6 +82,7 @@ function openSidebar() {
 function toggleNotif() {
   const panel = document.getElementById('notifPanel');
   const backdrop = document.getElementById('notifBackdrop');
+  if (!panel) { alert('No new notifications.'); return; }
   const isOpen = panel?.classList.contains('open');
   if (isOpen) {
     closeNotif();
