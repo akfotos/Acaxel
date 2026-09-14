@@ -1524,7 +1524,8 @@ body.home .auth-input-group { margin-bottom: 18px; }
 body.home .auth-input-group label { margin-bottom: 8px; color: var(--forest); font-size: .78rem; font-weight: 700; }
 body.home .auth-input-wrap { position: relative; }
 body.home .auth-input-wrap > i { position: absolute; top: 50%; left: 15px; width: 18px; height: 18px; color: #81918b; transform: translateY(-50%); pointer-events: none; }
-body.home .auth-input-wrap input { min-height: 52px; padding: 12px 15px 12px 46px; border: 1px solid rgba(18,54,45,.16); border-radius: 11px; background: #fff; }
+body.home .auth-input-wrap input { min-height: 52px; padding: 12px 15px 12px 46px; border: 1px solid rgba(18,54,45,.16); border-radius: 11px; background: #fff; color: var(--forest); }
+body.home .auth-input-wrap input::placeholder { color: var(--mid); opacity: 1; }
 body.home .auth-input-wrap input:focus { border-color: var(--sage-dark); box-shadow: 0 0 0 4px rgba(36,72,59,.09); }
 body.home .form-extras { margin: 2px 0 24px; }
 body.home .forgot-link-simple { color: var(--sage-dark); }
