@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fees — Acaxel School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/dashboard.css?v=13" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="proprietor">
+<div class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="sidebar-brand">
+      <img src="images/Logo/logo.png" class="sidebar-logo-img" alt="Acaxel Logo" />
+      <span class="sidebar-name">Acaxel</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">School Day</div>
+      <a href="proprietor-dashboard.html" class="nav-item">Today</a>
+      <a href="proprietor-register.html" class="nav-item">Register</a>
+      <button class="nav-item"><span class="nav-item-label">Pupils</span></button>
+      <button class="nav-item"><span class="nav-item-label">Assessment</span></button>
+      <button class="nav-item"><span class="nav-item-label">Notices</span></button>
+
+      <div class="sidebar-section-label">Office</div>
+      <a href="proprietor-fees.html" class="nav-item active">Fees</a>
+      <button class="nav-item"><span class="nav-item-label">Arrears</span></button>
+      <button class="nav-item"><span class="nav-item-label">Admissions</span></button>
+      <button class="nav-item"><span class="nav-item-label">Payroll</span></button>
+      <button class="nav-item"><span class="nav-item-label">Cash</span></button>
+
+      <div class="sidebar-section-label">Setup</div>
+      <button class="nav-item"><span class="nav-item-label">Staff</span></button>
+      <button class="nav-item"><span class="nav-item-label">Admin</span></button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn sidebar-collapse-btn--bottom" onclick="toggleSidebar()" aria-label="Collapse sidebar">
+        <i data-lucide="chevron-left"></i>
+        <span class="sidebar-collapse-label">Collapse</span>
+      </button>
+      <button class="sidebar-logout-btn" onclick="logout()">
+        <i data-lucide="log-out"></i>
+        <span class="sidebar-logout-label">Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- TOP NAV -->
+  <header class="dash-topnav">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="sidebar-hamburger" onclick="toggleSidebar()" aria-label="Open menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+    <div class="dash-topnav-right">
+      <button class="notif-btn" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+      </button>
+      <div class="user-chip">
+        <div class="user-avatar">P</div>
+        <div>
+          <div class="user-chip-name">Proprietor</div>
+          <div class="user-chip-role">School Owner</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <div class="dash-content" style="max-width:1100px;">
+
+      <div class="prop-fees-header">
+        <div class="prop-fees-title">
+          <h1>Fees</h1>
+          <p>Term 1 2026/27 · billed on 2025/26 rates</p>
+        </div>
+        <div class="prop-fees-actions">
+          <button class="btn-sm ghost">Export ledger</button>
+          <button class="btn-sm wine">Record a payment</button>
+        </div>
+      </div>
+
+      <div class="prop-fees-alert">
+        <strong>No 2026/27 fee ladder has been approved.</strong> Every figure here bills on the 2025/26 rate, including the inverted KG rate: a child moving from Nursery 2 to KG 1 sees the family's annual fee fall from GHS 9,400 to GHS 7,350 at the point teaching becomes more specialised. Set the ladder in Admin.
+      </div>
+
+      <div class="prop-fees-stats">
+        <div class="prop-stat-card prop-stat-red">
+          <div class="prop-stat-label">Billed to date</div>
+          <div class="prop-stat-num">0</div>
+          <div class="prop-stat-sub">Terms 1 to 1</div>
+        </div>
+        <div class="prop-stat-card prop-stat-green">
+          <div class="prop-stat-label">Received</div>
+          <div class="prop-stat-num">0</div>
+          <div class="prop-stat-sub">0% of billing</div>
+        </div>
+        <div class="prop-stat-card prop-stat-blue">
+          <div class="prop-stat-label">Outstanding</div>
+          <div class="prop-stat-num">0</div>
+          <div class="prop-stat-sub">across 0 pupils</div>
+        </div>
+        <div class="prop-stat-card prop-stat-amber">
+          <div class="prop-stat-label">Discounts</div>
+          <div class="prop-stat-num">0%</div>
+          <div class="prop-stat-sub">of billing, target 10%</div>
+        </div>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-card-header">
+          <h3>Class ledger</h3>
+          <a href="#" style="font-size:0.72rem;color:#60a5fa;">Tap a class to see every pupil</a>
+        </div>
+        <div class="prop-table-wrap">
+          <table class="prop-table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>On roll</th>
+                <th>Billed</th>
+                <th>Received</th>
+                <th>Outstanding</th>
+                <th>Collection</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6" class="prop-empty-cell"><h4>No pupils on roll</h4><p>Add pupils, or load the sample records from Admin.</p></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-card-header">
+          <h3>The ladder in force</h3>
+          <span style="font-size:0.72rem;color:rgba(255,255,255,0.55);">2025/26 rates</span>
+        </div>
+        <div class="prop-table-wrap">
+          <table class="prop-table">
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>House</th>
+                <th>Programme</th>
+                <th>Annual</th>
+                <th>Termly</th>
+                <th>Year on termly</th>
+                <th>Premium</th>
+                <th>Staff OIC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Crèche</strong></td><td>Robins</td><td>Year-round</td><td>10,000</td><td>2,550</td><td>10,200</td><td style="color:#22c55e;">200</td><td>800</td></tr>
+              <tr><td><strong>Nursery 1</strong></td><td>Starlings</td><td>Year-round</td><td>9,400</td><td>2,400</td><td>9,600</td><td style="color:#22c55e;">200</td><td>800</td></tr>
+              <tr><td><strong>Nursery 2</strong></td><td>Goldfinches</td><td>Year-round</td><td>9,400</td><td>2,400</td><td>9,600</td><td style="color:#22c55e;">200</td><td>800</td></tr>
+              <tr><td><strong>KG 1</strong></td><td>Kingfishers</td><td>Three-term</td><td>7,350</td><td>2,550</td><td>7,650</td><td style="color:#22c55e;">300</td><td>850</td></tr>
+              <tr><td><strong>KG 2</strong></td><td>Hawks</td><td>Three-term</td><td>7,350</td><td>2,550</td><td>7,650</td><td style="color:#22c55e;">300</td><td>850</td></tr>
+              <tr><td><strong>Grade 1</strong></td><td>Skylarks</td><td>Three-term</td><td>8,500</td><td>3,000</td><td>9,000</td><td style="color:#22c55e;">500</td><td>1,200</td></tr>
+              <tr><td><strong>Grade 2</strong></td><td>Kestrels</td><td>Three-term</td><td>8,500</td><td>3,000</td><td>9,000</td><td style="color:#22c55e;">500</td><td>1,200</td></tr>
+              <tr><td><strong>Grade 3</strong></td><td>Woodpeckers</td><td>Three-term</td><td>8,500</td><td>3,000</td><td>9,000</td><td style="color:#22c55e;">500</td><td>1,300</td></tr>
+              <tr><td><strong>Grade 4</strong></td><td>Nightingales</td><td>Three-term</td><td>8,500</td><td>3,000</td><td>9,000</td><td style="color:#22c55e;">500</td><td>1,300</td></tr>
+              <tr><td><strong>Grade 5</strong></td><td>Falcons</td><td>Three-term</td><td>8,500</td><td>3,000</td><td>9,000</td><td style="color:#22c55e;">500</td><td>1,300</td></tr>
+              <tr><td><strong>Grade 6</strong></td><td>Eagles</td><td>Three-term</td><td>8,500</td><td>3,000</td><td>9,000</td><td style="color:#22c55e;">500</td><td>1,300</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prop-fees-note" style="padding:14px 18px;">
+          Term 3 for a year-round class is two quarters, so a year-round place billed termly is charged four quarters across the year. Paying by the term costs a family more in every class. On the roll used in the school's modelling the premium is worth about GHS 27,400 a year.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

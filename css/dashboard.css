@@ -3878,3 +3878,67 @@ body.proprietor .dash-topnav { background: #0b0f1e; border-bottom-color: rgba(25
 body.proprietor .dash-content { color: rgba(255,255,255,0.7); }
 body.proprietor .nav-item.active { background: rgba(244,63,94,0.18); color: #fff; }
 
+/* Fees page */
+.prop-fees-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.prop-fees-title h1 { font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.prop-fees-title p { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin: 0; }
+.prop-fees-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.prop-fees-alert {
+  background: rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.35);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  color: #fbbf24;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.prop-fees-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+
+.prop-table-card { margin-bottom: 20px; }
+.prop-table-wrap { overflow-x: auto; }
+.prop-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.prop-table th, .prop-table td { background: transparent; }
+.prop-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.prop-table td {
+  padding: 14px 16px;
+  color: rgba(255,255,255,0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  white-space: nowrap;
+}
+.prop-table tbody tr:last-child td { border-bottom: none; }
+.prop-table tbody tr:hover td { background: rgba(255,255,255,0.03); }
+.prop-table .prop-empty-cell { text-align: center; padding: 48px 20px; }
+.prop-table .prop-empty-cell h4 { color: #fff; font-size: 1rem; margin-bottom: 8px; }
+.prop-table .prop-empty-cell p { color: rgba(255,255,255,0.45); font-size: 0.82rem; }
+
+.prop-fees-note {
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.45;
+  padding: 12px 0;
+}
+
+@media (max-width: 1024px) {
+  .prop-fees-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .prop-fees-stats { grid-template-columns: 1fr; }
+  .prop-table th, .prop-table td { padding: 10px 12px; }
+}
+
